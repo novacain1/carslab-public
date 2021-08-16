@@ -8,12 +8,12 @@ These method are the only methods that deploy and configure the `cluster-baremet
 
 ##
 
-One the cluster is deployed using one of the valid deployment methods for Telco Management Clusters, it's time to configure it.  Be sure to reference the appripriate KUBECONFIG and the path of this repository, which you should have cloned to a path appropriate to your environment.  Example below:
+One the cluster is deployed using one of the valid deployment methods for Telco Management Clusters, it's time to configure it.  Be sure to reference the appripriate KUBECONFIG and the path of this repository, which you should have cloned to a path appropriate to your environment.  The `oc kustomize` command will show you what will be applied.  Example is below:
 
 ```bash
 export KUBECONFIG=~/kubeconfig-volt
 export TELCO_MGMT_PATH=~/carslab-public/rhocp-clusters/volt.cars.lab
-oc apply -k $TELCO_MGMT_PATH
+oc kustomize $TELCO_MGMT_PATH
 ```
 
 - Sample run, be sure you are referencing the appropriate kubeconfig for the Management cluster here, which in our case is volt.cars.lab!

@@ -13,7 +13,7 @@ spec:
         revision: HEAD
   template:
     metadata:
-      name: 'mgmt-telco-{{path.basename}}'
+      name: 'volt-{{path.basename}}'
       namespace: openshift-gitops
     spec:
       destination:
