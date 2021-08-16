@@ -24,23 +24,35 @@ https://api.volt.cars.lab:6443
 
 $ cd $TELCO_MGMT_PATH
 $ oc apply -k .
-namespace/openshift-gitops-operator created
+Warning: resource namespaces/assisted-installer is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by oc apply. oc apply should only be used on resources created declaratively by either oc create --save-config or oc apply. The missing annotation will be patched automatically.
+namespace/assisted-installer configured
+namespace/open-cluster-management created
 namespace/openshift-local-storage created
-namespace/openshift-sriov-network-operator created
+namespace/openshift-serverless created
+clusterrole.rbac.authorization.k8s.io/openshift-gitops-custom-role created
 clusterrolebinding.rbac.authorization.k8s.io/cluster-admin-group created
 clusterrolebinding.rbac.authorization.k8s.io/cluster-admin-telcoadmin created
+clusterrolebinding.rbac.authorization.k8s.io/openshift-gitops-custom-rolebinding created
 ...<snip>...
 error: unable to recognize ".": no matches for kind "SriovOperatorConfig" in version "sriovnetwork.openshift.io/v1"
 ```
 
-- Ignore the "no matches for kind 'SriovOperatorConfig' " error as the reason is the SR-IOV Operator is getting install but the deployment has not compelted by the time it tries to configure the CRs in the first run.
-- Disconnection for the ingressVIP and apiVIP might be experienced as the configuration is modifying the corresponding operator configuration. There is a rolling update that is also kickstarted by the chrony configuration wich will apply to nodes. After few minutes the base configuration sould be completed
-- Create secret from pull-secret for Assisted Installer Operator
+- You will see some warning messages and some "unable to recognize" and Error from server (Invalid) messages.  Run oc apply -k a few times.
+- Disconnection for the ingressVIP and apiVIP might be experienced as the configuration is modifying the corresponding operator configuration. There is a rolling update that is also kickstarted by the chrony configuration wich will apply to nodes. After few minutes the base configuration sould be completed.
+
+- Create secret from pull-secret for Assisted Installer Operator:
 
     ```bash
     oc create secret generic assisted-deployment-pull-secret -n assisted-installer \
     --from-file=.dockerconfigjson=pull-secret.json --type=kubernetes.io/dockerconfigjson
     ```
+
+- Label OpenShift Supervisor nodes with the `ran.openshit.io/lso` label, so the Local Storage Operator consumes the second block device for the Openshift Infrastructure Operator storage needs:
+```bash
+oc label node super1 ran.openshift.io/lso=''
+oc label node super2 ran.openshift.io/lso=''
+oc label node super3 ran.openshift.io/lso=''
+```
 
 - Patch metal3 so it can see all the `bmh` resources in all namespaces:
 
@@ -74,7 +86,7 @@ https://kubernetes.default.svc          in-cluster  1.21+    Successful
 ```
 - Add target cluster
 ```bash
-$ argocd cluster add --kubeconfig ~/kubeconfig-telco-core admin --name telco-core
+$ argocd cluster add --kubeconfig ~/kubeconfig-volt admin --name volt
 INFO[0000] ServiceAccount "argocd-manager" created in namespace "kube-system"
 INFO[0000] ClusterRole "argocd-manager-role" created
 INFO[0000] ClusterRoleBinding "argocd-manager-role-binding" created
