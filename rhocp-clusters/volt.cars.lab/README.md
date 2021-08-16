@@ -1,27 +1,28 @@
 # Telco Managment Cluster
 
 The Telco management cluster must be OCP 4.8.x and be deployed using one of the following methods:
-- Assisted Installer / Assisted Service Operator mode
+- Assisted Installer / OpenShift Infrastructure Operator mode
 - Baremetal IPI mode
 
 These method are the only methods that deploy and configure the `cluster-baremetal-operator` in the cluster which is a requirement for some of the automation flows.
 
 ##
 
-One the cluster is deployed using one of the valid deployment methods for Telco Management Clusters
+One the cluster is deployed using one of the valid deployment methods for Telco Management Clusters, it's time to configure it.  Be sure to reference the appripriate KUBECONFIG and the path of this repository, which you should have cloned to a path appropriate to your environment.  Example below:
 
 ```bash
-export KUBECONFIG="~/path/to/kubeconfig-telco-mgmt"
-export TELCO_MGMT_PATH="~/path/to/this/path"
+export KUBECONFIG="~/home/dcain/kubeconfig-volt"
+export TELCO_MGMT_PATH="~/home/dcain/carslab-public/rhocp-clusters/volt.cars.lab"
 oc apply -k $TELCO_MGMT_PATH
 ```
 
-- Sample run
+- Sample run, be sure you are referencing the appropriate kubeconfig for the Management cluster here, which in our case is volt.cars.lab!
 
 ```bash
 $ oc whoami --show-server
-https://api.volc.ars.lab:6443
+https://api.volt.cars.lab:6443
 
+$ cd $TELCO_MGMT_PATH
 $ oc apply -k .
 namespace/openshift-gitops-operator created
 namespace/openshift-local-storage created
@@ -42,17 +43,17 @@ error: unable to recognize ".": no matches for kind "SriovOperatorConfig" in ver
     ```
 
 - Patch metal3 so it can see all the `bmh` resources in all namespaces:
-  
+
     ```bash
     oc patch provisioning provisioning-configuration --type merge -p '{"spec":{"watchAllNamespaces": true}}'
     ```
 - To obtain the password for `openshift-gitops` ArgoCD `admin`
-  
+
     ```bash
     oc get secret openshift-gitops-cluster -o go-template='{{index .data "admin.password"}}' | base64 -d
     ```
 - Set mgmt cluster definition via GitOps
-  
+
     ```bash
     oc apply -f 00-mgmt-telco-base.yaml
     ```
@@ -65,7 +66,7 @@ After a cluster is deployed, before using ArgoCD for day-2 GitOps configurations
 ```bash
 argocd login https://api.volt.cars.lab:6443 --name admin
 ```
-- List clusters 
+- List clusters
 ```bash
 $ argocd cluster list
 SERVER                                  NAME        VERSION  STATUS      MESSAGE
