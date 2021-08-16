@@ -1,0 +1,176 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super1-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super2-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super3-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-cu2-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-mgmt1-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super1-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    # InfraEnv to use
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    bmac.agent-install.openshift.io/role: master
+    inspect.metal3.io: disabled
+    #bmac.agent-install.openshift.io/installer-args: '["--append-karg", "bond=bond0:ens7f0,ens7f1:mode=active-backup ip=bond0:dhcp", "--save-partindex", "1", "-n"]'
+    # https://github.com/openshift/assisted-service/blob/master/docs/Kube-API.md
+    #bmac.agent-install.openshift.io/installer-args: '["--append-karg", "ip=192.0.2.2::192.0.2.254:255.255.255.0:core0.example.com:enp1s0:none", "--save-partindex", "1", "-n"]'
+    #bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition": {"version": "3.1.0"}, "storage": {"files": [{"path": "/tmp/example", "contents": {"source": "data:text/plain;base64,aGVscGltdHJhcHBlZGluYXN3YWdnZXJzcGVj"}}]}}'
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:51:9F:70
+  automatedCleaningMode: disabled
+  bmc:
+    # https://github.com/metal3-io/baremetal-operator/blob/master/docs/api.md
+    address: idrac-virtualmedia://172.28.11.31/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-super1-skylark-cars-lab
+    disableCertificateVerification: True
+
+# oc delete -f 02-bmh-ran-skylark-cars-lab.yaml ; sleep 3 ; oc create -f 02-bmh-ran-skylark-cars-lab.yaml
+# watch -c "oc get bmh pool5-ran-skylark-cars-lab -o jsonpath='{.status}' | jq . "
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super2-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:51:8A:60
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.32/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-super2-skylark-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super3-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:51:51:C0
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.33/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-super3-skylark-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: cu2-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+    #bmac.agent-install.openshift.io/installer-args: '["--append-karg", "bond=bond0:ens7f0,ens7f1:mode=active-backup ip=10.50.0.152::10.50.0.1:255.255.255.0:cu2.skylark.cars.lab:bond0:none", "--append-karg", "ip=ens1f0:off", "--append-karg", "ip=ens1f1:off", "--append-karg", "nameserver=10.40.0.100", "-n"]'
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:3A:CF:20
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.35/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-cu2-skylark-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: mgmt1-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+#    bmac.agent-install.openshift.io/installer-args: '["--append-karg", "bond=bond0:ens7f0,ens7f1:mode=active-backup ip=bond0:dhcp", "-n"]'
+#    bmac.agent-install.openshift.io/ignition-config-overrides: ''
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:3D:D7:30
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.36/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-mgmt1-skylark-cars-lab
+    disableCertificateVerification: True
+#---
+#apiVersion: metal3.io/v1alpha1
+#kind: BareMetalHost
+#metadata:
+#  name: du1-fec1-skylark-cars-lab
+#  namespace: assisted-installer
+#  labels:
+#    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+#  annotations:
+#    inspect.metal3.io: disabled
+#    bmac.agent-install.openshift.io/role: worker
+#spec:
+#  online: true
+#  bootMACAddress: AC:1F:6B:E1:80:86
+#  automatedCleaningMode: disabled
+#  bmc:
+#    address: redfish-virtualmedia://172.28.11.39/redfish/v1/Systems/1/
+#    credentialsName: bmc-du1-fec1-skylark-cars-lab
+#    disableCertificateVerification: True

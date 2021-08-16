@@ -1,0 +1,216 @@
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super1-vm-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: skylark-vm-nmstate
+spec:
+  config:
+    interfaces:
+      - name: bond0
+        type: bond
+        state: up
+        ipv4:
+          enabled: true
+          address:
+            - ip: 172.17.0.121
+              prefix-length: 24
+          dhcp: false
+        link-aggregation:
+          mode: active-backup
+          options:
+            miimon: '150'
+          slaves:
+          - enp1s0
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.17.0.1
+          next-hop-interface: bond0
+  interfaces:
+    - name: enp1s0
+      macAddress: 52:40:00:11:22:11
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super2-vm-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: skylark-nmstate
+spec:
+  config:
+    interfaces:
+      - name: bond0
+        type: bond
+        state: up
+        ipv4:
+          enabled: true
+          address:
+            - ip: 172.17.0.122
+              prefix-length: 24
+          dhcp: false
+        link-aggregation:
+          mode: active-backup
+          options:
+            miimon: '150'
+          slaves:
+          - enp1s0
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.17.0.1
+          next-hop-interface: bond0
+  interfaces:
+    - name: enp1s0
+      macAddress: 52:40:00:11:22:22
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super3-vm-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: skylark-nmstate
+spec:
+  config:
+    interfaces:
+      - name: bond0
+        type: bond
+        state: up
+        ipv4:
+          enabled: true
+          address:
+            - ip: 172.17.0.123
+              prefix-length: 24
+          dhcp: false
+        link-aggregation:
+          mode: active-backup
+          options:
+            miimon: '150'
+          slaves:
+          - enp1s0
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.17.0.1
+          next-hop-interface: bond0
+  interfaces:
+    - name: enp1s0
+      macAddress: 52:40:00:11:22:33
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-cu2-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: skylark-nmstate
+spec:
+  config:
+    interfaces:
+      - name: bond0
+        type: bond
+        state: up
+        ipv4:
+          enabled: true
+          address:
+            - ip: 10.50.0.152
+              prefix-length: 24
+          dhcp: false
+        link-aggregation:
+          mode: active-backup
+          options:
+            miimon: '100'
+          slaves:
+          - ens7f0
+          - ens7f1
+      - name: ens1f0
+        type: ethernet
+        state: down
+      - name: ens1f1
+        type: ethernet
+        state: down
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.50.0.1
+          next-hop-interface: bond0
+  interfaces:
+    - name: ens1f0
+      macAddress: 40:A6:B7:3A:D1:60
+    - name: ens1f1
+      macAddress: 40:A6:B7:3A:D1:61
+    - name: ens7f0
+      macAddress: 40:A6:B7:3A:CF:20
+    - name: ens7f1
+      macAddress: 40:A6:B7:3A:CF:21
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-mgmt1-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: skylark-nmstate
+spec:
+  config:
+    interfaces:
+      - name: bond0
+        type: bond
+        state: up
+        ipv4:
+          enabled: true
+          address:
+            - ip: 172.17.0.101
+              prefix-length: 24
+          dhcp: false
+        link-aggregation:
+          mode: active-backup
+          options:
+            miimon: '100'
+          slaves:
+          - ens7f0
+          - ens7f1
+      - name: ens1f0
+        type: ethernet
+        state: down
+      - name: ens1f1
+        type: ethernet
+        state: down
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.17.0.1
+          next-hop-interface: bond0
+  interfaces:
+    - name: ens1f0
+      macAddress: 40:a6:b7:3d:c5:30
+    - name: ens1f1
+      macAddress: 40:a6:b7:3d:c5:31
+    - name: ens7f0
+      macAddress: 40:a6:b7:3d:d7:30
+    - name: ens7f1
+      macAddress: 40:a6:b7:3d:d7:31

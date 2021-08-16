@@ -1,0 +1,137 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super1-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super2-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super3-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-cu1-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-mgmt1-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-du1-fec1-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: QURNSU4=
+  password: YWx0aW9zdGFyITIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super1-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    # InfraEnv to use
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    bmac.agent-install.openshift.io/role: master
+    inspect.metal3.io: disabled
+    #bmac.agent-install.openshift.io/installer-args: '["--append-karg", "bond=bond0:ens7f0,ens7f1:mode=active-backup ip=bond0:dhcp", "--save-partindex", "1", "-n"]'
+    # https://github.com/openshift/assisted-service/blob/master/docs/Kube-API.md
+    #bmac.agent-install.openshift.io/installer-args: '["--append-karg", "ip=192.0.2.2::192.0.2.254:255.255.255.0:core0.example.com:enp1s0:none", "--save-partindex", "1", "-n"]'
+    #bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition": {"version": "3.1.0"}, "storage": {"files": [{"path": "/tmp/example", "contents": {"source": "data:text/plain;base64,aGVscGltdHJhcHBlZGluYXN3YWdnZXJzcGVj"}}]}}'
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:51:9F:70
+  automatedCleaningMode: disabled
+  bmc:
+    # https://github.com/metal3-io/baremetal-operator/blob/master/docs/api.md
+    # example with Dell R640
+    #address: idrac-redfish://10.1.177.53/redfish/v1/Systems/System.Embedded.1
+    # address: idrac-virtualmedia://10.1.177.53/redfish/v1/Managers/iDRAC.Embedded.1/VirtualMedia/CD/Actions/VirtualMedia.InsertMedia
+    # address: idrac-virtualmedia://10.1.177.53/redfish/v1/Systems/System.Embedded.1
+    # https://10.1.177.53/redfish/v1/Managers/iDRAC.Embedded.1/VirtualMedia/CD/Actions/VirtualMedia.InsertMedia
+    #address: idrac-redfish://10.1.177.53/redfish/v1/Systems/System.Embedded.1
+    address: idrac-virtualmedia://172.28.11.31/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-super1-skylark-cars-lab
+    disableCertificateVerification: True
+
+# oc delete -f 02-bmh-ran-skylark-cars-lab.yaml ; sleep 3 ; oc create -f 02-bmh-ran-skylark-cars-lab.yaml
+# watch -c "oc get bmh pool5-ran-skylark-cars-lab -o jsonpath='{.status}' | jq . "
+
+# Currently Redfish is only supported on Dell with iDRAC firmware versions 4.20.20.20 through 04.40.00.00 for IPI
+# on bare metal deployments. There is a known issue with version 04.40.00.00. With iDRAC 9 firmware version 04.40.00.00,
+# the Virtual Console plug-in defaults to eHTML5, which causes problems with the InsertVirtualMedia workflow.
+# Set the plug-in to HTML5 to avoid this issue. The menu path is: Configuration → Virtual console → Plug-in Type → HTML5
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super2-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:51:8A:60
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.32/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-super2-skylark-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super3-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:51:51:C0
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.33/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-super3-skylark-cars-lab
+    disableCertificateVerification: True
