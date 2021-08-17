@@ -60,14 +60,14 @@ oc patch provisioning provisioning-configuration --type merge -p '{"spec":{"watc
 ```
 ## OpenShift GitOps configuration
 - Prerequisite for this section: Be sure to download the argo-cd cli on the client system you're running the below commands on.
-```bash
-wget https://github.com/argoproj/argo-cd/releases/download/v2.0.0/argocd-util-linux-amd64
-```
+    ```bash
+    wget https://github.com/argoproj/argo-cd/releases/download/v2.0.0/argocd-util-linux-amd64
+    ```
 
 - Configure a namespace called telco-gitops, a serviceaccount, clusterrole, and job that is necessary to function so that OpenShift Gitops can manage the cluster it is running on (management cluster).
-```bash
-oc apply -k config-telco-gitops/
-```
+    ```bash
+    oc apply -k config-telco-gitops/
+    ```
 
 - To obtain the password for `openshift-gitops` ArgoCD `admin`
 
@@ -85,41 +85,41 @@ oc apply -k config-telco-gitops/
 After a cluster is deployed, before using ArgoCD for day-2 GitOps configurations, the cluster credentials must be defined in ArgoCD.
 
 - Login into the ArgoCD instance in the management cluster using ArgoCD CLI. You will be prompted for the ArgoCD `admin` password.
-```bash
-argocd login openshift-gitops-server-openshift-gitops.apps.volt.cars.lab --name admin
-WARNING: server certificate had error: x509: certificate is valid for openshift-gitops, openshift-gitops-grpc, openshift-gitops.openshift-gitops.svc.cluster.local, not openshift-gitops-server-openshift-gitops.apps.volt.cars.lab. Proceed insecurely (y/n)? y
-Username: admin
-Password:
-'admin:login' logged in successfully
-Context 'admin' updated
-```
+    ```bash
+    argocd login openshift-gitops-server-openshift-gitops.apps.volt.cars.lab --name admin
+    WARNING: server certificate had error: x509: certificate is valid for openshift-gitops, openshift-gitops-grpc, openshift-gitops.openshift-gitops.svc.cluster.local, not openshift-gitops-server-openshift-gitops.apps.volt.cars.lab. Proceed insecurely (y/n)? y
+    Username: admin
+    Password:
+    'admin:login' logged in successfully
+    Context 'admin' updated
+    ```
 
 - List clusters
-```bash
-$ argocd cluster list
-SERVER                                  NAME        VERSION  STATUS      MESSAGE
-https://kubernetes.default.svc          in-cluster  1.21     Successful
-```
+    ```bash
+    $ argocd cluster list
+    SERVER                                  NAME        VERSION  STATUS      MESSAGE
+    https://kubernetes.default.svc          in-cluster  1.21     Successful
+    ```
 - Add target cluster
-```bash
-$ argocd cluster add --kubeconfig ~/kubeconfig-volt admin --name volt
-INFO[0000] ServiceAccount "argocd-manager" created in namespace "kube-system"
-INFO[0000] ClusterRole "argocd-manager-role" created    
-INFO[0000] ClusterRoleBinding "argocd-manager-role-binding" created
-Cluster 'https://api.volt.cars.lab:6443' added
-```
+    ```bash
+    $ argocd cluster add --kubeconfig ~/kubeconfig-volt admin --name volt
+    INFO[0000] ServiceAccount "argocd-manager" created in namespace "kube-system"
+    INFO[0000] ClusterRole "argocd-manager-role" created    
+    INFO[0000] ClusterRoleBinding "argocd-manager-role-binding" created
+    Cluster 'https://api.volt.cars.lab:6443' added
+    ```
 
 - Validate cluster has been defined
-```bash
-argocd cluster list
-SERVER                          NAME        VERSION  STATUS      MESSAGE
-https://api.volt.cars.lab:6443  volt                 Unknown     Cluster has no application and not being monitored.
-https://kubernetes.default.svc  in-cluster  1.21     Successful
-```
+    ```bash
+    argocd cluster list
+    SERVER                          NAME        VERSION  STATUS      MESSAGE
+    https://api.volt.cars.lab:6443  volt                 Unknown     Cluster has no application and not being monitored.
+    https://kubernetes.default.svc  in-cluster  1.21     Successful
+    ```
 - Add a clusterrolebinding to manage Clusters, this makes the argocd instance cluster-admin
-```bash
-oc apply -f https://raw.githubusercontent.com/openshift-telco/telco-gitops/main/base/operators/openshift-gitops/03-cluster-admin-gitops.yaml
-```
+    ```bash
+   oc apply -f https://raw.githubusercontent.com/openshift-telco/telco-gitops/main/base/operators/openshift-gitops/03-cluster-admin-gitops.yaml
+    ```
 
 - Go to the OpenShift GitOps Route (which should be exposed on the cluster) and log in as the admin user.
 (https://openshift-gitops-server-openshift-gitops.apps.volt.cars.lab)
