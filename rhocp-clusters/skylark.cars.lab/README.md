@@ -21,7 +21,7 @@ Domain: skylark.cars.lab
 ## Control Plane
 OpenShift Control Plane for cluster, Baremetal option
 
-| Supervisors              | MAC               | IP           | CONFIG                     |
+| Supervisors              | MAC               | IP           | CONFIG                                   |
 |--------------------------|-------------------|--------------|------------------------------------------|
 | super1.skylark.cars.lab  | 40:A6:B7:51:9F:70 | 10.50.0.101  | 96 vCPU, 192G RAM, 2*480 SSD, 2x1.6 NVMe |
 | super2.skylark.cars.lab  | 40:A6:B7:51:8A:60 | 10.50.0.102  | 96 vCPU, 192G RAM, 2*480 SSD, 2x1.6 NVMe |
@@ -29,11 +29,11 @@ OpenShift Control Plane for cluster, Baremetal option
 
 OpenShift Control Plane for cluster, Virtual Machine option
 
-| Supervisors              | MAC               | IP           | CONFIG                     |
-|--------------------------|-------------------|--------------|------------------------------------------|
-| super1.skylark.cars.lab  | 52:52:00:11:33:11 | 172.17.0.121  | 32 vCPU, 32G RAM, 2*200GB Disk          |
-| super2.skylark.cars.lab  | 52:52:00:11:33:22 | 172.17.0.122  | 32 vCPU, 32G RAM, 2*200GB Disk          |
-| super3.skylark.cars.lab  | 52:52:00:11:33:33 | 172.17.0.123  | 32 vCPU, 32G RAM, 2*200GB Disk          |
+| Supervisors              | MAC               | IP           | CONFIG                                  |
+|--------------------------|-------------------|--------------|-----------------------------------------|
+| super1.skylark.cars.lab  | 52:52:00:11:33:11 | 172.17.0.121 | 8 vCPU, 16G RAM, 1*120GB Disk           |
+| super2.skylark.cars.lab  | 52:52:00:11:33:22 | 172.17.0.122 | 8 vCPU, 16G RAM, 1*120GB Disk           |
+| super3.skylark.cars.lab  | 52:52:00:11:33:33 | 172.17.0.123 | 8 vCPU, 16G RAM, 1*120GB Disk           |
 
 
 # General Notes & Deployment
@@ -44,11 +44,14 @@ OpenShift Control Plane for cluster, Virtual Machine option
 
 ```bash
  oc kustomize .
- ``` to examine what would be applied.
-
+ ```
+ to examine what would be applied.
 ```bash
 oc apply -k .
-``` to apply manifests using Kustomize in this directory.
+```
+
+to apply manifests using Kustomize in this directory.
+
 ```bash
 oc create -f 02-bmh-ran-skylark-cars-lab-RWN.yaml
 ```
@@ -56,6 +59,7 @@ oc create -f 02-bmh-ran-skylark-cars-lab-RWN.yaml
 ## Verification During RAN Cluster Buildout
 After feeding the ztp/02-bmh* CRD file to the management cluster, the workload cluster will start deploying.  To check:
 
+``` bash
 $ oc get agents.agent-install.openshift.io -o wide
 NAME                                   CLUSTER                        APPROVED   ROLE     STAGE                  HOSTNAME
 57c5d417-f114-48c2-8eb9-769bc0dd532e   cluster-ran-skylark-cars-lab   true       master   Done                   super3-vm   
@@ -63,6 +67,7 @@ NAME                                   CLUSTER                        APPROVED  
 81acb6aa-f73c-a5f7-a3c1-fa760c4fb43f   cluster-ran-skylark-cars-lab   true       worker   Waiting for ignition   cu2         
 b1054569-9638-f04e-7c38-12ae57d754d4   cluster-ran-skylark-cars-lab   true       worker   Waiting for ignition   mgmt1       
 cd4dc2da-7337-4f1f-a92f-0e2bcf5681f5   cluster-ran-skylark-cars-lab   true       master   Done                   super1-vm
+```
 
 ### Check node booting and associating with OpenShift Infrastructure operator
 This command can be used to get regular status from the cluster deployment:
