@@ -6,9 +6,9 @@ The Telco management cluster must be OCP 4.8.x and be deployed using one of the 
 
 These method are the only methods that deploy and configure the `cluster-baremetal-operator` in the cluster which is a requirement for some of the automation flows.
 
-##
+## Instructions
 
-One the cluster is deployed using one of the valid deployment methods for Telco Management Clusters, it's time to configure it.  Be sure to reference the appripriate KUBECONFIG and the path of this repository, which you should have cloned to a path appropriate to your environment.  The `oc kustomize` command will show you what will be applied.  Example is below:
+Once the cluster is deployed using one of the valid deployment methods for Telco Management Clusters, it's time to configure it.  Be sure to reference the appripriate KUBECONFIG and the path of this repository, which you should have cloned to a path appropriate to your environment.  The `oc kustomize` command will show you what will be applied.  Example is below:
 
 ```bash
 export KUBECONFIG=~/kubeconfig-volt
@@ -99,3 +99,23 @@ SERVER                                  NAME        VERSION  STATUS      MESSAGE
 https://api.volt.cars.lab:6443          telco-core  1.20     Successful
 https://kubernetes.default.svc          in-cluster  1.21+    Successful
 ```
+## Context
+Output from a working management cluster (Volt) from August 2021 with versions at the time:
+
+$ oc get installplan -A
+NAMESPACE                 NAME            CSV                                            APPROVAL    APPROVED
+assisted-installer        install-ptttk   assisted-service-operator.v99.0.0-unreleased   Automatic   true
+open-cluster-management   install-6brjw   advanced-cluster-management.v2.3.1             Automatic   true
+openshift-local-storage   install-vxfqj   local-storage-operator.4.8.0-202107291502      Automatic   true
+openshift-operators       install-dg82v   openshift-gitops-operator.v1.2.0               Automatic   true
+openshift-serverless      install-vwt46   serverless-operator.v1.16.0                    Automatic   true
+
+$ oc get operatorgroup -A
+NAMESPACE                              NAME                           AGE
+assisted-installer                     assisted-service-operator      151m
+open-cluster-management                open-cluster-management        151m
+openshift-local-storage                local-operator-group           151m
+openshift-monitoring                   openshift-cluster-monitoring   4h7m
+openshift-operator-lifecycle-manager   olm-operators                  4h7m
+openshift-operators                    global-operators               4h7m
+openshift-serverless                   openshift-serverless           151m
