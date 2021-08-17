@@ -6,9 +6,9 @@ The Telco management cluster must be OCP 4.8.x and be deployed using one of the 
 
 These method are the only methods that deploy and configure the `cluster-baremetal-operator` in the cluster which is a requirement for some of the automation flows.
 
-## Instructions
+## Management Cluster Configuration
 
-Once the cluster is deployed using one of the valid deployment methods for Telco Management Clusters, it's time to configure it.  Be sure to reference the appripriate KUBECONFIG and the path of this repository, which you should have cloned to a path appropriate to your environment.  The `oc kustomize` command will show you what will be applied.  Example is below:
+Once the cluster is operational (using one of the valid deployment methods for Telco Management Clusters), it's time to configure it.  Be sure to reference the appripriate KUBECONFIG and the path of this repository, which you should have cloned to a path appropriate to your environment.  The `oc kustomize` command will show you what will be applied.  Example is below:
 
 ```bash
 export KUBECONFIG=~/kubeconfig-volt
@@ -48,17 +48,27 @@ error: unable to recognize ".": no matches for kind "SriovOperatorConfig" in ver
     ```
 
 - Label OpenShift Supervisor nodes with the `ran.openshit.io/lso` label, so the Local Storage Operator consumes the second block device for the Openshift Infrastructure Operator storage needs:
-```bash
-oc label node super1 ran.openshift.io/lso=''
-oc label node super2 ran.openshift.io/lso=''
-oc label node super3 ran.openshift.io/lso=''
-```
+  ```bash
+  oc label node super1 ran.openshift.io/lso=''
+  oc label node super2 ran.openshift.io/lso=''
+  oc label node super3 ran.openshift.io/lso=''
+  ```
 
 - Patch metal3 so it can see all the `bmh` resources in all namespaces:
+```bash
+oc patch provisioning provisioning-configuration --type merge -p '{"spec":{"watchAllNamespaces": true}}'
+```
+## OpenShift GitOps configuration
+- Prerequisite for this section: Be sure to download the argo-cd cli on the client system you're running the below commands on.
+```bash
+wget https://github.com/argoproj/argo-cd/releases/download/v2.0.0/argocd-util-linux-amd64
+```
 
-    ```bash
-    oc patch provisioning provisioning-configuration --type merge -p '{"spec":{"watchAllNamespaces": true}}'
-    ```
+- Configure a namespace called telco-gitops, a serviceaccount, clusterrole, and job that is necessary to function so that OpenShift Gitops can manage the cluster it is running on (management cluster).
+```bash
+oc apply -k config-telco-gitops/
+```
+
 - To obtain the password for `openshift-gitops` ArgoCD `admin`
 
     ```bash
@@ -67,41 +77,57 @@ oc label node super3 ran.openshift.io/lso=''
 - Set mgmt cluster definition via GitOps
 
     ```bash
-    oc apply -f 00-mgmt-telco-base.yaml
+    oc apply -f 05-gitops-mgmt-telco-configs.yaml
     ```
 
-## Definition of cluster for ArgoCD
+### Definition of cluster for ArgoCD
 
 After a cluster is deployed, before using ArgoCD for day-2 GitOps configurations, the cluster credentials must be defined in ArgoCD.
 
 - Login into the ArgoCD instance in the management cluster using ArgoCD CLI. You will be prompted for the ArgoCD `admin` password.
 ```bash
-argocd login https://api.volt.cars.lab:6443 --name admin
+argocd login openshift-gitops-server-openshift-gitops.apps.volt.cars.lab --name admin
+WARNING: server certificate had error: x509: certificate is valid for openshift-gitops, openshift-gitops-grpc, openshift-gitops.openshift-gitops.svc.cluster.local, not openshift-gitops-server-openshift-gitops.apps.volt.cars.lab. Proceed insecurely (y/n)? y
+Username: admin
+Password:
+'admin:login' logged in successfully
+Context 'admin' updated
 ```
+
 - List clusters
 ```bash
 $ argocd cluster list
 SERVER                                  NAME        VERSION  STATUS      MESSAGE
-https://kubernetes.default.svc          in-cluster  1.21+    Successful
+https://kubernetes.default.svc          in-cluster  1.21     Successful
 ```
 - Add target cluster
 ```bash
 $ argocd cluster add --kubeconfig ~/kubeconfig-volt admin --name volt
 INFO[0000] ServiceAccount "argocd-manager" created in namespace "kube-system"
-INFO[0000] ClusterRole "argocd-manager-role" created
+INFO[0000] ClusterRole "argocd-manager-role" created    
 INFO[0000] ClusterRoleBinding "argocd-manager-role-binding" created
 Cluster 'https://api.volt.cars.lab:6443' added
 ```
+
 - Validate cluster has been defined
 ```bash
 argocd cluster list
-SERVER                                  NAME        VERSION  STATUS      MESSAGE
-https://api.volt.cars.lab:6443          telco-core  1.20     Successful
-https://kubernetes.default.svc          in-cluster  1.21+    Successful
+SERVER                          NAME        VERSION  STATUS      MESSAGE
+https://api.volt.cars.lab:6443  volt                 Unknown     Cluster has no application and not being monitored.
+https://kubernetes.default.svc  in-cluster  1.21     Successful
 ```
-## Context
-Output from a working management cluster (Volt) from August 2021 with versions at the time:
+- Add a clusterrolebinding to manage Clusters, this makes the argocd instance cluster-admin
+```bash
+oc apply -f https://raw.githubusercontent.com/openshift-telco/telco-gitops/main/base/operators/openshift-gitops/03-cluster-admin-gitops.yaml
+```
 
+- Go to the OpenShift GitOps Route (which should be exposed on the cluster) and log in as the admin user.
+(https://openshift-gitops-server-openshift-gitops.apps.volt.cars.lab)
+
+## Context / Background Output
+This is output from a working management cluster (Volt) from August 2021 with versions at the time:
+
+```bash
 $ oc get installplan -A
 NAMESPACE                 NAME            CSV                                            APPROVAL    APPROVED
 assisted-installer        install-ptttk   assisted-service-operator.v99.0.0-unreleased   Automatic   true
@@ -109,13 +135,15 @@ open-cluster-management   install-6brjw   advanced-cluster-management.v2.3.1    
 openshift-local-storage   install-vxfqj   local-storage-operator.4.8.0-202107291502      Automatic   true
 openshift-operators       install-dg82v   openshift-gitops-operator.v1.2.0               Automatic   true
 openshift-serverless      install-vwt46   serverless-operator.v1.16.0                    Automatic   true
-
+```
+```bash
 $ oc get operatorgroup -A
 NAMESPACE                              NAME                           AGE
-assisted-installer                     assisted-service-operator      151m
-open-cluster-management                open-cluster-management        151m
-openshift-local-storage                local-operator-group           151m
-openshift-monitoring                   openshift-cluster-monitoring   4h7m
-openshift-operator-lifecycle-manager   olm-operators                  4h7m
-openshift-operators                    global-operators               4h7m
-openshift-serverless                   openshift-serverless           151m
+assisted-installer                     assisted-service-operator      20h
+open-cluster-management                open-cluster-management        20h
+openshift-local-storage                local-operator-group           20h
+openshift-monitoring                   openshift-cluster-monitoring   21h
+openshift-operator-lifecycle-manager   olm-operators                  21h
+openshift-operators                    global-operators               21h
+openshift-serverless                   openshift-serverless           20h
+```

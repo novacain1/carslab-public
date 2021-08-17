@@ -16,7 +16,7 @@ commonAnnotations:
 
 bases:
   # Operator Installs
-  # --- 
+  # ---
   # Common Operators
   - github.com/openshift-telco/telco-gitops/base/configs/all-common?ref=main
   # Operators for MGMT Clusters
@@ -32,7 +32,7 @@ bases:
   # OpenShift Logging
   # - ../../base/operators/openshift-logging
 
-  # Other Configs  
+  # Other Configs
   # ---
   # Hive Configs
   - github.com/openshift-telco/telco-gitops/base/configs/hive?ref=main
@@ -41,7 +41,7 @@ resources:
   - 01-master-create-lvs-for-lso.yaml
   - 02-lso-localvolume-lvs.yaml
   - 03-lso-filesystemclass-default.yaml
-  - 05-gitops-mgmt-telco-configs.yaml
+  #- 05-gitops-mgmt-telco-configs.yaml
 
 #patches:
 #  - ./00-patch.yaml
