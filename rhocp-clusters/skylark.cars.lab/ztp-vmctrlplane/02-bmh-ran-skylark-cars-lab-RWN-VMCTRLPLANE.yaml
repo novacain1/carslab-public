@@ -65,7 +65,7 @@ spec:
   bootMACAddress: 52:40:00:11:22:11
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/a94643c5-ecc8-49fa-9b13-c6541597c72c
+    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/cd4dc2da-7337-4f1f-a92f-0e2bcf5681f5
     credentialsName: bmc-super1-vm-skylark-cars-lab
     disableCertificateVerification: True
 ---
@@ -84,7 +84,7 @@ spec:
   bootMACAddress: 52:40:00:11:22:22
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/04828f7f-7336-4b68-8ea9-b46f3c400061
+    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/73e2b7fe-5388-4502-910b-fc8796d61e55
     credentialsName: bmc-super2-vm-skylark-cars-lab
     disableCertificateVerification: True
 ---
@@ -103,7 +103,7 @@ spec:
   bootMACAddress: 52:40:00:11:22:33
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/02d4a7a0-ba2a-4b5e-b3fe-0dc728905d78
+    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/57c5d417-f114-48c2-8eb9-769bc0dd532e
     credentialsName: bmc-super3-vm-skylark-cars-lab
     disableCertificateVerification: True
 ---
