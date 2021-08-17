@@ -14,7 +14,7 @@ spec:
     name: aci-ran-skylark-cars-lab
   imageSetRef:
 #    name: openshift-v4.9.0-nightly
-    name: openshift-v4.8.2
+    name: openshift-v4.8.5
 #  manifestsConfigMapRef:
 #    name: cm-overrides-ran-skylark-cars-lab
   networking:
