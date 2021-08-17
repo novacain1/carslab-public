@@ -16,7 +16,7 @@ export TELCO_MGMT_PATH=~/carslab-public/rhocp-clusters/volt.cars.lab
 oc kustomize $TELCO_MGMT_PATH
 ```
 
-- Sample run, be sure you are referencing the appropriate kubeconfig for the Management cluster here, which in our case is volt.cars.lab!
+Below is a sample run, be sure you are referencing the appropriate kubeconfig for the Management cluster here, which in our case is volt.cars.lab!
 
 ```bash
 $ oc whoami --show-server
@@ -55,9 +55,9 @@ error: unable to recognize ".": no matches for kind "SriovOperatorConfig" in ver
   ```
 
 - Patch metal3 so it can see all the `bmh` resources in all namespaces:
-```bash
-oc patch provisioning provisioning-configuration --type merge -p '{"spec":{"watchAllNamespaces": true}}'
-```
+    ```bash
+    oc patch provisioning provisioning-configuration --type merge -p '{"spec":{"watchAllNamespaces": true}}'
+    ```
 ## OpenShift GitOps configuration
 - Prerequisite for this section: Be sure to download the argo-cd cli on the client system you're running the below commands on.
     ```bash
