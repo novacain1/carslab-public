@@ -1,6 +1,6 @@
 # SKYLARK
 
-Skylark is a RAN workload cluster.
+Skylark is a RAN workload cluster.  Skylark is meant to be deployed by a Management cluster.
 
 ## Networks
 Domain: skylark.cars.lab
@@ -36,7 +36,7 @@ OpenShift Control Plane for cluster, Virtual Machine option
 | super3.skylark.cars.lab  | 52:52:00:11:33:33 | 172.17.0.123 | 8 vCPU, 16G RAM, 1*120GB Disk           |
 
 
-# General Notes & Deployment
+## Cluster Deployment using Hive / Metal3 / OpenShift Infrastructure Operator
 
 ```bash
  cd ztp/
@@ -46,6 +46,7 @@ OpenShift Control Plane for cluster, Virtual Machine option
  oc kustomize .
  ```
  to examine what would be applied.
+
 ```bash
 oc apply -k .
 ```
@@ -117,9 +118,20 @@ Installed	The installation has completed: Done
 ```
 
 ### Commands to get kubeconfig and kubeadmin password
-Use the following two commands once the cluster is finished to retrieve both the kubeconfig and kubeadmin credentials:
+Use the following two commands once the cluster is finished buiding to retrieve both the kubeconfig and kubeadmin credentials:
 
 ```bash
 oc get secret -n assisted-installer cluster-ran-skylark-cars-lab-admin-kubeconfig -o json | jq -r '.data.kubeconfig' | base64 -d > ~/kubeconfig-skylark
 oc get secret -n assisted-installer cluster-ran-skylark-cars-lab-admin-password -o json | jq -r '.data.password' | base64 -d > ~/kubeadmin-skylark
+```
+
+## Post deployment
+The following manifests configure the cluster to operate as a RAN cluster.  You will see some warning messages and some "unable to recognize" and Error from server (Invalid) messages.  Run `oc apply -k` a few times.
+
+```bash
+export KUBECONFIG=~/kubeconfig-skylark
+export TELCO_RANCLUSTER_PATH=~/carslab-public/rhocp-clusters/tesla.cars.lab
+oc kustomize $TELCO_RANCLUSTER_PATH
+
+oc apply -k $TELCO_RANCLUSTER_PATH
 ```
