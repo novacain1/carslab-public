@@ -115,7 +115,7 @@ After a cluster is deployed, before using ArgoCD for day-2 GitOps configurations
     ```bash
     argocd cluster list
     SERVER                          NAME        VERSION  STATUS      MESSAGE
-    https://api.volt.cars.lab:6443  volt                 Unknown     Cluster has no application and not being monitored.
+    https://api.volt.cars.lab:6443  volt        1.21     Successful  
     https://kubernetes.default.svc  in-cluster  1.21     Successful
     ```
 
@@ -124,7 +124,7 @@ After a cluster is deployed, before using ArgoCD for day-2 GitOps configurations
 
 ### ArgoCD view & testing
 
-- Go into ArgoCD and notice there are multiple applications.  One is 00-volt-cars-lab-base and 00-volt-config-assisted-installer.  Synchronize the Assisted Installer application to configure the AI operator running on the Management Cluster so it can deploy RAN clusters.  You can try to remove an Operator like OpenShift Serverless and see it be installed again, almost immediately by a reconciliation cycle from ArgoCD.
+- Go into ArgoCD and notice there are multiple applications.  You will see 00-volt-cars-lab-base, and 00-volt-config-assisted-installer.  Synchronize the Assisted Installer application to configure the AI operator running on the Management Cluster so it can deploy RAN clusters.  You can try to remove an Operator like OpenShift Serverless and see it be installed again, almost immediately by a reconciliation cycle from ArgoCD.
 
 ## Context / Background Output
 This is output from a working management cluster (Volt) from September 2021 with versions at the time:
