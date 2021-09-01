@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: 'https://github.com/novacain1/carslab-public.git'
     targetRevision: HEAD
-    path: rhocp-clusters/volt.cars.lab
+    path: rhocp-clusters/mgmt/volt.cars.lab
     directory:
       recurse: false
   # Sync policy

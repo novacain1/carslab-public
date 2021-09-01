@@ -8,7 +8,7 @@ spec:
   generators:
     - git:
         directories:
-          - path: rhocp-clusters/volt.cars.lab/config-*
+          - path: rhocp-clusters/mgmt/volt.cars.lab/config-*
         repoURL: 'https://github.com/novacain1/carslab-public.git'
         revision: HEAD
   template:

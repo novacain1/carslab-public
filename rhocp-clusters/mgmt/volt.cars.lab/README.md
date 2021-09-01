@@ -16,7 +16,7 @@ Once the cluster is operational (using one of the valid deployment methods for T
 
 ```bash
 export KUBECONFIG=~/kubeconfig-volt
-export TELCO_MGMTCLUSTER_PATH=~/carslab-public/rhocp-clusters/volt.cars.lab
+export TELCO_MGMTCLUSTER_PATH=~/carslab-public/rhocp-clusters/mgmt/volt.cars.lab
 oc kustomize $TELCO_MGMTCLUSTER_PATH
 ```
 
@@ -30,7 +30,6 @@ $ cd $TELCO_MGMTCLUSTER_PATH
 $ oc apply -k .
 Warning: resource namespaces/assisted-installer is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by oc apply. oc apply should only be used on resources created declaratively by either oc create --save-config or oc apply. The missing annotation will be patched automatically.
 namespace/assisted-installer configured
-namespace/open-cluster-management created
 namespace/openshift-local-storage created
 namespace/openshift-serverless created
 namespace/telco-gitops created
@@ -134,7 +133,6 @@ This is output from a working management cluster (Volt) from September 2021 with
 $ oc get installplan -A
 NAMESPACE                 NAME            CSV                                            APPROVAL    APPROVED
 assisted-installer        install-dmtcf   assisted-service-operator.v99.0.0-unreleased   Automatic   true
-open-cluster-management   install-j2vd4   advanced-cluster-management.v2.3.1             Automatic   true
 openshift-local-storage   install-5gkzh   local-storage-operator.4.8.0-202108130208      Automatic   true
 openshift-operators       install-dc8sj   openshift-gitops-operator.v1.2.0               Automatic   true
 openshift-serverless      install-vl84t   serverless-operator.v1.16.0                    Automatic   true
@@ -143,7 +141,6 @@ openshift-serverless      install-vl84t   serverless-operator.v1.16.0           
 $ oc get operatorgroup -A
 NAMESPACE                              NAME                           AGE
 assisted-installer                     assisted-service-operator      38m
-open-cluster-management                open-cluster-management        38m
 openshift-local-storage                openshift-local-storage        38m
 openshift-monitoring                   openshift-cluster-monitoring   3h53m
 openshift-operator-lifecycle-manager   olm-operators                  3h53m
