@@ -21,10 +21,11 @@ bases:
   - github.com/openshift-telco/telco-gitops/base/configs/all-common?ref=main
   # Operators for MGMT Clusters
   - github.com/openshift-telco/telco-gitops/blueprints/mgmt?ref=main
-  # Hive Configs
+  # Hive Operators and Configs
+  - github.com/openshift-telco/telco-gitops/base/operators/hive?ref=main
   - github.com/openshift-telco/telco-gitops/base/configs/hive?ref=main
   # Red Hat Advanced Cluster Manager for Kubernetes
-  - github.com/openshift-telco/telco-gitops/base/operators/advanced-cluster-management?ref=main
+  #- github.com/openshift-telco/telco-gitops/base/operators/advanced-cluster-management?ref=main
   # OpenShift Container storage
   # - ../../base/operators/openshift-container-storage
   # OpenShift Virtualization
