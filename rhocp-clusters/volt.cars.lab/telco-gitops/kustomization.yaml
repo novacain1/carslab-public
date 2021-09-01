@@ -6,4 +6,5 @@ bases:
   - github.com/openshift-telco/telco-gitops/base/configs/telco-gitops?ref=main
 
 resources:
+  - 00-mgmt-base.yaml
   - 05-gitops-mgmt-telco-configs.yaml
