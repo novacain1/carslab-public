@@ -35,12 +35,12 @@ bases:
   # OpenShift Logging
   # - ../../base/operators/openshift-logging
   # Configure telco-gitops for cluster
-  - ./telco-gitops
+  #- ./telco-gitops
 
 resources:
   - 01-master-create-lvs-for-lso.yaml
   - 02-lso-localvolume-lvs.yaml
   - 03-lso-filesystemclass-default.yaml
 
-patches:
-  - ./00-patch.yaml
+#patches:
+#  - ./00-patch.yaml

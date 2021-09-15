@@ -58,14 +58,15 @@ metadata:
     # InfraEnv to use
     infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
   annotations:
-    bmac.agent-install.openshift.io/role: master
     inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
   online: true
   bootMACAddress: 52:40:00:11:22:11
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/cd4dc2da-7337-4f1f-a92f-0e2bcf5681f5
+    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/107b9135-996f-4f6d-a99d-174948b9d305
     credentialsName: bmc-super1-vm-skylark-cars-lab
     disableCertificateVerification: True
 ---
@@ -79,12 +80,13 @@ metadata:
   annotations:
     inspect.metal3.io: disabled
     bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
   online: true
   bootMACAddress: 52:40:00:11:22:22
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/73e2b7fe-5388-4502-910b-fc8796d61e55
+    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/bd024e36-15aa-4e8f-a361-f07e367d6ad6
     credentialsName: bmc-super2-vm-skylark-cars-lab
     disableCertificateVerification: True
 ---
@@ -98,12 +100,13 @@ metadata:
   annotations:
     inspect.metal3.io: disabled
     bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
   online: true
   bootMACAddress: 52:40:00:11:22:33
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/57c5d417-f114-48c2-8eb9-769bc0dd532e
+    address: redfish-virtualmedia+http://mgmt2.skylark.cars.lab:8082/redfish/v1/Systems/cce818f4-9cf0-4777-b16e-30a340361dbb
     credentialsName: bmc-super3-vm-skylark-cars-lab
     disableCertificateVerification: True
 ---
@@ -117,6 +120,7 @@ metadata:
   annotations:
     inspect.metal3.io: disabled
     bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
   online: true
   bootMACAddress: 40:A6:B7:3A:CF:20
@@ -136,6 +140,7 @@ metadata:
   annotations:
     inspect.metal3.io: disabled
     bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
   online: true
   bootMACAddress: 40:A6:B7:3D:D7:30

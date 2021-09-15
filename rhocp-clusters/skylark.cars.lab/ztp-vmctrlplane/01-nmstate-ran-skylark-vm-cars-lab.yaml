@@ -2,66 +2,22 @@
 apiVersion: agent-install.openshift.io/v1beta1
 kind: NMStateConfig
 metadata:
-  name: nmstate-super1-vm-skylark-cars-lab
-  namespace: assisted-installer
-  labels:
-    cluster-name: skylark-vm-nmstate
-spec:
-  config:
-    interfaces:
-      - name: bond0
-        type: bond
-        state: up
-        ipv4:
-          enabled: true
-          address:
-            - ip: 172.17.0.121
-              prefix-length: 24
-          dhcp: false
-        link-aggregation:
-          mode: active-backup
-          options:
-            miimon: '150'
-          slaves:
-          - enp1s0
-    dns-resolver:
-      config:
-        server:
-          - 10.40.0.100
-    routes:
-      config:
-        - destination: 0.0.0.0/0
-          next-hop-address: 172.17.0.1
-          next-hop-interface: bond0
-  interfaces:
-    - name: enp1s0
-      macAddress: 52:40:00:11:22:11
----
-apiVersion: agent-install.openshift.io/v1beta1
-kind: NMStateConfig
-metadata:
-  name: nmstate-super2-vm-skylark-cars-lab
+  name: nmstate-super1-skylark-cars-lab
   namespace: assisted-installer
   labels:
     cluster-name: skylark-nmstate
 spec:
   config:
     interfaces:
-      - name: bond0
-        type: bond
+      - name: enp1s0
+        type: ethernet
         state: up
+        macAddress: 52:40:00:11:22:11
         ipv4:
-          enabled: true
           address:
-            - ip: 172.17.0.122
-              prefix-length: 24
-          dhcp: false
-        link-aggregation:
-          mode: active-backup
-          options:
-            miimon: '150'
-          slaves:
-          - enp1s0
+          - ip: 172.17.0.121
+            prefix-length: 24
+          enabled: true
     dns-resolver:
       config:
         server:
@@ -70,36 +26,27 @@ spec:
       config:
         - destination: 0.0.0.0/0
           next-hop-address: 172.17.0.1
-          next-hop-interface: bond0
-  interfaces:
-    - name: enp1s0
-      macAddress: 52:40:00:11:22:22
+          next-hop-interface: enp1s0
 ---
 apiVersion: agent-install.openshift.io/v1beta1
 kind: NMStateConfig
 metadata:
-  name: nmstate-super3-vm-skylark-cars-lab
+  name: nmstate-super2-skylark-cars-lab
   namespace: assisted-installer
   labels:
     cluster-name: skylark-nmstate
 spec:
   config:
     interfaces:
-      - name: bond0
-        type: bond
+      - name: enp1s0
+        type: ethernet
         state: up
+        macAddress: 52:40:00:11:22:22
         ipv4:
-          enabled: true
           address:
-            - ip: 172.17.0.123
-              prefix-length: 24
-          dhcp: false
-        link-aggregation:
-          mode: active-backup
-          options:
-            miimon: '150'
-          slaves:
-          - enp1s0
+          - ip: 172.17.0.122
+            prefix-length: 24
+          enabled: true
     dns-resolver:
       config:
         server:
@@ -108,10 +55,36 @@ spec:
       config:
         - destination: 0.0.0.0/0
           next-hop-address: 172.17.0.1
-          next-hop-interface: bond0
-  interfaces:
-    - name: enp1s0
-      macAddress: 52:40:00:11:22:33
+          next-hop-interface: enp1s0
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super3-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: skylark-nmstate
+spec:
+  config:
+    interfaces:
+      - name: enp1s0
+        type: ethernet
+        state: up
+        macAddress: 52:40:00:11:22:33
+        ipv4:
+          address:
+          - ip: 172.17.0.123
+            prefix-length: 24
+          enabled: true
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.17.0.1
+          next-hop-interface: enp1s0
 ---
 apiVersion: agent-install.openshift.io/v1beta1
 kind: NMStateConfig
