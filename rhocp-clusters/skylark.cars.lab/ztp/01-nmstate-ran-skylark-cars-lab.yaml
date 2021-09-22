@@ -22,6 +22,7 @@ spec:
           mode: active-backup
           options:
             miimon: '150'
+            primary: ens7f0
           slaves:
           - ens7f0
           - ens7f1
@@ -63,6 +64,7 @@ spec:
           mode: active-backup
           options:
             miimon: '150'
+            primary: ens7f0
           slaves:
           - ens7f0
           - ens7f1
@@ -104,6 +106,7 @@ spec:
           mode: active-backup
           options:
             miimon: '150'
+            primary: ens7f0
           slaves:
           - ens7f0
           - ens7f1
@@ -144,7 +147,8 @@ spec:
         link-aggregation:
           mode: active-backup
           options:
-            miimon: '100'
+            miimon: '150'
+            primary: ens7f0
           slaves:
           - ens7f0
           - ens7f1
@@ -195,7 +199,8 @@ spec:
         link-aggregation:
           mode: active-backup
           options:
-            miimon: '100'
+            miimon: '150'
+            primary: ens7f0
           slaves:
           - ens7f0
           - ens7f1
