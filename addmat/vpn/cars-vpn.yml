@@ -1,0 +1,13 @@
+---
+- name: Configure the Coppell CARS Lab VPN
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: true
+  roles:
+    - cars-vpn
+  handlers:
+    - name: Restart NetworkManager
+      ansible.builtin.service:
+        name: NetworkManager
+        state: restarted

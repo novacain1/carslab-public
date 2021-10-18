@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: foo-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ocs-storagecluster-ceph-rbd
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-pod-pvc
+spec:
+  # nodeSelector:
+  #   kubernetes.io/hostname: du1-fec1
+  containers:
+  - name: simple-pod-pvc
+    image: registry.access.redhat.com/ubi8/ubi
+    resources:
+      requests:
+        memory: "64M"
+        cpu: "20m"
+      limits:
+        memory: "128M"
+        cpu: "50m"
+    command:
+    - /bin/bash
+    - -c
+    - sleep infinity
+    volumeMounts:
+    - mountPath: /foo
+      name: foo-vol
+  volumes:
+    - name: foo-vol
+      persistentVolumeClaim:
+        claimName: foo-pvc

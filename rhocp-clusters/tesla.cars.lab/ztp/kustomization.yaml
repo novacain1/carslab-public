@@ -1,0 +1,17 @@
+---
+# This ZTP has dependency on a management cluster
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonAnnotations:
+  argocd.argoproj.io/sync-wave: "10"
+
+commonLabels:
+  telco-gitops/ztp: combined-ran
+
+resources:
+#  - 01-agent-ran-tesla-cars-lab.yaml
+#  - 01-cluster-ran-tesla-cars-lab.yaml
+#  - 01-infraenv-ran-tesla-cars-lab.yaml
+#  - 01-nmstate-ran-tesla-cars-lab.yaml
+# - 02-bmh-ran-tesla-cars-lab-ALL.yaml

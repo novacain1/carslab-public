@@ -1,0 +1,21 @@
+---
+- name: Detected Fedora
+  debug:
+    msg: "Detected Fedora"
+
+- name: Install packages
+  package:
+    name: NetworkManager-openconnect-gnome
+    state: present
+  tags: gnome
+
+- name: Configure client
+  ansible.builtin.template:
+    # backup: yes
+    src: CARS.nmconnection.j2
+    dest: /etc/NetworkManager/system-connections/CARS.nmconnection
+    owner: root
+    group: root
+    mode: 0600
+  notify: Restart NetworkManager
+- meta: end_play

@@ -1,0 +1,36 @@
+---
+# podman login registry.redhat.io
+# podman pull registry.redhat.io/openshift4/ose-ptp
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-pmc
+spec:
+  imagePullSecrets:
+    - name: ${PULL-SECRET}
+  initContainers:
+    # This container copy the PMC binary to /ptp/pmc
+    - name: ose-ptp
+      image: registry.redhat.io/openshift4/ose-ptp:v4.8
+      command:
+        - /bin/bash
+        - -c
+        - cp /usr/sbin/pmc /ptp/pmc
+      volumeMounts:
+      - mountPath: /ptp
+        name: cache-volume
+  containers:
+    # Accesing the UDS socket requires privileged access
+    - name: main-container
+      image: registry.access.redhat.com/ubi8/ubi
+      command:
+        - /bin/bash
+        - -c
+        - sleep infinity
+      volumeMounts:
+      # Mount volume with pmc binary
+      - mountPath: /ptp
+        name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: {}

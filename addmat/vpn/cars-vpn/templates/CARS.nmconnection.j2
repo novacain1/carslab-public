@@ -1,0 +1,39 @@
+[connection]
+id=IBM GSC Coppell CARS
+uuid={{ ansible_env['USERNAME'] | to_uuid }}
+type=vpn
+autoconnect=false
+permissions=user:{{ ansible_env['USERNAME'] }}:;
+
+[vpn]
+authtype=password
+autoconnect-flags=0
+certsigs-flags=0
+cookie-flags=2
+enable_csd_trojan=no
+gateway=https://gsc.ihost.com/redhat2
+gateway-flags=2
+gwcert-flags=2
+lasthost-flags=0
+pem_passphrase_fsid=no
+prevent_invalid_cert=no
+protocol=nc
+stoken_source=disabled
+xmlconfig-flags=0
+service-type=org.freedesktop.NetworkManager.openconnect
+
+[vpn-secrets]
+form:frmLogin:username={{ ansible_env['USERNAME'] }}
+lasthost=https://gsc.ihost.com/redhat2
+save_passwords=no
+
+[ipv4]
+dns-search=
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto
+
+[proxy]

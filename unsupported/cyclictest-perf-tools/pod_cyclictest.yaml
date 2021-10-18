@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cyclictest
+---
+# 'default' SA requries privileged role to run "privileged: true"
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cyclictest-default-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:privileged
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: cyclictest
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cyclictest
+  namespace: cyclictest
+  annotations:
+    ### Disable CPU balance with CRIO (OCP 4.6.x)
+    #cpu-load-balancing.crio.io: "true"
+    ### Correct annotations for OCP 4.7+
+    cpu-load-balancing.crio.io: "disable"
+    irq-load-balancing.crio.io: "disable"
+spec:
+  # Map to the correct performance class in the cluster (from PAO)
+  runtimeClassName: performance-ran-du-fec1-smci00-profile0
+  restartPolicy: Never
+  containers:
+  - name: container-perf-tools
+    image: UPDATEME
+    imagePullPolicy: Always
+    resources:
+      # NOTE: Requests and limits MUST be identical for the Pod to be assigned to the QoS Guaranteed class
+      requests:
+        memory: "200Mi"
+        cpu: "38"
+      limits:
+        memory: "200Mi"
+        cpu: "38"
+    env:
+    - name: GIT_URL
+      value: "false"
+    - name: tool
+      value: "cyclictest"
+    - name: rt_priority
+      value: "95"
+    - name: DURATION
+      value: "10m"
+    - name: INTERVAL
+      value: "100"
+      # To report SMI include flag here
+      #value: "100 -smi"
+    # # Following setting not required in OCP4.6+
+    # - name: DISABLE_CPU_BALANCE
+    #   value: "y"
+    # DISABLE_CPU_BALANCE requires privileged=true
+    securityContext:
+      privileged: true
+      #capabilities:
+      #  add:
+      #    - SYS_NICE
+      #    - IPC_LOCK
+      #    - SYS_RAWIO
+    volumeMounts:
+    - mountPath: /dev/cpu_dma_latency
+      name: cstate
+      readOnly: true
+  volumes:
+  - name: cstate
+    hostPath:
+      path: /dev/cpu_dma_latency
+  nodeSelector:
+    node-role.kubernetes.io/ran-du-fec1-smci00: ""
+# Use NodeName to select a node to execute cyclic test
+  #nodeName: du-fec1

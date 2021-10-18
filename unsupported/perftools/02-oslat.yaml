@@ -1,0 +1,61 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: oslat
+  namespace: perftest
+  annotations:
+    ### Disable CPU balance with CRIO (OCP 4.6.x)
+    #cpu-load-balancing.crio.io: "true"
+    ### Correct annotations for OCP 4.7+
+    cpu-load-balancing.crio.io: "disable"
+    irq-load-balancing.crio.io: "disable"
+spec:
+  serviceAccount: perftest
+  # Map to the correct performance class in the cluster (from PAO)
+  runtimeClassName: performance-ran-du-fec1-smci00-profile0
+  restartPolicy: Never
+  containers:
+  - name: container-perf-tools
+    image: quay.io/repository/jianzzha/oslat:latest
+    imagePullPolicy: Always
+    resources:
+      # NOTE: Requests and limits MUST be identical for the Pod to be assigned to the QoS Guaranteed class
+      requests:
+        memory: "2Gi"
+        cpu: "16"
+      limits:
+        memory: "2Gi"
+        cpu: "16"
+    env:
+    - name: GIT_URL
+      value: "false"
+    - name: tool
+      value: "oslat"
+    - name: RUNTIME_SECONDS
+      value: "600"
+    - name: INITIAL_DELAY_SEC
+      value: "10"
+    - name: RTPRIO
+      value: "1"
+    - name: delay
+      value: "0"
+    securityContext:
+      privileged: true
+      #capabilities:
+      #  add:
+      #    - SYS_NICE
+      #    - IPC_LOCK
+      #    - SYS_RAWIO
+    volumeMounts:
+    - mountPath: /dev/cpu_dma_latency
+      name: cstate
+      readOnly: true
+  volumes:
+  - name: cstate
+    hostPath:
+      path: /dev/cpu_dma_latency
+  nodeSelector:
+    node-role.kubernetes.io/ran-du-fec1-smci00: ""
+# Use NodeName to select a node to execute cyclic test
+  #nodeName: du1-fec1

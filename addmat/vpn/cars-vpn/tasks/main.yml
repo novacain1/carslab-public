@@ -1,0 +1,7 @@
+---
+- import_tasks: fedora.yml
+  when: ansible_os_family == "RedHat"
+
+- fail:
+    msg: No supported OS found.
+  when: ansible_os_family != "RedHat"
