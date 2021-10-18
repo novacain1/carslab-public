@@ -261,3 +261,44 @@ spec:
         - destination: 0.0.0.0/0
           next-hop-address: 172.19.0.1
           next-hop-interface: ens2f0
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-du1-ldc1-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: skylark-nmstate
+spec:
+  config:
+    interfaces:
+      - name: eth0
+        type: ethernet
+        state: up
+        macAddress: 3c:ec:ef:30:52:64
+        ipv4:
+          address:
+          - ip: 172.17.0.181
+            prefix-length: 24
+          enabled: true
+      - name: eth1
+        type: ethernet
+        state: down
+        macAddress: 3c:ec:ef:30:52:65
+      - name: enp81s0f0
+        type: ethernet
+        state: down
+        macAddress: 3c:ec:ef:74:9c:c8
+      - name: enp138s0f0
+        type: ethernet
+        state: down
+        macAddress: b4:96:91:89:48:44
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.17.0.1
+          next-hop-interface: eth0
