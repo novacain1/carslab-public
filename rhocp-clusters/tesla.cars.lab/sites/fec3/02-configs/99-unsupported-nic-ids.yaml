@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: unsupported-nic-ids
+ namespace: openshift-sriov-network-operator
+data:
+  E810C: 8086 159b 1889

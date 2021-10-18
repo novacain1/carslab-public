@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: du1-ldc1
+  labels:
+    node-role.kubernetes.io/ran-du-ldc1-smci01: ""
+    ran.openshift.io/ldc1-sriov-netdevice-smci01: ""
+    ran.openshift.io/ldc1-sriov-netdevice-fh-smci01: ""
+    ran.openshift.io/ldc1-sriov-vfio-smci01: ""
+    ran.openshift.io/ldc1-ptp-smci01: ""
+    #ran.openshift.io/n3k: ""
+    ran.openshift.io/ptp: ""
+    ran.openshift.io/sriov: ""
+    #ran.openshift.io/ldc1-local-storage-smci01: ""

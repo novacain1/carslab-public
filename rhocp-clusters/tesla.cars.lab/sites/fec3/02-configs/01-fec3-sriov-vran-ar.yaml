@@ -1,0 +1,24 @@
+---
+###############################################################################
+# SR-IOV Network Definition for the NS of the workload
+# vran-ar + vlan 2002 + vran_vfio
+###############################################################################
+# NS = workload-4g-du-fec3
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: fec3-vran-ar
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio_ar
+  networkNamespace: workload-4g-du-fec3
+  vlan: 2002
+  ipam: |-
+    {}
+  linkState: auto
+  # spoofChk: "<spoof_check>"
+  # maxTxRate: <max_tx_rate>
+  # minTxRate: <min_rx_rate>
+  # vlanQoS: <vlan_qos>
+  # trust: "<trust_vf>"
+  # capabilities: <capabilities>

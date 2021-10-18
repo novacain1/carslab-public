@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  # Each SITE_ID is a different zone
+  topology.kubernetes.io/zone: fec3
+
+resources:
+  # SRIOV Configs
+  #- 00-fec3-sriov-namespace.yaml
+  - 00-fec3-sriov-node-policy.yaml
+  - 01-fec3-sriov-vran-mgmt.yaml
+  - 01-fec3-sriov-vran-mh.yaml
+  - 01-fec3-sriov-vran-fh.yaml
+  - 01-fec3-sriov-vran-ar.yaml
+  - 01-fec3-sriov-vran-mp.yaml
+  # Storage Configs
+  # - 02-fec3-local-storage-dell03.yaml
+  # PTP Configs
+  - 03-fec3-ptp-dell03.yaml
+  # N3k Configs
+  # - 04-n3k.yaml

@@ -1,0 +1,15 @@
+variant: openshift
+version: 4.8.0
+metadata:
+  name: 02-ran-du-ldc1-smci01-rcu
+  labels:
+    machineconfiguration.openshift.io/role: ran-du-ldc1-smci01
+storage:
+  files:
+    - path: /etc/sysctl.d/02-rcu.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          kernel.panic_on_rcu_stall = 1
+          kernel.hung_task_panic = 1
