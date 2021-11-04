@@ -19,10 +19,7 @@ spec:
     userLevelNetworking: true
     devices:
     # intel I350
-    - interfaceName: eno1
-    - interfaceName: eno2
-    - interfaceName: eno3
-    - interfaceName: eno4
+    - interfaceName: eno*
     # intel xxv710
     - interfaceName: enp81s0f0
     - interfaceName: enp81s0f1

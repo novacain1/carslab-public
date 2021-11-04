@@ -5,7 +5,7 @@
 apiVersion: performance.openshift.io/v2
 kind: PerformanceProfile
 metadata:
-  name: ran-du-ldc1-smci01-profile0
+  name: ran-du-ldc1-smci03-profile0
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
@@ -20,9 +20,6 @@ spec:
     devices:
     # intel I350
     - interfaceName: eno*
-    # intel xxv710
-    - interfaceName: enp81s0f0
-    - interfaceName: enp81s0f1
     # dell e810  
     - interfaceName: enp138s0f0
     - interfaceName: enp138s0f1
@@ -41,4 +38,4 @@ spec:
   realTimeKernel:
     enabled: false
   nodeSelector:
-    node-role.kubernetes.io/ran-du-ldc1-smci01: ""
+    node-role.kubernetes.io/ran-du-ldc1-smci03: ""
