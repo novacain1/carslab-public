@@ -54,8 +54,8 @@ spec:
     - openshiftVersion: "4.8"
       cpuArchitecture: x86_64
       version: "48.84.202107202156-0"
-      url: "http://10.40.0.100/ztp-dave/rhcos-4.8.14-x86_64-live.x86_64.iso"
-      rootFSUrl: "http://10.40.0.100/ztp-dave/rhcos-4.8.14-x86_64-live-rootfs.x86_64.img"
+      url: "http://10.40.0.100/ztp-dave/rhcos-4.8.2-x86_64-live.x86_64.iso"
+      rootFSUrl: "http://10.40.0.100/ztp-dave/rhcos-4.8.2-x86_64-live-rootfs.x86_64.img"
     - openshiftVersion: "4.9"
       cpuArchitecture: x86_64
       version: "49.84.202109041651-0"
