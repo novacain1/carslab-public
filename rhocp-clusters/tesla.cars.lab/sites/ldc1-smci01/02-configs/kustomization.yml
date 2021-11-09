@@ -18,5 +18,5 @@ resources:
   # Storage Configs
   # - 02-ldc1-local-storage-dell03.yaml
   # PTP Configs
-  -  03-ldc1-ptp-smci01.yaml
-  #-  03-ldc1-ptp-smci01-e810.yaml
+  #-  03-ldc1-ptp-smci01.yaml
+  -  03-ldc1-ptp-smci01-e810.yaml
