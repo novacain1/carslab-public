@@ -2,18 +2,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
- name: db5-cars-lab
+ name: xj-cars-lab
  namespace: telco-gitops
 spec:
   generators:
     - git:
         directories:
-          - path: rhocp-clusters/mgmt/db5.cars.lab/config-*
-        repoURL: 'https://github.com/redhat-partner-solutions/carslab-public.git'
+          - path: rhocp-clusters/mgmt/xj.cars.lab/config-*
+        repoURL: 'https://github.com/novacain1/carslab-public.git'
         revision: HEAD
   template:
     metadata:
-      name: '00-db5-{{path.basename}}'
+      name: '00-xj-{{path.basename}}'
       namespace: telco-gitops
     spec:
       destination:
@@ -22,5 +22,5 @@ spec:
       project: default
       source:
         path: '{{path}}'
-        repoURL: 'https://github.com/redhat-partner-solutions/carslab-public.git'
+        repoURL: 'https://github.com/novacain1/carslab-public.git'
         targetRevision: HEAD

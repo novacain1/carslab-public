@@ -3,8 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 commonLabels:
-  telco-gitops/cluster-name: db5.cars.lab
-  topology.kubernetes.io/region: db5.cars.lab
+  telco-gitops/cluster-name: xj.cars.lab
+  topology.kubernetes.io/region: xj.cars.lab
   # Each SITE_ID is a different zone
   #topology.kubernetes.io/zone: sample-zone
 

@@ -4,10 +4,10 @@ DB5 is a Management cluster.
 
 # Telco Managment Cluster
 
-The Telco management cluster must be OCP 4.8.13 and be deployed using one of the following methods:
+The Telco management cluster must be OCP 4.8.19+ and be deployed using one of the following methods:
 - Assisted Installer / OpenShift Infrastructure Operator mode
 - Baremetal IPI mode
-- Crucible Ansible Playbooks (https://github.com/redhat-partner-solutions/crucible-public)
+- Crucible Ansible Playbooks (https://github.com/redhat-partner-solutions/crucible)
 
 These method are the only methods that deploy and configure the `cluster-baremetal-operator` in the cluster which is a requirement for some of the automation flows.
 

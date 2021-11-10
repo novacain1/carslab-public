@@ -1,6 +1,6 @@
-# VOLT
+# EsPIRIT
 
-Volt is a Management cluster.
+Espirit is a Management cluster.
 
 # Telco Managment Cluster
 

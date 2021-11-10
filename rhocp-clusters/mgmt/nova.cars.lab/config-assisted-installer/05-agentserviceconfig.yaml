@@ -25,7 +25,7 @@ metadata:
     unsupported.agent-install.openshift.io/assisted-service-configmap: 'assisted-service-config'
 spec:
   databaseStorage:
-    #bug, leave default class for now      
+    #bug, leave default class for now
     #storageClassName: lso-blockclass
     accessModes:
     - ReadWriteOnce
@@ -33,7 +33,7 @@ spec:
       requests:
         storage: 15Gi
   filesystemStorage:
-    #bug, leave default class for now      
+    #bug, leave default class for now
     #storageClassName: lso-filesystemclass
     accessModes:
     - ReadWriteOnce
@@ -58,8 +58,8 @@ spec:
       rootFSUrl: "http://10.40.0.100/ztp-dave/rhcos-4.8.2-x86_64-live-rootfs.x86_64.img"
     - openshiftVersion: "4.9"
       cpuArchitecture: x86_64
-      version: "49.84.202109041651-0"
+      version: "49.84.202110081407-0"
       #url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/pre-release/4.9.0-0.nightly-2021-07-20-014024/rhcos-4.9.0-0.nightly-2021-07-20-014024-x86_64-live.x86_64.iso"
       #rootFSUrl: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/pre-release/4.9.0-0.nightly-2021-07-20-014024/rhcos-4.9.0-0.nightly-2021-07-20-014024-x86_64-live-rootfs.x86_64.img"
-      url: "http://10.40.0.100/ztp-dave/rhcos-4.9.0-rc.0-x86_64-live.x86_64.iso"
-      rootFSUrl: "http://10.40.0.100/ztp-dave/rhcos-4.9.0-rc.0-x86_64-live-rootfs.x86_64.img"
+      url: "http://10.40.0.100/ztp-dave/rhcos-4.9.0-x86_64-live.x86_64.iso"
+      rootFSUrl: "http://10.40.0.100/ztp-dave/rhcos-4.9.0-x86_64-live-rootfs.x86_64.img"

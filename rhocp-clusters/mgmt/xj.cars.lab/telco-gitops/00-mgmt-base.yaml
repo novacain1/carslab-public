@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 00-db5-cars-lab-base
+  name: 00-xj-cars-lab-base
   namespace: telco-gitops
 spec:
   # The argocd project the application belongs to
@@ -11,9 +11,9 @@ spec:
     namespace: 'telco-gitops'
     server: 'https://kubernetes.default.svc'
   source:
-    repoURL: 'https://github.com/redhat-partner-solutions/carslab-public.git'
+    repoURL: 'https://github.com/novacain1/carslab-public.git'
     targetRevision: HEAD
-    path: rhocp-clusters/mgmt/db5.cars.lab
+    path: rhocp-clusters/mgmt/xj.cars.lab
     directory:
       recurse: false
   # Sync policy
