@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 00-volt-cars-lab-base
+  name: 00-espirit-cars-lab-base
   namespace: telco-gitops
 spec:
   # The argocd project the application belongs to
@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: 'https://github.com/novacain1/carslab-public.git'
     targetRevision: HEAD
-    path: rhocp-clusters/mgmt/volt.cars.lab
+    path: rhocp-clusters/mgmt/espirit.cars.lab
     directory:
       recurse: false
   # Sync policy
