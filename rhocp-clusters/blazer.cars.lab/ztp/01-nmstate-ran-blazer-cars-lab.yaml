@@ -1,0 +1,171 @@
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super1-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: blazer-nmstate
+spec:
+  config:
+    interfaces:
+      - name: enp1s0
+        type: ethernet
+        state: up
+        macAddress: changeMe
+        ipv4:
+          address:
+          - ip: changeMe
+            prefix-length: 24
+          enabled: true
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: changeMe
+          next-hop-interface: enp1s0
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super2-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: blazer-nmstate
+spec:
+  config:
+    interfaces:
+      - name: enp1s0
+        type: ethernet
+        state: up
+        macAddress: changeMe
+        ipv4:
+          address:
+          - ip: changeMe
+            prefix-length: 24
+          enabled: true
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: changeMe
+          next-hop-interface: enp1s0
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super3-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: blazer-nmstate
+spec:
+  config:
+    interfaces:
+      - name: enp1s0
+        type: ethernet
+        state: up
+        macAddress: changeMe
+        ipv4:
+          address:
+          - ip: changeMe
+            prefix-length: 24
+          enabled: true
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: changeMe
+          next-hop-interface: enp1s0
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-cu1-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: blazer-nmstate
+spec:
+  config:
+    interfaces:
+      - name: bond0
+        type: bond
+        state: up
+        ipv4:
+          enabled: true
+          address:
+            - ip: 10.50.0.152
+              prefix-length: 24
+          dhcp: false
+        link-aggregation:
+          mode: active-backup
+          options:
+            miimon: '100'
+          slaves:
+          - ens7f0
+          - ens7f1
+      - name: ens1f0
+        type: ethernet
+        state: down
+      - name: ens1f1
+        type: ethernet
+        state: down
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.50.0.1
+          next-hop-interface: bond0
+  interfaces:
+    - name: ens1f0
+      macAddress: 40:A6:B7:3A:D1:60
+    - name: ens1f1
+      macAddress: 40:A6:B7:3A:D1:61
+    - name: ens7f0
+      macAddress: 40:A6:B7:3A:CF:20
+    - name: ens7f1
+      macAddress: 40:A6:B7:3A:CF:21
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-du1-fec2-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    cluster-name: blazer-nmstate
+spec:
+  config:
+    interfaces:
+      - name: ens2f0
+        type: ethernet
+        state: up
+        macAddress: ac:1f:6b:e1:79:ba
+        ipv4:
+          address:
+          - ip: 172.19.0.151
+            prefix-length: 24
+          enabled: true
+      - name: ens2f1
+        type: ethernet
+        state: down
+        macAddress: ac:1f:6b:e1:79:bb
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.19.0.1
+          next-hop-interface: ens2f0

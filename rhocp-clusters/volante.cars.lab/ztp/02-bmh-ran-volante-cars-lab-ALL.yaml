@@ -1,0 +1,180 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super1-volante-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super2-volante-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super3-volante-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-worker1-volante-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-worker2-volante-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-mgmt3-volante-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super1-volante-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-volante-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: updateMe
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+http://mgmt2.volante.cars.lab:8082/redfish/v1/Systems/changeMe
+    credentialsName: bmc-super1-volante-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super2-volante-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-volante-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: updateMe
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+http://mgmt2.volante.cars.lab:8082/redfish/v1/Systems/updateMe
+    credentialsName: bmc-super2-volante-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super3-volante-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-volante-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: updateMe
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+http://mgmt2.volante.cars.lab:8082/redfish/v1/Systems/updateMe
+    credentialsName: bmc-super3-volante-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: worker1-volante-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-volante-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: updateMe
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+http://mgmt2.volante.cars.lab:8082/redfish/v1/Systems/changeMe
+    credentialsName: bmc-worker1-volante-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: worker2-volante-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-volante-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: updateMe
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+http://mgmt2.volante.cars.lab:8082/redfish/v1/Systems/updateMe
+    credentialsName: bmc-worker2-volante-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: mgmt3-volante-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-volante-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:3D:D4:F0
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.38/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-mgmt3-volante-cars-lab
+    disableCertificateVerification: True

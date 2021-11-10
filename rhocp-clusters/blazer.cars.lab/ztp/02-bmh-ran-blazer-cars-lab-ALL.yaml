@@ -1,0 +1,150 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super1-blazer-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super2-blazer-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super3-blazer-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-cu1-blazer-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-du1-fec2-blazer-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super1-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-blazer-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: updateMe
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+http://mgmt2.blazer.cars.lab:8082/redfish/v1/Systems/107b9135-996f-4f6d-a99d-174948b9d305
+    credentialsName: bmc-super1-blazer-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super2-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-blazer-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: updateMe
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+http://mgmt2.blazer.cars.lab:8082/redfish/v1/Systems/updateMe
+    credentialsName: bmc-super2-blazer-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super3-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-blazer-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: updateMe
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+http://mgmt2.blazer.cars.lab:8082/redfish/v1/Systems/updateMe
+    credentialsName: bmc-super3-blazer-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: cu1-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-blazer-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:3A:CF:D0
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.35/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-cu2-blazer-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: du1-fec2-blazer-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-blazer-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: ac:1f:6b:e1:79:ba
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia://172.28.11.40/redfish/v1/Systems/1/
+    credentialsName: bmc-du1-fec2-blazer-cars-lab
+    disableCertificateVerification: True

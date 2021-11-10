@@ -1,0 +1,23 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: cluster-ran-blazer-cars-lab
+  namespace: assisted-installer
+spec:
+  baseDomain: cars.lab
+  clusterName: blazer
+  controlPlaneConfig:
+    servingCertificates: {}
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: aci-ran-blazer-cars-lab
+    version: v1beta1
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          telco-rwn: ran-blazer-cars-lab
+  pullSecretRef:
+    name: assisted-deployment-pull-secret

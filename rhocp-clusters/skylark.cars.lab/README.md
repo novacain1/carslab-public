@@ -16,7 +16,7 @@ Domain: skylark.cars.lab
 |----------|----------------------------|--------------|--------------|-------------|---------------|-----------|
 | CU2      | cu2.skylark.cars.lab       | R740 XL      | 10.50.0.152  | B51TJ93     | 172.28.11.35  | LDC1      |
 | MGMT1    | mgmt1.skylark.cars.lab     | R740 XL      | 172.16.0.101 | B53TJ93     | 172.28.11.36  | LDC1      |
-| DU1      | du1.skylark.cars.lab       | SMCI X12     | 172.17.0.181 |             | 172.28.11.42  | FEC1      |
+| DU1      | du1-fec1.skylark.cars.lab  | SMCI X12     | 172.17.0.181 |             | 172.28.11.42  | FEC1      |
 
 ## Control Plane
 OpenShift Control Plane for cluster, Baremetal option
@@ -130,7 +130,7 @@ The following manifests configure the cluster to operate as a RAN cluster.  You 
 
 ```bash
 export KUBECONFIG=~/kubeconfig-skylark
-export TELCO_RANCLUSTER_PATH=~/carslab-public/rhocp-clusters/tesla.cars.lab
+export TELCO_RANCLUSTER_PATH=~/carslab-public/rhocp-clusters/skylark.cars.lab
 oc kustomize $TELCO_RANCLUSTER_PATH
 
 oc apply -k $TELCO_RANCLUSTER_PATH
