@@ -1,3 +1,3 @@
-# EsPIRIT
+# ESPIRIT
 
 Espirit is a Management cluster.
