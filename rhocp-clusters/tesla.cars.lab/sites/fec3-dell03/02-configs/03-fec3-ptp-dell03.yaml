@@ -7,7 +7,7 @@ metadata:
 spec:
   profile:
     - name: "fec3-ptp-dell03"
-      interface: "ens3f0"
+      interface: "ens4f0"
       ptp4lOpts: "-2 --summary_interval -4 -m -s -H"
       phc2sysOpts: "-a -r -n 24"
       ptp4lConf: |

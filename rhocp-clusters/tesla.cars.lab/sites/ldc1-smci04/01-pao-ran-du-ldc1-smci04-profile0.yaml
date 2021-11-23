@@ -5,11 +5,11 @@
 apiVersion: performance.openshift.io/v2
 kind: PerformanceProfile
 metadata:
-  name: ran-du-ldc1-smci02-profile0
+  name: ran-du-ldc1-smci04-profile0
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
-  #- nohz_full=3-31,35-63
+  #- nohz_full=3-31,35-63 
   #- kernel.timer_migration=1
   - crashkernel=auto
   cpu:
@@ -20,15 +20,12 @@ spec:
     devices:
     # intel I350
     - interfaceName: eno*
-    # intel xxv710
-    - interfaceName: enp81s0f0
-    - interfaceName: enp81s0f1
-    # intel e810
+    # dell e810  
     - interfaceName: enp138s0f0
     - interfaceName: enp138s0f1
     - interfaceName: enp138s0f2
     - interfaceName: enp138s0f3
-    # tbd
+    # tbd  
     - interfaceName: eth*
   hugepages:
     defaultHugepagesSize: "1G"
@@ -41,4 +38,4 @@ spec:
   realTimeKernel:
     enabled: true
   nodeSelector:
-    node-role.kubernetes.io/ran-du-ldc1-smci02: ""
+    node-role.kubernetes.io/ran-du-ldc1-smci04: ""

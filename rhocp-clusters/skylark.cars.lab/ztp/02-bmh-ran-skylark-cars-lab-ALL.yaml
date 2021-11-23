@@ -69,6 +69,16 @@ type: Opaque
 #  password: YWx0aW9zdGFyITIz
 #type: Opaque
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-du2-ldc1-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: QURNSU4=
+  password: YWx0aW9zdGFyITIz
+type: Opaque
+---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
 metadata:
@@ -220,3 +230,23 @@ spec:
 #    address: redfish-virtualmedia://172.28.11.42/redfish/v1/Systems/1/
 #    credentialsName: bmc-du1-ldc1-skylark-cars-lab
 #    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: du2-ldc1-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: 3C:EC:EF:2D:7F:B1
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia://172.28.11.43/redfish/v1/Systems/1/
+    credentialsName: bmc-du2-ldc1-skylark-cars-lab
+    disableCertificateVerification: True

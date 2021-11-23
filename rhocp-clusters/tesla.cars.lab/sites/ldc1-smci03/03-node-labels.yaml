@@ -9,7 +9,7 @@ metadata:
     ran.openshift.io/ldc1-sriov-netdevice-fh-smci03: ""
     ran.openshift.io/ldc1-sriov-vfio-smci03: ""
     ran.openshift.io/ldc1-ptp-smci03: ""
-    #ran.openshift.io/n3k: ""
+    ran.openshift.io/acc100: ""
     ran.openshift.io/ptp: ""
     ran.openshift.io/sriov: ""
     #ran.openshift.io/ldc1-local-storage-smci03: ""

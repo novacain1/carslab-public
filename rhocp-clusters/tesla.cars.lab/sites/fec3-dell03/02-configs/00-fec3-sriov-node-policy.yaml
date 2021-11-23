@@ -17,9 +17,9 @@ spec:
   numVfs: 10
   nicSelector:
     vendor: "8086"
-    deviceID: "159b"
+    deviceID: "1591"
     pfNames:
-      - ens3f0#0-3
+      - ens4f0#0-3
 ---
 ###############################################################################
 # specific resourceName for it (eg. sriov-vfio-smci00)
@@ -39,9 +39,9 @@ spec:
   numVfs: 10
   nicSelector:
     vendor: "8086"
-    deviceID: "159b"
+    deviceID: "1591"
     pfNames:
-      - ens3f0#4-5
+      - ens4f0#4-5
 ---
 ###############################################################################
 # specific resourceName for it (eg. sriov-vfio-smci00)
@@ -61,9 +61,9 @@ spec:
   numVfs: 10
   nicSelector:
     vendor: "8086"
-    deviceID: "159b"
+    deviceID: "1591"
     pfNames:
-      - ens3f0#6-7
+      - ens4f0#6-7
 ---
 ###############################################################################
 # specific resourceName for it (eg. sriov-netdevice-fh-smci00)
@@ -83,6 +83,6 @@ spec:
   numVfs: 10
   nicSelector:
     vendor: "8086"
-    deviceID: "159b"
+    deviceID: "1591"
     pfNames:
-      - ens3f0#8-9
+      - ens4f0#8-9

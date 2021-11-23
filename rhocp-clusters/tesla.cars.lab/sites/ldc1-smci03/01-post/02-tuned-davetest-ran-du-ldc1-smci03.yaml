@@ -1,0 +1,20 @@
+---
+apiVersion: tuned.openshift.io/v1
+kind: Tuned
+metadata:
+  name: performance-tuned-patch-ran-du-ldc1-smci03
+  namespace: openshift-cluster-node-tuning-operator
+spec:
+  profile:
+  - data: |
+      [main]
+      summary=Configuration changes profile inherited from performance created tuned
+      include=openshift-node-performance-ran-du-ldc1-smci03-profile0
+      [bootloader]
+      cmdline_removeKernelArgs=-nohz=on
+    name: performance-tuned-patch-ran-du-ldc1-smci03
+  recommend:
+  - machineConfigLabels:
+      machineconfiguration.openshift.io/role: "ran-du-ldc1-smci03"
+    priority: 19
+    profile: performance-tuned-patch-ran-du-ldc1-smci03
