@@ -39,6 +39,6 @@ spec:
   numa:
     topologyPolicy: best-effort
   realTimeKernel:
-    enabled: true
+    enabled: false
   nodeSelector:
     node-role.kubernetes.io/ran-du-ldc1-smci01: ""
