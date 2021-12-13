@@ -21,14 +21,10 @@ spec:
     # intel I350
     - interfaceName: eno*
     # intel xxv710
-    - interfaceName: enp81s0f0
-    - interfaceName: enp81s0f1
-    # dell e810  
-    - interfaceName: enp138s0f0
-    - interfaceName: enp138s0f1
-    - interfaceName: enp138s0f2
-    - interfaceName: enp138s0f3
-    # tbd  
+    #- interfaceName: enp81s0*
+    # silicom sts
+    - interfaceName: enp138s0*
+    # supermicro bug
     - interfaceName: eth*
   hugepages:
     defaultHugepagesSize: "1G"

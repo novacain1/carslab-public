@@ -22,4 +22,4 @@ resources:
   # N3k Configs
   # - 04-n3k.yaml
   # ACC100
-  - 04-sriovfecclusterconfig-ran-du-fec3-dell03.yaml
+  #- 04-sriovfecclusterconfig-ran-du-fec3-dell03.yaml

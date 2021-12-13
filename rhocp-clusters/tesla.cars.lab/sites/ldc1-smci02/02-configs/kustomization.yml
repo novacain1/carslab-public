@@ -19,6 +19,6 @@ resources:
   # - 02-ldc1-local-storage-dell03.yaml
   # PTP Configs
   #- 03-ldc1-ptp-smci02.yaml
-  - 03-ldc1-ptp-smci02-e810.yaml
+  #- 03-ldc1-ptp-smci02-e810.yaml
   # ACC100
   - 04-sriovfecclusterconfig-ran-du-ldc1-smci02.yaml
