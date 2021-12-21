@@ -8,10 +8,11 @@ metadata:
   name: ran-du-ldc1-smci02-profile0
 spec:
   additionalKernelArgs:
-  - rcupdate.rcu_normal_after_boot=0
   #- nohz_full=3-31,35-63
   #- kernel.timer_migration=1
-  - crashkernel=auto
+  - crashkernel=512M
+  - rcupdate.rcu_normal_after_boot=0
+  - slub_debug=FZPU
   cpu:
     isolated: "3-31,35-63"
     reserved: "0-2,32-34"

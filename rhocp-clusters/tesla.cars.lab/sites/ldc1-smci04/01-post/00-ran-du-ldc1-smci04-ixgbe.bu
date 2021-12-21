@@ -1,0 +1,14 @@
+variant: openshift
+version: 4.8.0
+metadata:
+  name: 00-ran-du-ldc1-smci04-ixgbe
+  labels:
+    machineconfiguration.openshift.io/role: ran-du-ldc1-smci04
+storage:
+  files:
+    - path: /etc/modprobe.d.d/ixgbe-blacklist.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          blacklist ixgbe
