@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-mgmt1-skylark-cars-lab
+  namespace: assisted-installer
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: mgmt1-skylark-cars-lab
+  namespace: assisted-installer
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: 40:A6:B7:3D:D7:30
+  automatedCleaningMode: disabled
+  bmc:
+    address: idrac-virtualmedia://172.28.11.36/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-mgmt1-skylark-cars-lab
+    disableCertificateVerification: True
