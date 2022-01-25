@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: cu1
+  labels:
+    node-role.kubernetes.io/ran-cu-ldc1-dell00: ""

@@ -1,0 +1,93 @@
+---
+###############################################################################
+# specific resourceName for it (eg. sriov-vfio-dell00)
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: ldc1-sriov-a-vfio-dell00
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio_a
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/ldc1-sriov-a-vfio-dell00: ""
+  deviceType: vfio-pci
+  priority: 10
+  #mtu: 1500
+  numVfs: 8
+  nicSelector:
+    vendor: "8086"
+    deviceID: "158b"
+    pfNames:
+      - ens1f0#0-3
+      - ens7f0#0-3
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: ldc1-sriov-b-vfio-dell00
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio_b
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/ldc1-sriov-b-vfio-dell00: ""
+  deviceType: vfio-pci
+  priority: 10
+  #mtu: 1500
+  numVfs: 8
+  nicSelector:
+    vendor: "8086"
+    deviceID: "158b"
+    pfNames:
+      - ens1f1#0-3
+      - ens7f1#0-3
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: ldc1-sriov-vfio-dell00
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/ldc1-sriov-vfio-dell00: ""
+  deviceType: vfio-pci
+  priority: 10
+  #mtu: 1500
+  numVfs: 16
+  nicSelector:
+    vendor: "8086"
+    deviceID: "158b"
+    pfNames:
+      - ens1f0#4-7
+      - ens1f1#4-7
+      - ens7f0#4-7
+      - ens7f1#4-7
+---
+###############################################################################
+# specific resourceName for it (eg. sriov-netdevice-dell00)
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: ldc1-sriov-netdevice-dell00
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_netdevice
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/ldc1-sriov-netdevice-dell00: ""
+  deviceType: netdevice
+  priority: 10
+  #mtu: 1500
+  numVfs: 16
+  nicSelector:
+    vendor: "8086"
+    deviceID: "158b"
+    pfNames:
+      - ens1f0#8-11
+      - ens1f1#8-11
+      - ens7f0#8-11
+      - ens7f1#8-11

@@ -1,0 +1,43 @@
+---
+###############################################################################
+# SR-IOV Network Definition for the NS of the workload
+# vran-mh + vlan 806 + vran_vfio
+###############################################################################
+# NS = workload-4g-cu-ldc1
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: ldc1-dell00-vran-mh-a
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio_a
+  networkNamespace: workload-4g-cu-ldc1-dell00
+  vlan: 806
+  ipam: |-
+    {}
+  linkState: auto
+  # spoofChk: "<spoof_check>"
+  # maxTxRate: <max_tx_rate>
+  # minTxRate: <min_rx_rate>
+  # vlanQoS: <vlan_qos>
+  # trust: "<trust_vf>"
+  # capabilities: <capabilities>
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: ldc1-dell00-vran-mh-b
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio_b
+  networkNamespace: workload-4g-cu-ldc1-dell00
+  vlan: 806
+  ipam: |-
+    {}
+  linkState: auto
+  # spoofChk: "<spoof_check>"
+  # maxTxRate: <max_tx_rate>
+  # minTxRate: <min_rx_rate>
+  # vlanQoS: <vlan_qos>
+  # trust: "<trust_vf>"
+  # capabilities: <capabilities>

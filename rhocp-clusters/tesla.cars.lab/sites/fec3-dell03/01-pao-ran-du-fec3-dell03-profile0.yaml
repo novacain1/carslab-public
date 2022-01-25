@@ -9,8 +9,7 @@ metadata:
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
-  #- nohz_full=4-31,36-63
-  - crashkernel=auto
+  - crashkernel=512M
   cpu:
     isolated: "4-31,36-63"
     reserved: "0-3,32-35"
@@ -18,9 +17,7 @@ spec:
     userLevelNetworking: true
     devices:
     # dell e810        
-    #- interfaceName: "ens3f0"
-    #- interfaceName: "ens3f1"
-    # silicom sts2        
+    - interfaceName: ens3f*
     - interfaceName: ens4f*
     # broadcom BCM57504 onboard        
     - interfaceName: eno8303np0
@@ -36,6 +33,6 @@ spec:
   numa:
     topologyPolicy: best-effort
   realTimeKernel:
-    enabled: true
+    enabled: false
   nodeSelector:
     node-role.kubernetes.io/ran-du-fec3-dell03: ""

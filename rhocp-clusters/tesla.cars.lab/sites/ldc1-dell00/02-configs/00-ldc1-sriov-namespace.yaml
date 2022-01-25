@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: workload-4g-cu-ldc1-dell00
+  labels:
+    mutatevirtualmachines.kubemacpool.io: allocate
+    openshift.io/cluster-monitoring: "true"

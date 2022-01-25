@@ -1,0 +1,19 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfigPool
+metadata:
+  name: ran-cu-ldc1-dell00
+  labels:
+    machineconfiguration.openshift.io/role: ran-cu-ldc1-dell00
+spec:
+  machineConfigSelector:
+    matchExpressions:
+      - {
+          key: machineconfiguration.openshift.io/role,
+          operator: In,
+          values: [worker, ran, ran-cu-ldc1-dell00],
+        }
+  paused: false
+  nodeSelector:
+    matchLabels:
+      node-role.kubernetes.io/ran-cu-ldc1-dell00: ""

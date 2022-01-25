@@ -1,0 +1,24 @@
+---
+apiVersion: performance.openshift.io/v1
+kind: PerformanceProfile
+metadata:
+  name: ran-cu-ldc1-dell00-profile0
+spec:
+  cpu:
+    isolated: "4-47,52-95"
+    reserved: "0-3,48-51"
+  hugepages:
+    defaultHugepagesSize: "1G"
+    pages:
+    - size: "1G"
+      count: 64
+      node: 0
+    - size: "1G"
+      count: 64
+      node: 1
+  numa:
+    topologyPolicy: best-effort
+  realTimeKernel:
+    enabled: false
+  nodeSelector:
+    node-role.kubernetes.io/ran-cu-ldc1-dell00: ""

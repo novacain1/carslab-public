@@ -1,0 +1,7 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - 01-sc-selinux-hpp-ran-cu-ldc1-dell00.yaml
+  - 05-deploy-openshift-virt.yaml

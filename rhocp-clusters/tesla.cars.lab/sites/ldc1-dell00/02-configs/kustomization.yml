@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  # Each SITE_ID is a different zone
+  topology.kubernetes.io/zone: ldc1
+
+resources:
+  # SRIOV Configs
+  #- 00-ldc1-sriov-namespace.yaml
+  - 00-ldc1-sriov-node-policy.yaml
+  - 01-ldc1-sriov-vran-bh-s1c-ng4t.yaml
+  - 01-ldc1-sriov-vran-bh-s1c.yaml
+  - 01-ldc1-sriov-vran-bh-s1u.yaml
+  - 01-ldc1-sriov-vran-mgmt.yaml
+  - 01-ldc1-sriov-vran-mh.yaml
+  - 01-ldc1-sriov-vran-mp.yaml

@@ -14,8 +14,9 @@ spec:
       #group.ksoftirqd=0:f:11:*:ksoftirqd.*
       #group.rcuc=0:f:11:*:rcuc.*
       #group.rcub=0:f:11:*:rcub.*
-      [sysctl]
-      kernel.panic_on_rcu_stall=1
+      #[sysctl]
+      #contained in machineConfig
+      #kernel.panic_on_rcu_stall=1
       #[service]
       #service.stalld=stop,disable
       #[sysfs]
@@ -29,8 +30,8 @@ spec:
       #/sys/devices/virtual/workqueue/cpumask = ${not_isolated_cpumask}
       #/sys/devices/system/machinecheck/machinecheck*/ignore_ce = 1
       #/sys/bus/workqueue/devices/ib-comp-unb-wq/cpumask = ${not_isolated_cpumask}
-      #[bootloader]
-      #cmdline_removeKernelArgs=-nohz=on
+      [bootloader]
+      cmdline_removeKernelArgs=-nohz=on
       # NOTE: nohz_full=${isolated_cores} improves cyclictest results but may have negative impact on some DPDK low-latency applications
       #cmdline_additionalKernelArgs=+intel_idle.max_cstate=0 processor.max_cstate=1 nohz=off rcu_nocbs=all rcu_nocb_poll nowatchdog nmi_watchdog=0 nohz_full=${isolated_cores}
     name: performance-tuned-patch-ran-du-ldc1-smci01

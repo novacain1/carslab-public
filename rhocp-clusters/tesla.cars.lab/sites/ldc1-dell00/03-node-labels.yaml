@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: cu1
+  labels:
+    node-role.kubernetes.io/ran-cu-ldc1-dell00: ""
+    ran.openshift.io/ocpvirt: ""
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/ldc1-sriov-a-vfio-dell00: ""
+    ran.openshift.io/ldc1-sriov-b-vfio-dell00: ""
+    ran.openshift.io/ldc1-sriov-vfio-dell00: ""
+    ran.openshift.io/ldc1-sriov-netdevice-dell00:  ""
