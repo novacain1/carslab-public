@@ -9,19 +9,20 @@ metadata:
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
-  #- nohz_full=3-31,35-63 
+  #- nohz_full=4-31,36-63 
   #- kernel.timer_migration=1
   - crashkernel=auto
   cpu:
-    isolated: "3-31,35-63"
-    reserved: "0-2,32-34"
+    isolated: "4-31,36-63"
+    reserved: "0-3,32-35"
   net:
     userLevelNetworking: true
     devices:
     # intel I350
     - interfaceName: eno*
     # silicom sts  
-    - interfaceName: enp138s0*
+    - interfaceName: enp81*
+    - interfaceName: enp83*
     # supermicro bug
     - interfaceName: eth*
   hugepages:

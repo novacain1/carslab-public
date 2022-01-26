@@ -6,4 +6,4 @@ metadata:
  namespace: openshift-sriov-network-operator
 data:
   E810C: 8086 159B 1889
-  STS2: 8086 1591 1889
+  STS: 8086 1591 1889

@@ -19,7 +19,7 @@ spec:
     vendor: "8086"
     deviceID: "1591"
     pfNames:
-      - enp138s0f0#0-3
+      - enp81s0f0#0-3
 ---
 ###############################################################################
 # specific resourceName for it (eg. sriov-vfio-smci00)
@@ -41,7 +41,7 @@ spec:
     vendor: "8086"
     deviceID: "1591"
     pfNames:
-      - enp138s0f0#4-5
+      - enp81s0f0#4-5
 ---
 ###############################################################################
 # specific resourceName for it (eg. sriov-vfio-smci00)
@@ -63,7 +63,7 @@ spec:
     vendor: "8086"
     deviceID: "1591"
     pfNames:
-      - enp138s0f0#6-7
+      - enp81s0f0#6-7
 ---
 ###############################################################################
 # specific resourceName for it (eg. sriov-netdevice-fh-smci00)
@@ -85,4 +85,4 @@ spec:
     vendor: "8086"
     deviceID: "1591"
     pfNames:
-      - enp138s0f0#8-9
+      - enp81s0f0#8-9
