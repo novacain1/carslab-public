@@ -13,7 +13,7 @@ spec:
   clusterDeploymentRef:
     name: aci-ran-skylark-cars-lab
   imageSetRef:
-    name: openshift-v4.8.27
+    name: openshift-v4.8.28
 #  manifestsConfigMapRef:
 #    name: cm-overrides-ran-skylark-cars-lab
   networking:
