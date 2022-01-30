@@ -21,12 +21,10 @@ spec:
     devices:
     # intel I350
     - interfaceName: eno*
-    # intel xxv710
-    #- interfaceName: enp81s0*
+    # intel X550
+    - interfaceName: enp25s0*
     # silicom sts
     - interfaceName: enp138s0*
-    # supermicro bug
-    - interfaceName: eth*
   hugepages:
     defaultHugepagesSize: "1G"
     pages:
