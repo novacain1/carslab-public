@@ -8,13 +8,19 @@ spec:
     isolated: "4-47,52-95"
     reserved: "0-3,48-51"
   hugepages:
-    defaultHugepagesSize: "1G"
+    defaultHugepagesSize: "2M"
     pages:
-    - size: "1G"
-      count: 64
+    #- size: "1G"
+    #  count: 64
+    #  node: 0
+    #- size: "1G"
+    #  count: 64
+    #  node: 1
+    - size: "2M"
+      count: 2500
       node: 0
-    - size: "1G"
-      count: 64
+    - size: "2M"
+      count: 2500
       node: 1
   numa:
     topologyPolicy: best-effort
