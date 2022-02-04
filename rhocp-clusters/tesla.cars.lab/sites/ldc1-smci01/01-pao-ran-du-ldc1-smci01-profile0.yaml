@@ -23,7 +23,7 @@ spec:
     - interfaceName: eno*
     # intel X550
     - interfaceName: enp25s0*
-    # silicom sts
+    # intel e810
     - interfaceName: enp138s0*
   hugepages:
     defaultHugepagesSize: "1G"
@@ -34,6 +34,6 @@ spec:
   numa:
     topologyPolicy: best-effort
   realTimeKernel:
-    enabled: true
+    enabled: false
   nodeSelector:
     node-role.kubernetes.io/ran-du-ldc1-smci01: ""

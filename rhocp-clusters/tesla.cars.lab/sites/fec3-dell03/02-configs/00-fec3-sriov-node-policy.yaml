@@ -17,7 +17,7 @@ spec:
   numVfs: 10
   nicSelector:
     vendor: "8086"
-    deviceID: "1591"
+    deviceID: "159b"
     pfNames:
       - ens4f0#0-3
 ---
@@ -39,7 +39,7 @@ spec:
   numVfs: 10
   nicSelector:
     vendor: "8086"
-    deviceID: "1591"
+    deviceID: "159b"
     pfNames:
       - ens4f0#4-5
 ---
@@ -61,7 +61,7 @@ spec:
   numVfs: 10
   nicSelector:
     vendor: "8086"
-    deviceID: "1591"
+    deviceID: "159b"
     pfNames:
       - ens4f0#6-7
 ---
@@ -83,6 +83,6 @@ spec:
   numVfs: 10
   nicSelector:
     vendor: "8086"
-    deviceID: "1591"
+    deviceID: "159b"
     pfNames:
       - ens4f0#8-9

@@ -14,4 +14,4 @@ resources:
   - 01-cluster-ran-skylark-cars-lab.yaml
   - 01-infraenv-ran-skylark-cars-lab.yaml
   - 01-nmstate-ran-skylark-cars-lab.yaml
-# - 02-bmh-ran-skylark-cars-lab-ALL.yaml
+# - 02-bmh-ran-skylark-cars-lab-cplane.yaml

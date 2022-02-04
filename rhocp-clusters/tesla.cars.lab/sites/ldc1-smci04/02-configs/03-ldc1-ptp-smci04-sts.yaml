@@ -7,7 +7,7 @@ metadata:
 spec:
   profile:
     - name: "ldc1-ptp-smci04-sts"
-      interface: "enp138s0f0"
+      interface: "enp81s0f3"
       ptp4lOpts: "-2 --summary_interval -4 -m -s -H"
       phc2sysOpts: "-a -r -n 24"
       ptp4lConf: |
