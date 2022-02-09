@@ -3,7 +3,7 @@
 # SR-IOV Network Definition for the NS of the workload
 # vran-mp + vlan 2003 + vran_netdevice_fh
 ###############################################################################
-# NS = workload-4g-du-ldc1-smci04
+# NS = workload-du
 apiVersion: sriovnetwork.openshift.io/v1
 kind: SriovNetwork
 metadata:
@@ -11,7 +11,7 @@ metadata:
   namespace: openshift-sriov-network-operator
 spec:
   resourceName: vran_netdevice_fh
-  networkNamespace: workload-4g-du-ldc1-smci04
+  networkNamespace: workload-du
   vlan: 2003
   ipam: |-
     {"type": "static"}
