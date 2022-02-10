@@ -50,7 +50,7 @@ spec:
         path_trace_enabled 0
         follow_up_info 0
         hybrid_e2e 0
-        tx_timestamp_timeout 100
+        tx_timestamp_timeout 50
         use_syslog 1
         verbose 0
         #summary_interval 0
@@ -107,8 +107,8 @@ spec:
         #
         # INTEL HACK E810
         #
-        sanity_freq_limit 0
-        step_threshold 30.0
+        #sanity_freq_limit 0
+        #step_threshold 30.0
   recommend:
     - profile: "ldc1-ptp-smci04-sts"
       priority: 1

@@ -10,12 +10,12 @@ spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
   - crashkernel=512M
-  - nohz=off
-  - nohz_full=3-31,35-63 
-  - slub_debug=FZPU
+  #- nohz=off
+  #- nohz_full=3-31,35-63 
+  #- slub_debug=FZPU
   cpu:
-    isolated: 3-31,35-63
-    reserved: 0-2,32-34
+    isolated: 4-31,36-63
+    reserved: 0-3,32-35
   net:
     userLevelNetworking: true
     devices:
@@ -34,6 +34,6 @@ spec:
   numa:
     topologyPolicy: best-effort
   realTimeKernel:
-    enabled: false
+    enabled: true
   nodeSelector:
     node-role.kubernetes.io/ran-du-ldc1-smci01: ""
