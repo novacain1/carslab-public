@@ -1,0 +1,22 @@
+---
+###############################################################################
+# netdevice for all core networks
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: core-network-devices
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: core_sriov_netdevice
+  nodeSelector:
+    feature.node.kubernetes.io/open5gs: "true"
+  deviceType: netdevice
+  priority: 10
+  #mtu: 1500
+  numVfs: 10
+  nicSelector:
+    vendor: "8086"
+    deviceID: "159b"
+    pfNames:
+      - ens4f1#0-6
+
