@@ -3,5 +3,7 @@ apiVersion: cluster.open-cluster-management.io/v1
 kind: ManagedCluster
 metadata:
   name: skylark-cars-lab
+  namespace: skylark-cars-lab
 spec:
   hubAcceptsClient: true
+  leaseDurationSeconds: 60
