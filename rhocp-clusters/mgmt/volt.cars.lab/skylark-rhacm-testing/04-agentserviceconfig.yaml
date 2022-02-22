@@ -24,7 +24,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 15Gi
+        storage: 90Gi
   filesystemStorage:
     #bug, leave default class for now
     #storageClassName: lso-filesystemclass
@@ -32,7 +32,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 15Gi
+        storage: 90Gi
   osImages:
     #- openshiftVersion: "4.6"
     #  version: "46.82.202012051820-0"
