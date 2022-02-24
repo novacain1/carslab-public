@@ -5,3 +5,8 @@ metadata:
   name: workload-4g-du-fec3
   labels:
     openshift.io/cluster-monitoring: "true"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: open5gs-core
