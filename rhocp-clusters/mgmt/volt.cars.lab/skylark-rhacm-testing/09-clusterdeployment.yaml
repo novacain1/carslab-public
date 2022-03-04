@@ -2,7 +2,7 @@
 apiVersion: hive.openshift.io/v1
 kind: ClusterDeployment
 metadata:
-  name: cluster-skylark-cars-lab
+  name: skylark-cars-lab
   namespace: skylark-cars-lab
 spec:
   baseDomain: cars.lab
@@ -10,7 +10,7 @@ spec:
   clusterInstallRef:
     group: extensions.hive.openshift.io
     kind: AgentClusterInstall
-    name: aci-skylark-cars-lab
+    name: skylark-cars-lab
     version: v1beta1
   platform:
     agentBareMetal:

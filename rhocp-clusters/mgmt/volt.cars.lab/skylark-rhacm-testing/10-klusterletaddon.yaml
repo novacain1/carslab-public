@@ -5,7 +5,7 @@ metadata:
   name: klusterletaddonconfig-skylark-cars-lab
   namespace: skylark-cars-lab
 spec:
-  clusterName: cluster-skylark-cars-lab
+  clusterName: skylark-cars-lab
   clusterNamespace: skylark-cars-lab
   clusterLabels:
     cloud: auto-detect
