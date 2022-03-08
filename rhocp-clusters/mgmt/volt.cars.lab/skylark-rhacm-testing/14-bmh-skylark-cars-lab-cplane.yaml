@@ -35,10 +35,10 @@ metadata:
   name: super1-skylark-cars-lab
   namespace: skylark-cars-lab
   labels:
-    # InfraEnv to use
     infraenvs.agent-install.openshift.io: "infraenv-skylark-cars-lab"
   annotations:
     inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super1"
     bmac.agent-install.openshift.io/role: master
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
     #bmac.agent-install.openshift.io/installer-args: '["--append-karg", "bond=bond0:ens7f0,ens7f1:mode=active-backup ip=bond0:dhcp", "--save-partindex", "1", "--copy-network"]'
@@ -49,13 +49,10 @@ spec:
   bootMACAddress: 40:A6:B7:51:9F:70
   automatedCleaningMode: disabled
   bmc:
-    # https://github.com/metal3-io/baremetal-operator/blob/master/docs/api.md
     address: idrac-virtualmedia://172.28.11.31/redfish/v1/Systems/System.Embedded.1
+    #address: idrac-virtualmedia://fd00:6:6:11::31/redfish/v1/Systems/System.Embedded.1
     credentialsName: bmc-super1-skylark-cars-lab
     disableCertificateVerification: True
-
-# oc delete -f 02-bmh-ran-skylark-cars-lab.yaml ; sleep 3 ; oc create -f 02-bmh-ran-skylark-cars-lab.yaml
-# watch -c "oc get bmh pool5-ran-skylark-cars-lab -o jsonpath='{.status}' | jq . "
 ---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
@@ -66,6 +63,7 @@ metadata:
     infraenvs.agent-install.openshift.io: "infraenv-skylark-cars-lab"
   annotations:
     inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super2"
     bmac.agent-install.openshift.io/role: master
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
@@ -74,6 +72,7 @@ spec:
   automatedCleaningMode: disabled
   bmc:
     address: idrac-virtualmedia://172.28.11.32/redfish/v1/Systems/System.Embedded.1
+    #address: idrac-virtualmedia://fd00:6:6:11::32/redfish/v1/Systems/System.Embedded.1
     credentialsName: bmc-super2-skylark-cars-lab
     disableCertificateVerification: True
 ---
@@ -86,6 +85,7 @@ metadata:
     infraenvs.agent-install.openshift.io: "infraenv-skylark-cars-lab"
   annotations:
     inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super3"
     bmac.agent-install.openshift.io/role: master
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
@@ -94,5 +94,6 @@ spec:
   automatedCleaningMode: disabled
   bmc:
     address: idrac-virtualmedia://172.28.11.33/redfish/v1/Systems/System.Embedded.1
+    #address: idrac-virtualmedia://fd00:6:6:11::33/redfish/v1/Systems/System.Embedded.1
     credentialsName: bmc-super3-skylark-cars-lab
     disableCertificateVerification: True

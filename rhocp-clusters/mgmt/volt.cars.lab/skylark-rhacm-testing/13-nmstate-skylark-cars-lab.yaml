@@ -18,22 +18,33 @@ spec:
             - ip: 10.50.0.101
               prefix-length: 24
           dhcp: false
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2052::101
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
         link-aggregation:
           mode: active-backup
           options:
             miimon: '100'
             primary: ens7f0
-          slaves:
+          port:
           - ens7f0
           - ens7f1
     dns-resolver:
       config:
         server:
-          - 10.40.0.100
+        - 10.40.0.100
+        - fd00:6:6:11::52
     routes:
       config:
         - destination: 0.0.0.0/0
           next-hop-address: 10.50.0.1
+          next-hop-interface: bond0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2052::1
           next-hop-interface: bond0
   interfaces:
     - name: ens7f0
@@ -60,22 +71,33 @@ spec:
             - ip: 10.50.0.102
               prefix-length: 24
           dhcp: false
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2052::102
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
         link-aggregation:
           mode: active-backup
           options:
             miimon: '100'
             primary: ens7f0
-          slaves:
+          port:
           - ens7f0
           - ens7f1
     dns-resolver:
       config:
         server:
-          - 10.40.0.100
+        - 10.40.0.100
+        - fd00:6:6:11::52
     routes:
       config:
         - destination: 0.0.0.0/0
           next-hop-address: 10.50.0.1
+          next-hop-interface: bond0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2052::1
           next-hop-interface: bond0
   interfaces:
     - name: ens7f0
@@ -102,22 +124,33 @@ spec:
             - ip: 10.50.0.103
               prefix-length: 24
           dhcp: false
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2052::103
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
         link-aggregation:
           mode: active-backup
           options:
             miimon: '100'
             primary: ens7f0
-          slaves:
+          port:
           - ens7f0
           - ens7f1
     dns-resolver:
       config:
         server:
-          - 10.40.0.100
+        - 10.40.0.100
+        - fd00:6:6:11::52
     routes:
       config:
         - destination: 0.0.0.0/0
           next-hop-address: 10.50.0.1
+          next-hop-interface: bond0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2052::1
           next-hop-interface: bond0
   interfaces:
     - name: ens7f0
@@ -144,12 +177,19 @@ spec:
             - ip: 10.50.0.152
               prefix-length: 24
           dhcp: false
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2052::152
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
         link-aggregation:
           mode: active-backup
           options:
-            miimon: '150'
+            miimon: '100'
             primary: ens7f0
-          slaves:
+          port:
           - ens7f0
           - ens7f1
       - name: ens1f0
@@ -161,11 +201,15 @@ spec:
     dns-resolver:
       config:
         server:
-          - 10.40.0.100
+        - 10.40.0.100
+        - fd00:6:6:11::52
     routes:
       config:
         - destination: 0.0.0.0/0
           next-hop-address: 10.50.0.1
+          next-hop-interface: bond0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2052::1
           next-hop-interface: bond0
   interfaces:
     - name: ens1f0
@@ -196,12 +240,19 @@ spec:
             - ip: 172.17.0.101
               prefix-length: 24
           dhcp: false
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2060::101
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
         link-aggregation:
           mode: active-backup
           options:
-            miimon: '150'
+            miimon: '100'
             primary: ens7f0
-          slaves:
+          port:
           - ens7f0
           - ens7f1
       - name: ens1f0
@@ -213,11 +264,15 @@ spec:
     dns-resolver:
       config:
         server:
-          - 10.40.0.100
+        - 10.40.0.100
+        - fd00:6:6:11::52
     routes:
       config:
         - destination: 0.0.0.0/0
           next-hop-address: 172.17.0.1
+          next-hop-interface: bond0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2060::1
           next-hop-interface: bond0
   interfaces:
     - name: ens1f0
