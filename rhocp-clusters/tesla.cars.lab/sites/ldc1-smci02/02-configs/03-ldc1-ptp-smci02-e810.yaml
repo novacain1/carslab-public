@@ -39,7 +39,6 @@ spec:
         announceReceiptTimeout 3
         syncReceiptTimeout 100
         delayAsymmetry 0
-        #update 30-Nov per Pasi recommendations:
         fault_reset_interval -8
         neighborPropDelayThresh 20000000
         #
@@ -50,7 +49,6 @@ spec:
         path_trace_enabled 0
         follow_up_info 0
         hybrid_e2e 0
-        #update 30-Nov per Intel recommendations:
         tx_timestamp_timeout 50
         use_syslog 1
         verbose 0
