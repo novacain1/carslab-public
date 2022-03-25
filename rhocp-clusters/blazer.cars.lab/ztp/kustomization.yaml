@@ -10,8 +10,12 @@ commonLabels:
   telco-gitops/ztp: combined-ran
 
 resources:
-  - 01-agent-ran-blazer-cars-lab.yaml
-  - 01-cluster-ran-blazer-cars-lab.yaml
-  - 01-infraenv-ran-blazer-cars-lab.yaml
-  - 01-nmstate-ran-blazer-cars-lab.yaml
-# - 02-bmh-ran-blazer-cars-lab-ALL.yaml
+  - 00-namespace.yaml
+  #- 01-pullsecret.yaml
+  - 02-aci.yaml
+  - 03-clusterdeployment.yaml
+  - 04-klusterletaddon.yaml
+  - 05-managedcluster.yaml
+  - 06-infraenv-blazer-cars-lab.yaml
+  - 07-nmstate-blazer-cars-lab.yaml
+  - 08-bmh-blazer-cars-lab-cplane.yaml
