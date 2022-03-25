@@ -18,10 +18,10 @@ spec:
       cluster-name: skylark-cars-lab
   pullSecretRef:
     name: assisted-deployment-pull-secret
-  proxy:
-    httpProxy: http://infra-registry.infra.cars.lab:3128
-    httpsProxy: http://infra-registry.infra.cars.lab:3128
-    noProxy: .cars.lab
+#  proxy:
+#    httpProxy: http://infra-registry.infra.cars.lab:3128
+#    httpsProxy: http://infra-registry.infra.cars.lab:3128
+#    noProxy: .cars.lab
   # Modify ignition during discovery
   #ignitionConfigOverride: '{"ignition": {"version": "3.1.0"}, "storage": {"files": [{"path": "/etc/someconfig", "contents": {"source": "data:text/plain;base64,aGVscGltdHJhcHBlZGluYXN3YWdnZXJzcGVj"}}]}}'
   ## Custom network configuration
