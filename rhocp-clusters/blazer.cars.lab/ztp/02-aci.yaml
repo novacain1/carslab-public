@@ -2,21 +2,21 @@
 apiVersion: extensions.hive.openshift.io/v1beta1
 kind: AgentClusterInstall
 metadata:
-  name: skylark-cars-lab
-  namespace: skylark-cars-lab
+  name: blazer-cars-lab
+  namespace: blazer-cars-lab
   annotations:
     agent-install.openshift.io/install-config-overrides: '{"networking":{"networkType":"OVNKubernetes"}}'
 spec:
-  apiVIP: 10.50.0.98
-  #apiVIP: fd00:6:6:2052::98
-  ingressVIP: 10.50.0.99
-  #ingressVIP: fd00:6:6:2052::99
+  apiVIP: 10.50.56.98
+  #apiVIP: fd00:6:6:2056::98
+  ingressVIP: 10.50.56.99
+  #ingressVIP: fd00:6:6:2056::99
   clusterDeploymentRef:
-    name: skylark-cars-lab
+    name: blazer-cars-lab
   imageSetRef:
-    name: openshift-v4.10.4
+    name: openshift-v4.8.35
 #  manifestsConfigMapRef:
-#    name: cm-overrides-skylark-cars-lab
+#    name: cm-overrides-blazer-cars-lab
   networking:
     clusterNetwork:
       - cidr: 10.128.0.0/14
@@ -27,8 +27,8 @@ spec:
       - 172.30.0.0/16
       - fd02::/112
     machineNetwork:
-      - cidr: 10.50.0.0/24
-      - cidr: fd00:6:6:2052::0/64
+      - cidr: 10.50.56.0/24
+      - cidr: fd00:6:6:2056::0/64
   provisionRequirements:
     controlPlaneAgents: 3
     workerAgents: 0
