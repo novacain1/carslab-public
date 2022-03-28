@@ -41,13 +41,15 @@ metadata:
     bmac.agent-install.openshift.io/hostname: "super1"
     bmac.agent-install.openshift.io/role: master
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
   online: true
-  bootMACAddress: 40:A6:B7:51:9F:70
+  bootMACAddress: DE:AD:BE:EF:A0:1D
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/ca1a85d9-4bc2-5e86-af84-c39aac30c0e5
+    address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/da1a85d9-4bc2-5e86-af84-c39aac30c0e5
     credentialsName: bmc-super1-blazer-cars-lab
     disableCertificateVerification: True
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 ---
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
@@ -63,7 +65,7 @@ metadata:
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
   online: true
-  bootMACAddress: 40:A6:B7:51:8A:60
+  bootMACAddress: DE:AD:BE:EF:9D:47
   automatedCleaningMode: disabled
   bmc:
     address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/8273cc27-82c1-54dc-9eab-a75ea53f1ebf
@@ -84,7 +86,7 @@ metadata:
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
 spec:
   online: true
-  bootMACAddress: 40:A6:B7:51:51:C0
+  bootMACAddress: DE:AD:BE:EF:C8:86
   automatedCleaningMode: disabled
   bmc:
     address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/03798b5b-994b-5088-89f3-30f7c6fb35e2
