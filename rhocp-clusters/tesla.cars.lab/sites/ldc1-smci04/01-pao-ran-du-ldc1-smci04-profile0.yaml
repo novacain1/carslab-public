@@ -9,12 +9,13 @@ metadata:
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
+  - crashkernel=512M
   #- nohz_full=4-31,36-63 
   #- kernel.timer_migration=1
-  - crashkernel=auto
+  - slub_debug=FZPU
   cpu:
-    isolated: "4-31,36-63"
-    reserved: "0-3,32-35"
+    isolated: 4-31,36-63
+    reserved: 0-3,32-35
   net:
     userLevelNetworking: true
     devices:

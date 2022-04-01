@@ -14,7 +14,7 @@ spec:
   clusterDeploymentRef:
     name: skylark-cars-lab
   imageSetRef:
-    name: openshift-v4.10.4
+    name: openshift-v4.9.26-disconnected
 #  manifestsConfigMapRef:
 #    name: cm-overrides-skylark-cars-lab
   networking:
