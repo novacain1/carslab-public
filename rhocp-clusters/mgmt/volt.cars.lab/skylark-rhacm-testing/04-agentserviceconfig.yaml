@@ -8,6 +8,7 @@ data:
   LOG_LEVEL: "debug"
   SUPPORT_L2: "false"
   DISABLED_HOST_VALIDATIONS: "belongs-to-machine-cidr,belongs-to-majority-group"
+  PUBLIC_CONTAINER_REGISTRIES: "quay.io,registry.svc.ci.openshift.org,registry.redhat.io"
   ISO_IMAGE_TYPE: "full-iso"
 ---
 apiVersion: agent-install.openshift.io/v1beta1
@@ -33,6 +34,9 @@ spec:
     resources:
       requests:
         storage: 90Gi
+  mirrorRegistryRef:
+    # for disconnected installs
+    name: "disconnected-mirror-config"
   osImages:
     #- openshiftVersion: "4.6"
     #  version: "46.82.202012051820-0"
