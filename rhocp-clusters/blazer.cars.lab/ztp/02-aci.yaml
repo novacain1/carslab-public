@@ -14,7 +14,7 @@ spec:
   clusterDeploymentRef:
     name: blazer-cars-lab
   imageSetRef:
-    name: openshift-v4.9.26
+    name: openshift-v4.9.27
 #  manifestsConfigMapRef:
 #    name: cm-overrides-blazer-cars-lab
   networking:
