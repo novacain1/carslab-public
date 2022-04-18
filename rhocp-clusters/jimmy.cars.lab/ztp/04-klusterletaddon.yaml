@@ -1,0 +1,22 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: klusterletaddonconfig-jimmy-cars-lab
+  namespace: jimmy-cars-lab
+spec:
+  clusterName: jimmy-cars-lab
+  clusterNamespace: jimmy-cars-lab
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: true
+  certPolicyController:
+    enabled: false
+  iamPolicyController:
+    enabled: false
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: false
