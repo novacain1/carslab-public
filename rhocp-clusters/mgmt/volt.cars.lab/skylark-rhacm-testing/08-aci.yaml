@@ -14,21 +14,21 @@ spec:
   clusterDeploymentRef:
     name: skylark-cars-lab
   imageSetRef:
-    name: openshift-v4.9.26-disconnected
+    name: img4.8.12-x86-64-appsub
 #  manifestsConfigMapRef:
 #    name: cm-overrides-skylark-cars-lab
   networking:
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
-      - cidr: fd01::/48
-        hostPrefix: 64
+#      - cidr: fd01::/48
+#        hostPrefix: 64
     serviceNetwork:
       - 172.30.0.0/16
-      - fd02::/112
+#      - fd02::/112
     machineNetwork:
       - cidr: 10.50.0.0/24
-      - cidr: fd00:6:6:2052::0/64
+#      - cidr: fd00:6:6:2052::0/64
   provisionRequirements:
     controlPlaneAgents: 3
     workerAgents: 0

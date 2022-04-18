@@ -2,23 +2,23 @@
 apiVersion: hive.openshift.io/v1
 kind: ClusterImageSet
 metadata:
-  name: openshift-v4.8.35
+  name: openshift-v4.8.36
 spec:
-  releaseImage: quay.io/openshift-release-dev/ocp-release:4.8.35-x86_64
+  releaseImage: quay.io/openshift-release-dev/ocp-release:4.8.36-x86_64
 ---
 apiVersion: hive.openshift.io/v1
 kind: ClusterImageSet
 metadata:
-  name: openshift-v4.9.26
+  name: openshift-v4.9.27
 spec:
-  releaseImage: quay.io/openshift-release-dev/ocp-release:4.9.26-x86_64
+  releaseImage: quay.io/openshift-release-dev/ocp-release:4.9.27-x86_64
 ---
 apiVersion: hive.openshift.io/v1
 kind: ClusterImageSet
 metadata:
-  name: openshift-v4.10.5
+  name: openshift-v4.10.6
 spec:
-  releaseImage: quay.io/openshift-release-dev/ocp-release:4.10.5-x86_64
+  releaseImage: quay.io/openshift-release-dev/ocp-release:4.10.6-x86_64
 ---
 apiVersion: hive.openshift.io/v1
 kind: ClusterImageSet
