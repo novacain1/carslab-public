@@ -16,6 +16,6 @@ resources:
   - 03-clusterdeployment.yaml
   - 04-klusterletaddon.yaml
   - 05-managedcluster.yaml
-  - 06-infraenv-blazer-cars-lab.yaml
-  - 07-nmstate-blazer-cars-lab.yaml
-  - 08-bmh-blazer-cars-lab-cplane.yaml
+  - 06-infraenv-jimmy-cars-lab.yaml
+  - 07-nmstate-jimmy-cars-lab.yaml
+  - 08-bmh-jimmy-cars-lab-cplane.yaml
