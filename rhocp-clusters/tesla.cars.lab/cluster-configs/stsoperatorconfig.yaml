@@ -1,0 +1,19 @@
+apiVersion: sts.silicom.com/v1alpha1
+kind: StsOperatorConfig
+metadata:
+  name: sts-operator-config
+  namespace: openshift-operators
+Spec:
+  grpcSvcPort: 50051
+  gpsSvcPort: 2947
+  namespace: openshift-operators
+  images:
+    gpsd: quay.io/silicom/gpsd:3.23.1
+    grpcTsyncd: quay.io/silicom/grpc-tsyncd:2.1.1.0
+    phc2sys: quay.io/silicom/phc2sys:3.1.1
+    stsPlugin: quay.io/silicom/sts-plugin:0.0.3
+    tsyncExtts: quay.io/silicom/tsync_extts:1.0.0
+    tsyncd: quay.io/ryan_raasch/tsyncd:2.1.1.1
+  sro:
+    properties:
+      build: false

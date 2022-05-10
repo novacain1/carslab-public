@@ -18,9 +18,8 @@ spec:
       devicePaths:
         - /dev/autopart/lv_1
         - /dev/autopart/lv_2
-        - /dev/autopart/lv_3
     - storageClassName: "lso-blockclass"
       volumeMode: Block
       devicePaths:
+        - /dev/autopart/lv_3
         - /dev/autopart/lv_4
-        - /dev/autopart/lv_5

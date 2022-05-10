@@ -46,7 +46,7 @@ spec:
   bootMACAddress: DE:AD:BE:EF:A0:1D
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/ca1a85d9-4bc2-5e86-af84-c39aac30c0e5
+    address: redfish-virtualmedia+http://172.17.0.102:8082/redfish/v1/Systems/ca1a85d9-4bc2-5e86-af84-c39aac30c0e5
     credentialsName: bmc-super1-blazer-cars-lab
     disableCertificateVerification: True
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
@@ -68,7 +68,7 @@ spec:
   bootMACAddress: DE:AD:BE:EF:9D:47
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/8273cc27-82c1-54dc-9eab-a75ea53f1ebf
+    address: redfish-virtualmedia+http://172.17.0.102:8082/redfish/v1/Systems/8273cc27-82c1-54dc-9eab-a75ea53f1ebf
     credentialsName: bmc-super2-blazer-cars-lab
     disableCertificateVerification: True
 ---
@@ -89,6 +89,6 @@ spec:
   bootMACAddress: DE:AD:BE:EF:C8:86
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/03798b5b-994b-5088-89f3-30f7c6fb35e2
+    address: redfish-virtualmedia+http://172.17.0.102:8082/redfish/v1/Systems/03798b5b-994b-5088-89f3-30f7c6fb35e2
     credentialsName: bmc-super3-blazer-cars-lab
     disableCertificateVerification: True

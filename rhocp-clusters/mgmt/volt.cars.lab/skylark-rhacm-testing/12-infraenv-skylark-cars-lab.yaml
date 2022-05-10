@@ -7,7 +7,7 @@ metadata:
 spec:
   additionalNTPSources:
     - registry.cars.lab
-#    - fd00:6:6:11::52
+    - fd00:6:6:11::52
   clusterRef:
     name: skylark-cars-lab
     namespace: skylark-cars-lab

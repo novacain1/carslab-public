@@ -10,7 +10,7 @@ commonLabels:
   telco-gitops/ztp: combined-ran
 
 resources:
-  - 00-namespace.yaml
+  #- 00-namespace.yaml
   #- 01-pullsecret.yaml
   - 02-aci.yaml
   - 03-clusterdeployment.yaml
