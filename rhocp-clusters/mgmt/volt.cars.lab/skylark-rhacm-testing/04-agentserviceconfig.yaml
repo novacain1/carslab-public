@@ -10,6 +10,13 @@ data:
   DISABLED_HOST_VALIDATIONS: "belongs-to-machine-cidr,belongs-to-majority-group"
   #PUBLIC_CONTAINER_REGISTRIES: "quay.io,registry.svc.ci.openshift.org,registry.redhat.io"
   ISO_IMAGE_TYPE: "full-iso"
+  #ASSISTED_SERVICE_IMAGE: registry.redhat.io/rhacm2/agent-service-rhel8@sha256:2e3f3795de17f08c30dd81e90aeb86998a572b8953368b7f181d34a445a84eb2
+  #SERVICE_IMAGE: registry.redhat.io/rhacm2/agent-service-rhel8@sha256:2e3f3795de17f08c30dd81e90aeb86998a572b8953368b7f181d34a445a84eb2
+  #SELF_IMAGE: registry.redhat.io/rhacm2/agent-service-rhel8@sha256:2e3f3795de17f08c30dd81e90aeb86998a572b8953368b7f181d34a445a84eb2
+  #IMAGE_SERVICE_IMAGE: registry.redhat.io/rhacm2/assisted-image-service-rhel8@sha256:9768e9a73324561133f159ca6a2397e6a31de28abdc47be5b5fae444aeab20e3
+  #AGENT_DOCKER_IMAGE: registry.redhat.io/rhacm2/assisted-installer-agent-rhel8@sha256:f53598df253ef2762d1f0b74bd4bcb0735379d6b13fb88ecf8acac5946bcbc53
+  #CONTROLLER_IMAGE: registry.redhat.io/rhacm2/assisted-installer-reporter-rhel8@sha256:ee14648f60f46face43da4a7b26a1e7911fe0eae9a3b8ade5db476b22e085fca
+  #INSTALLER_IMAGE: registry.redhat.io/rhacm2/assisted-installer-rhel8@sha256:c809bb9d532788163391d7183fccda26b020270865f34cf652ffe4419c4ae6a6
 ---
 apiVersion: agent-install.openshift.io/v1beta1
 kind: AgentServiceConfig
@@ -25,7 +32,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 90Gi
+        storage: 48Gi
   filesystemStorage:
     #bug, leave default class for now
     #storageClassName: lso-filesystemclass
@@ -33,7 +40,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 90Gi
+        storage: 48Gi
   #mirrorRegistryRef:
     # for disconnected installs
     #name: "disconnected-mirror-config"

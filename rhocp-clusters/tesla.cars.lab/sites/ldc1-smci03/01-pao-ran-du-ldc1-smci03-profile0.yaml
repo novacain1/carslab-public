@@ -11,7 +11,7 @@ spec:
   - rcupdate.rcu_normal_after_boot=0
   #- nohz_full=4-31,36-63 
   #- kernel.timer_migration=1
-  - crashkernel=auto
+  - crashkernel=512M
   cpu:
     isolated: "4-31,36-63"
     reserved: "0-3,32-35"

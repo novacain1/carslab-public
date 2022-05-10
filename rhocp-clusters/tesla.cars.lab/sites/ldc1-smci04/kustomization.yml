@@ -7,7 +7,7 @@ commonLabels:
   topology.kubernetes.io/zone: ldc1
 
 resources:
-  - 00-mcp-ran-du-ldc1-smci03.yaml
-  - 01-pao-ran-du-ldc1-smci03-profile0.yaml
+  - 00-mcp-ran-du-ldc1-smci04.yaml
+  - 01-pao-ran-du-ldc1-smci04-profile0.yaml
   #- 02-node-labels.yaml
   #- 03-node-labels.yaml
