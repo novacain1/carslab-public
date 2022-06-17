@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: bmc-du4-ldc1-jimmy-cars-lab
-  namespace: jimmy-cars-lab
+  name: bmc-du4-ldc1-caravan-cars-lab
+  namespace: caravan-cars-lab
 data:
   username: QURNSU4=
   password: YWx0aW9zdGFyITIz
@@ -12,10 +12,10 @@ type: Opaque
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
 metadata:
-  name: du4-ldc1-jimmy-cars-lab
-  namespace: jimmy-cars-lab
+  name: du4-ldc1-caravan-cars-lab
+  namespace: caravan-cars-lab
   labels:
-    infraenvs.agent-install.openshift.io: "infraenv-jimmy-cars-lab"
+    infraenvs.agent-install.openshift.io: "infraenv-caravan-cars-lab"
   annotations:
     inspect.metal3.io: disabled
     bmac.agent-install.openshift.io/hostname: "du4-ldc1"
@@ -27,16 +27,16 @@ spec:
   automatedCleaningMode: disabled
   bmc:
     address: redfish-virtualmedia://172.28.11.45/redfish/v1/Systems/1/
-    credentialsName: bmc-du4-ldc1-jimmy-cars-lab
+    credentialsName: bmc-du4-ldc1-caravan-cars-lab
     disableCertificateVerification: True
 ---
 apiVersion: agent-install.openshift.io/v1beta1
 kind: NMStateConfig
 metadata:
-  name: nmstate-du4-ldc1-jimmy-cars-lab
-  namespace: jimmy-cars-lab
+  name: nmstate-du4-ldc1-caravan-cars-lab
+  namespace: caravan-cars-lab
   labels:
-    cluster-name: jimmy-nmstate
+    cluster-name: caravan-nmstate
 spec:
   config:
     interfaces:

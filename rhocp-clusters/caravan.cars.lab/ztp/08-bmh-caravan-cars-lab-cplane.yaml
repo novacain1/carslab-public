@@ -1,0 +1,93 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super1-caravan-cars-lab
+  namespace: caravan-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super2-caravan-cars-lab
+  namespace: caravan-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super3-caravan-cars-lab
+  namespace: caravan-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super1-caravan-cars-lab
+  namespace: caravan-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-caravan-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super1"
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: 52:12:6D:48:68:8B
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+https://kvmhost3.caravan.cars.lab:8082/redfish/v1/Systems/99c35f02-11e1-4f0d-ac92-c74fc8656d96
+    credentialsName: bmc-super1-caravan-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super2-caravan-cars-lab
+  namespace: caravan-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-caravan-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super2"
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: 52:12:6D:48:68:8C
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+https://kvmhost3.caravan.cars.lab:8082/redfish/v1/Systems/a22595de-07da-4002-971f-e14ac55964d8
+    credentialsName: bmc-super2-caravan-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super3-caravan-cars-lab
+  namespace: caravan-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-caravan-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super3"
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: 52:12:6D:48:68:8D
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+https://kvmhost3.caravan.cars.lab:8082/redfish/v1/Systems/3dd3e953-2c73-4ba3-9755-55aac2698623
+    credentialsName: bmc-super3-caravan-cars-lab
+    disableCertificateVerification: True

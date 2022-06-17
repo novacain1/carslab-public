@@ -1,0 +1,14 @@
+variant: openshift
+version: 4.8.0
+metadata:
+  name: 03-ran-du-ldc1-smci04-pps-ldisc
+  labels:
+    machineconfiguration.openshift.io/role: ran-du-ldc1-smci04
+storage:
+  files:
+    - path: /etc/modprobe.d/03-pps_ldisc.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          blacklist pps_ldisc

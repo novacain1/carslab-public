@@ -2,21 +2,21 @@
 apiVersion: extensions.hive.openshift.io/v1beta1
 kind: AgentClusterInstall
 metadata:
-  name: jimmy-cars-lab
-  namespace: jimmy-cars-lab
+  name: caravan-cars-lab
+  namespace: caravan-cars-lab
   annotations:
     agent-install.openshift.io/install-config-overrides: '{"networking":{"networkType":"OVNKubernetes"}}'
 spec:
-  apiVIP: 10.50.58.98
-  #apiVIP: fd00:6:6:2056::98
-  ingressVIP: 10.50.58.99
-  #ingressVIP: fd00:6:6:2056::99
+  apiVIP: 10.70.100.90
+  #apiVIP: fd00:6:6:2053::98
+  ingressVIP: 10.70.100.91
+  #ingressVIP: fd00:6:6:2053::99
   clusterDeploymentRef:
-    name: jimmy-cars-lab
+    name: caravan-cars-lab
   imageSetRef:
-    name: openshift-v4.10.17
+    name: img4.8.36-x86-64-appsub
 #  manifestsConfigMapRef:
-#    name: cm-overrides-jimmy-cars-lab
+#    name: cm-overrides-caravan-cars-lab
   networking:
     clusterNetwork:
       - cidr: 10.128.0.0/14
@@ -27,8 +27,8 @@ spec:
       - 172.30.0.0/16
       - fd02::/112
     machineNetwork:
-      - cidr: 10.50.58.0/24
-      - cidr: fd00:6:6:2058::0/64
+      - cidr: 10.70.100.0/24
+      - cidr: fd00:6:6:2053::0/64
   provisionRequirements:
     controlPlaneAgents: 3
     workerAgents: 0
