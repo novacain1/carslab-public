@@ -6,6 +6,9 @@ kind: Kustomization
 commonAnnotations:
   argocd.argoproj.io/sync-wave: "10"
 
+commonLabels:
+  telco-gitops/ztp: combined-ran
+
 resources:
   #- 00-namespace.yaml
   #- 01-pullsecret.yaml
@@ -13,6 +16,6 @@ resources:
   - 03-clusterdeployment.yaml
   - 04-klusterletaddon.yaml
   - 05-managedcluster.yaml
-  - 06-infraenv-jimmy-cars-lab.yaml
-  - 07-nmstate-jimmy-cars-lab.yaml
-  - 08-bmh-jimmy-cars-lab-cplane.yaml
+  - 06-infraenv-caravan-cars-lab.yaml
+  - 07-nmstate-caravan-cars-lab.yaml
+  - 08-bmh-caravan-cars-lab-cplane.yaml

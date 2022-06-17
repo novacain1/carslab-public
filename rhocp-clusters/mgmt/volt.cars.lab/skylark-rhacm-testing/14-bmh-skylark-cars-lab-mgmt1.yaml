@@ -21,7 +21,7 @@ metadata:
     bmac.agent-install.openshift.io/hostname: "mgmt1"
     bmac.agent-install.openshift.io/role: worker
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
-    bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/sdb","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":102400},{"label":"lso_10G_1","sizeMiB":10240},{"label":"lso_10G_2","sizeMiB":10240},{"label":"lso_10G_3","sizeMiB":10240}],"wipeTable":false}]}}'
+    bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/sdb","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":204800},{"label":"lso_10G_1","sizeMiB":10240},{"label":"lso_10G_2","sizeMiB":10240},{"label":"lso_10G_3","sizeMiB":10240}],"wipeTable":false}]}}'
 spec:
   online: true
   bootMACAddress: 40:A6:B7:3D:D7:30

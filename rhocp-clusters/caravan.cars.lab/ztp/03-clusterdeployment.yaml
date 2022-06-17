@@ -1,0 +1,21 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: caravan-cars-lab
+  namespace: caravan-cars-lab
+spec:
+  baseDomain: cars.lab
+  clusterName: caravan
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: caravan-cars-lab
+    version: v1beta1
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: caravan-cars-lab
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
