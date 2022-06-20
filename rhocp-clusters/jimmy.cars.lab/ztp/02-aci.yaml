@@ -14,7 +14,7 @@ spec:
   clusterDeploymentRef:
     name: jimmy-cars-lab
   imageSetRef:
-    name: openshift-v4.8.36
+    name: openshift-v4.10.17
 #  manifestsConfigMapRef:
 #    name: cm-overrides-jimmy-cars-lab
   networking:

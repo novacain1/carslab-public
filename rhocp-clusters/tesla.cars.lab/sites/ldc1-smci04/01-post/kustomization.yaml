@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - 01-disable-chronyd.yaml
   - 02-mc-rcu-ran-du-ldc1-smci04.yaml 
+#  - 03-mc-pps-ldisc-ran-du-ldc1-smci04.yaml

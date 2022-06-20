@@ -13,6 +13,8 @@ spec:
   #- nohz_full=4-31,36-63 
   #- kernel.timer_migration=1
   - slub_debug=FZPU
+  - ignore_loglevel
+  - initcall_debug
   cpu:
     isolated: 4-31,36-63
     reserved: 0-3,32-35

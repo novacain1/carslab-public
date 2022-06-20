@@ -1,0 +1,97 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-du1-ldc1-caravan-cars-lab
+  namespace: caravan-cars-lab
+data:
+  username: QURNSU4=
+  password: YWx0aW9zdGFyITIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: du1-ldc1-caravan-cars-lab
+  namespace: caravan-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-caravan-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "du1-ldc1"
+    bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: b4:96:91:ab:21:98
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia://172.28.11.42/redfish/v1/Systems/1/
+    credentialsName: bmc-du1-ldc1-caravan-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-du1-ldc1-caravan-cars-lab
+  namespace: caravan-cars-lab
+  labels:
+    cluster-name: caravan-nmstate
+spec:
+  config:
+    interfaces:
+      - name: eno1
+        type: ethernet
+        state: down     
+      - name: eno2
+        type: ethernet
+        state: down
+      - name: eno3
+        type: ethernet
+        state: up 
+        ipv4:
+          address:
+          - ip: 172.17.0.181
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2060::181
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
+      - name: enp138s0f0
+        type: ethernet
+        state: up
+      - name: eno4
+        type: ethernet
+        state: down     
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+          - fd00:6:6:11::52
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.17.0.1
+          next-hop-interface: eno3
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2060::1
+          next-hop-interface: eno3
+  interfaces:
+    - name: eno1
+      macAddress: "3c:ec:ef:30:71:c4"
+    - name: eno2
+      macAddress: "3c:ec:ef:30:71:c5"
+    - name: eno3
+      macAddress: "3c:ec:ef:2d:80:1a"
+    - name: eno4
+      macAddress: "3c:ec:ef:2d:80:1b"
+    - name: enp25s0f0
+      macAddress: "3c:ec:ef:2d:80:18"
+    - name: enp25s0f1
+      macAddress: "3c:ec:ef:2d:80:19"
+    - name: enp138s0f0
+      macAddress: "b4:96:91:ab:21:98"
