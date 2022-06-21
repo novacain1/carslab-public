@@ -4,21 +4,21 @@ kind: Kustomization
 
 bases:
   #####################################################
-  # Operators for MGMT Clusters
+  # Operators for MGMT Cluster
   #####################################################
   # Common Telco Optimizations
-  - github.com/openshift-telco/telco-gitops/base/configs/telco-optimized?ref=main
+  #- github.com/openshift-telco/telco-gitops/base/configs/telco-optimized?ref=main
   # OpenShift Local Storage
   - github.com/openshift-telco/telco-gitops/base/operators/local-storage-operator?ref=main
   # OpenShift GitOps
-  - github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/overlays/stable?ref=main
+  #- github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/overlays/stable?ref=main
   # OpenShift Pipelines
-  - github.com/redhat-cop/gitops-catalog/openshift-pipelines-operator/overlays/stable?ref=main
+  #- github.com/redhat-cop/gitops-catalog/openshift-pipelines-operator/overlays/stable?ref=main
   # OpenShift Serverless
   #- github.com/openshift-telco/telco-gitops/base/operators/openshift-serverless
   # Red Hat Advanced Cluster Manager for Kubernetes
-  - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.5?ref=main
-  - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/instance/base?ref=main
+  #- github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.5?ref=main
+  #- github.com/redhat-cop/gitops-catalog/advanced-cluster-management/instance/base?ref=main
   # OpenShift Data Fabric
   # - github.com/openshift-telco/telco-gitops/base/operators/openshift-container-storage
   # Quay Enterprise
