@@ -46,7 +46,7 @@ spec:
   bootMACAddress: DE:AD:BE:EF:77:DA
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+https://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/2a143c67-0ad4-5522-9943-ecaeb27f4b43
+    address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/2a143c67-0ad4-5522-9943-ecaeb27f4b43
     credentialsName: bmc-super1-volante-cars-lab
     disableCertificateVerification: True
 ---
@@ -67,7 +67,7 @@ spec:
   bootMACAddress: DE:AD:BE:EF:D0:D7
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+https://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/76721040-1e6a-5724-a863-4c3acf41af75
+    address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/76721040-1e6a-5724-a863-4c3acf41af75
     credentialsName: bmc-super2-volante-cars-lab
     disableCertificateVerification: True
 ---
@@ -88,6 +88,6 @@ spec:
   bootMACAddress: DE:AD:BE:EF:A7:53
   automatedCleaningMode: disabled
   bmc:
-    address: redfish-virtualmedia+https://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/550e75a5-e224-5f1a-9a00-c132cea6f533
+    address: redfish-virtualmedia+http://kvmhost2.remote-skylark-ldc1.cars.lab:8082/redfish/v1/Systems/550e75a5-e224-5f1a-9a00-c132cea6f533
     credentialsName: bmc-super3-volante-cars-lab
     disableCertificateVerification: True
