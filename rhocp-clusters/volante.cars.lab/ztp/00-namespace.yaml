@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+     name: volante-cars-lab
+     labels:
+        name: volante-cars-lab

@@ -2,21 +2,21 @@
 apiVersion: extensions.hive.openshift.io/v1beta1
 kind: AgentClusterInstall
 metadata:
-  name: jimmy-cars-lab
-  namespace: jimmy-cars-lab
+  name: volante-cars-lab
+  namespace: volante-cars-lab
   annotations:
     agent-install.openshift.io/install-config-overrides: '{"networking":{"networkType":"OVNKubernetes"}}'
 spec:
-  apiVIP: 10.50.58.98
-  #apiVIP: fd00:6:6:2056::98
-  ingressVIP: 10.50.58.99
-  #ingressVIP: fd00:6:6:2056::99
+  apiVIP: 10.50.57.98
+  #apiVIP: fd00:6:6:2057::98
+  ingressVIP: 10.50.57.99
+  #ingressVIP: fd00:6:6:2057::99
   clusterDeploymentRef:
-    name: jimmy-cars-lab
+    name: volante-cars-lab
   imageSetRef:
     name: img4.10.18-x86-64-appsub
 #  manifestsConfigMapRef:
-#    name: cm-overrides-jimmy-cars-lab
+#    name: cm-overrides-volante-cars-lab
   networking:
     clusterNetwork:
       - cidr: 10.128.0.0/14
@@ -27,8 +27,8 @@ spec:
       - 172.30.0.0/16
       - fd02::/112
     machineNetwork:
-      - cidr: 10.50.58.0/24
-      - cidr: fd00:6:6:2058::0/64
+      - cidr: 10.50.57.0/24
+      - cidr: fd00:6:6:2057::0/64
   provisionRequirements:
     controlPlaneAgents: 3
     workerAgents: 0
