@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-     name: skylark-cars-lab
-     labels:
-        name: skylark-cars-lab
