@@ -15,3 +15,4 @@ resources:
   - 05-managedcluster.yaml
   - 06-infraenv-volante-cars-lab.yaml
   - 07-nmstate-volante-cars-lab.yaml
+  - 08-bmh-volante-cars-lab-cplane.yaml
