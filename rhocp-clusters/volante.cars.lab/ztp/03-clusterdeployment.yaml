@@ -2,22 +2,20 @@
 apiVersion: hive.openshift.io/v1
 kind: ClusterDeployment
 metadata:
-  name: cluster-ran-volante-cars-lab
-  namespace: assisted-installer
+  name: volante-cars-lab
+  namespace: volante-cars-lab
 spec:
   baseDomain: cars.lab
   clusterName: volante
-  controlPlaneConfig:
-    servingCertificates: {}
   clusterInstallRef:
     group: extensions.hive.openshift.io
     kind: AgentClusterInstall
-    name: aci-ran-volante-cars-lab
+    name: volante-cars-lab
     version: v1beta1
   platform:
     agentBareMetal:
       agentSelector:
         matchLabels:
-          telco-rwn: ran-volante-cars-lab
+          cluster-name: volante-cars-lab
   pullSecretRef:
     name: assisted-deployment-pull-secret
