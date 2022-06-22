@@ -26,7 +26,7 @@ spec:
   bootMACAddress: 4c:76:25:ff:5c:24
   automatedCleaningMode: disabled
   rootDeviceHints:
-    deviceName: /dev/sdb
+    deviceName: /dev/sda
   bmc:
     address: idrac-virtualmedia://172.28.11.41/redfish/v1/Systems/System.Embedded.1
     credentialsName: bmc-du1-fec3-volante-cars-lab
