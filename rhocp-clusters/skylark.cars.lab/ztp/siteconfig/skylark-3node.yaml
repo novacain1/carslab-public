@@ -1,0 +1,197 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super1-skylark-cars-lab
+  namespace: skylark-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super2-skylark-cars-lab
+  namespace: skylark-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super3-skylark-cars-lab
+  namespace: skylark-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "skylark-cars-lab"
+  namespace: "skylark-cars-lab"
+spec:
+  baseDomain: "cars.lab"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "openshift-v4.8.32"
+  sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFC9CIV1mjDw9VRgfDyPJUNm1BAzjK7xD6JdZeYydYFIbqEN0t+iFK0pEcaj83wuU2HBvd32IHfYJYuHxzkXun2t1h5SPKmyIzQEFGhxWEWDqhzYefHuNU94adpk82qsHssDxNVhDPSZFIc6L/6K3YQyBmeHkC5Pq+NYIk0M+VOGgWXIob+yH8A3mIdN3e3GWPdUIJqFS40BVqfsZIUuUHv9RHYqrCjoJKDlbTO5kFcr5esAyjPX9P7uPCgGgQ4Omtol4G4nzYsti3IpT5dC4IigWkFqb4qwYevn+dkIB7Ju/X43iyylku9ftBf0SkUCylwZJ0JjGmh5avZBAJJS3DTPWQDualOekiD1edlN+b0RQq02iPv945KEh3KDPjf0DSb2GTr0+8GuVWOAzT0slUNV70mmEKkBsk84TD4TPVcSD5E7iogEA6HGaXIY7ab2D2qDpGGnf8u9N4taxpXm4ZmOOBnz4dVMtF6fvzUPfzP9rChVVc8dRFtIW1yARTBtML2yww12XRbsOvq6vAVWJHLfWLycNWbWy8ZSs080/a1auymyWrqfYYO62CYtpNIIO95WpVzl2itL6NZvG9d8VGtjEN6MsSlKy/Lx4x+zS0N3MFVKorZ464zz48oCe8za0hLW5yp5PkudEtVhk1GXq4KrrqNk+A/Ofhdre8H6N9Ew=='
+  clusters:
+  - clusterName: "skylark-cars-lab"
+    networkType: "OVNKubernetes"
+    clusterLabels:
+      # These example cluster labels correspond to the bindingRules in the PolicyGenTemplate examples in ../policygentemplates:
+      # ../policygentemplates/common-ranGen.yaml will apply to all clusters with 'common: true'
+      common: true
+      # ../policygentemplates/group-du-3node-ranGen.yaml will apply to all clusters with 'group-du-3node: ""'
+      group-du-3node: ""
+      # ../policygentemplates/example-multinode-site.yaml will apply to all clusters with 'sites: "example-multinode"'
+      # Normally this should match or contain the cluster name so it only applies to a single cluster
+      sites : "example-multinode"
+    clusterNetwork:
+      - cidr: "10.128.0.0/14"
+        hostPrefix: 23
+    # For 3-node and standard clusters with static IPs, the API and Ingress IPs must be configured here
+    apiVIP: 10.50.0.98
+    ingressVIP: 10.50.0.99
+    serviceNetwork:
+      - "172.30.0.0/16"
+    additionalNTPSources:
+      - registry.cars.lab
+    # Optionally; This can be used to override the KlusterletAddonConfig that is creted for this cluster:
+    #crTemplates:
+    #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
+    nodes:
+      - hostName: "super1.skylark.cars.lab"
+        role: "master"
+        bmcAddress: "idrac-virtualmedia://172.28.11.31/redfish/v1/Systems/System.Embedded.1"
+        bmcCredentialsName:
+          name: "bmc-super1-skylark-cars-lab"
+        bootMACAddress: "40:A6:B7:51:9F:70"
+        bootMode: "UEFI"
+        rootDeviceHints:
+          deviceName: /dev/sdb
+        nodeNetwork:
+          interfaces:
+            - name: ens7f0
+              macAddress: 40:A6:B7:51:9F:70
+            - name: ens7f1
+              macAddress: 40:A6:B7:51:9F:71
+          config:
+            interfaces:
+              - name: bond0
+                type: bond
+                state: up
+                ipv4:
+                  enabled: true
+                  address:
+                  - ip: 10.50.0.101
+                    prefix-length: 24
+                  dhcp: false
+                link-aggregation:
+                  mode: active-backup
+                  options:
+                    miimon: '100'
+                    primary: ens7f0
+                  slaves:
+                  - ens7f0
+                  - ens7f1
+            dns-resolver:
+              config:
+                server:
+                  - 10.40.0.100
+            routes:
+              config:
+                - destination: 0.0.0.0/0
+                  next-hop-address: 10.50.0.1
+                  next-hop-interface: bond0    
+      - hostName: "super2.skylark.cars.lab"
+        role: "master"
+        bmcAddress: "idrac-virtualmedia://172.28.11.32/redfish/v1/Systems/System.Embedded.1"
+        bmcCredentialsName:
+          name: "bmc-super2-skylark-cars-lab"
+        bootMACAddress: "40:A6:B7:51:8A:60"
+        bootMode: "UEFI"
+        rootDeviceHints:
+          deviceName: /dev/sdb
+        nodeNetwork:
+          interfaces:
+            - name: ens7f0
+              macAddress: 40:A6:B7:51:8A:60
+            - name: ens7f1
+              macAddress: 40:A6:B7:51:8A:61
+          config:
+            interfaces:
+              - name: bond0
+                type: bond
+                state: up
+                ipv4:
+                  enabled: true
+                  address:
+                  - ip: 10.50.0.102
+                    prefix-length: 24
+                  dhcp: false
+                link-aggregation:
+                  mode: active-backup
+                  options:
+                    miimon: '100'
+                    primary: ens7f0
+                  slaves:
+                  - ens7f0
+                  - ens7f1
+            dns-resolver:
+              config:
+                server:
+                  - 10.40.0.100
+            routes:
+              config:
+                - destination: 0.0.0.0/0
+                  next-hop-address: 10.50.0.1
+                  next-hop-interface: bond0
+      - hostName: "super3.skylark.cars.lab"
+        role: "master"
+        bmcAddress: "idrac-virtualmedia://172.28.11.33/redfish/v1/Systems/System.Embedded.1"
+        bmcCredentialsName:
+          name: "bmc-super3-skylark-cars-lab"
+        bootMACAddress: "40:A6:B7:51:51:C0"
+        bootMode: "UEFI"
+        rootDeviceHints:
+          deviceName: /dev/sdb
+        nodeNetwork:
+          interfaces:
+            - name: ens7f0
+              macAddress: 40:A6:B7:51:51:C0
+            - name: ens7f1
+              macAddress: 40:A6:B7:51:51:C1
+          config:
+            interfaces:
+              - name: bond0
+                type: bond
+                state: up
+                ipv4:
+                  enabled: true
+                  address:
+                  - ip: 10.50.0.103
+                    prefix-length: 24
+                  dhcp: false
+                link-aggregation:
+                  mode: active-backup
+                  options:
+                    miimon: '100'
+                    primary: ens7f0
+                  slaves:
+                  - ens7f0
+                  - ens7f1
+            dns-resolver:
+              config:
+                server:
+                  - 10.40.0.100
+            routes:
+              config:
+                - destination: 0.0.0.0/0
+                  next-hop-address: 10.50.0.1
+                  next-hop-interface: bond0
