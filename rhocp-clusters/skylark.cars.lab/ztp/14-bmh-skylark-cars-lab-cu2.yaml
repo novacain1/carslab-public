@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: bmc-cu2-skylark-cars-lab
-  namespace: assisted-installer
+  namespace: skylark-cars-lab
 data:
   username: cm9vdA==
   password: YWx0aW9zdGFyMTIz
@@ -13,11 +13,12 @@ apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
 metadata:
   name: cu2-skylark-cars-lab
-  namespace: assisted-installer
+  namespace: skylark-cars-lab
   labels:
-    infraenvs.agent-install.openshift.io: "infraenv-ran-skylark-cars-lab"
+    infraenvs.agent-install.openshift.io: "infraenv-skylark-cars-lab"
   annotations:
     inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "cu2"
     bmac.agent-install.openshift.io/role: worker
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
     bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/sdb","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":102400},{"label":"lso_10G_1","sizeMiB":10240},{"label":"lso_10G_2","sizeMiB":10240},{"label":"lso_10G_3","sizeMiB":10240}],"wipeTable":false}]}}'
