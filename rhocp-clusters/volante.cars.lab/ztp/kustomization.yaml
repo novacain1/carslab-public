@@ -6,12 +6,13 @@ kind: Kustomization
 commonAnnotations:
   argocd.argoproj.io/sync-wave: "10"
 
-commonLabels:
-  telco-gitops/ztp: combined-ran
-
 resources:
-  - 01-agent-ran-volante-cars-lab.yaml
-  - 01-cluster-ran-volante-cars-lab.yaml
-  - 01-infraenv-ran-volante-cars-lab.yaml
-  - 01-nmstate-ran-volante-cars-lab.yaml
-# - 02-bmh-ran-volante-cars-lab-ALL.yaml
+  #- 00-namespace.yaml
+  #- 01-pullsecret.yaml
+  - 02-aci.yaml
+  - 03-clusterdeployment.yaml
+  - 04-klusterletaddon.yaml
+  - 05-managedcluster.yaml
+  - 06-infraenv-volante-cars-lab.yaml
+  - 07-nmstate-volante-cars-lab.yaml
+  - 08-bmh-volante-cars-lab-cplane.yaml

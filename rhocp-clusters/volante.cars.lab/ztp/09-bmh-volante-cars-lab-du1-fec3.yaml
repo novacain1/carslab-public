@@ -1,0 +1,110 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-du1-fec3-volante-cars-lab
+  namespace: volante-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: du1-fec3-volante-cars-lab
+  namespace: volante-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-volante-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "du1-fec3"
+    bmac.agent-install.openshift.io/role: worker
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: 4c:76:25:ff:5c:24
+  automatedCleaningMode: disabled
+  rootDeviceHints:
+    deviceName: /dev/sda
+  bmc:
+    address: idrac-virtualmedia://172.28.11.41/redfish/v1/Systems/System.Embedded.1
+    credentialsName: bmc-du1-fec3-volante-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-du1-fec3-volante-cars-lab
+  namespace: volante-cars-lab
+  labels:
+    cluster-name: volante-nmstate
+spec:
+  config:
+    interfaces:
+      - name: eno8303np0
+        type: ethernet
+        state: up
+        ipv4:
+          address:
+          - ip: 172.20.0.151
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2057::151
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
+      - name: eno8403np1
+        type: ethernet
+        state: down
+      - name: eno8503np2
+        type: ethernet
+        state: down
+      - name: eno8603np3
+        type: ethernet
+        state: down
+      - name: ens3f0
+        type: ethernet
+        state: down
+      - name: ens3f1
+        type: ethernet
+        state: down
+      - name: ens4f0
+        type: ethernet
+        state: down
+      - name: ens4f1
+        type: ethernet
+        state: down
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+          - fd00:6:6:11::52
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.20.0.1
+          next-hop-interface: eno8303np0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2057::1
+          next-hop-interface: eno8303np0
+  interfaces:
+    - name: eno8303np0
+      macAddress: "4c:76:25:ff:5c:24"
+    - name: eno8403np1
+      macAddress: "4c:76:25:ff:5c:25"
+    - name: eno8503np2
+      macAddress: "4c:76:25:ff:5c:26"
+    - name: eno8603np3
+      macAddress: "4c:76:25:ff:5c:27"
+    - name: ens3f0
+      macAddress: "b4:96:91:89:48:4a"
+    - name: ens3f1
+      macAddress: "b4:96:91:89:48:4b"
+    - name: ens4f0
+      macAddress: "b4:96:91:89:48:44"
+    - name: ens4f1
+      macAddress: "b4:96:91:89:48:45"
