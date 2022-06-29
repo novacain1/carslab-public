@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: du1-fec3
+  labels:
+    ran.openshift.io/ptp: ""
+    ran.openshift.io/sriov: ""

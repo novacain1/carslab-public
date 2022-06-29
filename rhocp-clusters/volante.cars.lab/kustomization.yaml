@@ -2,13 +2,36 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+patches:
+  - patch: |-
+      kind: Subscription
+      metadata:
+        name: sriov-network-operator-subscription
+        namespace: openshift-sriov-network-operator
+      spec:
+        channel: "4.10"
+    target:
+      kind: Subscription
+  - patch: |-
+      kind: Subscription
+      metadata:
+        name: ptp-operator-subscription
+        namespace: openshift-ptp
+      spec:
+        channel: "4.10"
+    target:
+      kind: Subscription
 bases:
 #####################################################
-# Operators for WORKLOAD Clusters
+# Operators for System Under Test
 #####################################################
 #  # Common Operators
-  - github.com/openshift-telco/telco-gitops/base/configs/all-common?ref=main
+#  - github.com/openshift-telco/telco-gitops/base/configs/all-common?ref=main
 #  # Import blueprint cluster definitions
-  - github.com/openshift-telco/telco-gitops/blueprints/combined-ran?ref=main
+#  - github.com/openshift-telco/telco-gitops/blueprints/combined-ran?ref=main
+#  # Openshift SRIOV Network Operator
+   - github.com/jnunyez/telco-gitops/base/operators/openshift-sriov-network-operator?ref=main
+   # Openshift PTP Network Operator
+   - github.com/jnunyez/telco-gitops/base/operators/openshift-ptp?ref=main
 #  # OpenShift Logging
-  - github.com/openshift-telco/telco-gitops/base/operators/openshift-logging?ref=main
+#  - github.com/openshift-telco/telco-gitops/base/operators/openshift-logging?ref=main
