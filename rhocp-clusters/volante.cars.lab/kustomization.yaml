@@ -30,8 +30,8 @@ bases:
 #  # Import blueprint cluster definitions
 #  - github.com/openshift-telco/telco-gitops/blueprints/combined-ran?ref=main
 #  # Openshift SRIOV Network Operator
-   - github.com/jnunyez/telco-gitops/base/operators/openshift-sriov-network-operator?ref=main
+   - github.com/openshift-telco/base/operators/openshift-sriov-network-operator?ref=main
    # Openshift PTP Network Operator
-   - github.com/jnunyez/telco-gitops/base/operators/openshift-ptp?ref=main
+   - github.com/openshift-telco/telco-gitops/base/operators/openshift-ptp?ref=main
 #  # OpenShift Logging
 #  - github.com/openshift-telco/telco-gitops/base/operators/openshift-logging?ref=main
