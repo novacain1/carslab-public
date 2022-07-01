@@ -2,45 +2,28 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-commonLabels:
-  telco-gitops/cluster-name: volt.cars.lab
-  topology.kubernetes.io/region: volt.cars.lab
-  # Each SITE_ID is a different zone
-  #topology.kubernetes.io/zone: sample-zone
-
-commonAnnotations:
-  # Annotations to work around automatically generated resoruces
-  # to avoid ArgoCD reporing out-of-sync
-  argcd.argoproj.io/compare-options: IgnoreExtraneous
-  argocd.argoproj.io/sync-options: Prune=false
-
 bases:
-  # Operator Installs
-  # ---
-  # Common Operators
-  - github.com/openshift-telco/telco-gitops/base/configs/all-common?ref=main
+  #####################################################
   # Operators for MGMT Clusters
-  - github.com/openshift-telco/telco-gitops/blueprints/mgmt?ref=main
-  # Hive Operators and Configs
-  - github.com/openshift-telco/telco-gitops/base/operators/hive?ref=main
-  - github.com/openshift-telco/telco-gitops/base/configs/hive?ref=main
+  #####################################################
+  # Common Telco Optimizations
+  - github.com/openshift-telco/telco-gitops/base/configs/telco-optimized?ref=main
+  # OpenShift Local Storage
+  - github.com/openshift-telco/telco-gitops/base/operators/local-storage-operator?ref=main
+  # OpenShift GitOps
+  - github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/overlays/stable?ref=main
+  # OpenShift Pipelines
+  - github.com/redhat-cop/gitops-catalog/openshift-pipelines-operator/overlays/stable?ref=main
+  # OpenShift Serverless
+  #- github.com/openshift-telco/telco-gitops/base/operators/openshift-serverless
   # Red Hat Advanced Cluster Manager for Kubernetes
-  #- github.com/openshift-telco/telco-gitops/base/operators/advanced-cluster-management?ref=main
-  # OpenShift Container storage
-  # - ../../base/operators/openshift-container-storage
-  # OpenShift Virtualization
-  # - ../../base/operators/openshift-virtualization
+  - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.5?ref=main
+  - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/instance/base?ref=main
+  # OpenShift Data Fabric
+  # - github.com/openshift-telco/telco-gitops/base/operators/openshift-container-storage
   # Quay Enterprise
-  # - ../../base/operators/quay-enterprise-operator
+  # - github.com/openshift-telco/telco-gitops/base/operators/quay-enterprise-operator
   # OpenShift Logging
-  # - ../../base/operators/openshift-logging
-  # Configure telco-gitops for cluster
-  #- ./telco-gitops
-
+  # - github.com/openshift-telco/telco-gitops/base/operators/openshift-logging
 resources:
-  - 01-master-create-lvs-for-lso.yaml
-  - 02-lso-localvolume-lvs.yaml
-  - 03-lso-filesystemclass-default.yaml
-
-#patches:
-#  - ./00-patch.yaml
+  - https://raw.githubusercontent.com/openshift-telco/telco-gitops/main/base/operators/local-storage-operator/02-lso-auto-discovery-devices-EXAMPLE.yaml

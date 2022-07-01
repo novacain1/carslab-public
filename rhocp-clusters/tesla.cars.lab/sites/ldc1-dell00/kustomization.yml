@@ -8,8 +8,6 @@ commonLabels:
 
 resources:
   - 00-mcp-ran-cu-ldc1-dell00.yaml
-  - 00-mcp-ran-du-ldc1-dell01.yaml
   - 01-pao-ran-cu-ldc1-dell00-profile0.yaml
-  - 01-pao-ran-du-ldc1-dell01-profile0.yaml
   #- 02-node-labels.yaml
   #- 03-node-labels.yaml

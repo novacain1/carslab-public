@@ -21,10 +21,10 @@ metadata:
     bmac.agent-install.openshift.io/hostname: "cu2"
     bmac.agent-install.openshift.io/role: worker
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
-    bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/sdb","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":102400},{"label":"lso_10G_1","sizeMiB":10240},{"label":"lso_10G_2","sizeMiB":10240},{"label":"lso_10G_3","sizeMiB":10240}],"wipeTable":false}]}}'
+    bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/sdb","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":204800},{"label":"lso_20G_1","sizeMiB":20000},{"label":"lso_20G_2","sizeMiB":20000},{"label":"lso_20G_3","sizeMiB":20000}],"wipeTable":false}]}}'
 spec:
   online: true
-  bootMACAddress: 40:A6:B7:3A:CF:20
+  bootMACAddress: 40:a6:b7:3a:d1:61
   automatedCleaningMode: disabled
   rootDeviceHints:
     deviceName: /dev/sdb
@@ -32,3 +32,103 @@ spec:
     address: idrac-virtualmedia://172.28.11.35/redfish/v1/Systems/System.Embedded.1
     credentialsName: bmc-cu2-skylark-cars-lab
     disableCertificateVerification: True
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-cu2-skylark-cars-lab
+  namespace: skylark-cars-lab
+  labels:
+    cluster-name: skylark-nmstate
+spec:
+  config:
+    interfaces:
+      - name: bondctlplane
+        type: bond
+        state: up
+        ipv4:
+          enabled: true
+          address:
+          - ip: 10.50.0.152
+            prefix-length: 24
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2052::152
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
+        link-aggregation:
+          mode: 802.3ad
+          options:
+            lacp_rate: "fast"
+            miimon: '150'
+          slaves:
+          - ens1f1
+          - ens7f0
+      - name: bondcnf1
+        type: bond
+        state: up
+        ipv4:
+          enabled: false
+#          dhcp: false
+        ipv6:
+          enabled: false
+          autoconf: false
+#          dhcp: false
+        link-aggregation:
+          mode: active-backup
+          options:
+            miimon: '150'
+            primary: ens1f0
+          slaves:
+          - ens1f0
+          - ens7f1
+      - name: bondcnf1.803
+        type: vlan
+        state: up
+        vlan:
+          base-iface: bondcnf1
+          id: 803
+#        ipv4:
+#          enabled: true
+#          dhcp: false
+#        ipv6:
+#          enabled: false
+#          autoconf: false
+#          dhcp: false
+      - name: bondcnf1.804
+        type: vlan
+        state: up
+        vlan:
+          base-iface: bondcnf1
+          id: 804
+#        ipv4:
+#          enabled: false
+#          dhcp: false
+#        ipv6:
+#          enabled: false
+#          autoconf: false
+#          dhcp: false
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+          - fd00:6:6:11::52
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.50.0.1
+          next-hop-interface: bondctlplane
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2052::1
+          next-hop-interface: bondctlplane
+  interfaces:
+    - name: "ens1f0"
+      macAddress: "40:a6:b7:3a:d1:60"
+    - name: "ens1f1"
+      macAddress: "40:a6:b7:3a:d1:61"
+    - name: "ens7f0"
+      macAddress: "40:a6:b7:3a:cf:20"
+    - name: "ens7f1"
+      macAddress: "40:a6:b7:3a:cf:21"
