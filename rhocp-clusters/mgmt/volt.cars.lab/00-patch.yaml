@@ -1,8 +1,0 @@
----
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: hive-operator
-  namespace: openshift-operators
-spec:
-  channel: "ocm-2.3"

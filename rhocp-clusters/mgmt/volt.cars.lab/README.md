@@ -5,11 +5,9 @@ Volt is a Management cluster.
 # Telco Managment Cluster
 
 The Telco management cluster must be OCP 4.8.19+ and be deployed using one of the following methods:
-- Assisted Installer / OpenShift Infrastructure Operator mode
+- Red Hat Advanced Cluster Manager for Kubernetes
 - Baremetal IPI mode
 - Crucible Ansible Playbooks (https://github.com/redhat-partner-solutions/crucible)
-
-These method are the only methods that deploy and configure the `cluster-baremetal-operator` in the cluster which is a requirement for some of the automation flows.
 
 ## Management Cluster Configuration
 

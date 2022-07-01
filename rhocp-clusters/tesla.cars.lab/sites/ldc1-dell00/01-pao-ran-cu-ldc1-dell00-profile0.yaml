@@ -4,23 +4,23 @@ kind: PerformanceProfile
 metadata:
   name: ran-cu-ldc1-dell00-profile0
 spec:
+  additionalKernelArgs:
+  - rcupdate.rcu_normal_after_boot=0
+  - nohz=off
+  - nohz_full=4-47,52-95
   cpu:
     isolated: "4-47,52-95"
     reserved: "0-3,48-51"
+  net:
+    userLevelNetworking: true
   hugepages:
-    defaultHugepagesSize: "2M"
+    defaultHugepagesSize: "1G"
     pages:
-    #- size: "1G"
-    #  count: 64
-    #  node: 0
-    #- size: "1G"
-    #  count: 64
-    #  node: 1
-    - size: "2M"
-      count: 2500
+    - size: "1G"
+      count: 64
       node: 0
-    - size: "2M"
-      count: 2500
+    - size: "1G"
+      count: 64
       node: 1
   numa:
     topologyPolicy: best-effort

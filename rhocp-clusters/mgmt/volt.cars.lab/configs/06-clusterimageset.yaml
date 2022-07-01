@@ -1,0 +1,7 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterImageSet
+metadata:
+  name: openshift-v4.9.26-disconnected
+spec:
+  releaseImage: registry.cars.lab:5000/ocp4/openshift4:4.9.26-x86_64

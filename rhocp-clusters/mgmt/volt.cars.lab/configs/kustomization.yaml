@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - 01-master-create-lvs-for-lso.yaml
+  - 02-lso-localvolume-lvs.yaml
+  - 03-lso-filesystemclass-default.yaml
+  - 04-rhacm-install.yaml
+  - 05-disconnected_configmap.yaml
+  - 06-clusterimageset.yaml
+  - 07-hiveoverride.yaml
+  - 08-provisioningoverride.yaml
+  - 09-agentserviceconfig.yaml

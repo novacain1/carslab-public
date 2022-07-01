@@ -15,13 +15,12 @@ spec:
   deviceType: vfio-pci
   priority: 10
   #mtu: 1500
-  numVfs: 8
+  numVfs: 4
   nicSelector:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
       - ens1f0#0-3
-      - ens7f0#0-3
 ---
 apiVersion: sriovnetwork.openshift.io/v1
 kind: SriovNetworkNodePolicy
@@ -36,12 +35,11 @@ spec:
   deviceType: vfio-pci
   priority: 10
   #mtu: 1500
-  numVfs: 8
+  numVfs: 4
   nicSelector:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
-      - ens1f1#0-3
       - ens7f1#0-3
 ---
 apiVersion: sriovnetwork.openshift.io/v1
@@ -57,14 +55,12 @@ spec:
   deviceType: vfio-pci
   priority: 10
   #mtu: 1500
-  numVfs: 16
+  numVfs: 8
   nicSelector:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
       - ens1f0#4-7
-      - ens1f1#4-7
-      - ens7f0#4-7
       - ens7f1#4-7
 ---
 ###############################################################################
@@ -82,12 +78,10 @@ spec:
   deviceType: netdevice
   priority: 10
   #mtu: 1500
-  numVfs: 16
+  numVfs: 12
   nicSelector:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
       - ens1f0#8-11
-      - ens1f1#8-11
-      - ens7f0#8-11
       - ens7f1#8-11
