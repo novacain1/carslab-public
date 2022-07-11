@@ -1,0 +1,30 @@
+---
+###############################################################################
+# SR-IOV Network Definition for the NS of the workload
+#  n6 + vlan 901 + core_sriov_netdevice
+###############################################################################
+#
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: n6wan
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: core_sriov_netdevice
+  networkNamespace: open5gs-core
+  vlan: 821
+  ipam: |-
+    {
+      "type": "static",
+      "addresses": [
+        {
+          "address": "10.28.1.8/24",
+          "gateway": "10.28.1.1"
+        },
+        {
+          "address": "fd00:6:6:821::8/64",
+          "gateway": "fd00:6:6:821::1"
+        }
+      ]
+    }
+  linkState: auto
