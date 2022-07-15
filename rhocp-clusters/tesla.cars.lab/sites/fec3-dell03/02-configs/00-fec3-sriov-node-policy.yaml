@@ -1,88 +1,109 @@
----
+###############################################################################
+# SR-IOV netdevice for all 4G/5G core networks
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: core-network-devices
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: core_sriov_netdevice
+  nodeSelector:
+    feature.node.kubernetes.io/open5gs: "true"
+  deviceType: netdevice
+  priority: 10
+  #mtu: 1500
+  numVfs: 10
+  nicSelector:
+    vendor: "8086"
+    deviceID: "159b"
+    pfNames:
+      - ens4f0#0-9
+#
+#---
 ###############################################################################
 # specific resourceName for it (eg. sriov-netdevice-smci00)
-apiVersion: sriovnetwork.openshift.io/v1
-kind: SriovNetworkNodePolicy
-metadata:
-  name: fec3-sriov-netdevice-dell03
-  namespace: openshift-sriov-network-operator
-spec:
-  resourceName: vran_netdevice
-  nodeSelector:
-    ran.openshift.io/sriov: ""
-    ran.openshift.io/fec3-sriov-netdevice-dell03: ""
-  deviceType: netdevice
-  priority: 10
+#apiVersion: sriovnetwork.openshift.io/v1
+#kind: SriovNetworkNodePolicy
+#metadata:
+#  name: fec3-sriov-netdevice-dell03
+#  namespace: openshift-sriov-network-operator
+#spec:
+#  resourceName: vran_netdevice
+#  nodeSelector:
+#    ran.openshift.io/sriov: ""
+#    ran.openshift.io/fec3-sriov-netdevice-dell03: ""
+#  deviceType: netdevice
+#  priority: 10
   #mtu: 1500
-  numVfs: 10
-  nicSelector:
-    vendor: "8086"
-    deviceID: "159b"
-    pfNames:
-      - ens4f0#0-3
----
+#  numVfs: 10
+#  nicSelector:
+#    vendor: "8086"
+#    deviceID: "159b"
+#    pfNames:
+#      - ens4f0#0-3
+#---
 ###############################################################################
 # specific resourceName for it (eg. sriov-vfio-smci00)
-apiVersion: sriovnetwork.openshift.io/v1
-kind: SriovNetworkNodePolicy
-metadata:
-  name: fec3-sriov-vfio-ar-dell03
-  namespace: openshift-sriov-network-operator
-spec:
-  resourceName: vran_vfio_ar
-  nodeSelector:
-    ran.openshift.io/sriov: ""
-    ran.openshift.io/fec3-sriov-vfio-dell03: ""
-  deviceType: vfio-pci
-  priority: 10
+#apiVersion: sriovnetwork.openshift.io/v1
+#kind: SriovNetworkNodePolicy
+#metadata:
+#  name: fec3-sriov-vfio-ar-dell03
+#  namespace: openshift-sriov-network-operator
+#spec:
+#  resourceName: vran_vfio_ar
+#  nodeSelector:
+#    ran.openshift.io/sriov: ""
+#    ran.openshift.io/fec3-sriov-vfio-dell03: ""
+#  deviceType: vfio-pci
+#  priority: 10
   #mtu: 1500
-  numVfs: 10
-  nicSelector:
-    vendor: "8086"
-    deviceID: "159b"
-    pfNames:
-      - ens4f0#4-5
----
+#  numVfs: 10
+#  nicSelector:
+#    vendor: "8086"
+#    deviceID: "159b"
+#    pfNames:
+#      - ens4f0#4-5
+#---
 ###############################################################################
 # specific resourceName for it (eg. sriov-vfio-smci00)
-apiVersion: sriovnetwork.openshift.io/v1
-kind: SriovNetworkNodePolicy
-metadata:
-  name: fec3-sriov-vfio-dell03
-  namespace: openshift-sriov-network-operator
-spec:
-  resourceName: vran_vfio
-  nodeSelector:
-    ran.openshift.io/sriov: ""
-    ran.openshift.io/fec3-sriov-vfio-dell03: ""
-  deviceType: vfio-pci
-  priority: 10
+#apiVersion: sriovnetwork.openshift.io/v1
+#kind: SriovNetworkNodePolicy
+#metadata:
+#  name: fec3-sriov-vfio-dell03
+#  namespace: openshift-sriov-network-operator
+#spec:
+#  resourceName: vran_vfio
+#  nodeSelector:
+#    ran.openshift.io/sriov: ""
+#    ran.openshift.io/fec3-sriov-vfio-dell03: ""
+#  deviceType: vfio-pci
+#  priority: 10
   #mtu: 1500
-  numVfs: 10
-  nicSelector:
-    vendor: "8086"
-    deviceID: "159b"
-    pfNames:
-      - ens4f0#6-7
----
+#  numVfs: 10
+#  nicSelector:
+#    vendor: "8086"
+#    deviceID: "159b"
+#    pfNames:
+#      - ens4f0#6-7
+#---
 ###############################################################################
 # specific resourceName for it (eg. sriov-netdevice-fh-smci00)
-apiVersion: sriovnetwork.openshift.io/v1
-kind: SriovNetworkNodePolicy
-metadata:
-  name: fec3-sriov-netdevice-fh-dell03
-  namespace: openshift-sriov-network-operator
-spec:
-  resourceName: vran_netdevice_fh
-  nodeSelector:
-    ran.openshift.io/sriov: ""
-    ran.openshift.io/fec3-sriov-netdevice-fh-dell03: ""
-  deviceType: netdevice
-  priority: 10
+#apiVersion: sriovnetwork.openshift.io/v1
+#kind: SriovNetworkNodePolicy
+#metadata:
+#  name: fec3-sriov-netdevice-fh-dell03
+#  namespace: openshift-sriov-network-operator
+#spec:
+#  resourceName: vran_netdevice_fh
+#  nodeSelector:
+#    ran.openshift.io/sriov: ""
+#    ran.openshift.io/fec3-sriov-netdevice-fh-dell03: ""
+#  deviceType: netdevice
+#  priority: 10
   #mtu: 1500
-  numVfs: 10
-  nicSelector:
-    vendor: "8086"
-    deviceID: "159b"
-    pfNames:
-      - ens4f0#8-9
+#  numVfs: 10
+#  nicSelector:
+#    vendor: "8086"
+#    deviceID: "159b"
+#    pfNames:
+#      - ens4f0#8-9
