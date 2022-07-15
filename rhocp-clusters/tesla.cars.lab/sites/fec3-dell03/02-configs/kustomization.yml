@@ -10,11 +10,17 @@ resources:
   # SRIOV Configs
   #- 00-fec3-sriov-namespace.yaml
   - 00-fec3-sriov-node-policy.yaml
-  - 01-fec3-sriov-vran-mgmt.yaml
-  - 01-fec3-sriov-vran-mh.yaml
-  - 01-fec3-sriov-vran-fh.yaml
-  - 01-fec3-sriov-vran-ar.yaml
-  - 01-fec3-sriov-vran-mp.yaml
+  # 5G Core SRIOV nets
+  - 01-sriov-bh-n2.yaml
+  - 01-sriov-bh-n3.yaml
+  - 01-sriov-bh-s1c.yaml
+  - 01-sriov-bh-s1u.yaml
+  - 01-sriov-wan-n6.yaml
+    #- 01-fec3-sriov-vran-mgmt.yaml
+    #- 01-fec3-sriov-vran-mh.yaml
+    #- 01-fec3-sriov-vran-fh.yaml
+    #- 01-fec3-sriov-vran-ar.yaml
+    #- 01-fec3-sriov-vran-mp.yaml
   # Storage Configs
   # - 02-fec3-local-storage-dell03.yaml
   # PTP Configs
