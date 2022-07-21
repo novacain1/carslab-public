@@ -7,7 +7,6 @@ resources:
   #- 01-pullsecret.yaml
   - 02-aci.yaml
   - 03-clusterdeployment.yaml
-  - 03-provisioningoverride.yaml
   - 04-klusterletaddon.yaml
   - 05-managedcluster.yaml
   - 06-infraenv-skylark-cars-lab.yaml
