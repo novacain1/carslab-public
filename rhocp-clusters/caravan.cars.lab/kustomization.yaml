@@ -2,17 +2,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-commonLabels:
-  telco-gitops/cluster-name: caravan.cars.lab
-  topology.kubernetes.io/region: caravan.cars.lab
+#commonLabels:
+#  telco-gitops/cluster-name: caravan.cars.lab
+#  topology.kubernetes.io/region: caravan.cars.lab
   # Each SITE_ID is a different zone
   #topology.kubernetes.io/zone: sample-zone
 
-commonAnnotations:
+#commonAnnotations:
   # Annotations to work around automatically generated resoruces
   # to avoid ArgoCD reporing out-of-sync
-  argcd.argoproj.io/compare-options: IgnoreExtraneous
-  argocd.argoproj.io/sync-options: Prune=false
+#  argcd.argoproj.io/compare-options: IgnoreExtraneous
+#  argocd.argoproj.io/sync-options: Prune=false
 
 bases:
 #  # Common Operators

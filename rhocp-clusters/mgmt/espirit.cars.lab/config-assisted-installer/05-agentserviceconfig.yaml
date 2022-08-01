@@ -59,7 +59,7 @@ spec:
     - openshiftVersion: "4.9"
       cpuArchitecture: x86_64
       version: "49.84.202110081407-0"
-      #url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/pre-release/4.9.0-0.nightly-2021-07-20-014024/rhcos-4.9.0-0.nightly-2021-07-20-014024-x86_64-live.x86_64.iso"
-      #rootFSUrl: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/pre-release/4.9.0-0.nightly-2021-07-20-014024/rhcos-4.9.0-0.nightly-2021-07-20-014024-x86_64-live-rootfs.x86_64.img"
-      url: "http://10.40.0.100/ztp-dave/rhcos-4.9.0-x86_64-live.x86_64.iso"
-      rootFSUrl: "http://10.40.0.100/ztp-dave/rhcos-4.9.0-x86_64-live-rootfs.x86_64.img"
+      #url: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/pre-release/4.9.40-0.nightly-2021-07-20-014024/rhcos-4.9.40-0.nightly-2021-07-20-014024-x86_64-live.x86_64.iso"
+      #rootFSUrl: "https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/pre-release/4.9.40-0.nightly-2021-07-20-014024/rhcos-4.9.40-0.nightly-2021-07-20-014024-x86_64-live-rootfs.x86_64.img"
+      url: "http://10.40.0.100/ztp-dave/rhcos-4.9.40-x86_64-live.x86_64.iso"
+      rootFSUrl: "http://10.40.0.100/ztp-dave/rhcos-4.9.40-x86_64-live-rootfs.x86_64.img"
