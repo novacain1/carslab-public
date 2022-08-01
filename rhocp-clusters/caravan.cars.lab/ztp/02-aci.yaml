@@ -14,7 +14,7 @@ spec:
   clusterDeploymentRef:
     name: caravan-cars-lab
   imageSetRef:
-    name: img4.8.36-x86-64-appsub
+    name: openshift-v4.8.45
 #  manifestsConfigMapRef:
 #    name: cm-overrides-caravan-cars-lab
   networking:
