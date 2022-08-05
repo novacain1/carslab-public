@@ -32,7 +32,7 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 48Gi
+        storage: 20Gi
   filesystemStorage:
     #bug, leave default class for now
     #storageClassName: lso-filesystemclass
@@ -40,7 +40,13 @@ spec:
     - ReadWriteOnce
     resources:
       requests:
-        storage: 48Gi
+        storage: 40Gi
+  imageStorage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 20Gi
   #mirrorRegistryRef:
     # for disconnected installs
     #name: "disconnected-mirror-config"
