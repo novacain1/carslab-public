@@ -1,0 +1,21 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: voyager-cars-lab
+  namespace: voyager-cars-lab
+spec:
+  baseDomain: cars.lab
+  clusterName: voyager
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: voyager-cars-lab
+    version: v1beta1
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: "voyager-cars-lab"
+  pullSecretRef:
+    name: assisted-deployment-pull-secret

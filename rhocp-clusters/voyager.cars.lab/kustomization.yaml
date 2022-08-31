@@ -1,0 +1,14 @@
+---
+# This ZTP has dependency on a management cluster
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  #- 00-namespace.yaml
+  #- 01-pullsecret.yaml
+  - 02-aci.yaml
+  - 03-clusterdeployment.yaml
+  - 04-klusterletaddon.yaml
+  - 05-managedcluster.yaml
+  - 06-infraenv-voyager-cars-lab.yaml
+  - 07-du1-fec1.yaml

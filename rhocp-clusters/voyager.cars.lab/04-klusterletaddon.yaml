@@ -1,0 +1,22 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: voyager-cars-lab
+  namespace: voyager-cars-lab
+spec:
+  clusterName: voyager-cars-lab
+  clusterNamespace: voyager-cars-lab
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: false
+  certPolicyController:
+    enabled: false
+  iamPolicyController:
+    enabled: false
+  policyController:
+    enabled: false
+  searchCollector:
+    enabled: false

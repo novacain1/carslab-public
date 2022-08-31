@@ -1,0 +1,93 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super1-xj-cars-lab
+  namespace: xj-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super2-xj-cars-lab
+  namespace: xj-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-super3-xj-cars-lab
+  namespace: xj-cars-lab
+data:
+  username: cm9vdA==
+  password: YWx0aW9zdGFyMTIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super1-xj-cars-lab
+  namespace: xj-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-xj-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super1"
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: DE:AD:BE:EF:87:6E
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+https://kvmhost1.db5.cars.lab:8082/redfish/v1/Systems/aea74d07-4367-4034-bfd1-794705d01d0c
+    credentialsName: bmc-super1-xj-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super2-xj-cars-lab
+  namespace: xj-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-xj-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super2"
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: DE:AD:BE:EF:ED:74
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+https://kvmhost1.infra.cars.lab:8082/redfish/v1/Systems/1107b340-2c03-42ed-8de2-95ec1ba06b50
+    credentialsName: bmc-super2-xj-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: super3-xj-cars-lab
+  namespace: xj-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-xj-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "super3"
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+spec:
+  online: true
+  bootMACAddress: DE:AD:BE:EF:E1:5E
+  automatedCleaningMode: disabled
+  bmc:
+    address: redfish-virtualmedia+https://kvmhost1.infra.cars.lab:8082/redfish/v1/Systems/1157380c-e2c9-45fb-b5f0-0351dc44902e
+    credentialsName: bmc-super3-xj-cars-lab
+    disableCertificateVerification: True

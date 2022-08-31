@@ -1,0 +1,355 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/node-selector: ""
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: openshift-local-storage
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: openshift-logging
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    openshift.io/run-level: "1"
+  name: openshift-ptp
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
+    openshift.io/run-level: "1"
+  name: openshift-sriov-network-operator
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: vran-acceleration-operators
+---
+apiVersion: config.openshift.io/v1
+kind: Scheduler
+metadata:
+  labels:
+  name: cluster
+spec:
+  mastersSchedulable: true
+---
+apiVersion: local.storage.openshift.io/v1alpha1
+kind: LocalVolumeDiscovery
+metadata:
+  labels:
+  name: auto-discover-devices
+  namespace: openshift-local-storage
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+      - key: ran.openshift.io/lso
+        operator: Exists
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  labels:
+  name: max-pods-500
+spec:
+  kubeletConfig:
+    maxPods: 500
+    podsPerCore: 0
+  machineConfigPoolSelector:
+    matchLabels:
+      custom-kubelet: max-pods-500
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 50-master-enable-sctp
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    storage:
+      files:
+      - contents:
+          source: data:,
+        mode: 420
+        overwrite: true
+        path: /etc/modprobe.d/sctp-blacklist.conf
+      - contents:
+          source: data:text/plain;charset=utf-8,sctp
+        mode: 420
+        overwrite: true
+        path: /etc/modules-load.d/sctp-load.conf
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: ran-du
+  name: 50-ran-du-disable-chronyd
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    systemd:
+      units:
+      - contents: |
+          [Unit]
+          Description=NTP client/server
+          Documentation=man:chronyd(8) man:chrony.conf(5)
+          After=ntpdate.service sntp.service ntpd.service
+          Conflicts=ntpd.service systemd-timesyncd.service
+          ConditionCapability=CAP_SYS_TIME
+          [Service]
+          Type=forking
+          PIDFile=/run/chrony/chronyd.pid
+          EnvironmentFile=-/etc/sysconfig/chronyd
+          ExecStart=/usr/sbin/chronyd $OPTIONS
+          ExecStartPost=/usr/libexec/chrony-helper update-daemon
+          PrivateTmp=yes
+          ProtectHome=yes
+          ProtectSystem=full
+          [Install]
+          WantedBy=multi-user.target
+        enabled: false
+        name: chronyd.service
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 50-worker-enable-sctp
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    storage:
+      files:
+      - contents:
+          source: data:,
+        mode: 420
+        overwrite: true
+        path: /etc/modprobe.d/sctp-blacklist.conf
+      - contents:
+          source: data:text/plain;charset=utf-8,sctp
+        mode: 420
+        overwrite: true
+        path: /etc/modules-load.d/sctp-load.conf
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 50-worker-fix-ipi-rwn
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    storage:
+      files:
+      - contents:
+          source: data:,
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/kubernetes/manifests/keepalived.yaml
+      - contents:
+          source: data:,
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/kubernetes/manifests/mdns-publisher.yaml
+      - contents:
+          source: data:,
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/kubernetes/manifests/coredns.yaml
+    systemd:
+      units:
+      - contents: |
+          [Unit]
+          Description=Writes IP address configuration so that kubelet and crio services select a valid node IP
+          Wants=network-online.target
+          After=network-online.target ignition-firstboot-complete.service
+          Before=kubelet.service crio.service
+          [Service]
+          Type=oneshot
+          ExecStart=/bin/bash -c "exit 0 "
+          [Install]
+          WantedBy=multi-user.target
+        enabled: true
+        name: nodeip-configuration.service
+---
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  labels:
+  name: default
+  namespace: openshift-ingress-operator
+spec:
+  nodePlacement:
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/master: ""
+  replicas: 3
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  labels:
+  name: openshift-local-storage
+  namespace: openshift-local-storage
+spec:
+  targetNamespaces:
+  - openshift-local-storage
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: cluster-logging
+  namespace: openshift-logging
+spec:
+  targetNamespaces:
+  - openshift-logging
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  labels:
+  name: ptp-operators
+  namespace: openshift-ptp
+spec:
+  targetNamespaces:
+  - openshift-ptp
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  labels:
+  name: sriov-network-operators
+  namespace: openshift-sriov-network-operator
+spec:
+  targetNamespaces:
+  - openshift-sriov-network-operator
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  labels:
+  name: vran-operators
+  namespace: vran-acceleration-operators
+spec:
+  targetNamespaces:
+  - vran-acceleration-operators
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+  name: openshift-local-storage-operator
+  namespace: openshift-local-storage
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: local-storage-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: cluster-logging
+  namespace: openshift-logging
+spec:
+  channel: stable
+  name: cluster-logging
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+  name: performance-addon-operator
+  namespace: openshift-operators
+spec:
+  channel: "4.10"
+  installPlanApproval: Automatic
+  name: performance-addon-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+  name: ptp-operator-subscription
+  namespace: openshift-ptp
+spec:
+  channel: "stable"
+  installPlanApproval: Automatic
+  name: ptp-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: sriov-network-operator-subscription
+  namespace: openshift-sriov-network-operator
+spec:
+  channel: "4.10"
+  installPlanApproval: Automatic
+  name: sriov-network-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: sriov-fec-subscription
+  namespace: vran-acceleration-operators
+spec:
+  channel: stable
+  name: sriov-fec
+  source: certified-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: ptp.openshift.io/v1
+kind: PtpOperatorConfig
+metadata:
+  labels:
+  name: default
+  namespace: openshift-ptp
+spec:
+  daemonNodeSelector:
+    ran.openshift.io/ptp: ""
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovOperatorConfig
+metadata:
+  labels:
+  name: default
+  namespace: openshift-sriov-network-operator
+spec:
+  configDaemonNodeSelector:
+    ran.openshift.io/sriov: ""
+  enableInjector: true
+  enableOperatorWebhook: true
+  logLevel: 2
