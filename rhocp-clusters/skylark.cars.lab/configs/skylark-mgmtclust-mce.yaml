@@ -1,0 +1,165 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: multicluster-engine
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/node-selector: ""
+  labels:
+    openshift.io/cluster-monitoring: "true"
+  name: openshift-local-storage
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: multicluster-engine:subscription-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: multicluster-engine:subscription-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: kube:admin
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: system:admin
+---
+apiVersion: config.openshift.io/v1
+kind: Scheduler
+metadata:
+  name: cluster
+spec:
+  mastersSchedulable: true
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  labels:
+    telco-gitops/rwn: telco-gitops
+  name: max-pods-500
+spec:
+  kubeletConfig:
+    maxPods: 500
+    podsPerCore: 0
+  machineConfigPoolSelector:
+    matchLabels:
+      custom-kubelet: max-pods-500
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+    telco-gitops/rwn: telco-gitops
+  name: 50-worker-fix-ipi-rwn
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    storage:
+      files:
+      - contents:
+          source: data:,
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/kubernetes/manifests/keepalived.yaml
+      - contents:
+          source: data:,
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/kubernetes/manifests/mdns-publisher.yaml
+      - contents:
+          source: data:,
+          verification: {}
+        filesystem: root
+        mode: 420
+        path: /etc/kubernetes/manifests/coredns.yaml
+    systemd:
+      units:
+      - contents: |
+          [Unit]
+          Description=Writes IP address configuration so that kubelet and crio services select a valid node IP
+          Wants=network-online.target
+          After=network-online.target ignition-firstboot-complete.service
+          Before=kubelet.service crio.service
+          [Service]
+          Type=oneshot
+          ExecStart=/bin/bash -c "exit 0 "
+          [Install]
+          WantedBy=multi-user.target
+        enabled: true
+        name: nodeip-configuration.service
+---
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  labels:
+    telco-gitops/rwn: telco-gitops
+  name: default
+  namespace: openshift-ingress-operator
+spec:
+  nodePlacement:
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/master: ""
+  replicas: 3
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: multicluster-engine
+  namespace: multicluster-engine
+spec:
+  targetNamespaces:
+  - multicluster-engine
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: multicluster-engine
+  namespace: multicluster-engine
+spec:
+  channel: stable-2.0
+  installPlanApproval: Automatic
+  name: multicluster-engine
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: openshift-gitops-operator
+  namespace: openshift-operators
+spec:
+  channel: latest
+  installPlanApproval: Automatic
+  name: openshift-gitops-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: openshift-pipelines-operator
+  namespace: openshift-operators
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: openshift-pipelines-operator-rh
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---
+apiVersion: multicluster.openshift.io/v1
+kind: MultiClusterEngine
+metadata:
+  name: multiclusterengine
+spec: {}

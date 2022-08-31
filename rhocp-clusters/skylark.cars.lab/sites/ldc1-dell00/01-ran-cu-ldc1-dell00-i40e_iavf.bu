@@ -1,0 +1,15 @@
+variant: openshift
+version: 4.8.0
+metadata:
+  name: 01-ran-cu-ldc1-dell00-i40e-iavf-debug
+  labels:
+    machineconfiguration.openshift.io/role: ran-cu-ldc1-dell00
+storage:
+  files:
+    - path: /etc/modprobe.d/i40e_iavf-debug.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          options i40e debug=16
+          options iavf debug=16

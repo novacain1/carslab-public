@@ -9,17 +9,21 @@ metadata:
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
+  - crashkernel=512M
   #- nohz_full=4-31,36-63 
   #- kernel.timer_migration=1
-  - crashkernel=512M
+  - slub_debug=FZPU
+  - ignore_loglevel
+  - initcall_debug
   cpu:
-    isolated: "4-31,36-63"
-    reserved: "0-3,32-35"
+    isolated: 4-31,36-63
+    reserved: 0-3,32-35
   net:
     userLevelNetworking: true
     devices:
-    # intel onboard
+    # intel I350
     - interfaceName: eno*
+    # intel X550
     - interfaceName: enp25s0*
     # silicom sts
     - interfaceName: enp81*

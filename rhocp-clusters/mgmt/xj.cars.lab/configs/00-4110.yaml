@@ -5,10 +5,10 @@ metadata:
   name: openshift-v4.11.0
 spec:
   releaseImage: quay.io/openshift-release-dev/ocp-release:4.11.0-x86_64
----  
+---
 apiVersion: hive.openshift.io/v1
 kind: ClusterImageSet
 metadata:
-  name: openshift-v4.9.26-disconnected
+  name: openshift-v4.11.0-multi
 spec:
-  releaseImage: registry.cars.lab:5000/ocp4/openshift4:4.9.26-x86_64
+  releaseImage: quay.io/openshift-release-dev/ocp-release:4.11.0-multi

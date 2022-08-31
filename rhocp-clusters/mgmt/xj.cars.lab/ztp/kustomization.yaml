@@ -10,5 +10,6 @@ resources:
   - 03-clusterdeployment.yaml
   - 04-klusterletaddon.yaml
   - 05-managedcluster.yaml
-  - 06-infraenv-voyager-cars-lab.yaml
-  - 07-du1-fec1.yaml
+  - 06-infraenv-xj-cars-lab.yaml
+  - 07-nmstate-xj-cars-lab.yaml
+  - 08-bmh-xj-cars-lab-cplane.yaml

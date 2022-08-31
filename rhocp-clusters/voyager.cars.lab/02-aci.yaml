@@ -7,14 +7,14 @@ metadata:
   annotations:
     agent-install.openshift.io/install-config-overrides: '{"networking":{"networkType":"OVNKubernetes"}}'
 spec:
-  #apiVIP: 172.19.0.51
+  #apiVIP: 172.18.0.51
   #apiVIP: fd00:6:6:2053::98
-  #ingressVIP: 172.19.0.51
+  #ingressVIP: 172.18.0.51
   #ingressVIP: fd00:6:6:2053::99
   clusterDeploymentRef:
     name: voyager-cars-lab
   imageSetRef:
-    name: img4.10.28-x86-64-appsub
+    name: img4.11.2-x86-64-appsub
 #  manifestsConfigMapRef:
 #    name: cm-overrides-voyager-cars-lab
   networking:
@@ -27,8 +27,8 @@ spec:
       - 172.30.0.0/16
       - fd02::/112
     machineNetwork:
-      - cidr: 10.70.100.0/24
-      - cidr: fd00:6:6:2053::0/64
+      - cidr: 172.18.0.0/24
+      - cidr: fd00:6:6:2051::0/64
   provisionRequirements:
     controlPlaneAgents: 1
     workerAgents: 0

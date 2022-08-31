@@ -1,0 +1,126 @@
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super1-xj-cars-lab
+  namespace: xj-cars-lab
+  labels:
+    cluster-name: xj-nmstate
+spec:
+  config:
+    interfaces:
+      - name: enp1s0
+        type: ethernet
+        state: up
+        ipv4:
+          address:
+          - ip: 10.60.55.30
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2055::30
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
+    dns-resolver:
+      config:
+        server:
+        - 10.40.0.100
+        - fd00:6:6:11::52
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.60.55.1
+          next-hop-interface: enp1s0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2055::1
+          next-hop-interface: enp1s0
+  interfaces:
+    - name: enp1s0
+      macAddress: DE:AD:BE:EF:87:6E
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super2-xj-cars-lab
+  namespace: xj-cars-lab
+  labels:
+    cluster-name: xj-nmstate
+spec:
+  config:
+    interfaces:
+      - name: enp1s0
+        type: ethernet
+        state: up
+        ipv4:
+          address:
+          - ip: 10.60.55.31
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2055::31
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
+    dns-resolver:
+      config:
+        server:
+        - 10.40.0.100
+        - fd00:6:6:11::52
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.60.55.1
+          next-hop-interface: enp1s0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2055::1
+          next-hop-interface: enp1s0
+  interfaces:
+    - name: enp1s0
+      macAddress: DE:AD:BE:EF:ED:74
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-super3-xj-cars-lab
+  namespace: xj-cars-lab
+  labels:
+    cluster-name: xj-nmstate
+spec:
+  config:
+    interfaces:
+      - name: enp1s0
+        type: ethernet
+        state: up
+        ipv4:
+          address:
+          - ip: 10.60.55.32
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2055::94
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
+    dns-resolver:
+      config:
+        server:
+        - 10.40.0.100
+        - fd00:6:6:11::52
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.60.55.1
+          next-hop-interface: enp1s0
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2055::1
+          next-hop-interface: enp1s0
+  interfaces:
+    - name: enp1s0
+      macAddress: DE:AD:BE:EF:E1:5E
