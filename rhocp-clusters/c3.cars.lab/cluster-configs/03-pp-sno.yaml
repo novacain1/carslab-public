@@ -1,0 +1,27 @@
+---
+apiVersion: performance.openshift.io/v2
+kind: PerformanceProfile
+metadata:
+  name: c3sno-pp
+spec:
+  additionalKernelArgs:
+  - rcupdate.rcu_normal_after_boot=0
+  - nohz_full=4-23,28-47
+  cpu:
+    isolated: 4-23,28-47
+    reserved: 0-3,24-27
+  hugepages:
+    defaultHugepagesSize: 1G
+    pages:
+    - size: 1G
+      count: 32
+  machineConfigPoolSelector:
+    pools.operator.machineconfiguration.openshift.io/master: ""
+  net:
+    userLevelNetworking: true
+  nodeSelector:
+    node-role.kubernetes.io/master: ""
+  numa:
+    topologyPolicy: best-effort
+  realTimeKernel:
+    enabled: true
