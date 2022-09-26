@@ -1,0 +1,21 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterImageSet
+metadata:
+  name: openshift-4.12.0-ec.3
+spec:
+  releaseImage: quay.io/openshift-release-dev/ocp-release:4.12.0-ec.3-x86_64
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterImageSet
+metadata:
+  name: openshift-4.12.0-ec.2-rhel9
+spec:
+  releaseImage: registry.ci.openshift.org/rhcos-devel/ocp-4.12-9.0:4.12.0-ec.2
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterImageSet
+metadata:
+  name: openshift-4.12.0-ec.3-rhel9
+spec:
+  releaseImage: registry.ci.openshift.org/rhcos-devel/ocp-4.12-9.0:4.12.0-ec.3
