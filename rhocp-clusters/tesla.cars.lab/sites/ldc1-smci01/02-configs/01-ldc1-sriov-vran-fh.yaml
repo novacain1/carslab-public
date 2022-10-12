@@ -12,7 +12,8 @@ metadata:
 spec:
   resourceName: vran_vfio
   networkNamespace: workload-4g-du-ldc1-smci01
-  vlan: 2001
+  #vlan: 2001
+  vlan: 806
   ipam: |-
     {}
   linkState: auto

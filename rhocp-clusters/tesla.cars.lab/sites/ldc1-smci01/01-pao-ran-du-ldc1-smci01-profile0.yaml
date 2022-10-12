@@ -11,7 +11,7 @@ spec:
   - rcupdate.rcu_normal_after_boot=0
   - crashkernel=512M
   #- nohz=off
-  #- nohz_full=3-31,35-63 
+  #- nohz_full=4-31,36-63 
   - slub_debug=FZPU
   cpu:
     isolated: 4-31,36-63
@@ -25,14 +25,15 @@ spec:
     - interfaceName: enp25s0*
     # intel e810
     - interfaceName: enp138s0*
+  globallyDisableIrqLoadBalancing: true
   hugepages:
-    defaultHugepagesSize: "1G"
+    defaultHugepagesSize: 1G
     pages:
-    - size: "1G"
-      count: 16
+    - size: 1G
+      count: 32
       node: 0
   numa:
-    topologyPolicy: best-effort
+    topologyPolicy: single-numa-node
   realTimeKernel:
     enabled: true
   nodeSelector:

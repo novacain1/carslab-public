@@ -14,7 +14,7 @@ spec:
   clusterDeploymentRef:
     name: volante-cars-lab
   imageSetRef:
-    name: img4.10.18-x86-64-appsub
+    name: img4.10.30-x86-64-appsub
 #  manifestsConfigMapRef:
 #    name: cm-overrides-volante-cars-lab
   networking:
