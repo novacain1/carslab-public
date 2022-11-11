@@ -10,6 +10,5 @@ resources:
   - 03-clusterdeployment.yaml
   - 04-klusterletaddon.yaml
   - 05-managedcluster.yaml
-  - 06-infraenv-jimmy-cars-lab.yaml
-  - 07-nmstate-jimmy-cars-lab.yaml
-  - 08-bmh-jimmy-cars-lab-cplane.yaml
+  - 06-infraenv-wrangler-cars-lab.yaml
+  - 07-du2-ldc1.yaml

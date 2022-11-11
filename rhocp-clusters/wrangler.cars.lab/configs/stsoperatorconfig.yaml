@@ -1,0 +1,20 @@
+---
+apiVersion: sts.silicom.com/v1alpha1
+kind: StsOperatorConfig
+metadata:
+  name: sts-operator-config
+  namespace: silicom
+spec:
+  images:
+    gpsd: quay.io/silicom/gpsd:v3.23
+    grpcTsyncd: quay.io/silicom/grpc-tsyncd:2.1.2.8
+    phc2sys: quay.io/silicom/phc2sys:3.1.1
+    stsPlugin: quay.io/silicom/sts-plugin:0.1.0
+    tsyncd: quay.io/silicom/tsyncd:2.1.2.8
+  sro:
+    build: false
+    driverRegistry: image-registry.openshift-image-registry.svc:5000
+    iceVersion: 1.8.3
+    namespace: openshift-operators
+    srcImage: quay.io/silicom/ice-driver-src:1.8.3.2
+    srcSvcPort: 3000

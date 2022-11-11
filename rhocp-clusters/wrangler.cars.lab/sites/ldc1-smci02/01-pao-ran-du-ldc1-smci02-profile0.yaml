@@ -5,36 +5,35 @@
 apiVersion: performance.openshift.io/v2
 kind: PerformanceProfile
 metadata:
-  name: ran-du-ldc1-smci01-profile0
+  name: ran-du-ldc1-smci02-profile0
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
   - crashkernel=512M
   #- nohz=off
-  #- nohz_full=4-31,36-63 
+  #- nohz_full=3-31,35-63
   - slub_debug=FZPU
   cpu:
     isolated: 4-31,36-63
     reserved: 0-3,32-35
   net:
     userLevelNetworking: true
-    devices:
+    #devices:
     # intel I350
-    - interfaceName: eno*
+    #- interfaceName: eno*
     # intel X550
-    - interfaceName: enp25s0*
-    # intel e810
-    - interfaceName: enp138s0*
-  globallyDisableIrqLoadBalancing: true
+    #- interfaceName: enp25s0*
+    # silicom sts
+    #- interfaceName: enp138s0*
   hugepages:
-    defaultHugepagesSize: 1G
+    defaultHugepagesSize: "1G"
     pages:
-    - size: 1G
-      count: 32
+    - size: "1G"
+      count: 16
       node: 0
   numa:
-    topologyPolicy: single-numa-node
+    topologyPolicy: best-effort
   realTimeKernel:
     enabled: true
   nodeSelector:
-    node-role.kubernetes.io/ran-du-ldc1-smci01: ""
+    node-role.kubernetes.io/master: ""
