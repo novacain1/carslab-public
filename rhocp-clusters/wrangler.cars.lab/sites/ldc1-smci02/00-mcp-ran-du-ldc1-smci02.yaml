@@ -1,0 +1,20 @@
+# Example for a SMC DU: ran-du-ldc1-smci02
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfigPool
+metadata:
+  name:  ran-du-ldc1-smci02
+  labels:
+    machineconfiguration.openshift.io/role: ran-du-ldc1-smci02
+spec:
+  machineConfigSelector:
+    matchExpressions:
+      - {
+          key: machineconfiguration.openshift.io/role,
+          operator: In,
+          values: [master, ran-du-ldc1-smci02]
+        }
+  paused: false
+  nodeSelector:
+    matchLabels:
+      node-role.kubernetes.io/ran-du-ldc1-smci02: ""

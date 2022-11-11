@@ -1,0 +1,28 @@
+variant: openshift
+version: 4.9.0
+metadata:
+  name: 02-ran-du-ldc1-smci02-kdump
+  labels:
+    machineconfiguration.openshift.io/role: master
+storage:
+  files:
+    - path: /etc/kdump.conf 
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          path /var/crash
+          core_collector makedumpfile -l --message-level 7 -d 31
+
+    - path: /etc/sysconfig/kdump 
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          KEXEC_ARGS="-s"
+          KDUMP_IMG="vmlinuz"
+
+systemd:
+  units:
+    - name: kdump.service
+      enabled: true
