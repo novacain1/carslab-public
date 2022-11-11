@@ -1,0 +1,105 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bmc-du2-ldc1-wrangler-cars-lab
+  namespace: wrangler-cars-lab
+data:
+  username: QURNSU4=
+  password: YWx0aW9zdGFyITIz
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: du2-ldc1-wrangler-cars-lab
+  namespace: wrangler-cars-lab
+  labels:
+    infraenvs.agent-install.openshift.io: "infraenv-wrangler-cars-lab"
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: "du2sno"
+    bmac.agent-install.openshift.io/role: master
+    bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
+    bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":102400},{"label":"lso_400G_1","sizeMiB":409600},{"label":"lso_200G_1","sizeMiB":204800}],"wipeTable":false}]}}'
+spec:
+  online: true
+  bootMACAddress: 3c:ec:ef:2d:33:32
+  automatedCleaningMode: disabled
+  rootDeviceHints:
+    deviceName: /dev/nvme0n1
+  bmc:
+    address: redfish-virtualmedia://172.28.11.43/redfish/v1/Systems/1/
+    credentialsName: bmc-du2-ldc1-wrangler-cars-lab
+    disableCertificateVerification: True
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: nmstate-du2-ldc1-wrangler-cars-lab
+  namespace: wrangler-cars-lab
+  labels:
+    cluster-name: wrangler-nmstate
+spec:
+  config:
+    interfaces:
+      - name: eno1
+        type: ethernet
+        state: down     
+      - name: eno2
+        type: ethernet
+        state: down
+      - name: eno3
+        type: ethernet
+        state: up 
+        ipv4:
+          address:
+          - ip: 172.17.0.182
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          enabled: true
+          address:
+          - ip: fd00:6:6:2060::182
+            prefix-length: 64
+          autoconf: false
+          dhcp: false
+      - name: eno4
+        type: ethernet
+        state: down
+      - name: enp138s0f0
+        type: ethernet
+        state: down
+      - name: enp138s0f2
+        type: ethernet
+        state: down
+    dns-resolver:
+      config:
+        server:
+          - 10.40.0.100
+          - fd00:6:6:11::52
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 172.17.0.1
+          next-hop-interface: eno3
+        - destination: ::/0
+          next-hop-address: fd00:6:6:2060::1
+          next-hop-interface: eno3
+  interfaces:
+    - name: eno1
+      macAddress: "3c:ec:ef:2d:33:30"
+    - name: eno2
+      macAddress: "3c:ec:ef:2d:33:31"
+    - name: eno3
+      macAddress: "3c:ec:ef:2d:33:32"
+    - name: eno4
+      macAddress: "3c:ec:ef:2d:33:33"
+    - name: enp25s0f0
+      macAddress: "3c:ec:ef:30:52:74"
+    - name: enp25s0f1
+      macAddress: "3c:ec:ef:30:52:75"
+    - name: enp138s0f0
+      macAddress: "00:e0:ed:f0:0e:70"
+    - name: enp138s0f2
+      macAddress: "00:e0:ed:f0:0e:72"

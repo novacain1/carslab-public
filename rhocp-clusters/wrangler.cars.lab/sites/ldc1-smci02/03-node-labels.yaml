@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: du2sno
+  labels:
+    node-role.kubernetes.io/master: ""
+    ran.openshift.io/ldc1-sriov-netdevice-smci02: ""
+    ran.openshift.io/ldc1-sriov-netdevice-fh-smci02: ""
+    ran.openshift.io/ldc1-sriov-vfio-smci02: ""
+    ran.openshift.io/ldc1-ptp-smci02: ""
+    ran.openshift.io/acc100: ""
+    #ran.openshift.io/ptp: ""
+    ran.openshift.io/sriov: ""
+    #ran.openshift.io/ldc1-local-storage-smci02: ""
+    ran.openshift.io/lso: ""
+    sts.silicom.com/config: "gm-1"

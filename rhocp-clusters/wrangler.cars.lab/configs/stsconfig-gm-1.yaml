@@ -1,0 +1,69 @@
+---
+apiVersion: sts.silicom.com/v1alpha1
+kind: StsConfig
+metadata:
+  name: gm-1
+  namespace: silicom
+spec:
+  namespace: silicom
+  imageRegistry: quay.io/silicom
+  nodeSelector:
+    sts.silicom.com/config: "gm-1"
+  mode: T-GM.8275.1
+  twoStep: 0 
+  esmcMode: 2
+  ssmMode: 1
+  forwardable: 1
+  synceRecClkPort: 3
+  syncOption: 1
+  gnssSpec:
+    gnssSigGpsEn: 1
+  interfaces:
+    - ethName: enp138s0f0
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 1
+      qlEnable: 1
+    - ethName: enp138s0f1
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 2
+      qlEnable: 1
+    - ethName: enp138s0f2
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 3
+      qlEnable: 1
+    - ethName: enp138s0f3
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 4
+      qlEnable: 1
+    - ethName: enp138s0f4
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 5
+      qlEnable: 1
+    - ethName: enp138s0f5
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 6
+      qlEnable: 1
+    - ethName: enp138s0f6
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 7
+      qlEnable: 1
+    - ethName: enp138s0f7
+      holdoff: 500
+      synce: 1
+      mode: Master
+      ethPort: 8
+      qlEnable: 1
