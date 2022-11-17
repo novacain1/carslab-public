@@ -1,0 +1,126 @@
+# flexran-gnb-bmh-secret & assisted-deployment-pull-secret need to be created under same namespace flexran-cars-lab
+---
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "gnb-flexran-cars-lab"
+  namespace: "gnb-flexran-cars-lab"
+spec:
+  baseDomain: "flexran.cars.lab"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "openshift-v4.11.13"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFC9CIV1mjDw9VRgfDyPJUNm1BAzjK7xD6JdZeYydYFIbqEN0t+iFK0pEcaj83wuU2HBvd32IHfYJYuHxzkXun2t1h5SPKmyIzQEFGhxWEWDqhzYefHuNU94adpk82qsHssDxNVhDPSZFIc6L/6K3YQyBmeHkC5Pq+NYIk0M+VOGgWXIob+yH8A3mIdN3e3GWPdUIJqFS40BVqfsZIUuUHv9RHYqrCjoJKDlbTO5kFcr5esAyjPX9P7uPCgGgQ4Omtol4G4nzYsti3IpT5dC4IigWkFqb4qwYevn+dkIB7Ju/X43iyylku9ftBf0SkUCylwZJ0JjGmh5avZBAJJS3DTPWQDualOekiD1edlN+b0RQq02iPv945KEh3KDPjf0DSb2GTr0+8GuVWOAzT0slUNV70mmEKkBsk84TD4TPVcSD5E7iogEA6HGaXIY7ab2D2qDpGGnf8u9N4taxpXm4ZmOOBnz4dVMtF6fvzUPfzP9rChVVc8dRFtIW1yARTBtML2yww12XRbsOvq6vAVWJHLfWLycNWbWy8ZSs080/a1auymyWrqfYYO62CYtpNIIO95WpVzl2itL6NZvG9d8VGtjEN6MsSlKy/Lx4x+zS0N3MFVKorZ464zz48oCe8za0hLW5yp5PkudEtVhk1GXq4KrrqNk+A/Ofhdre8H6N9Ew=="
+  clusters:
+  - clusterName: "gnb"
+    networkType: "OVNKubernetes"
+    clusterLabels:
+      # These example cluster labels correspond to the bindingRules in the PolicyGenTemplate examples in ../site-policies:
+      # ../site-policies/common-policies/common-ranGen.yaml will apply to all clusters with 'common: true'
+      common: true
+      # ../site-policies/common-policies/group-xr12.yaml will apply to all clusters with 'group-xr12: ""'
+      group-xr12: ""
+      # ../site-policies/site-specific-policies/flexran-cars-lab.yaml will apply to all clusters with 'sites: "flexran-cars-lab"'
+      # Normally this should match or contain the cluster name so it only applies to a single cluster
+      sites : "flexran-cars-lab"
+    clusterNetwork:
+      - cidr: 10.128.0.0/14
+        hostPrefix: 23
+      - cidr: fd01::/48
+        hostPrefix: 64
+    machineNetwork:
+      - cidr: 172.20.0.0/24
+      - cidr: fd00:6:6:2063::0/64
+    serviceNetwork:
+      - 172.30.0.0/16
+      - fd02::/112
+    additionalNTPSources:
+      - registry.cars.lab
+      - fd00:6:6:11::52
+    # Optionally; This can be used to override the KlusterletAddonConfig that is created for this cluster:
+    #crTemplates:
+    #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
+    nodes:
+      - hostName: "gnb.flexran.cars.lab"
+        role: "master"
+        # Optionally; This can be used to configure desired BIOS setting on a host:
+        #biosConfigRef:
+        #  filePath: "example-hw.profile"
+        bmcAddress: "idrac-virtualmedia://172.28.11.41/redfish/v1/Systems/System.Embedded.1"
+        bmcCredentialsName:
+          name: "gnb-flexran-cars-lab-bmc-secret"
+        bootMACAddress: "4c:76:25:ff:5c:24"
+        # Use UEFISecureBoot to enable secure boot
+        bootMode: "UEFI"
+        rootDeviceHints:
+          deviceName: "/dev/sda"
+        cpuset: "0-1,32-33"
+        nodeNetwork:
+          interfaces:
+            - name: eno8303np0
+              macAddress: "4c:76:25:ff:5c:24"
+            - name: eno8403np1
+              macAddress: "4c:76:25:ff:5c:25"
+            - name: eno8503np2
+              macAddress: "4c:76:25:ff:5c:26"
+            - name: eno8603np3
+              macAddress: "4c:76:25:ff:5c:27"
+            - name: ens3f0
+              macAddress: "b4:96:91:89:48:4a"
+            - name: ens3f1
+              macAddress: "b4:96:91:89:48:4b"
+            - name: ens4f0
+              macAddress: "b4:96:91:89:48:44"
+            - name: ens4f1
+              macAddress: "b4:96:91:89:48:45"
+          config:
+            interfaces:
+            - name: eno8303np0
+              type: ethernet
+              state: up
+              ipv4:
+                address:
+                - ip: 172.20.0.151
+                  prefix-length: 24
+                enabled: true
+              ipv6:
+                enabled: true
+                address:
+                - ip: fd00:6:6:2063::151
+                  prefix-length: 64
+                autoconf: false
+                dhcp: false
+            - name: eno8403np1
+              type: ethernet
+              state: down
+            - name: eno8503np2
+              type: ethernet
+              state: down
+            - name: eno8603np3
+              type: ethernet
+              state: down
+            - name: ens3f0
+              type: ethernet
+              state: down
+            - name: ens3f1
+              type: ethernet
+              state: down
+            - name: ens4f0
+              type: ethernet
+              state: down
+            - name: ens4f1
+              type: ethernet
+              state: down
+            dns-resolver:
+              config:
+                server:
+                  - 10.40.0.100
+                  - fd00:6:6:11::52
+            routes:
+              config:
+              - destination: 0.0.0.0/0
+                next-hop-address: 172.20.0.1
+                next-hop-interface: eno8303np0
+              - destination: ::/0
+                next-hop-address: fd00:6:6:2063::1
+                next-hop-interface: eno8303np0

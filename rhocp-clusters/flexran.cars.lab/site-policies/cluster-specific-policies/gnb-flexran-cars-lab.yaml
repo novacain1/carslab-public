@@ -1,0 +1,98 @@
+---
+apiVersion: ran.openshift.io/v1
+kind: PolicyGenTemplate
+metadata:
+  name: "gnb-flexran-cars-lab"
+  namespace: "gnb-flexran-cars-lab"
+spec:
+  bindingRules:
+    name: "gnb-flexran-cars-lab"
+  mcp: "master"
+  remediationAction: inform
+  sourceFiles:
+    - fileName: AcceleratorsNS.yaml
+      policyName: "subscriptions-policy"
+    - fileName: AcceleratorsOperGroup.yaml
+      policyName: "subscriptions-policy"
+    - fileName: AcceleratorsSubscription.yaml
+      policyName: "subscriptions-policy"
+    - fileName: "SriovFecClusterConfig.yaml"
+      policyName: "fec-policy"
+      spec:
+        drainSkip: true
+        acceleratorSelector:
+          pciAddress: 0000:51:00.0
+        physicalFunction:
+         bbDevConfig:
+          acc100:
+            # Programming mode: 0 = VF Programming, 1 = PF Programming
+            pfMode: false
+            numVfBundles: 16
+            maxQueueSize: 1024
+            uplink4G:
+              numQueueGroups: 0
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            downlink4G:
+              numQueueGroups: 0
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            uplink5G:
+              numQueueGroups: 4
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            downlink5G:
+              numQueueGroups: 4
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+    - fileName: SriovNetworkNodePolicy.yaml
+      policyName: "sriov-netdevice-policy"
+      remediationAction: inform
+      metadata:
+        name: "e810-1"
+      spec:
+        deviceType: netdevice
+        mtu: 1500
+        linkType: eth
+        isRdma: false
+        nicSelector:
+          pfNames: ["ens4f0"]
+          vendor: "8086"
+          deviceID: "159b"
+        numVfs: 10
+        priority: 10
+        resourceName: e810_1
+    - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: inform
+      policyName: "sriov-vfio-policy"
+      metadata:
+        name: "e810-2"
+      spec:
+        deviceType: vfio-pci
+        mtu: 1500
+        linkType: eth
+        isRdma: false
+        nicSelector:
+          pfNames: ["ens4f0"]
+          vendor: "8086"
+          deviceID: "159b"
+        numVfs: 4
+        priority: 10
+        resourceName: e810_2
+    - fileName: TunedPerformancePatch.yaml
+      policyName: "tuned-patch-policy"
+      spec:
+        profile:
+          - name: performance-patch
+            # The 'include' line must match the PerformanceProfile metadata.name above (openshift-node-performance-${metadata.name})
+            # And the cmdline_crash CPU set must match the 'isolated' set in the PerformanceProfile above
+            data: |
+              [main]
+              summary=Configuration changes profile inherited from performance created tuned
+              include=openshift-node-performance-openshift-node-performance-profile
+              [bootloader]
+              cmdline_crash=nohz_full=2-31,34-63
+              [sysctl]
+              kernel.timer_migration=1
+              [service]
+              service.stalld=start,enable

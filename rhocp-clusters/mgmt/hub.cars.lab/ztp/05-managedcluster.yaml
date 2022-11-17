@@ -1,0 +1,9 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  name: hub-cars-lab
+  namespace: hub-cars-lab
+spec:
+  hubAcceptsClient: true
+  leaseDurationSeconds: 60
