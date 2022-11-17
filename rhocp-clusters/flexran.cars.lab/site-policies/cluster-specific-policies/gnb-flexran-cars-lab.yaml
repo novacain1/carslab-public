@@ -6,7 +6,7 @@ metadata:
   namespace: "ztp-site"
 spec:
   bindingRules:
-    name: "gnb-flexran-cars-lab"
+    name: "flexran"
   mcp: "master"
   remediationAction: inform
   sourceFiles:
