@@ -2,8 +2,8 @@
 apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
-  name: "pgt-gnb"
-  namespace: "gnb-flexran-cars-lab"
+  name: "pgt-gnb-cluster"
+  namespace: "ztp-site"
 spec:
   bindingRules:
     name: "gnb-flexran-cars-lab"
