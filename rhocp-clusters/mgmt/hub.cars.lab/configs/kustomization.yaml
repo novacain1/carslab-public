@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/operator/overlays/release-2.5?ref=main
+  - github.com/redhat-cop/gitops-catalog/advanced-cluster-management/instance/base?ref=main
+  - github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/overlays/latest?ref=main
+  - github.com/openshift-telco/telco-gitops/base/operators/local-storage-operator?ref=main
+  - github.com/redhat-cop/gitops-catalog/topology-aware-lifecycle-manager-operator/overlays/stable?ref=main
+  - 01-master-create-lvs-for-lso.yaml
+  - 02-lso-localvolume-lvs.yaml
+  - 03-lso-filesystemclass-default.yaml
+    #- 05-disconnected_configmap.yaml
+    #- 06-clusterimageset.yaml
+    #- 07-hiveoverride.yaml
+  - 08-provisioningoverride.yaml
+  - 09-agentserviceconfig.yaml
