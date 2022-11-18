@@ -59,8 +59,8 @@ spec:
           vendor: "8086"
           deviceID: "159b"
           pfNames:
-            - ens4f0#0-3
-        numVfs: 10
+          - ens4f0#0-3
+        numVfs: 8
         priority: 10
         resourceName: vran_netdevice
     - fileName: SriovNetworkNodePolicy.yaml
@@ -77,8 +77,8 @@ spec:
           vendor: "8086"
           deviceID: "159b"
           pfNames:
-            - ens4f0#4-7
-        numVfs: 10
+          - ens4f0#4-7
+        numVfs: 8
         priority: 10
         resourceName: vran_vfio
     - fileName: TunedPerformancePatch.yaml
