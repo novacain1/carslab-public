@@ -56,7 +56,6 @@ spec:
         linkType: eth
         isRdma: false
         nicSelector:
-          pfNames: ["ens4f0"]
           vendor: "8086"
           deviceID: "159b"
           pfNames:
@@ -75,7 +74,6 @@ spec:
         linkType: eth
         isRdma: false
         nicSelector:
-          pfNames: ["ens4f0"]
           vendor: "8086"
           deviceID: "159b"
           pfNames:
