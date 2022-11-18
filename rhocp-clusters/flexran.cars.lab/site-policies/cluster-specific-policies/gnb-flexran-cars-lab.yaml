@@ -2,7 +2,7 @@
 apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
-  name: "pgt-gnb-cluster"
+  name: "gnb"
   namespace: "ztp-site"
 spec:
   bindingRules:
@@ -16,7 +16,7 @@ spec:
       policyName: "subscriptions-policy"
     - fileName: AcceleratorsSubscription.yaml
       policyName: "subscriptions-policy"
-    - fileName: "SriovFecClusterConfig.yaml"
+    - fileName: SriovFecClusterConfig.yaml
       policyName: "fec-policy"
       spec:
         drainSkip: true
@@ -49,7 +49,7 @@ spec:
       policyName: "sriov-netdevice-policy"
       remediationAction: inform
       metadata:
-        name: "e810-1"
+        name: "vran_netdevice"
       spec:
         deviceType: netdevice
         mtu: 1500
@@ -59,14 +59,16 @@ spec:
           pfNames: ["ens4f0"]
           vendor: "8086"
           deviceID: "159b"
+          pfNames:
+            - ens4f0#0-3
         numVfs: 10
         priority: 10
-        resourceName: e810_1
+        resourceName: vran_netdevice
     - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: inform
       policyName: "sriov-vfio-policy"
       metadata:
-        name: "e810-2"
+        name: "vran_vfio"
       spec:
         deviceType: vfio-pci
         mtu: 1500
@@ -76,9 +78,11 @@ spec:
           pfNames: ["ens4f0"]
           vendor: "8086"
           deviceID: "159b"
-        numVfs: 4
+          pfNames:
+            - ens4f0#4-7
+        numVfs: 10
         priority: 10
-        resourceName: e810_2
+        resourceName: vran_vfio
     - fileName: TunedPerformancePatch.yaml
       policyName: "tuned-patch-policy"
       spec:
