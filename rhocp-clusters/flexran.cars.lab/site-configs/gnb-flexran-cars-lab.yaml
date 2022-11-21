@@ -20,7 +20,7 @@ spec:
       common: true
       # ../site-policies/common-policies/group-xr12.yaml will apply to all clusters with 'group-xr12: ""'
       group-xr12: ""
-      # ../site-policies/site-specific-policies/flexran-cars-lab.yaml will apply to all clusters with 'sites: "flexran-cars-lab"'
+      # ../site-policies/site-specific-policies/flexran-cars-lab.yaml will apply to all clusters with 'sites : "flexran-cars-lab"'
       # Normally this should match or contain the cluster name so it only applies to a single cluster
       sites : "flexran-cars-lab"
     clusterNetwork:
