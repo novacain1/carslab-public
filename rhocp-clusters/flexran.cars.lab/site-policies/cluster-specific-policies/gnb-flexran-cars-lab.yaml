@@ -49,7 +49,7 @@ spec:
       policyName: "sriov-netdevice-policy"
       remediationAction: inform
       metadata:
-        name: "vran_netdevice"
+        name: "vran-netdevice"
       spec:
         deviceType: netdevice
         mtu: 1500
@@ -62,12 +62,12 @@ spec:
           - ens4f0#0-3
         numVfs: 8
         priority: 10
-        resourceName: vran_netdevice
+        resourceName: vran-netdevice
     - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: inform
       policyName: "sriov-vfio-policy"
       metadata:
-        name: "vran_vfio"
+        name: "vran-vfio"
       spec:
         deviceType: vfio-pci
         mtu: 1500
@@ -80,7 +80,7 @@ spec:
           - ens4f0#4-7
         numVfs: 8
         priority: 10
-        resourceName: vran_vfio
+        resourceName: vran-vfio
     - fileName: TunedPerformancePatch.yaml
       policyName: "tuned-patch-policy"
       spec:
