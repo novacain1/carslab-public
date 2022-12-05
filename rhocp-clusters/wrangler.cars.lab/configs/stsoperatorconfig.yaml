@@ -7,10 +7,10 @@ metadata:
 spec:
   images:
     gpsd: quay.io/silicom/gpsd:v3.23
-    grpcTsyncd: quay.io/silicom/grpc-tsyncd:2.1.2.8
+    grpcTsyncd: quay.io/igorgsilicom/grpc-tsyncd:2.1.2.10d6.1
     phc2sys: quay.io/silicom/phc2sys:3.1.1
     stsPlugin: quay.io/silicom/sts-plugin:0.1.0
-    tsyncd: quay.io/silicom/tsyncd:2.1.2.8
+    tsyncd: quay.io/igorgsilicom/grpc-tsyncd:2.1.2.10d6.1
   sro:
     build: false
     driverRegistry: image-registry.openshift-image-registry.svc:5000
