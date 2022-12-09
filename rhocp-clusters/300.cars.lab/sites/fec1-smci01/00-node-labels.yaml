@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Node
+metadata:
+  name: lbsno
+  labels:
+    node-role.kubernetes.io/master: ""
+    ran.openshift.io/fec1-sriov-netdevice-smci01: ""
+    ran.openshift.io/fec1-sriov-netdevice-fh-smci01: ""
+    ran.openshift.io/fec1-sriov-vfio-smci01: ""
+    ran.openshift.io/fec1-ptp-smci01: ""
+    #ran.openshift.io/acc100: ""
+    ran.openshift.io/ptp: ""
+    ran.openshift.io/sriov: ""
+    #ran.openshift.io/fec1-local-storage-smci01: ""
+    ran.openshift.io/lso: ""

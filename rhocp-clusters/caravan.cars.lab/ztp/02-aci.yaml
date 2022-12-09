@@ -14,7 +14,7 @@ spec:
   clusterDeploymentRef:
     name: caravan-cars-lab
   imageSetRef:
-    name: img4.11.12-x86-64-appsub
+    name: img4.10.24-x86-64-appsub
 #  manifestsConfigMapRef:
 #    name: cm-overrides-caravan-cars-lab
   networking:

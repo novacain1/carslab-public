@@ -1,0 +1,22 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: 300-cars-lab
+  namespace: 300-cars-lab
+spec:
+  clusterName: 300-cars-lab
+  clusterNamespace: 300-cars-lab
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  applicationManager:
+    enabled: false
+  certPolicyController:
+    enabled: false
+  iamPolicyController:
+    enabled: false
+  policyController:
+    enabled: false
+  searchCollector:
+    enabled: false

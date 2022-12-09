@@ -1,0 +1,21 @@
+---
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: 300-cars-lab
+  namespace: 300-cars-lab
+spec:
+  baseDomain: cars.lab
+  clusterName: "300"
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: 300-cars-lab
+    version: v1beta1
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: "300-cars-lab"
+  pullSecretRef:
+    name: assisted-deployment-pull-secret

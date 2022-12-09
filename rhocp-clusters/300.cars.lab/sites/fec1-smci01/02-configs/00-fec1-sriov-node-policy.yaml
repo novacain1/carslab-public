@@ -1,0 +1,88 @@
+---
+###############################################################################
+# specific resourceName for it (eg. sriov-netdevice-smci00)
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: fec1-sriov-netdevice-smci01
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_netdevice
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/fec1-sriov-netdevice-smci01: ""
+  deviceType: netdevice
+  priority: 10
+  #mtu: 1500
+  numVfs: 10
+  nicSelector:
+    vendor: "8086"
+    deviceID: "1592"
+    pfNames:
+      - ens1f0#0-3
+---
+###############################################################################
+# specific resourceName for it (eg. sriov-vfio-smci00)
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: fec1-sriov-vfio-ar-smci01
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio_ar
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/fec1-sriov-vfio-smci01: ""
+  deviceType: vfio-pci
+  priority: 10
+  #mtu: 1500
+  numVfs: 10
+  nicSelector:
+    vendor: "8086"
+    deviceID: "1592"
+    pfNames:
+      - ens1f0#4-5
+---
+###############################################################################
+# specific resourceName for it (eg. sriov-vfio-smci00)
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: fec1-sriov-vfio-smci01
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_vfio
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/fec1-sriov-vfio-smci01: ""
+  deviceType: vfio-pci
+  priority: 10
+  #mtu: 1500
+  numVfs: 10
+  nicSelector:
+    vendor: "8086"
+    deviceID: "1592"
+    pfNames:
+      - ens1f0#6-7
+---
+###############################################################################
+# specific resourceName for it (eg. sriov-netdevice-fh-smci00)
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  name: fec1-sriov-netdevice-fh-smci01
+  namespace: openshift-sriov-network-operator
+spec:
+  resourceName: vran_netdevice_fh
+  nodeSelector:
+    ran.openshift.io/sriov: ""
+    ran.openshift.io/fec1-sriov-netdevice-fh-smci01: ""
+  deviceType: netdevice
+  priority: 10
+  #mtu: 1500
+  numVfs: 10
+  nicSelector:
+    vendor: "8086"
+    deviceID: "1592"
+    pfNames:
+      - ens1f0#8-9

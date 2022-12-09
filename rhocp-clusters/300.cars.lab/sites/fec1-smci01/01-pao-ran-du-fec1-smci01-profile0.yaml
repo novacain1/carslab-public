@@ -1,30 +1,27 @@
 # Validate CPU topology
-# $ for file in /sys/devices/system/cpu/cpu[0-9]*/topology/thread_siblings_list; do echo -n "$file "; cat $file; done |sort -k2 -n
-# Supermicro with 1x Intel Ice Lake 6338R
+# for file in /sys/devices/system/cpu/cpu[0-9]*/topology/thread_siblings_list; do cat $file; done |sort -k2 -n | uniq | sort -V
 ---
 apiVersion: performance.openshift.io/v2
 kind: PerformanceProfile
 metadata:
-  name: ran-du-ldc1-smci02-profile0
+  name: ran-du-fec1-smci01-profile0
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
   - crashkernel=512M
-  #- nohz=off
-  #- nohz_full=3-31,35-63
   - slub_debug=FZPU
   cpu:
-    isolated: 4-31,36-63
-    reserved: 0-3,32-35
+    isolated: 4-23,28-47
+    reserved: 0-3,24-27
   net:
     userLevelNetworking: true
-    devices:
+    #devices:
     # intel I350
-    - interfaceName: eno*
+    #- interfaceName: eno*
     # intel X550
-    - interfaceName: enp25s0*
+    #- interfaceName: enp25s0*
     # silicom sts
-    - interfaceName: enp138s0*
+    #- interfaceName: enp138s0*
   hugepages:
     defaultHugepagesSize: "1G"
     pages:
@@ -36,4 +33,4 @@ spec:
   realTimeKernel:
     enabled: false
   nodeSelector:
-    node-role.kubernetes.io/ran-du-ldc1-smci02: ""
+    node-role.kubernetes.io/master: ""

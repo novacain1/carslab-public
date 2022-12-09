@@ -1,0 +1,19 @@
+variant: openshift
+version: 4.11.0
+metadata:
+  name: 02-ran-du-fec1-smci01-rcu
+  labels:
+    machineconfiguration.openshift.io/role: ran-du-fec1-smci02
+storage:
+  files:
+    - path: /etc/sysctl.d/02-rcu.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          kernel.hung_task_panic = 1
+          kernel.panic_on_io_nmi = 1
+          kernel.panic_on_rcu_stall = 1
+          kernel.panic_on_unrecovered_nmi = 1
+          kernel.unknown_nmi_panic = 1 
+
