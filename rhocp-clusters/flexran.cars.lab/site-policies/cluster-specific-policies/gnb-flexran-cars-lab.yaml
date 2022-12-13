@@ -53,7 +53,6 @@ spec:
       spec:
         deviceType: netdevice
         mtu: 1500
-        linkType: eth
         isRdma: false
         nicSelector:
           vendor: "8086"
@@ -71,7 +70,6 @@ spec:
       spec:
         deviceType: vfio-pci
         mtu: 1500
-        linkType: eth
         isRdma: false
         nicSelector:
           vendor: "8086"
