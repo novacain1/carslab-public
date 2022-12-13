@@ -47,7 +47,7 @@ spec:
               aqDepthLog2: 4
     - fileName: SriovNetworkNodePolicy.yaml
       policyName: "sriov-netdevice-policy"
-      remediationAction: inform
+      remediationAction: enforce
       metadata:
         name: "vran-netdevice"
       spec:
@@ -64,7 +64,7 @@ spec:
         priority: 10
         resourceName: vran-netdevice
     - fileName: SriovNetworkNodePolicy.yaml
-      remediationAction: inform
+      remediationAction: enforce
       policyName: "sriov-vfio-policy"
       metadata:
         name: "vran-vfio"
