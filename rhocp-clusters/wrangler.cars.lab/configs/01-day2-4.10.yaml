@@ -395,5 +395,5 @@ spec:
   configDaemonNodeSelector:
     ran.openshift.io/sriov: ""
   enableInjector: true
-  enableOperatorWebhook: true
+  enableOperatorWebhook: false
   logLevel: 2

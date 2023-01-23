@@ -1,7 +1,7 @@
 variant: openshift
 version: 4.9.0
 metadata:
-  name: 02-ran-du-ldc1-smci02-kdump
+  name: 03-ran-du-ldc1-smci02-kdump
   labels:
     machineconfiguration.openshift.io/role: master
 storage:

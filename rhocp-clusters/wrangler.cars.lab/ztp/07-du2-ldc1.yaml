@@ -21,7 +21,9 @@ metadata:
     bmac.agent-install.openshift.io/hostname: "du2sno"
     bmac.agent-install.openshift.io/role: master
     bmac.agent-install.openshift.io/installer-args: '["--copy-network"]'
-    bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":102400},{"label":"lso_400G_1","sizeMiB":409600},{"label":"lso_200G_1","sizeMiB":204800}],"wipeTable":false}]}}'
+    #bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":102400},{"label":"lso_400G_1","sizeMiB":409600},{"label":"lso_200G_1","sizeMiB":204800}],"wipeTable":false}]}}'
+    bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"boot","number":3,"sizeMiB":10240,"wipePartitionEntry":true},{"label":"root","number":4,"sizeMiB":102400,"wipePartitionEntry":true}]}],"filesystems":[{"device":"/dev/disk/by-partlabel/boot","format":"ext4","label":"boot","wipeFilesystem":true},{"device":"/dev/disk/by-partlabel/root","format":"xfs","label":"root","wipeFilesystem":true}]}}'
+    #bmac.agent-install.openshift.io/ignition-config-overrides: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"boot","number":3,"sizeMiB":5120}],"wipeTable":false}]}}'
 spec:
   online: true
   bootMACAddress: 3c:ec:ef:2d:33:32

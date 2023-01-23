@@ -14,7 +14,7 @@ spec:
   clusterDeploymentRef:
     name: 300-cars-lab
   imageSetRef:
-    name: img4.11.18-x86-64-appsub
+    name: openshift-4.12.0-ec.3-rhel9
 #  manifestsConfigMapRef:
 #    name: cm-overrides-300-cars-lab
   networking:

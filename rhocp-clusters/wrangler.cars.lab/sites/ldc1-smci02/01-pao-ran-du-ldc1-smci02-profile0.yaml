@@ -9,7 +9,7 @@ metadata:
 spec:
   additionalKernelArgs:
   - rcupdate.rcu_normal_after_boot=0
-  - crashkernel=512M
+  - crashkernel=4096M
   #- nohz=off
   #- nohz_full=3-31,35-63
   - slub_debug=FZPU

@@ -4,7 +4,7 @@ kind: MachineConfig
 metadata:
   labels:
     machineconfiguration.openshift.io/role: master
-  name: 02-ran-du-ldc1-smci02-kdump
+  name: 03-ran-du-ldc1-smci02-kdump
 spec:
   config:
     ignition:
