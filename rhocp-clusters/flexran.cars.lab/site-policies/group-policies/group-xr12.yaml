@@ -78,17 +78,25 @@ spec:
       policyName: "config-policy"
       spec:
         additionalKernelArgs:
-          - rcupdate.rcu_normal_after_boot=0
           - crashkernel=512M
+          - cpufreq.default_governor=schedutil
+          - rcupdate.rcu_normal_after_boot=0
         cpu:
           # These must be tailored for the specific hardware platform
-          isolated: "2-31,34-63"
+          isolated: "2-20,34-52"
           reserved: "0-1,32-33"
+          offlined: "21-31,53-63"
         hugepages:
           defaultHugepagesSize: 1G
           pages:
             - size: 1G
               count: 16
+        workloadHints:
+          realTime: true
+          highPowerConsumption: true
+          perPodPowerManagement: false
+        net:
+          userLevelNetworking: true
     - fileName: TunedPerformancePatch.yaml
       policyName: "config-policy"
       spec:
@@ -100,7 +108,7 @@ spec:
               summary=Configuration changes profile inherited from performance created tuned
               include=openshift-node-performance-openshift-node-performance-profile
               [bootloader]
-              cmdline_crash=nohz_full=2-31,34-63
+              cmdline_crash=nohz_full=2-20,34-52
               [sysctl]
               kernel.timer_migration=1
               [scheduler]
@@ -108,6 +116,8 @@ spec:
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
+              #[sysfs]
+              #/sys/devices/system/cpu/intel_pstate/max_perf_pct = 75
 #    --- sources needed for image registry (check ImageRegistry.md for more details)----
 #    - fileName: StorageClass.yaml
 #      policyName: "config-policy"
