@@ -57,8 +57,7 @@ spec:
         nicSelector:
           vendor: "8086"
           deviceID: "159b"
-          pfNames:
-          - ens4f0#0-3
+          pfNames: ["ens4f0#0-3"]
         numVfs: 8
         priority: 10
         resourceName: vran-netdevice
@@ -74,8 +73,7 @@ spec:
         nicSelector:
           vendor: "8086"
           deviceID: "159b"
-          pfNames:
-          - ens4f0#4-7
+          pfNames: ["ens4f0#4-7"]
         numVfs: 8
         priority: 10
         resourceName: vran-vfio

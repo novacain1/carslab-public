@@ -54,10 +54,6 @@ spec:
           interface: "ens4f0"
           ptp4lOpts: "-2 -s --summary_interval -4"
           phc2sysOpts: "-a -r -n 24"
-    #- fileName: SriovOperatorConfig.yaml #testing 30-Jan-2023 dcain
-    #  policyName: "config-policy"
-    #  spec:
-    #    disableDrain: true
 #    - fileName: StorageLV.yaml
 #      policyName: "config-policy"
 #      spec:
@@ -107,8 +103,6 @@ spec:
               [main]
               summary=Configuration changes profile inherited from performance created tuned
               include=openshift-node-performance-openshift-node-performance-profile
-              #[bootloader]
-              #cmdline_crash=nohz_full=2-20,34-52 #testing 30-Jan dcain should be set by hints
               [sysctl]
               kernel.timer_migration=1
               [scheduler]
