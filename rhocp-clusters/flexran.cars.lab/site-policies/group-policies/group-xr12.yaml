@@ -54,20 +54,30 @@ spec:
           interface: "ens4f0"
           ptp4lOpts: "-2 -s --summary_interval -4"
           phc2sysOpts: "-a -r -n 24"
-#    - fileName: StorageLV.yaml
-#      policyName: "config-policy"
-#      spec:
-#        storageClassDevices:
-#          - storageClassName: "example-storage-class-1"
-#            volumeMode: Filesystem
-#            fsType: xfs
-#            devicePaths:
-#              - /dev/sdb1
-#          - storageClassName: "example-storage-class-2"
-#            volumeMode: Filesystem
-#            fsType: xfs
-#            devicePaths:
-#              - /dev/sdb2
+    - fileName: StorageClass.yaml
+      policyName: "config-policy"
+      metadata:
+        name: "lso-filesystemclass"
+        annotations:
+          storageclass.kubernetes.io/is-default-class: "true"
+    - fileName: StorageClass.yaml
+      policyName: "config-policy"
+      metadata:
+        name: "lso-blockclass"
+    - fileName: StorageLV.yaml
+      policyName: "config-policy"
+      spec:
+        storageClassDevices:
+          - storageClassName: "lso-filesystemclass"
+            volumeMode: Filesystem
+            fsType: xfs
+            devicePaths:
+              - /dev/sda5
+          - storageClassName: "lso-blockclass"
+            volumeMode: Block
+            fsType: xfs
+            devicePaths:
+              - /dev/sda6
     - fileName: DisableSnoNetworkDiag.yaml
       policyName: "config-policy"
     - fileName: PerformanceProfile.yaml
