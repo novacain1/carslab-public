@@ -46,10 +46,26 @@ spec:
               numAqsPerGroups: 16
               aqDepthLog2: 4
     - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "sriov-vfio-policy-ens3f0"
+      metadata:
+        name: "sriov-nnp-vfio-ens3f0"
+      spec:
+        deviceType: vfio-pci
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "159b"
+          pfNames: ["ens3f0#0-3"]
+        numVfs: 4
+        priority: 10
+        resourceName: pci_sriov_net_ens3f0_1
+    - fileName: SriovNetworkNodePolicy.yaml
       policyName: "sriov-netdevice-policy"
       remediationAction: enforce
       metadata:
-        name: "sriov-nnp-netdevice"
+        name: "sriov-nnp-netdevice-ens4f0"
       spec:
         deviceType: netdevice
         mtu: 1500
@@ -63,7 +79,7 @@ spec:
         resourceName: pci_sriov_net_ens4f0_1
     - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
-      policyName: "sriov-vfio-policy"
+      policyName: "sriov-vfio-policy-ens4f0"
       metadata:
         name: "sriov-nnp-vfio"
       spec:
@@ -77,3 +93,30 @@ spec:
         numVfs: 8
         priority: 10
         resourceName: pci_sriov_net_ens4f0_2
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-mh"
+      metadata:
+        name: "sriov-nw-mh"
+      spec:
+        resourceName: vran-mh
+        networkNamespace:  flexranl1
+        vlan: 806
+        linkState: auto
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-vran-mgmt"
+      metadata:
+        name: "sriov-nw-vran-mgmt"
+      spec:
+        resourceName: vran-mgmt
+        networkNamespace:  flexranl1
+        vlan: 814
+        linkState: auto
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-fh"
+      metadata:
+        name: "sriov-nw-fh"
+      spec:
+        resourceName: vran-fh
+        networkNamespace:  flexranl1
+        vlan: 826
+        linkState: auto
