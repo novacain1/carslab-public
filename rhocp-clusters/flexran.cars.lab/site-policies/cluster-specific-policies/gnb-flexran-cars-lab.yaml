@@ -60,12 +60,12 @@ spec:
           pfNames: ["ens3f0#0-3"]
         numVfs: 4
         priority: 10
-        resourceName: pci_sriov_net_ens3f0_1
+        resourceName: pci_sriov_net_ens3f0_0
     - fileName: SriovNetworkNodePolicy.yaml
-      policyName: "sriov-netdevice-policy"
+      policyName: "sriov-netd-policy-ens4f0"
       remediationAction: enforce
       metadata:
-        name: "sriov-nnp-netdevice-ens4f0"
+        name: "sriov-nnp-netd-ens4f0"
       spec:
         deviceType: netdevice
         mtu: 1500
@@ -76,7 +76,7 @@ spec:
           pfNames: ["ens4f0#0-3"]
         numVfs: 8
         priority: 10
-        resourceName: pci_sriov_net_ens4f0_1
+        resourceName: pci_sriov_net_ens4f0_0
     - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "sriov-vfio-policy-ens4f0"
@@ -98,7 +98,7 @@ spec:
       metadata:
         name: "sriov-nw-mh"
       spec:
-        resourceName: pci_sriov_net_ens4f0_1
+        resourceName: pci_sriov_net_ens4f0_0
         networkNamespace: flexranl1
         vlan: 806
         ipam: |-
@@ -120,7 +120,7 @@ spec:
       metadata:
         name: "sriov-nw-fh"
       spec:
-        resourceName: pci_sriov_net_ens3f0_1
+        resourceName: pci_sriov_net_ens3f0_0
         networkNamespace: flexranl1
         vlan: 826
         ipam: |-
