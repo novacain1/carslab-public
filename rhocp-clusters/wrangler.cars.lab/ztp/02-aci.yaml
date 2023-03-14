@@ -14,9 +14,10 @@ spec:
   clusterDeploymentRef:
     name: wrangler-cars-lab
   imageSetRef:
-    name: img4.10.45-x86-64-appsub
-#  manifestsConfigMapRef:
-#    name: cm-overrides-wrangler-cars-lab
+    name: img4.10.53-x86-64-appsub
+    #iname: img4.10.45-x86-64-appsub
+  manifestsConfigMapRef:
+    name: cm-workload-partitioning
   networking:
     clusterNetwork:
       - cidr: 10.128.0.0/14

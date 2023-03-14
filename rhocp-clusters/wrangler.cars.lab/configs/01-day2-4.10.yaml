@@ -22,6 +22,13 @@ kind: Namespace
 metadata:
   labels:
     openshift.io/cluster-monitoring: "true"
+  name: openshift-nfd
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    openshift.io/cluster-monitoring: "true"
   name: openshift-logging
 ---
 apiVersion: v1
@@ -313,18 +320,18 @@ spec:
   name: nfd
   source: redhat-operators
   sourceNamespace: openshift-marketplace
----
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: silicom-sts-operator
-  namespace: silicom
-spec:
-  channel: stable
-  installPlanApproval: Automatic
-  name: silicom-sts-operator
-  source: certified-operators
-  sourceNamespace: openshift-marketplace
+#---
+#apiVersion: operators.coreos.com/v1alpha1
+#kind: Subscription
+#metadata:
+#  name: silicom-sts-operator
+#  namespace: silicom
+#spec:
+#  channel: stable
+#  installPlanApproval: Automatic
+#  name: silicom-sts-operator
+#  source: certified-operators
+#  sourceNamespace: openshift-marketplace
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription

@@ -31,6 +31,6 @@ spec:
   numa:
     topologyPolicy: best-effort
   realTimeKernel:
-    enabled: false
+    enabled: true
   nodeSelector:
     node-role.kubernetes.io/master: ""
