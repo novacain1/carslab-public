@@ -125,5 +125,5 @@ spec:
                 next-hop-address: 192.168.38.129
                 next-hop-interface: bondctrlplane
               - destination: ::/0
-                next-hop-address: 2600:52:7:38::1
+                next-hop-address: 2600:52:7:300::1
                 next-hop-interface: bondctrlplane
