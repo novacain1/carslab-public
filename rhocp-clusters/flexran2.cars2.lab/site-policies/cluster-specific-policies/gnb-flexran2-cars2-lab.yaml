@@ -1,0 +1,112 @@
+---
+apiVersion: ran.openshift.io/v1
+kind: PolicyGenTemplate
+metadata:
+  name: "gnb"
+  namespace: "ztp-site-dcain"
+spec:
+  bindingRules:
+    name: "flexran2"
+  mcp: "master"
+  remediationAction: inform
+  sourceFiles:
+    - fileName: AcceleratorsNS.yaml
+      policyName: "subscriptions-policy"
+    - fileName: AcceleratorsOperGroup.yaml
+      policyName: "subscriptions-policy"
+    - fileName: AcceleratorsSubscription.yaml
+      policyName: "subscriptions-policy"
+    - fileName: SriovFecClusterConfig.yaml
+      policyName: "fec-policy"
+      spec:
+        drainSkip: true
+        acceleratorSelector:
+          pciAddress: 0000:51:00.0
+        physicalFunction:
+         bbDevConfig:
+          acc100:
+            # Programming mode: 0 = VF Programming, 1 = PF Programming
+            pfMode: false
+            numVfBundles: 16
+            maxQueueSize: 1024
+            uplink4G:
+              numQueueGroups: 0
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            downlink4G:
+              numQueueGroups: 0
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            uplink5G:
+              numQueueGroups: 4
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            downlink5G:
+              numQueueGroups: 4
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+    - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "sriov-vfio-policy-ens3f0"
+      metadata:
+        name: "sriov-nnp-vfio-ens3f0"
+      spec:
+        deviceType: vfio-pci
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "159b"
+          pfNames: ["ens3f0#0-3"]
+        numVfs: 8
+        priority: 10
+        resourceName: pci_sriov_net_ens3f0_0
+    - fileName: SriovNetworkNodePolicy.yaml
+      policyName: "sriov-netd-policy-ens3f0"
+      remediationAction: enforce
+      metadata:
+        name: "sriov-nnp-netd-ens3f0"
+      spec:
+        deviceType: netdevice
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "159b"
+          pfNames: ["ens3f0#4-7"]
+        numVfs: 8
+        priority: 10
+        resourceName: pci_sriov_net_ens3f0_1
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-mh"
+      metadata:
+        name: "sriov-nw-mh"
+      spec:
+        resourceName: pci_sriov_net_ens3f0_1
+        networkNamespace: flexranl1
+        vlan: 806
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-vran-mgmt"
+      metadata:
+        name: "sriov-nw-vran-mgmt"
+      spec:
+        resourceName: pci_sriov_net_ens3f0_1
+        networkNamespace: flexranl1
+        vlan: 814
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-fh"
+      metadata:
+        name: "sriov-nw-fh"
+      spec:
+        resourceName: pci_sriov_net_ens3f0_0
+        networkNamespace: flexranl1
+        vlan: 826
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
