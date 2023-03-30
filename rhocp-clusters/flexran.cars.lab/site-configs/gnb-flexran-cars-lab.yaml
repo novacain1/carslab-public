@@ -43,7 +43,7 @@ spec:
     proxy:
       httpProxy: http://proxy.cars.lab:3128
       httpsProxy: http://proxy.cars.lab:3128
-      noProxy: 172.20.0 172.28. 10.70.
+      noProxy: ".wrangler.cars.lab,172.20.0,172.28.,10.70."
     nodes:
       - hostName: "gnb.flexran.cars.lab"
         role: "master"
