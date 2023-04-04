@@ -1,0 +1,121 @@
+# gnb-flexranicx-cars2-lab-bmc-secret & assisted-deployment-pull-secret need to be created under same namespace flexranicx
+---
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "gnb-flexranicx-cars2-lab"
+  namespace: "gnb-flexranicx-cars2-lab"
+spec:
+  baseDomain: "cars2.lab"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.12.9-x86-64-appsub"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd7Jj5iFCWv9IHJK9H+2O3lyPs36moAxeAUiHvzRS3uzqGxxB33BnTRBNDKsoDFSGJX0J4bd5b+XyCPdhFOfvn/xhmAcm6d8GALS+139e8d+No8h2QgZy0OVJFp844k4nmz4wew5/+X9DN40ZURYerekbVc58hw1+rTu0uM2jQ0cE2QmEf3qGKHx9UJW8t6IsMzwnrikBH30sYqn2NcBE+/c8JzlLc3PvvenlY0iQkpukI1A5E9GGMR9OS/q+w6FH85zvSgUatOV7Q5lg45QUF+V77DrfX5+niI+NK1g70pRvD8481SAdXrHPB5vK4vQEmJ4pz83IKYHVuPzRnjzYKv1jV33oReyyMqyk44Rsfkxl4i5SJ9z7q/EVmTjvurzD6ofi3Dg0+PL18eTcjuPFdCxSCUFsnr5N9CRHCxHRQpxoZTD7sYD4jDGNygawLvhxcvgKGBZzP53NRCzRFOMFmZsLPLQRaNOsgKRPAohmrn5l8+1xG5ltVauOwAFlKUxk="
+  clusters:
+  - clusterName: "flexranicx"
+    networkType: "OVNKubernetes"
+    clusterLabels:
+      # These example cluster labels correspond to the bindingRules in the PolicyGenTemplate examples in ../site-policies:
+      # ../site-policies/common-policies/common-ranGen.yaml will apply to all clusters with 'common: true'
+      common: true
+      # ../site-policies/common-policies/group-xr12.yaml will apply to all clusters with 'group-xr12: ""'
+      group-xr12: ""
+      # ../site-policies/site-specific-policies/flexranicx-cars2-lab.yaml will apply to all clusters with 'sites : "flexranicx-cars2-lab"'
+      # Normally this should match or contain the cluster name so it only applies to a single cluster
+      sites : "flexranicx-cars2-lab"
+    clusterNetwork:
+      - cidr: 10.128.0.0/14
+        hostPrefix: 23
+      - cidr: fd01::/48
+        hostPrefix: 64
+    machineNetwork:
+      - cidr: 192.168.38.128/26
+      - cidr: 2600:52:7:300::0/64
+    serviceNetwork:
+      - 172.30.0.0/16
+      - fd02::/112
+    additionalNTPSources:
+      - clock.cars2.lab
+      - clock-v6.cars2.lab
+    # Optionally; This can be used to override the KlusterletAddonConfig that is created for this cluster:
+    #crTemplates:
+    #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
+    nodes:
+      - hostName: "gnb-icx.flexranicx.cars2.lab"
+        role: "master"
+        # Optionally; This can be used to configure desired BIOS setting on a host:
+        #biosConfigRef:
+        #  filePath: "example-hw.profile"
+        bmcAddress: "idrac-virtualmedia://192.168.38.201/redfish/v1/Systems/System.Embedded.1"
+        bmcCredentialsName:
+          name: "gnb-flexranicx-cars2-lab-bmc-secret"
+        bootMACAddress: "3c:ec:ef:7a:70:1f"
+        # Use UEFISecureBoot to enable secure boot
+        bootMode: "UEFI"
+        rootDeviceHints:
+          deviceName: "/dev/sda"
+        cpuset: "0-1,32-33"
+        ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/sda","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":70000},{"label":"lso_75G_1","sizeMiB":75000},{"label":"lso_75G_2","sizeMiB":75000}],"wipeTable":false}]}}'
+        nodeNetwork:
+          interfaces:
+            - name: ens2f3
+              macAddress: "3c:ec:ef:7a:70:1f"
+            - name: ens3f3
+              macAddress: "3c:ec:ef:7a:70:3f"
+          config:
+            interfaces:
+            - name: ens2f3
+              type: ethernet
+              state: up
+            - name: ens3f3
+              type: ethernet
+              state: up
+            - name: bondctrlplane
+              type: bond
+              mac-address: "3c:ec:ef:7a:70:1f"
+              state: up
+              ipv4:
+                enabled: true
+                address:
+                  - ip: "192.168.38.140"
+                    prefix-length: 26
+                dhcp: false
+              ipv6:
+                enabled: true
+                address:
+                  - ip: "2600:52:7:300::140"
+                    prefix-length: 64
+                autoconf: false
+                dhcp: false
+              link-aggregation:
+                mode: 802.3ad
+                options:
+                  lacp_rate: "fast"
+                port:
+                  - "ens2f3"
+                  - "ens3f3"
+            - name: ens2f0
+              type: ethernet
+              state: down
+            - name: ens2f1
+              type: ethernet
+              state: down
+            - name: ens3f0
+              type: ethernet
+              state: down
+            - name: ens3f1
+              type: ethernet
+              state: down
+            dns-resolver:
+              config:
+                server:
+                  - 192.168.38.12
+                  - 2600:52:7:38::12
+            routes:
+              config:
+              - destination: 0.0.0.0/0
+                next-hop-address: 192.168.38.129
+                next-hop-interface: bondctrlplane
+              - destination: ::/0
+                next-hop-address: 2600:52:7:300::1
+                next-hop-interface: bondctrlplane
