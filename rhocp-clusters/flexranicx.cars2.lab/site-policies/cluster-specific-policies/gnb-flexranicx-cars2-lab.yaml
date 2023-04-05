@@ -2,7 +2,7 @@
 apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
-  name: "gnb"
+  name: "flexranicx"
   namespace: "ztp-site-dcain"
 spec:
   bindingRules:
