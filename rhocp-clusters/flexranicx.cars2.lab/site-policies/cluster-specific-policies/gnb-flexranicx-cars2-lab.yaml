@@ -21,7 +21,7 @@ spec:
       spec:
         drainSkip: true
         acceleratorSelector:
-          pciAddress: 0000:51:00.0
+          pciAddress: 0000:8a:00.0
         physicalFunction:
          bbDevConfig:
           acc100:
@@ -56,7 +56,7 @@ spec:
         isRdma: false
         nicSelector:
           vendor: "8086"
-          deviceID: "159b"
+          deviceID: "1593"
           pfNames: ["ens3f0#0-3"]
         numVfs: 8
         priority: 10
@@ -72,7 +72,7 @@ spec:
         isRdma: false
         nicSelector:
           vendor: "8086"
-          deviceID: "159b"
+          deviceID: "1593"
           pfNames: ["ens3f0#4-7"]
         numVfs: 8
         priority: 10
