@@ -99,7 +99,8 @@ spec:
               count: 16
         workloadHints:
           realTime: true
-          perPodPowerManagement: false
+          highPowerConsumption: false
+          perPodPowerManagement: true
         #net:
         #  userLevelNetworking: true #testing 30-Jan dcain
     - fileName: TunedPerformancePatch.yaml
@@ -119,13 +120,8 @@ spec:
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
-              [bootloader]
-              cmdline_remove-pstate=-intel_pstate=disable
-              cmdline_add-pstate=+intel_pstate=passive
-              #[cpu]
-              #enabled=false
               [sysfs]
-              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 75
+              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 72
 #    --- sources needed for image registry (check ImageRegistry.md for more details)----
 #    - fileName: StorageClass.yaml
 #      policyName: "config-policy"
