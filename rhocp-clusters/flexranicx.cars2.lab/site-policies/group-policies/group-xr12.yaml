@@ -3,12 +3,12 @@ apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
   # The name will be used to generate the placementBinding and placementRule names as {name}-placementBinding and {name}-placementRule
-  name: "flexranicx-cars2-lab"
+  name: "flexranicx-group-xr12"
   namespace: "ztp-group-dcain"
 spec:
   bindingRules:
     # These policies will correspond to all clusters with this label:
-    group-xr12: ""
+    flexranicx-group-xr12: ""
   mcp: "master"
   sourceFiles:
     - fileName: ConsoleOperatorDisable.yaml

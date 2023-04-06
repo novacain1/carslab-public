@@ -7,7 +7,7 @@ resources:
 
 generators:
 # This is common to all RAN deployments
-- common-policies/common-ranGen.yaml
+#- common-policies/common-ranGen.yaml
 # This group policy is for all Dell EMC XR12 based deployments:
 - group-policies/group-xr12.yaml
 # This group validator policy is for all Dell EMC XR12 based deployments:
