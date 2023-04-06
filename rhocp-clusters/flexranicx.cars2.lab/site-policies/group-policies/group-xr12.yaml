@@ -3,7 +3,7 @@ apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
   # The name will be used to generate the placementBinding and placementRule names as {name}-placementBinding and {name}-placementRule
-  name: "group-xr12"
+  name: "flexranicx-cars2-lab"
   namespace: "ztp-group-dcain"
 spec:
   bindingRules:
