@@ -84,9 +84,9 @@ spec:
       policyName: "config-policy"
       spec:
         additionalKernelArgs:
-          - crashkernel=512M
-          - cpufreq.default_governor=schedutil
-          - rcupdate.rcu_normal_after_boot=0
+          - "crashkernel=512M"
+          - "cpufreq.default_governor=powersave"
+          - "rcupdate.rcu_normal_after_boot=0"
         cpu:
           # These must be tailored for the specific hardware platform
           isolated: "2-31,34-63"
@@ -119,8 +119,13 @@ spec:
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
-              #[sysfs]
-              #/sys/devices/system/cpu/intel_pstate/max_perf_pct = 75
+              [bootloader]
+              cmdline_remove-pstate=-intel_pstate=disable
+              cmdline_add-pstate=+intel_pstate=passive
+              #[cpu]
+              #enabled=false
+              [sysfs]
+              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 75
 #    --- sources needed for image registry (check ImageRegistry.md for more details)----
 #    - fileName: StorageClass.yaml
 #      policyName: "config-policy"
