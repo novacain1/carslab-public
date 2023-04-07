@@ -5,7 +5,7 @@ metadata:
   # The name will be used to generate the placementBinding name as {name}-placementBinding, the placementRule name as {name}-placementRule,
   # and the policy name as {name}-{spec.sourceFiles[x].policyName}
   name: "flexranicx-group-validator"
-  namespace: "ztp-group-dcain"
+  namespace: "ztp-group-cars2"
 spec:
   bindingRules:
     # This policy will correspond to all clusters with label specified in bindingRules and

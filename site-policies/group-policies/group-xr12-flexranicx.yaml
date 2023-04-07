@@ -4,7 +4,7 @@ kind: PolicyGenTemplate
 metadata:
   # The name will be used to generate the placementBinding and placementRule names as {name}-placementBinding and {name}-placementRule
   name: "flexranicx-group-xr12"
-  namespace: "ztp-group-dcain"
+  namespace: "ztp-group-cars2"
 spec:
   bindingRules:
     # These policies will correspond to all clusters with this label:

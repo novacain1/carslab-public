@@ -1,24 +1,24 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: clusters-sub
+    name: policies-sub
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dcain-clusters-flexranicx
+  name: cars2-policies
   namespace: openshift-gitops
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: clusters-sub
-  project: ztp-app-project
+    namespace: policies-sub
+  project: policy-app-project
   source:
-    path: rhocp-clusters/flexranicx.cars2.lab/site-configs
+    path: site-policies
     repoURL: https://github.com/novacain1/carslab-public
     targetRevision: main
     # uncomment the below plugin if you will be adding the plugin binaries in the same repo->dir where
-    # the sitconfig.yaml exist AND use the ../../hack/patch-argocd-dev.sh script to re-patch the deployment-repo-server
+    # the policyGenTemplate.yaml exist AND use the ../../hack/patch-argocd-dev.sh script to re-patch the deployment-repo-server
 #    plugin:
 #      name: kustomize-with-local-plugins
   syncPolicy:
@@ -27,3 +27,4 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+

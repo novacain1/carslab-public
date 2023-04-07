@@ -1,2 +1,2 @@
 # carslab-public
-Public CARS Lab Repository
+Public CARS and CARS2 Lab Repository

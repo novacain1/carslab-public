@@ -9,9 +9,9 @@ generators:
 # This is common to all RAN deployments
 #- common-policies/common-ranGen.yaml
 # This group policy is for all Dell EMC XR12 based deployments:
-- group-policies/group-xr12.yaml
+- group-policies/group-xr12-flexranicx.yaml
 # This group validator policy is for all Dell EMC XR12 based deployments:
-- group-policies/group-xr12-validator.yaml
+- group-policies/group-xr12-flexranicx-validator.yaml
 # This group policy is for all compressed 3-node cluster deployments:
 #- group-du-3node-ranGen.yaml
 # This group validator policy is for all compressed 3-node cluster deployments:

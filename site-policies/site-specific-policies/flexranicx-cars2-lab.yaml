@@ -3,7 +3,7 @@ apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
   name: "flexranicx-cars2-lab"
-  namespace: "ztp-site-dcain"
+  namespace: "ztp-site-cars2"
 spec:
   bindingRules:
     sites: "flexranicx-cars2-lab"
