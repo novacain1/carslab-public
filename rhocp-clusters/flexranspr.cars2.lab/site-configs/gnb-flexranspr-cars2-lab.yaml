@@ -1,0 +1,128 @@
+# gnb-flexranspr-cars2-lab-bmc-secret & assisted-deployment-pull-secret need to be created under same namespace flexranspr
+---
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "gnb-flexranspr-cars2-lab"
+  namespace: "gnb-flexranspr-cars2-lab"
+spec:
+  baseDomain: "cars2.lab"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.12.10-x86-64-appsub"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd7Jj5iFCWv9IHJK9H+2O3lyPs36moAxeAUiHvzRS3uzqGxxB33BnTRBNDKsoDFSGJX0J4bd5b+XyCPdhFOfvn/xhmAcm6d8GALS+139e8d+No8h2QgZy0OVJFp844k4nmz4wew5/+X9DN40ZURYerekbVc58hw1+rTu0uM2jQ0cE2QmEf3qGKHx9UJW8t6IsMzwnrikBH30sYqn2NcBE+/c8JzlLc3PvvenlY0iQkpukI1A5E9GGMR9OS/q+w6FH85zvSgUatOV7Q5lg45QUF+V77DrfX5+niI+NK1g70pRvD8481SAdXrHPB5vK4vQEmJ4pz83IKYHVuPzRnjzYKv1jV33oReyyMqyk44Rsfkxl4i5SJ9z7q/EVmTjvurzD6ofi3Dg0+PL18eTcjuPFdCxSCUFsnr5N9CRHCxHRQpxoZTD7sYD4jDGNygawLvhxcvgKGBZzP53NRCzRFOMFmZsLPLQRaNOsgKRPAohmrn5l8+1xG5ltVauOwAFlKUxk="
+  clusters:
+  - clusterName: "flexranspr"
+    networkType: "OVNKubernetes"
+    clusterLabels:
+      # These example cluster labels correspond to the bindingRules in the PolicyGenTemplate examples in ~/site-policies:
+      # ../../../site-policies/common-policies/common-ranGen.yaml will apply to all clusters with 'common-du: true'
+      common-du: true
+      # ../../../site-policies/common-policies/group-hook-flexranspr.yaml will apply to all clusters with 'flexranspr-group-hook: ""'
+      flexranspr-group-hook: ""
+      # ../../../site-policies/site-specific-policies/flexranspr-cars2-lab.yaml will apply to all clusters with 'sites : "flexranspr-cars2-lab"'
+      # Normally this should match or contain the cluster name so it only applies to a single cluster
+      sites : "flexranspr-cars2-lab"
+    clusterNetwork:
+      - cidr: 10.128.0.0/14
+        hostPrefix: 23
+      - cidr: fd01::/48
+        hostPrefix: 64
+    machineNetwork:
+      - cidr: 192.168.38.128/26
+      - cidr: 2600:52:7:300::0/64
+    serviceNetwork:
+      - 172.30.0.0/16
+      - fd02::/112
+    additionalNTPSources:
+      - clock.cars2.lab
+      - clock-v6.cars2.lab
+    # Optionally; This can be used to override the KlusterletAddonConfig that is created for this cluster:
+    #crTemplates:
+    #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
+    nodes:
+      - hostName: "gnb-spr.flexranspr.cars2.lab"
+        role: "master"
+        # Optionally; This can be used to configure desired BIOS setting on a host:
+        #biosConfigRef:
+        #  filePath: "example-hw.profile"
+        bmcAddress: "idrac-virtualmedia://192.168.38.212/redfish/v1/Systems/System.Embedded.1"
+        bmcCredentialsName:
+          name: "gnb-flexranspr-cars2-lab-bmc-secret"
+        bootMACAddress: "50:7c:6f:22:d4:c8"
+        # Use UEFISecureBoot to enable secure boot
+        bootMode: "UEFI"
+        rootDeviceHints:
+          deviceName: "/dev/nvme0n1"
+        cpuset: "0-1,20-21"
+        ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":70000},{"label":"lso_75G_1","sizeMiB":75000},{"label":"lso_75G_2","sizeMiB":75000}],"wipeTable":false}]}}'
+        nodeNetwork:
+          interfaces:
+            - name: ens1f0
+              macAddress: "40:a6:b7:b1:4b:9c"
+            - name: ens1f1
+              macAddress: "40:a6:b7:b1:4b:9d"
+            - name: ens1f2
+              macAddress: "40:a6:b7:b1:4b:9e"
+            - name: ens1f3
+              macAddress: "40:a6:b7:b1:4b:9f"
+            - name: ens2f0
+              macAddress: "50:7c:6f:22:d4:c8"
+            - name: ens2f1
+              macAddress: "50:7c:6f:22:d4:c9"
+            - name: ens2f2
+              macAddress: "50:7c:6f:22:d4:ca"
+            - name: ens2f3
+              macAddress: "50:7c:6f:22:d4:cb"
+          config:
+            interfaces:
+            - name: ens1f0
+              type: ethernet
+              state: up
+            - name: ens2f0
+              type: ethernet
+              state: up
+              ipv4:
+                enabled: true
+                address:
+                  - ip: "192.168.38.141"
+                    prefix-length: 26
+                dhcp: false
+              ipv6:
+                enabled: true
+                address:
+                  - ip: "2600:52:7:300::141"
+                    prefix-length: 64
+                autoconf: false
+                dhcp: false
+            - name: ens1f1
+              type: ethernet
+              state: down
+            - name: ens1f2
+              type: ethernet
+              state: down
+            - name: ens1f3
+              type: ethernet
+              state: down
+            - name: ens2f1
+              type: ethernet
+              state: down
+            - name: ens2f2
+              type: ethernet
+              state: down
+            - name: ens2f3
+              type: ethernet
+              state: down
+            dns-resolver:
+              config:
+                server:
+                  - 192.168.38.12
+                  - 2600:52:7:38::12
+            routes:
+              config:
+              - destination: 0.0.0.0/0
+                next-hop-address: 192.168.38.129
+                next-hop-interface: ens2f0
+              - destination: ::/0
+                next-hop-address: 2600:52:7:300::1
+                next-hop-interface: ens2f0
