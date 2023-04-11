@@ -85,7 +85,7 @@ spec:
       spec:
         additionalKernelArgs:
           - "crashkernel=512M"
-          - "cpufreq.default_governor=powersave"
+          - "cpufreq.default_governor=schedutil"
           - "rcupdate.rcu_normal_after_boot=0"
         cpu:
           # These must be tailored for the specific hardware platform
