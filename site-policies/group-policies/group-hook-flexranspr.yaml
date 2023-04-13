@@ -120,7 +120,7 @@ spec:
               service.stalld=start,enable
               service.chronyd=stop,disable
               [sysfs]
-              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 93
+              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 70
 #    --- sources needed for image registry (check ImageRegistry.md for more details)----
 #    - fileName: StorageClass.yaml
 #      policyName: "config-policy"
