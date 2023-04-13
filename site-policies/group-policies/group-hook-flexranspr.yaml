@@ -98,8 +98,8 @@ spec:
               count: 16
         workloadHints:
           realTime: true
-          #highPowerConsumption: false
-          #perPodPowerManagement: true
+          highPowerConsumption: false
+          perPodPowerManagement: true
         #net:
         #  userLevelNetworking: true #testing 30-Jan dcain
     - fileName: TunedPerformancePatch.yaml
