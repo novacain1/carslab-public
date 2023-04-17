@@ -8,6 +8,8 @@ resources:
 generators:
 # This is common to all RAN DU deployments
 - common-policies/common-ranGen.yaml
+- common-policies/policy-kepler.yaml
+
 # This group policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2.yaml
 - group-policies/group-xr12-flexranicx.yaml
@@ -26,11 +28,13 @@ generators:
 #- group-du-standard-ranGen.yaml
 # This group validator policy is for all standard cluster deployments:
 #- group-du-standard-validator-ranGen.yaml
+
 # These are examples that should be replicated for every individual site:
 - site-specific-policies/flexran2-cars2-lab.yaml
 - site-specific-policies/flexranicx-cars2-lab.yaml
 - site-specific-policies/flexranspr-cars2-lab.yaml
 #- example-multinode-site.yaml
+
 # These are cluster specific policies:
 - cluster-specific-policies/gnb-flexran2-cars2-lab.yaml
 - cluster-specific-policies/gnb-flexranicx-cars2-lab.yaml
