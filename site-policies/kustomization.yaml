@@ -4,11 +4,11 @@ kind: Kustomization
 
 resources:
 - ns.yaml
+- common-policies/policy-kepler.yaml
 
 generators:
 # This is common to all RAN DU deployments
 - common-policies/common-ranGen.yaml
-- common-policies/policy-kepler.yaml
 
 # This group policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2.yaml
