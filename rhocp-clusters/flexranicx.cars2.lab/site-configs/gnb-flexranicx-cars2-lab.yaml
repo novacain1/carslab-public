@@ -23,6 +23,7 @@ spec:
       # ../../../site-policies/site-specific-policies/flexranicx-cars2-lab.yaml will apply to all clusters with 'sites : "flexranicx-cars2-lab"'
       # Normally this should match or contain the cluster name so it only applies to a single cluster
       sites : "flexranicx-cars2-lab"
+      kepler: true
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
