@@ -4,6 +4,7 @@ kind: Kustomization
 
 resources:
 - ns.yaml
+- common-policies/policy-kepler.yaml
 
 generators:
 # This is common to all RAN deployments
