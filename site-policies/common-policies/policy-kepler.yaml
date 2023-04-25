@@ -312,8 +312,8 @@ spec:
                                 operator: DoesNotExist
                       containers:
                       - args:
-                        - /usr/bin/kepler -v 1
-                        #- /usr/bin/kepler -enable-bpf-batch-del=true -v 1
+                        #- /usr/bin/kepler -v 1
+                        - /usr/bin/kepler -enable-bpf-batch-del=true -v 1
                         command:
                         - /bin/sh
                         - -c
