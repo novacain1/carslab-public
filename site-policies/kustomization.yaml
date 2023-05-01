@@ -13,13 +13,19 @@ generators:
 # This group policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2.yaml
 - group-policies/group-xr12-flexranicx.yaml
+# This group policy is for Supermicro X12 based deployments:
+- group-policies/group-smcx12-flexrankepler.yaml
 # This group policy is for Dell XR8620t based deployments:
 - group-policies/group-hook-flexranspr.yaml
+
 # This group validator policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2-validator.yaml
 - group-policies/group-xr12-flexranicx-validator.yaml
+# This group validator policy is for Supermicro X12 based deployments:
+- group-policies/group-smcx12-flexrankepler-validator.yaml
 # This group validator policy is for Dell XR8620t based deployments:
 - group-policies/group-hook-flexranspr-validator.yaml
+
 # This group policy is for all compressed 3-node cluster deployments:
 #- group-du-3node-ranGen.yaml
 # This group validator policy is for all compressed 3-node cluster deployments:
@@ -32,10 +38,12 @@ generators:
 # These are examples that should be replicated for every individual site:
 - site-specific-policies/flexran2-cars2-lab.yaml
 - site-specific-policies/flexranicx-cars2-lab.yaml
+#- site-specific-policies/flexrankepler-cars2-lab.yaml
 - site-specific-policies/flexranspr-cars2-lab.yaml
 #- example-multinode-site.yaml
 
 # These are cluster specific policies:
 - cluster-specific-policies/gnb-flexran2-cars2-lab.yaml
 - cluster-specific-policies/gnb-flexranicx-cars2-lab.yaml
+- cluster-specific-policies/gnb-flexrankepler-cars2-lab.yaml
 - cluster-specific-policies/gnb-flexranspr-cars2-lab.yaml
