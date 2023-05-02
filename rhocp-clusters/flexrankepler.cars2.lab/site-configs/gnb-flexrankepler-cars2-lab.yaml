@@ -59,21 +59,21 @@ spec:
         ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":70000},{"label":"lso_75G_1","sizeMiB":75000},{"label":"lso_75G_2","sizeMiB":75000}],"wipeTable":false}]}}'
         nodeNetwork:
           interfaces:
-            - name: eno3
+            - name: eno5
               macAddress: "3c:ec:ef:b6:ce:f2"
-            - name: eno4
+            - name: eno6
               macAddress: "3c:ec:ef:b6:ce:f3"
-            - name: ens6f0
+            - name: enp81s0f0
               macAddress: "50:7c:6f:30:fb:e8"
-            - name: ens6f1
+            - name: enp81s0f1
               macAddress: "50:7c:6f:30:fb:e9"
-            - name: ens6f2
+            - name: enp81s0f2
               macAddress: "50:7c:6f:30:fb:ea"
-            - name: ens6f3
+            - name: enp81s0f3
               macAddress: "50:7c:6f:30:fb:eb"
           config:
             interfaces:
-            - name: eno3
+            - name: eno5
               type: ethernet
               state: up
               ipv4:
@@ -89,19 +89,19 @@ spec:
                     prefix-length: 64
                 autoconf: false
                 dhcp: false
-            - name: eno4
+            - name: eno6
               type: ethernet
               state: down
-            - name: ens6f0
+            - name: enp81s0f0
               type: ethernet
               state: down
-            - name: ens6f1
+            - name: enp81s0f1
               type: ethernet
               state: down
-            - name: ens6f2
+            - name: enp81s0f2
               type: ethernet
               state: down
-            - name: ens6f3
+            - name: enp81s0f3
               type: ethernet
               state: down
             dns-resolver:
@@ -113,7 +113,7 @@ spec:
               config:
               - destination: 0.0.0.0/0
                 next-hop-address: 192.168.38.129
-                next-hop-interface: eno3
+                next-hop-interface: eno5
               - destination: ::/0
                 next-hop-address: 2600:52:7:300::1
-                next-hop-interface: eno3
+                next-hop-interface: eno5
