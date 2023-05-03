@@ -61,19 +61,12 @@ spec:
           interfaces:
             - name: ens2f3
               macAddress: "3c:ec:ef:7a:70:1f"
-            - name: ens3f3
-              macAddress: "3c:ec:ef:7a:70:3f"
+#            - name: ens3f3
+#              macAddress: "3c:ec:ef:7a:70:3f"
           config:
             interfaces:
             - name: ens2f3
               type: ethernet
-              state: up
-            - name: ens3f3
-              type: ethernet
-              state: up
-            - name: bondctrlplane
-              type: bond
-              mac-address: "3c:ec:ef:7a:70:1f"
               state: up
               ipv4:
                 enabled: true
@@ -88,25 +81,45 @@ spec:
                     prefix-length: 64
                 autoconf: false
                 dhcp: false
-              link-aggregation:
-                mode: 802.3ad
-                options:
-                  lacp_rate: "fast"
-                port:
-                  - "ens2f3"
-                  - "ens3f3"
+#            - name: ens3f3
+#              type: ethernet
+#              state: up
+#            - name: bondctrlplane
+#              type: bond
+#              mac-address: "3c:ec:ef:7a:70:1f"
+#              state: up
+#              ipv4:
+#                enabled: true
+#                address:
+#                  - ip: "192.168.38.140"
+#                    prefix-length: 26
+#                dhcp: false
+#              ipv6:
+#                enabled: true
+#                address:
+#                  - ip: "2600:52:7:300::140"
+#                    prefix-length: 64
+#                autoconf: false
+#                dhcp: false
+#              link-aggregation:
+#                mode: 802.3ad
+#                options:
+#                  lacp_rate: "fast"
+#                port:
+#                  - "ens2f3"
+#                  - "ens3f3"
             - name: ens2f0
               type: ethernet
               state: down
             - name: ens2f1
               type: ethernet
               state: down
-            - name: ens3f0
-              type: ethernet
-              state: down
-            - name: ens3f1
-              type: ethernet
-              state: down
+#            - name: ens3f0
+#              type: ethernet
+#              state: down
+#            - name: ens3f1
+#              type: ethernet
+#              state: down
             dns-resolver:
               config:
                 server:
@@ -116,7 +129,7 @@ spec:
               config:
               - destination: 0.0.0.0/0
                 next-hop-address: 192.168.38.129
-                next-hop-interface: bondctrlplane
+                next-hop-interface: ens2f3
               - destination: ::/0
                 next-hop-address: 2600:52:7:300::1
-                next-hop-interface: bondctrlplane
+                next-hop-interface: ens2f3
