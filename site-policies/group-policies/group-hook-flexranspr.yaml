@@ -85,8 +85,9 @@ spec:
       spec:
         additionalKernelArgs:
           - "crashkernel=512M"
-          - "cpufreq.default_governor=schedutil"
           - "rcupdate.rcu_normal_after_boot=0"
+          - "intel_idle.max_cstate=0"
+          - "module_blacklist=irdma"
         cpu:
           # These must be tailored for the specific hardware platform
           isolated: "2-19,22-39"
@@ -100,8 +101,8 @@ spec:
           realTime: true
           highPowerConsumption: false
           perPodPowerManagement: true
-        #net:
-        #  userLevelNetworking: true #testing 30-Jan dcain
+        net:
+          userLevelNetworking: true
     - fileName: TunedPerformancePatch.yaml
       policyName: "config-policy"
       spec:
