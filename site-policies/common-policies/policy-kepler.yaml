@@ -236,6 +236,7 @@ spec:
                   ENABLE_GPU: "false"
                   ENABLE_HW_COUNTER_METRICS: "true"
                   ENABLE_PROCESS_METRICS: "false"
+                  EXPOSE_CGROUP_METRICS: "false"
                   EXPOSE_IRQ_COUNTER_METRICS: "false"
                   EXPOSE_KUBELET_METRICS: "false"
                   IDLE_POWER_METHOD: idle_power_method_none
