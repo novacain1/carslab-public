@@ -230,18 +230,22 @@ spec:
                 data:
                   BIND_ADDRESS: 0.0.0.0:9104
                   CGROUP_METRICS: '*'
+                  CORE_USAGE_METRIC: cpu_instr
                   CPU_ARCH_OVERRIDE: ""
                   ENABLE_EBPF_CGROUPID: "true"
-                  ENABLE_GPU: "true"
+                  ENABLE_GPU: "false"
+                  ENABLE_HW_COUNTER_METRICS: "true"
                   ENABLE_PROCESS_METRICS: "false"
-                  EXPOSE_IRQ_COUNTER_METRICS: "true"
-                  EXPOSE_KUBELET_METRICS: "true"
+                  EXPOSE_IRQ_COUNTER_METRICS: "false"
+                  EXPOSE_KUBELET_METRICS: "false"
+                  IDLE_POWER_METHOD: idle_power_method_none
                   KEPLER_LOG_LEVEL: "1"
                   KEPLER_NAMESPACE: kepler
                   METRIC_PATH: /metrics
                   MODEL_CONFIG: |
                     CONTAINER_COMPONENTS_ESTIMATOR=false
                     CONTAINER_COMPONENTS_INIT_URL=https://raw.githubusercontent.com/sustainable-computing-io/kepler-model-server/main/tests/test_models/DynComponentModelWeight/CgroupOnly/ScikitMixed/ScikitMixed.json
+                  NUM_CPU: "64"
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
@@ -322,7 +326,7 @@ spec:
                           valueFrom:
                             fieldRef:
                               fieldPath: status.hostIP
-                        image: quay.io/sustainable_computing_io/kepler:pr-665
+                        image: quay.io/sustainable_computing_io/kepler:pr-665-630cbd
                         imagePullPolicy: Always
                         livenessProbe:
                           failureThreshold: 5
