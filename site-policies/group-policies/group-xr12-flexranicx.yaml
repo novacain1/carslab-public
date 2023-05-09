@@ -84,10 +84,10 @@ spec:
       policyName: "config-policy"
       spec:
         additionalKernelArgs:
-          - "crashkernel=512M"
-          - "cpufreq.default_governor=performance"
-          - "rcupdate.rcu_normal_after_boot=0"
-          - "module_blacklist=irdma"
+          - crashkernel=512M
+          - rcupdate.rcu_normal_after_boot=0
+          #- intel_idle.max_cstate=0
+          - module_blacklist=irdma
         cpu:
           # These must be tailored for the specific hardware platform
           isolated: "2-31,34-63"
