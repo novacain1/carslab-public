@@ -5,11 +5,12 @@ kind: Kustomization
 resources:
 - ns.yaml
 - common-policies/policy-kepler.yaml
-- common-policies/pgt-acpipm.yaml
 
 generators:
 # This is common to all RAN DU deployments
 - common-policies/common-ranGen.yaml
+# This is common to all Dell EMC deployments
+- common-policies/pgt-acpipm.yaml
 
 # This group policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2.yaml
