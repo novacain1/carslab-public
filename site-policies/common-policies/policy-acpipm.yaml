@@ -25,7 +25,7 @@ spec:
           object-templates:
             - complianceType: musthave
               objectDefinition:
-                apiVersion: v1
+                apiVersion: machineconfiguration.openshift.io/v1
                 kind: MachineConfig # must have acpipm
                 metadata:
                   name: 50-mc-acpipm-workaround
