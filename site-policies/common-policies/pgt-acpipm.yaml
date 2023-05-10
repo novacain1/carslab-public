@@ -1,0 +1,43 @@
+---
+apiVersion: ran.openshift.io/v1
+kind: PolicyGenTemplate
+metadata:
+  name: "acpipm-workaround"
+  namespace: "ztp-common-cars2"
+spec:
+  bindingRules:
+    acpipm: "true"
+  remediationAction: enforce
+  mcp: "master"
+  sourceFiles:
+    - fileName: MachineConfigGeneric.yaml
+      policyName: "config-policy"
+      metadata:
+        labels:
+          machineconfiguration.openshift.io/role: master
+          name: 50-mc-acpipm-workaround
+        spec:
+          config:
+            ignition:
+              version: 3.2.0
+            storage:
+              files:
+                - contents:
+                    source: data:text/plain;charset=utf-8;base64,IyEvdXNyL2Jpbi9lbnYgYmFzaAoKc2V0IC1leAoKbW9kcHJvYmUgLXIgYWNwaV9wb3dlcl9tZXRlcgptb2Rwcm9iZSBhY3BpX2lwbWkKbW9kcHJvYmUgYWNwaV9wb3dlcl9tZXRlcg==
+                  filesystem: root
+                  mode: 493
+                  overwrite: true
+                  path: /usr/local/bin/reload-acpi_power_meter.sh
+            systemd:
+              units:
+                - contents: |
+                    [Unit]
+                    Description=Workaround ACPI Power Meter problems on Dell for Wall Power
+                    After=kubelet.service
+                    [Service]
+                    Type=oneshot
+                    ExecStart=/bin/sh /usr/local/bin/reload-acpi_power_meter.sh
+                    [Install]
+                    WantedBy=multi-user.target
+                  enabled: true
+                  name: acpipm-workaround.service
