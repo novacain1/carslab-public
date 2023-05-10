@@ -15,7 +15,7 @@ spec:
       metadata:
         labels:
           machineconfiguration.openshift.io/role: master
-          name: 50-mc-acpipm-workaround
+        name: 50-mc-acpipm-workaround
         spec:
           config:
             ignition:
