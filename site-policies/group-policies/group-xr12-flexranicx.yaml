@@ -33,16 +33,14 @@ spec:
 #             - infrastructure
 #            outputRefs:
 #             - kafka-open
-#    - fileName: ClusterLogging.yaml # 30-Jan dcain testing logging delete
-#      policyName: "config-policy"
-#      spec:
-#        curation:
-#          curator:
-#            schedule: "30 3 * * *"
-#        collection:
-#          logs:
-#            type: "fluentd"
-#            fluentd: {}
+    - fileName: ClusterLogging.yaml
+      policyName: "config-policy"
+      spec:
+        curation:
+          curator:
+            schedule: "30 3 * * *"
+        collection:
+          type: vector
 #    - fileName: PtpConfigSlaveCvl.yaml   # Change to PtpConfigSlaveCvl.yaml for ColumbiaVille NIC
 #      policyName: "config-policy"
 #      metadata:
