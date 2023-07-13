@@ -11,7 +11,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-vseloki
-  namespace: ztp-common
+  namespace: ztp-common-cars2
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: CM Configuration Management
@@ -47,7 +47,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-vseloki
-  namespace: ztp-common
+  namespace: ztp-common-cars2
 placementRef:
   name: placement-policy-vseloki
   kind: PlacementRule
@@ -61,7 +61,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-vseloki
-  namespace: ztp-common
+  namespace: ztp-common-cars2
 spec:
   clusterConditions:
     - status: "True"
