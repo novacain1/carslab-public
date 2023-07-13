@@ -1,0 +1,71 @@
+# yamllint disable rule:line-length
+# for this Policy to be implemented, the ManagedCluster SiteConfig must have "vseloki: "true"" as a label
+# this is a temporary workaround
+#
+# to get these values, get this from the Hub cluster:
+# ca-bundle.crt: "oc -n openshift-config-managed get configmaps default-ingress-cert -o json | jq -r '.data["ca-bundle.crt"]' | base64 -w 0"
+# token: "oc -n openshift-logging get secret remote-logging-token -o json | jq -r '.data["token"]'"
+# yamllint enable rule:line-length
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-vseloki
+  namespace: ztp-common
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+    ran.openshift.io/ztp-deploy-wave: "2"
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-vseloki-secret
+        spec:
+          remediationAction: enforce
+          severity: low
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: Secret
+                metadata:
+                  name: remote-logging-secret
+                  namespace: openshift-logging
+                data:
+                  # yamllint disable-line rule:line-length
+                  ca-bundle.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURhekNDQWxPZ0F3SUJBZ0lJSDdXd2JWKzBVYTB3RFFZSktvWklodmNOQVFFTEJRQXdKakVrTUNJR0ExVUUKQXd3YmFXNW5jbVZ6Y3kxdmNHVnlZWFJ2Y2tBeE5qZzROamczTkRBd01CNFhEVEl6TURjd05qSXpOVEF3TUZvWApEVEkxTURjd05USXpOVEF3TVZvd0pURWpNQ0VHQTFVRUF3d2FLaTVoY0hCekxuTm9ZV1J2ZDIxaGJpNWpZWEp6Ck1pNXNZV0l3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRRGxET0dLb2QzR0ZmaHoKdm8wdG9od3NzWC9aTHA1eUUxRTNwSWZpRU16NmluZHpNSndmQWkrWDZVQmNMTVlxWVora2Q0aGlEWWFHS0dVYQpuU04xVVFCU0hmTFhXenY0dkFzTE1vTW01a2ZQbTRzOUhucURiMk10Nk4zM0hjTmZpbko3b2pSSlgrdTN6OGk2CnZNYVFQQUF5U05Hd3U5YTBNQVc3UW51OFY0bmxkSFBLVitSaVd4QUorV2lWNGZzZGRsRm53RVJaLzArMkIyRi8KUDVGSzdXdVgyZ0FFVzZkc0pPZHNENUdkYW0rc1dCOGkxNFZKTC9wY0JzK2ZyZTJSVnAzdjFlc2JmU3FOV0tkWApBb1RPYzhYdEU4TmFxZXJ0Q25FOThqcVZvYkJjQmd0TDdUNkhqTXlDdklsNEpoSmVoZzdUYjZlanZqUmN3RUxOCktzKzhLRllQQWdNQkFBR2pnWjB3Z1pvd0RnWURWUjBQQVFIL0JBUURBZ1dnTUJNR0ExVWRKUVFNTUFvR0NDc0cKQVFVRkJ3TUJNQXdHQTFVZEV3RUIvd1FDTUFBd0hRWURWUjBPQkJZRUZEbWxUWnNlbXpkd3puWGJZdytBQUdEOQpwd0J6TUI4R0ExVWRJd1FZTUJhQUZCQUsyb0lrU2thVVFjY1ZsRDR5aHF3Q3pnMjZNQ1VHQTFVZEVRUWVNQnlDCkdpb3VZWEJ3Y3k1emFHRmtiM2R0WVc0dVkyRnljekl1YkdGaU1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQ2kKbTdHVmlrTStKd2NVczNCeHhreDhFSnJ5QmNRN2lCanV5L1ZRSVplREJxeVFPYlRYZ3U3c2c0Z2VmbHdYZVNJOApXKzMwZlRTNjc5YUExN2JIbjI1NFZuVVZSWUtBTDJmanpzQmx2cXVGd0FzenVpamt3VlFOSWpUMHI4dUJzbEZnCkI3MEttOGJzV09ScmRCeUhlYk5lenFVUFUrWUZYSG55ZDQrYjN3S3dkNmphTXE0SzJoRE82aGZmM3U2S09yejIKU3FQbmlmSWFYVURKdmNVNGVoRUE0NU44eWE2aHpvVi9hN2pSQU8xeitWVVhSWEdLSURmRDFyVFRKTUx5eDhFYQp3QnNjdTJ6TDBmc3AzNnlvOEMrbTJtWGNTYytxblpBSFpVQWgxam93Ty9jRmtzTGRrR3hmS01oNmduakxlbVZ5ClVnbXJicW1xYXI0eHBGWFVROWNjCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURERENDQWZTZ0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBREFtTVNRd0lnWURWUVFEREJ0cGJtZHkKWlhOekxXOXdaWEpoZEc5eVFERTJPRGcyT0RjME1EQXdIaGNOTWpNd056QTJNak0wT1RVNVdoY05NalV3TnpBMQpNak0xTURBd1dqQW1NU1F3SWdZRFZRUUREQnRwYm1keVpYTnpMVzl3WlhKaGRHOXlRREUyT0RnMk9EYzBNREF3CmdnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUMxRGVRTFg2Y1l0WmtGVkxyMGVxZU4KYWNZSEp3SGd2dHZPcUg3RURjUkNQYVg4am92ZG1ndmFzWWFsd3FEUnhhS2cwMjd3TEh5YVVZbVFXTUlidmNLcwpjL255NmFrMzZzSXFKdFB2blpHeXJnVVhySVY0NDE1bW1Xbzl5ZGUrS2ZNZFM5aU4rTWh0MEZWK2xtWXZ0ZGtBCnpmZzlBT1k5cFpiajNKSjBSQ0NqTHBzVWFPTzZYS2tjSzI4QlNEc1NHMno0bER4MWxIMzRCSTlqN2N2UUhrZ1YKdWw1QzRYOUExYzBBdW96OVM1eXMrQ3RsZWVZVkNabFZ3ODB6K0dPTTN4NkhpSTNiYTNpaXJ5UFFtZ2VONGNWSQpFUTRPQ3cyRkxtZUxkTGV1Vkx4SkVaNDN0TittWllLOWIyV0YyZXVXWHlUazFCemI2UlNZOE9IZlVna2dRY29YCkFnTUJBQUdqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lDcERBU0JnTlZIUk1CQWY4RUNEQUdBUUgvQWdFQU1CMEcKQTFVZERnUVdCQlFRQ3RxQ0pFcEdsRUhIRlpRK01vYXNBczROdWpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQQpvT25FQWFibi9JQTNZSk5zLzBLZmZzTFJKeVNZZ2Z5b2VCdHFWd1oxZ0pPVnhCUVpURzBJWDFEajNJSzhKOTRBCk41L0xTaG1QSjRrYXNpOTB5TUc0dCtHUmhWMHRpSmpZUUZtdy9HM1M0bFVzZWlyS3ZyZC9uNkN3elZMUUJQMXIKQy9makRFNTlpUllHZjJRMGdTMFFDNWF4a21DbW1YbUQvRmloNytpQitMSVFBdGFFUnR0V2dERStVSS9RVGUwRQpsbjFLQkdwUnhoTG9Gb2QyNXpNQi9IWEZQekRQUzhFVkdRZy8yS0NrZ2JSYy9PZlZuc2dyWnRsa0pxdjlIbkpDCnNkNGY1b1ZvWmlyRXhacEc5ODZzUjdSNUs0VDB5TVNYV3JpUW54WWFzVnRLSzRjeS9pbHVxbEtmelBxcDNTVDYKNGE3aVZWYUNWd1NzUllCcW5vRytRUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0KCg==
+                  # yamllint disable-line rule:line-length
+                  token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkltWlFNelppWDFGTGNrWkdZVlZsYkU1c1EydHlUMVJvY2s5Q2NHbE9PR05TT1V0VlZpMHdiMHd4Y1VraWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUp2Y0dWdWMyaHBablF0Ykc5bloybHVaeUlzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVmpjbVYwTG01aGJXVWlPaUp5WlcxdmRHVXRiRzluWjJsdVp5MTBiMnRsYmlJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZ5ZG1salpTMWhZMk52ZFc1MExtNWhiV1VpT2lKeVpXMXZkR1V0Ykc5bloybHVaeUlzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJamxoWXpCbU9XRXpMV1ZtWWpJdE5HSmtOeTFpTVRka0xURTRORFV6WVRGaE9Ea3dZU0lzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwdmNHVnVjMmhwWm5RdGJHOW5aMmx1WnpweVpXMXZkR1V0Ykc5bloybHVaeUo5LmUzVlV3VmZaSlpEU2FLajUwRkZ2dmxHRWdhMU44MlE1TWMyeS1JWVZXZlFnNVh4WGQ0OTVNMUc0UzRNLUhscE45WDdNTzd1SzdGWjBWS0M5ZkxKTHNHakd2a2FDUDRKbl9acEwwdDJmeFpVSzRMVHltQkV3T2dLWThxM2JXSjR1UTFPdGdkRG5iWjdhRlFwWG1PdnNhbERFQk1SQ0tVVzVpRU43bUR2V2cwSURzcHlCNWQtTW5TRDVjM2kySVFyRVVja1ZxaXBQNjYtRFExeFBCZEZMaGl4SlpzeDBQYTNTbVlqWHVnRk5nQUZid3pBd3FLcFhiaGFWMDVZU0VOWTFfNVhrWGl6N3hTa3lYTlFSVmVoMFdhNmVTRmlaSnJ3RHZNazJpSjFrYXBGei05Mno1OWJCeU9LdlAxdUFhZjljcTBoc01qWWZFZDZXQ1lFNmtFQUF4dG5CTlRacC1pWkxyUmdselNWcEQ4ZGo4Y3VLUkxHb0h4SlJrX3JLbHpNY1d4T2VVbHBnMUJqSFRMLVNoRV9EX0I5ZndGNXFnX19TV0wxN1pXTHZBZW5PQ3dpMkhWYTZLbkJYRG5ybkNnNjNsTE9tenFsUmIzcDdEcnVtZkp5YU4waHk5ajdjOUFpTWtYTi1GT3JwR1NUWkNfYlM1djFaNEtsS0NMVEVKbnp2ZVlVSUlxeGhwSThVQ19iTzhGZzFkcmgwYlBKaFlGZWFwS1ItT0gwRC0yNEVmdVJlNVFLSjlobG1TREFBVmQtZ3pCMVNFN3JmVjY2dDUtTUxhUVl6NnAzWWdWMkE3bHVtWkR3Z19RSG5GeG5zT3FCeHVMVDIzUXRaeWdIV0FmcWtxM1oyWU1RbEV1SmI0SDRvLXkxRDg2Ykpxa2lUOUFDZ1ZBSEd1WUdHUXlr
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-vseloki
+  namespace: ztp-common
+placementRef:
+  name: placement-policy-vseloki
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+  - name: policy-vseloki
+    kind: Policy
+    apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-vseloki
+  namespace: ztp-common
+spec:
+  clusterConditions:
+    - status: "True"
+      type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: vseloki, operator: In, values: ["true"]}
