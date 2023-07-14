@@ -13,26 +13,24 @@ spec:
   sourceFiles:
     - fileName: ConsoleOperatorDisable.yaml
       policyName: "config-policy"
-    # Set ClusterLogForwarder & ClusterLogging as example might be better to create another policyTemp-Group
-#    - fileName: ClusterLogForwarder.yaml
-#      policyName: "config-policy"
-#      spec:
-#        outputs:
-#          - type: "kafka"
-#            name: kafka-open
-#            # below url is an example
-#            url: tcp://10.46.55.190:9092/test
-#        pipelines:
-#          - name: audit-logs
-#            inputRefs:
-#             - audit
-#            outputRefs:
-#             - kafka-open
-#          - name: infrastructure-logs
-#            inputRefs:
-#             - infrastructure
-#            outputRefs:
-#             - kafka-open
+    - fileName: ClusterLogForwarder.yaml
+      policyName: "config-policy"
+      spec:
+        outputs:
+          - name: loki-infra
+            secret:
+              name: remote-logging-secret
+            type: loki
+            # yamllint disable-line rule:line-length
+            url: https://logging-loki-openshift-logging.apps.shadowman.cars2.lab/api/logs/v1/infrastructure
+        pipelines:
+          - name: send-infra-logs
+            inputRefs:
+              - infrastructure
+            outputRefs:
+              - loki-infra
+            labels:
+              clustername: flexran2
     - fileName: ClusterLogging.yaml
       policyName: "config-policy"
       spec:
