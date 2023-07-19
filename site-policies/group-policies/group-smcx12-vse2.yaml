@@ -12,8 +12,6 @@ spec:
     group-smcx12-vse2: ""
   mcp: "master"
   sourceFiles:
-
-  sourceFiles:
     - fileName: AcceleratorsNS.yaml
       policyName: "subscriptions-policy"
     - fileName: AcceleratorsOperGroup.yaml
