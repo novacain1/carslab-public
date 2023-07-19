@@ -7,17 +7,18 @@ resources:
 - common-policies/policy-acpipm.yaml
 - common-policies/policy-kepler.yaml
 - common-policies/policy-vseloki.yaml
+- common-policies/policy-vsesync.yaml
 
 generators:
 # This is common to all RAN DU deployments
 - common-policies/common-ranGen.yaml
-#- common-policies/common-ranGen-vsesync.yaml
+- common-policies/common-ranGen-vsesync.yaml
 
 # This group policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2.yaml
 - group-policies/group-xr12-flexranicx.yaml
 # This group policy is for Supermicro X12 based deployments:
-#- group-policies/group-smcx12-flexrankepler.yaml
+- group-policies/group-smcx12-vse2.yaml
 # This group policy is for Dell XR8620t based deployments:
 #- group-policies/group-hook-flexranspr.yaml
 
@@ -25,7 +26,7 @@ generators:
 - group-policies/group-xr12-flexran2-validator.yaml
 - group-policies/group-xr12-flexranicx-validator.yaml
 # This group validator policy is for Supermicro X12 based deployments:
-#- group-policies/group-smcx12-flexrankepler-validator.yaml
+- group-policies/group-smcx12-vse2-validator.yaml
 # This group validator policy is for Dell XR8620t based deployments:
 #- group-policies/group-hook-flexranspr-validator.yaml
 
@@ -41,6 +42,7 @@ generators:
 # These are examples that should be replicated for every individual site:
 - site-specific-policies/flexran2-cars2-lab.yaml
 - site-specific-policies/flexranicx-cars2-lab.yaml
+- site-specific-policies/fiesta-cars2-lab.yaml
 #- site-specific-policies/flexrankepler-cars2-lab.yaml
 #- site-specific-policies/flexranspr-cars2-lab.yaml
 #- example-multinode-site.yaml
