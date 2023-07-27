@@ -2,7 +2,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
-  name: policy-vseptp
+  name: policy-vsesync
   namespace: ztp-common-cars2
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
@@ -20,6 +20,22 @@ spec:
           name: policy-ztp-catalog-add
         spec:
           object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: operators.coreos.com/v1alpha
+                kind: CatalogSource
+                metadata:
+                  name: certified-operators
+                  namespace: openshift-marketplace
+                spec:
+                  displayName: Telco 4.14 Certified
+                  image: quay.io/redhat-partner-solutions/prega/certified-operator-index:v4.14
+                  priority: -100
+                  publisher: Red Hat
+                  sourceType: grpc
+                  updateStrategy:
+                    registryPoll:
+                      interval: 10m0s
             - complianceType: musthave
               objectDefinition:
                 apiVersion: operators.coreos.com/v1alpha
