@@ -70,3 +70,6 @@ spec:
         - mirrors:
           - brew.registry.redhat.io/openshift4
           source: registry.redhat.io/openshift4
+        - mirrors:
+          - brew.registry.redhat.io/openshift-logging
+          source: registry.redhat.io/openshift-logging
