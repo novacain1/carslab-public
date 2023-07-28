@@ -17,12 +17,12 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: policy-ztp-catalog-add
+          name: policy-catalogs
         spec:
           object-templates:
             - complianceType: musthave
               objectDefinition:
-                apiVersion: operators.coreos.com/v1alpha
+                apiVersion: operators.coreos.com/v1alpha1
                 kind: CatalogSource
                 metadata:
                   name: certified-operators
@@ -38,7 +38,7 @@ spec:
                       interval: 10m0s
             - complianceType: musthave
               objectDefinition:
-                apiVersion: operators.coreos.com/v1alpha
+                apiVersion: operators.coreos.com/v1alpha1
                 kind: CatalogSource
                 metadata:
                   name: prega-operators
