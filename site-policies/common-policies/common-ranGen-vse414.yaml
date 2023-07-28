@@ -2,12 +2,12 @@
 apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
-  name: "common-du-vse"
+  name: "common-du-vse414"
   namespace: "ztp-common-cars2"
 spec:
   bindingRules:
     # These policies will correspond to all clusters with this label:
-    common-du-vse: "true"
+    common-du-vse414: "true"
   sourceFiles:
     # Create operators policies that will be installed in all clusters
     - fileName: SriovSubscription.yaml
