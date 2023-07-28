@@ -30,7 +30,6 @@ spec:
                 spec:
                   displayName: Telco 4.14 Certified
                   image: quay.io/redhat-partner-solutions/prega/certified-operator-index:v4.14
-                  priority: -100
                   publisher: Red Hat
                   sourceType: grpc
                   updateStrategy:
@@ -44,9 +43,8 @@ spec:
                   name: prega-operators
                   namespace: openshift-marketplace
                 spec:
-                  displayName: preGA PTP Operator
+                  displayName: VSE PTP Operator
                   image: quay.io/jnunez/sync-operator-catalog:v4.14dev
-                  priority: -100
                   publisher: Red Hat
                   sourceType: grpc
                   updateStrategy:
