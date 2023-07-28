@@ -15,11 +15,11 @@ spec:
   - clusterName: "fiesta"
     networkType: "OVNKubernetes"
     clusterLabels:
-      common-du-vsesync: true
+      common-du-vse414: true
       group-smcx12-vse2: ""
       sites: "fiesta-cars2-lab"
       vseloki: true
-      vsepregasync: true
+#      vsepregasync: true
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
