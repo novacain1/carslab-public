@@ -155,7 +155,21 @@ spec:
             userDescription ;
             timeSource 0xA0
           ts2phcConf: |
+            [nmea]
+            ts2phc.master 1
+            [global]
+            use_syslog  0
+            verbose 1
+            logging_level 7
+            ts2phc.pulsewidth 100000000
+            #GNSS module s /dev/ttyGNSS* -al use _0
+            #cat /dev/ttyGNSS_1700_0 to find available serial port
+            #example value of gnss_serialport is /dev/ttyGNSS_1700_0
+            ts2phc.nmea_serialport $gnss_serialport
+            leapfile  /usr/share/zoneinfo/leap-seconds.list
             [ens6f0]
+            ts2phc.extts_polarity rising
+            ts2phc.extts_correction 0
 #    - fileName: PtpConfigSlave.yaml   # Change to PtpConfigSlaveCvl.yaml for ColumbiaVille NIC
 #      policyName: "config-policy"
 #      metadata:
