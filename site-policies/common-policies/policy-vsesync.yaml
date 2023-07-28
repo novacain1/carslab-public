@@ -116,21 +116,21 @@ spec:
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
-  name: binding-policy-ztp-catalog-add
+  name: binding-policy-vsesync
   namespace: ztp-common-cars2
 placementRef:
-  name: placement-policy-ztp-catalog-add
+  name: placement-policy-vsesync
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
-  - name: policy-ztp-catalog-add
+  - name: policy-vsesync
     kind: Policy
     apiGroup: policy.open-cluster-management.io
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: placement-policy-ztp-catalog-add
+  name: placement-policy-vsesync
   namespace: ztp-common-cars2
 spec:
   clusterConditions:
