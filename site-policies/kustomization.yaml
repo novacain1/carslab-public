@@ -7,7 +7,7 @@ resources:
 - common-policies/policy-acpipm.yaml
 - common-policies/policy-kepler.yaml
 - common-policies/policy-vseloki.yaml
-- common-policies/policy-vsesync.yaml
+- common-policies/policy-vseextras.yaml
 
 generators:
 # This is common to all RAN DU deployments
