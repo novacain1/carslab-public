@@ -119,7 +119,7 @@ metadata:
   name: binding-policy-vseextras
   namespace: ztp-common-cars2
 placementRef:
-  name: placement-policy-vsecatalog
+  name: placement-policy-vseextras
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
