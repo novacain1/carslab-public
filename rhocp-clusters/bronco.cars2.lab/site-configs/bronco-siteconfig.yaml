@@ -16,8 +16,7 @@ spec:
     networkType: "OVNKubernetes"
     clusterLabels:
       common-du-vse414: true
-      group-dell760-vse3: ""
-      sites: "bronco-cars2-lab"
+      group-dellr760-vse3: ""
       vseloki: true
       vseextras: true
     clusterNetwork:
