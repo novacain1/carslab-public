@@ -29,7 +29,7 @@ spec:
                   namespace: openshift-marketplace
                 spec:
                   displayName: Telco 4.14 Certified
-                  image: quay.io/redhat-partner-solutions/prega/certified-operator-index:v4.14
+                  image: registry.redhat.io/redhat/certified-operator-index:v4.14
                   publisher: Red Hat
                   sourceType: grpc
                   updateStrategy:

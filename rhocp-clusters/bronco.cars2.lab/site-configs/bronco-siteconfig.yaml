@@ -15,9 +15,9 @@ spec:
   - clusterName: "bronco"
     networkType: "OVNKubernetes"
     clusterLabels:
-      common-du-vse414: true
+      common-du-prega414: true
       group-dellr760-vse3: ""
-      vseloki: true
+      #vseloki: true
       vseextras: true
     clusterNetwork:
       - cidr: 10.128.0.0/14
