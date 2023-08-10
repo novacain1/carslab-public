@@ -39,7 +39,7 @@ spec:
     proxy:
       httpProxy: http://cars2-client.infra.cars2.lab:3128
       httpsProxy: http://cars2-client.infra.cars2.lab:3128
-      noProxy: ".cars2.lab,fd01::/48,2600:52:7:300::0/64,fd02::/112"
+      noProxy: "2600:52:7:300::0/64,fd02::/112,fd01::/48,2600:52:7:238::0/64,2600:52:7:38::0/64,.cars2.lab"
     nodes:
       - hostName: "spr760-1.bronco.cars2.lab"
         role: "master"
