@@ -1,4 +1,4 @@
-# gnb-dave414-cars2-lab-bmc-secret & assisted-deployment-pull-secret need to be created under same namespace dave414
+# cu1-1-cars2-lab-bmc-secret & assisted-deployment-pull-secret need to be created under same namespace dave414
 ---
 apiVersion: ran.openshift.io/v1
 kind: SiteConfig
@@ -48,7 +48,7 @@ spec:
         #  filePath: "example-hw.profile"
         bmcAddress: "idrac-virtualmedia://192.168.38.203/redfish/v1/Systems/System.Embedded.1"
         bmcCredentialsName:
-          name: "cu1-1-dave414-cars2-lab-bmc-secret"
+          name: "cu1-1-cars2-lab-bmc-secret"
         bootMACAddress: "b4:96:91:a5:04:f8"
         # Use UEFISecureBoot to enable secure boot
         bootMode: "UEFI"
