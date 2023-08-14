@@ -1,0 +1,18 @@
+variant: openshift
+version: 4.13.0
+metadata:
+  name: 99-master-blacklist-drm
+  labels:
+    machineconfiguration.openshift.io/role: master
+storage:
+  files:
+    - path: /etc/modprobe.d/drm-blacklist.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          # https://bugzilla.redhat.com/show_bug.cgi?id=2139901
+          blacklist drm
+          blacklist drm_kms_helper
+          blacklist drm_shmem_helper
+          blacklist mgag200
