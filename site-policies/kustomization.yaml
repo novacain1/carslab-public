@@ -24,6 +24,8 @@ generators:
 - group-policies/group-hook-flexranspr.yaml
 # This group policy is for Dell R760 based deployments:
 - group-policies/group-dellr760-vse3.yaml
+# This group policy is for Dell R750 based deployments:
+- group-policies/group-dellr750-vse4.yaml
 
 # This group validator policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2-validator.yaml
@@ -34,6 +36,8 @@ generators:
 - group-policies/group-hook-flexranspr-validator.yaml
 # This group validator policy is for Dell R760 based deployments:
 - group-policies/group-dellr760-vse3-validator.yaml
+# This group validator policy is for Dell R750 based deployments:
+- group-policies/group-dellr750-vse4-validator.yaml
 
 # This group policy is for all compressed 3-node cluster deployments:
 #- group-du-3node-ranGen.yaml
