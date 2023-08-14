@@ -100,7 +100,8 @@ spec:
         workloadHints:
           realTime: true
           highPowerConsumption: false
-          perPodPowerManagement: true
+          perPodPowerManagement: false
+          #perPodPowerManagement: true
         net:
           userLevelNetworking: true
     - fileName: TunedPerformancePatch.yaml
@@ -120,8 +121,8 @@ spec:
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
-              [sysfs]
-              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 70
+#              [sysfs]
+#              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 70
 #    --- sources needed for image registry (check ImageRegistry.md for more details)----
 #    - fileName: StorageClass.yaml
 #      policyName: "config-policy"
