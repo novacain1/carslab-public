@@ -65,7 +65,7 @@ spec:
               type: ethernet
               state: up
               ipv4:
-                enabled: false
+                enabled: true
                 address:
                   - ip: "192.168.38.142"
                     prefix-length: 26
