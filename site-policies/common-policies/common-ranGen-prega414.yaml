@@ -76,3 +76,7 @@ spec:
         - mirrors:
           - brew.registry.redhat.io/openshift-logging
           source: registry.redhat.io/openshift-logging
+    - fileName: SriovSubscription.yaml
+      policyName: "config-policy"
+      spec:
+        channel: "4.14"
