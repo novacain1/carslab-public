@@ -12,6 +12,8 @@ spec:
     # Create operators policies that will be installed in all clusters
     - fileName: SriovSubscription.yaml
       policyName: "subscriptions-policy"
+      spec:
+        channel: "4.14"
     - fileName: SriovSubscriptionNS.yaml
       policyName: "subscriptions-policy"
     - fileName: SriovSubscriptionOperGroup.yaml
@@ -76,7 +78,3 @@ spec:
         - mirrors:
           - brew.registry.redhat.io/openshift-logging
           source: registry.redhat.io/openshift-logging
-    - fileName: SriovSubscription.yaml
-      policyName: "config-policy"
-      spec:
-        channel: "4.14"
