@@ -88,8 +88,5 @@ spec:
           - quay.io/prega/test
           source: registry-proxy.engineering.redhat.com
         - mirrors:
-          - quay.io/prega/test
+          - quay.io/prega/test/openshift4
           source: registry.redhat.io/openshift4
-        - mirrors:
-          - quay.io/prega/test
-          source: registry.redhat.io/openshift-logging
