@@ -15,16 +15,12 @@ spec:
   - clusterName: "flexranspr"
     networkType: "OVNKubernetes"
     clusterLabels:
-      # These example cluster labels correspond to the bindingRules in the PolicyGenTemplate examples in ~/site-policies:
-      # ../../../site-policies/common-policies/common-ranGen.yaml will apply to all clusters with 'common-du: true'
       common-du: true
-      # ../../../site-policies/common-policies/group-hook-flexranspr.yaml will apply to all clusters with 'flexranspr-group-hook: ""'
       flexranspr-group-hook: ""
-      # ../../../site-policies/site-specific-policies/flexranspr-cars2-lab.yaml will apply to all clusters with 'sites : "flexranspr-cars2-lab"'
-      # Normally this should match or contain the cluster name so it only applies to a single cluster
       sites : "flexranspr-cars2-lab"
       #kepler: true
       acpipm: true
+      latencyrhel9: true
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23

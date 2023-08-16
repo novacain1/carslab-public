@@ -1,0 +1,72 @@
+#for this to take affect, the ManagedCluster must have "latencyrhel9: "true"" as a label
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-latencyrhel9
+  namespace: ztp-common-cars2
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+    ran.openshift.io/ztp-deploy-wave: "2"
+spec:
+  remediationAction: enforce
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-latencyrhel9-blacklistdrm
+        spec:
+          remediationAction: enforce # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
+          severity: low
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: machineconfiguration.openshift.io/v1
+                kind: MachineConfig # must have latencyrhel9
+                metadata:
+                  name: 60-mc-latencyrhel9-blacklistdrm
+                  labels:
+                    machineconfiguration.openshift.io/role: master
+                spec:
+                  config:
+                    ignition:
+                      version: 3.2.0
+                    storage:
+                      files:
+                        - contents:
+                            compression: gzip
+                            source: data:;base64,H4sIAAAAAAAC/2TJOwrDMAwA0D2nCHS3nXRKofQoxj8kEYkES6bQ03duMz7ebUazUx/e5wEfYk6ut4rJXDnEKx7vmAe4AvSi+lyX+7aFZcqcys6kNtcuv4q7aMTGZ+t/oShNriWQYA1h+gYAAP//XiT8rooAAAA=
+                          mode: 420
+                          overwrite: true
+                          path: /etc/modprobe.d/drm-blacklist.conf
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-latencyrhel9
+  namespace: ztp-common-cars2
+placementRef:
+  name: placement-policy-latencyrhel9
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-latencyrhel9
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-latencyrhel9
+  namespace: ztp-common-cars2
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+      - {key: latencyrhel9, operator: In, values: ["true"]}

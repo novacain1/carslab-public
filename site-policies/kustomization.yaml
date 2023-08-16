@@ -8,6 +8,7 @@ resources:
 - common-policies/policy-kepler.yaml
 - common-policies/policy-vseloki.yaml
 - common-policies/policy-vseextras.yaml
+- common-policies/policy-latencyrhel9.yaml
 
 generators:
 # This is common to all RAN DU deployments
