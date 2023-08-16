@@ -85,7 +85,8 @@ spec:
       spec:
         additionalKernelArgs:
           - crashkernel=512M
-          - rcupdate.rcu_normal_after_boot=0
+#          - rcupdate.rcu_normal_after_boot=0
+          - rcupdate.rcu_normal_after_boot=1
           - intel_idle.max_cstate=0
           - module_blacklist=irdma
         cpu:
@@ -118,11 +119,16 @@ spec:
               kernel.timer_migration=1
               [scheduler]
               group.ice-ptp=0:f:10:*:ice-ptp.*
+              group.ice-gnss=0:f:10:*:ice-gnss.*
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
 #              [sysfs]
 #              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 70
+    - fileName: optional-extra-manifest/enable-crun-master.yaml
+      policyName: "config-policy"
+    - fileName: optional-extra-manifest/enable-crun-worker.yaml
+      policyName: "config-policy"
 #    --- sources needed for image registry (check ImageRegistry.md for more details)----
 #    - fileName: StorageClass.yaml
 #      policyName: "config-policy"
