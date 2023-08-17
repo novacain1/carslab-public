@@ -90,3 +90,6 @@ spec:
         - mirrors:
           - quay.io/prega/test/openshift4
           source: registry.redhat.io/openshift4
+        - mirrors:
+          - quay.io/prega/test/openshift-logging
+          source: registry.redhat.io/openshift-logging
