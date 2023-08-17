@@ -15,7 +15,7 @@ spec:
   - clusterName: "flexranspr"
     networkType: "OVNKubernetes"
     clusterLabels:
-      common-du-vse414: true
+      common-du-prega414: true
       flexranspr-group-hook: ""
       sites : "flexranspr-cars2-lab"
       #kepler: true
