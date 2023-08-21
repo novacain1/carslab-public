@@ -53,7 +53,7 @@ spec:
         # Use UEFISecureBoot to enable secure boot
         bootMode: "UEFI"
         rootDeviceHints:
-          deviceName: "/dev/sda"
+          deviceName: "0x6b07b250f799d1002a99942706f4cecd"
         cpuset: "0,2,64,66"
         nodeNetwork:
           interfaces:
