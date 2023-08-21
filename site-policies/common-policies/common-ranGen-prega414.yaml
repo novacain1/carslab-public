@@ -60,10 +60,8 @@ spec:
       metadata:
         name: redhat-operators
       spec:
-        #displayName: Telco 4.14 PreGA
-        displayName: Telco 4.14 PreGA Test
-        #image: quay.io/prega/redhat-operator-index:v4.14
-        image: quay.io/prega/test/prega/redhat-operator-index:4.14
+        displayName: Telco 4.14 PreGA
+        image: quay.io/prega/redhat-operator-index:v4.14
         updateStrategy:
             registryPoll:
                 interval: 10m0s
