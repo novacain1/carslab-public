@@ -327,7 +327,8 @@ spec:
                           valueFrom:
                             fieldRef:
                               fieldPath: status.hostIP
-                        image: quay.io/sustainable_computing_io/kepler:pr-665-630cbd
+                        #image: quay.io/sustainable_computing_io/kepler:pr-665-630cbd
+                        image: quay.io/sustainable_computing_io/kepler:release-0.5.4
                         imagePullPolicy: Always
                         livenessProbe:
                           failureThreshold: 5
