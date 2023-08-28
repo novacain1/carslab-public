@@ -50,9 +50,9 @@ generators:
 #- group-du-standard-validator-ranGen.yaml
 
 # These are examples that should be replicated for every individual site:
-- site-specific-policies/flexran2-cars2-lab.yaml
-- site-specific-policies/flexranicx-cars2-lab.yaml
-- site-specific-policies/fiesta-cars2-lab.yaml
+#- site-specific-policies/flexran2-cars2-lab.yaml
+#- site-specific-policies/flexranicx-cars2-lab.yaml
+#- site-specific-policies/fiesta-cars2-lab.yaml
 #- site-specific-policies/flexrankepler-cars2-lab.yaml
 #- site-specific-policies/flexranspr-cars2-lab.yaml
 #- example-multinode-site.yaml
