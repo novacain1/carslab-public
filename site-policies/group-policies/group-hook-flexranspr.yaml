@@ -89,6 +89,8 @@ spec:
           - rcupdate.rcu_normal_after_boot=1
           - intel_idle.max_cstate=0
           - module_blacklist=irdma
+          - vfio_pci.enable_sriov=1
+          - vfio_pci.disable_idle_d3=1
         cpu:
           # These must be tailored for the specific hardware platform
           isolated: "2-19,22-39"
