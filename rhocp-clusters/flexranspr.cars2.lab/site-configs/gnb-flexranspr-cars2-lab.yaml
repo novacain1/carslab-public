@@ -19,9 +19,10 @@ spec:
       common-du-prega414: true
       flexranspr-group-hook: ""
       sites : "flexranspr-cars2-lab"
-      #kepler: true
       acpipm: true
+      #kepler: true
       latencyrhel9: true
+      vseextras: true
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
