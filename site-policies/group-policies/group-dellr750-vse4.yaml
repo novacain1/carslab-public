@@ -37,17 +37,17 @@ spec:
     #       node-role.kubernetes.io/worker: ""
     #     ptpEventConfig:
     #       storageType: "storage-class-http-events"
-#    - fileName: PtpConfigSlave.yaml   # Change to PtpConfigSlaveCvl.yaml for ColumbiaVille NIC
-#      policyName: "config-policy"
-#      metadata:
-#        name: "du-ptp-slave"
-#      spec:
-#        profile:
-#        - name: "slave"
-          # This interface must match the hardware in this group
-#          interface: "ens5f0"
-#          ptp4lOpts: "-2 -s --summary_interval -4"
-#          phc2sysOpts: "-a -r -n 24"
+    - fileName: PtpConfigSlave.yaml   # Change to PtpConfigSlaveCvl.yaml for ColumbiaVille NIC
+      policyName: "config-policy"
+      metadata:
+        name: "du-ptp-slave"
+      spec:
+        profile:
+        - name: "slave"
+         # This interface must match the hardware in this group
+          interface: "ens7f1"
+          ptp4lOpts: "-2 -s --summary_interval -4"
+          phc2sysOpts: "-a -r -n 24"
     - fileName: SriovOperatorConfig.yaml
       policyName: "config-policy"
       # For existing clusters with node selector set as "master",
