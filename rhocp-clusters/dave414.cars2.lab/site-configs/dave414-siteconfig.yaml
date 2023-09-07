@@ -14,6 +14,7 @@ spec:
   clusters:
   - clusterName: "dave414"
     networkType: "OVNKubernetes"
+    cpuPartitioningMode: AllNodes
     clusterLabels:
       common-du-prega414: true
       group-dellr750-vse4: ""
@@ -56,7 +57,7 @@ spec:
         bootMode: "UEFI"
         rootDeviceHints:
           deviceName: "/dev/sda"
-        cpuset: "0,2,64,66"
+        #cpuset: "0,2,64,66"
         nodeNetwork:
           interfaces:
             - name: ens2f0
