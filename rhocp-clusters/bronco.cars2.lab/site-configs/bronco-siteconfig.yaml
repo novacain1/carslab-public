@@ -14,7 +14,7 @@ spec:
   clusters:
   - clusterName: "bronco"
     networkType: "OVNKubernetes"
-    #cpuPartitioningMode: AllNodes
+    cpuPartitioningMode: AllNodes
     clusterLabels:
       common-du-prega414: true
       group-dellr760-vse3: ""
@@ -58,7 +58,7 @@ spec:
         bootMode: "UEFI"
         rootDeviceHints:
           deviceName: "/dev/sda"
-        cpuset: "0-1,32-33"
+        #cpuset: "0-1,32-33"
         nodeNetwork:
           interfaces:
             - name: eno8303
