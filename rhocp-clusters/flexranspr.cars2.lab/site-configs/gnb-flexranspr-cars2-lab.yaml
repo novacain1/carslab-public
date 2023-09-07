@@ -15,6 +15,7 @@ spec:
   clusters:
   - clusterName: "flexranspr"
     networkType: "OVNKubernetes"
+    cpuPartitioningMode: AllNodes
     clusterLabels:
       common-du-prega414: true
       flexranspr-group-hook: ""
@@ -54,7 +55,7 @@ spec:
         bootMode: "UEFI"
         rootDeviceHints:
           deviceName: "/dev/nvme0n1"
-        cpuset: "0-1,20-21"
+        #cpuset: "0-1,20-21"
         ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":70000},{"label":"lso_75G_1","sizeMiB":75000},{"label":"lso_75G_2","sizeMiB":75000}],"wipeTable":false}]}}'
         nodeNetwork:
           interfaces:
