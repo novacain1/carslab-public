@@ -161,7 +161,7 @@ spec:
             #example value of gnss_serialport is /dev/ttyGNSS_1700_0
             ts2phc.nmea_serialport /gpsd/data
             leapfile  /usr/share/zoneinfo/leap-seconds.list
-            [ens6f0]
+            [ens2f0]
             ts2phc.extts_polarity rising
             ts2phc.extts_correction 0
 #    - fileName: PtpConfigSlave.yaml   # Change to PtpConfigSlaveCvl.yaml for ColumbiaVille NIC
