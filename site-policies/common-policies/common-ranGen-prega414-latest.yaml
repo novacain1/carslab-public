@@ -59,7 +59,7 @@ spec:
         name: redhat-operators
       spec:
         displayName: Telco 4.14 PreGA Latest
-        image: quay.io/prega/testpb/redhat-operator-index:v4.14-20230914T040309
+        image: quay.io/prega/redhat-operator-index:v4.14-20230915T053309
         updateStrategy:
             registryPoll:
                 interval: 10m0s
