@@ -15,6 +15,7 @@ generators:
 - common-policies/common-ranGen.yaml
 #- common-policies/common-ranGen-vse414.yaml
 - common-policies/common-ranGen-prega414.yaml
+- common-policies/common-ranGen-prega414-latest.yaml
 
 # This group policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2.yaml
