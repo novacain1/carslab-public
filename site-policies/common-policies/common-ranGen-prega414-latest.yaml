@@ -2,7 +2,7 @@
 apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
-  name: "common-du-prega414"
+  name: "common-du-prega414-latest"
   namespace: "ztp-common-cars2"
 spec:
   bindingRules:
