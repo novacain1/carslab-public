@@ -16,7 +16,7 @@ spec:
     networkType: "OVNKubernetes"
     cpuPartitioningMode: AllNodes
     clusterLabels:
-      common-du-prega414: true
+      common-du-prega414-latest: true
       group-dellr760-vse3: ""
       acpipm: true
       #vseloki: true
