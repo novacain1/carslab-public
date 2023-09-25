@@ -52,10 +52,10 @@ spec:
                 apiVersion: operators.coreos.com/v1alpha1
                 kind: CatalogSource
                 metadata:
-                  name: community-operators
+                  name: community-operators-kepler
                   namespace: openshift-marketplace
                 spec:
-                  displayName: Community Operators
+                  displayName: Community Operators - Kepler
                   grpcPodConfig:
                     nodeSelector:
                       kubernetes.io/os: linux
@@ -106,7 +106,7 @@ spec:
                   channel: alpha
                   installPlanApproval: Automatic
                   name: kepler-operator
-                  source: community-operators
+                  source: community-operators-kepler
                   sourceNamespace: openshift-marketplace
                   startingCSV: kepler-operator.v0.8.0
     - objectDefinition:
