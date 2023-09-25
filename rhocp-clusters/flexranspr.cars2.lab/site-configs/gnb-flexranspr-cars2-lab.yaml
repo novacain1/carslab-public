@@ -16,7 +16,7 @@ spec:
     networkType: "OVNKubernetes"
     cpuPartitioningMode: AllNodes
     clusterLabels:
-      common-du-prega414: true
+      common-du-prega414-latest: true
       flexranspr-group-hook: ""
       sites : "flexranspr-cars2-lab"
       acpipm: true
