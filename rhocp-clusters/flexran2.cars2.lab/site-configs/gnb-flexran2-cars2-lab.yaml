@@ -24,7 +24,7 @@ spec:
       # Normally this should match or contain the cluster name so it only applies to a single cluster
       sites : "flexran2-cars2-lab"
       acpipm: true
-      kepler: true
+      #kepler: true
       #vseloki: true
     clusterNetwork:
       - cidr: 10.128.0.0/14
