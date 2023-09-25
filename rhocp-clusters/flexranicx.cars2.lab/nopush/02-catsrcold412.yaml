@@ -1,0 +1,16 @@
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  annotations:
+    target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+  name: vse-operators
+  namespace: openshift-marketplace
+spec:
+  displayName: Dave Old
+  image: quay.io/redhat-partner-solutions/olm_snapshot_certified_catalog:v4.12_2023_05_30
+  publisher: Red Hat
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 10m0s
