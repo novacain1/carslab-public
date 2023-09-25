@@ -9,7 +9,7 @@ metadata:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: CM Configuration Management
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
-    ran.openshift.io/ztp-deploy-wave: "11"
+    ran.openshift.io/ztp-deploy-wave: "66"
 spec:
   remediationAction: enforce
   disabled: false
@@ -22,11 +22,24 @@ spec:
         spec:
           remediationAction: inform
           severity: low
-          namespaceSelector:
-            exclude:
-              - kube-*
-            include:
-              - default
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: v1
+                kind: ConfigMap
+                metadata:
+                  name: enable-user-workload-monitoring
+                  namespace: openshift-monitoring
+                data:
+                  enableUserWorkload: true
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-applyuserworkload
+        spec:
+          remediationAction: inform
+          severity: low
           object-templates:
             - complianceType: musthave
               objectDefinition:
@@ -36,8 +49,8 @@ spec:
                   name: cluster-monitoring-config
                   namespace: openshift-monitoring
                 data:
-                  config.yaml: |+
-                    enableUserWorkload: true
+                  config.yaml: |
+                    enableUserWorkload: '{{hub ( index ( lookup "v1"  "ConfigMap" "openshift-monitoring" "enable-user-workload-monitoring").data "enableUserWorkload" ) hub}}'
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
