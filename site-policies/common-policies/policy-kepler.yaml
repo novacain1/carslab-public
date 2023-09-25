@@ -36,7 +36,7 @@ spec:
                   name: cluster-monitoring-config
                   namespace: openshift-monitoring
                 data:
-                  config.yaml: |
+                  config.yaml: |+
                     enableUserWorkload: true
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
