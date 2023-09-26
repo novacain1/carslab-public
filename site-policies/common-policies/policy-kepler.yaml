@@ -51,7 +51,7 @@ spec:
                 data:
                   config.yaml: |
                     alertmanagerMain:
-                      enabled: false
+                      enabled: true
                     enableUserWorkload: '{{ (fromConfigMap "openshift-monitoring" "enable-user-workload-monitoring" "enableUserWorkload") | toBool }}'
                     grafana:
                       enabled: false
