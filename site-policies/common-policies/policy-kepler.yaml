@@ -28,7 +28,7 @@ spec:
                 apiVersion: v1
                 kind: ConfigMap
                 metadata:
-                  name: enable-user-workload-monitoring
+                  name: cluster-monitoring-config
                   namespace: openshift-monitoring
                 data:
                   config.yaml: |
@@ -39,25 +39,6 @@ spec:
                     prometheusK8s:
                       retention: 24h
                     enableUserWorkload: true
-    - objectDefinition:
-        apiVersion: policy.open-cluster-management.io/v1
-        kind: ConfigurationPolicy
-        metadata:
-          name: policy-applyuserworkload
-        spec:
-          remediationAction: inform
-          severity: low
-          object-templates:
-            - complianceType: musthave
-              objectDefinition:
-                apiVersion: v1
-                kind: ConfigMap
-                metadata:
-                  name: cluster-monitoring-config
-                  namespace: openshift-monitoring
-                data:
-                  config.yaml: |
-                    enableUserWorkload: '{{ (fromConfigMap "openshift-monitoring" "enable-user-workload-monitoring" "enableUserWorkload") | toBool }}'
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
