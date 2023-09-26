@@ -47,10 +47,6 @@ spec:
             - complianceType: musthave
               objectDefinition:
                 apiVersion: v1
-                kind: ConfigMap
-                metadata:
-                  name: cluster-monitoring-config
-                  namespace: openshift-monitoring
                 data:
                   config.yaml: |
                     alertmanagerMain:
@@ -60,6 +56,10 @@ spec:
                       enabled: false
                     prometheusK8s:
                        retention: 24h
+                kind: ConfigMap
+                metadata:
+                  name: cluster-monitoring-config
+                  namespace: openshift-monitoring
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
