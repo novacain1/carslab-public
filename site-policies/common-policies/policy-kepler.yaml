@@ -50,13 +50,13 @@ spec:
                   namespace: openshift-monitoring
                 data:
                   config.yaml: |
-                    grafana:
-                      enabled: "false"
                     alertmanagerMain:
-                      enabled: "false"
-                    prometheusK8s:
-                      retention: "24h"
+                      enabled: false
                     enableUserWorkload: '{{ (fromConfigMap "openshift-monitoring" "enable-user-workload-monitoring" "enableUserWorkload") | toBool }}'
+                    grafana:
+                      enabled: false
+                    prometheusK8s:
+                       retention: 24h
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
