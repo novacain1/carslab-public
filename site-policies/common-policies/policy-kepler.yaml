@@ -31,7 +31,7 @@ spec:
                   name: enable-user-workload-monitoring
                   namespace: openshift-monitoring
                 data:
-                  enableUserWorkload: true
+                  enableUserWorkload: "true"
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
