@@ -31,6 +31,8 @@ spec:
                   name: enable-user-workload-monitoring
                   namespace: openshift-monitoring
                 data:
+                  alertmanagerMain:
+                    enabled: "true"
                   enableUserWorkload: "true"
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
@@ -51,7 +53,7 @@ spec:
                 data:
                   config.yaml: |
                     alertmanagerMain:
-                      enabled: true
+                      enabled: '{{ (fromConfigMap "openshift-monitoring" "enable-user-workload-monitoring" "alertmanagerMain.enabled") | toBool }}'
                     enableUserWorkload: '{{ (fromConfigMap "openshift-monitoring" "enable-user-workload-monitoring" "enableUserWorkload") | toBool }}'
                     grafana:
                       enabled: false
