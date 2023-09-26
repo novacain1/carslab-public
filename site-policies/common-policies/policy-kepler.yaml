@@ -50,7 +50,8 @@ spec:
                   namespace: openshift-monitoring
                 data:
                   config.yaml: |
-                    enableUserWorkload: '{{hub ( index ( lookup "v1"  "ConfigMap" "openshift-monitoring" "enable-user-workload-monitoring").data "enableUserWorkload" ) hub}}'
+                    enableUserWorkload: '{{ fromConfigMap "openshift-monitoring" "enable-user-workload-monitoring" "enableUserWorkload"}}'
+                    #enableUserWorkload: '{{hub ( index ( lookup "v1"  "ConfigMap" "openshift-monitoring" "enable-user-workload-monitoring").data "enableUserWorkload" ) hub}}'
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
