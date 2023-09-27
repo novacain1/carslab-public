@@ -18,7 +18,7 @@ spec:
     clusterLabels:
       common-du-prega414-latest: true
       flexranspr-group-hook: ""
-      sites : "flexranspr-cars2-lab"
+      #sites : "flexranspr-cars2-lab"
       acpipm: true
       kepler: true
       latencyrhel9: true

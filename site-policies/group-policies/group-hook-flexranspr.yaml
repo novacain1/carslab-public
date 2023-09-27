@@ -181,43 +181,35 @@ spec:
 #          interface: "ens1f0"
 #          ptp4lOpts: "-2 -s --summary_interval -4"
 #          phc2sysOpts: "-a -r -n 24"
-    - fileName: StorageClass.yaml
-      policyName: "config-policy"
-      metadata:
-        name: "lso-filesystemclass"
-        annotations:
-          storageclass.kubernetes.io/is-default-class: "true"
-    - fileName: StorageClass.yaml
-      policyName: "config-policy"
-      metadata:
-        name: "lso-blockclass"
-    - fileName: StorageLV.yaml
-      policyName: "config-policy"
-      spec:
-        storageClassDevices:
-          - storageClassName: "lso-filesystemclass"
-            volumeMode: Filesystem
-            fsType: xfs
-            devicePaths:
-              - /dev/nvme0n1p5
-          - storageClassName: "lso-blockclass"
-            volumeMode: Block
-            fsType: xfs
-            devicePaths:
-              - /dev/nvme0n1p6
+#    - fileName: StorageClass.yaml
+#      policyName: "config-policy"
+#      metadata:
+#        name: "lso-filesystemclass"
+#        annotations:
+#          storageclass.kubernetes.io/is-default-class: "true"
+#    - fileName: StorageClass.yaml
+#      policyName: "config-policy"
+#      metadata:
+#        name: "lso-blockclass"
+#    - fileName: StorageLV.yaml
+#      policyName: "config-policy"
+#      spec:
+#        storageClassDevices:
+#          - storageClassName: "lso-filesystemclass"
+#            volumeMode: Filesystem
+#            fsType: xfs
+#            devicePaths:
+#              - /dev/nvme0n1p5
+#          - storageClassName: "lso-blockclass"
+#            volumeMode: Block
+#            fsType: xfs
+#            devicePaths:
+#              - /dev/nvme0n1p6
     - fileName: DisableSnoNetworkDiag.yaml
       policyName: "config-policy"
     - fileName: PerformanceProfile.yaml
       policyName: "config-policy"
       spec:
-        additionalKernelArgs:
-          - crashkernel=512M
-#          - rcupdate.rcu_normal_after_boot=0
-          - rcupdate.rcu_normal_after_boot=1
-          - intel_idle.max_cstate=0
-          - module_blacklist=irdma
-          - vfio_pci.enable_sriov=1
-          - vfio_pci.disable_idle_d3=1
         cpu:
           # These must be tailored for the specific hardware platform
           isolated: "2-19,22-39"
@@ -230,8 +222,7 @@ spec:
         workloadHints:
           realTime: true
           highPowerConsumption: false
-          perPodPowerManagement: false
-          #perPodPowerManagement: true
+          perPodPowerManagement: true
         net:
           userLevelNetworking: true
     - fileName: TunedPerformancePatch.yaml
@@ -252,8 +243,8 @@ spec:
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
-#              [sysfs]
-#              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 70
+              [sysfs]
+              /sys/devices/system/cpu/intel_pstate/max_perf_pct = 70
     - fileName: optional-extra-manifest/enable-crun-master.yaml
       policyName: "config-policy"
     - fileName: optional-extra-manifest/enable-crun-worker.yaml
