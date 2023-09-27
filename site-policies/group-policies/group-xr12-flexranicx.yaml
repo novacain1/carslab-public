@@ -13,24 +13,24 @@ spec:
   sourceFiles:
     - fileName: ConsoleOperatorDisable.yaml
       policyName: "config-policy"
-    - fileName: ClusterLogForwarder.yaml
-      policyName: "config-policy"
-      spec:
-        outputs:
-          - name: loki-infra
-            secret:
-              name: remote-logging-secret
-            type: loki
-            # yamllint disable-line rule:line-length
-            url: https://logging-loki-openshift-logging.apps.shadowman.cars2.lab/api/logs/v1/infrastructure
-        pipelines:
-          - name: send-infra-logs
-            inputRefs:
-              - infrastructure
-            outputRefs:
-              - loki-infra
-            labels:
-              clustername: flexranicx
+#    - fileName: ClusterLogForwarder.yaml
+#      policyName: "config-policy"
+#      spec:
+#        outputs:
+#          - name: loki-infra
+#            secret:
+#              name: remote-logging-secret
+#            type: loki
+#            # yamllint disable-line rule:line-length
+#            url: https://logging-loki-openshift-logging.apps.shadowman.cars2.lab/api/logs/v1/infrastructure
+#        pipelines:
+#          - name: send-infra-logs
+#            inputRefs:
+#              - infrastructure
+#            outputRefs:
+#              - loki-infra
+#            labels:
+#              clustername: flexranicx
     - fileName: ClusterLogging.yaml
       policyName: "config-policy"
       spec:
@@ -50,40 +50,35 @@ spec:
           interface: "ens3f3"
           ptp4lOpts: "-2 -s --summary_interval -4"
           phc2sysOpts: "-a -r -n 24"
-    - fileName: StorageClass.yaml
-      policyName: "config-policy"
-      metadata:
-        name: "lso-filesystemclass"
-        annotations:
-          storageclass.kubernetes.io/is-default-class: "true"
-    - fileName: StorageClass.yaml
-      policyName: "config-policy"
-      metadata:
-        name: "lso-blockclass"
-    - fileName: StorageLV.yaml
-      policyName: "config-policy"
-      spec:
-        storageClassDevices:
-          - storageClassName: "lso-filesystemclass"
-            volumeMode: Filesystem
-            fsType: xfs
-            devicePaths:
-              - /dev/sda5
-          - storageClassName: "lso-blockclass"
-            volumeMode: Block
-            fsType: xfs
-            devicePaths:
-              - /dev/sda6
+#    - fileName: StorageClass.yaml
+#      policyName: "config-policy"
+#      metadata:
+#        name: "lso-filesystemclass"
+#        annotations:
+#          storageclass.kubernetes.io/is-default-class: "true"
+#    - fileName: StorageClass.yaml
+#      policyName: "config-policy"
+#      metadata:
+#        name: "lso-blockclass"
+#    - fileName: StorageLV.yaml
+#      policyName: "config-policy"
+#      spec:
+#        storageClassDevices:
+#          - storageClassName: "lso-filesystemclass"
+#            volumeMode: Filesystem
+#            fsType: xfs
+#            devicePaths:
+#              - /dev/sda5
+#          - storageClassName: "lso-blockclass"
+#            volumeMode: Block
+#            fsType: xfs
+#            devicePaths:
+#              - /dev/sda6
     - fileName: DisableSnoNetworkDiag.yaml
       policyName: "config-policy"
     - fileName: PerformanceProfile.yaml
       policyName: "config-policy"
       spec:
-        additionalKernelArgs:
-          - crashkernel=512M
-          - rcupdate.rcu_normal_after_boot=0
-          #- intel_idle.max_cstate=0
-          - module_blacklist=irdma
         cpu:
           # These must be tailored for the specific hardware platform
           isolated: "2-31,34-63"
@@ -113,6 +108,7 @@ spec:
               kernel.timer_migration=1
               [scheduler]
               group.ice-ptp=0:f:10:*:ice-ptp.*
+              group.ice-gnss=0:f:10:*:ice-gnss.*
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
