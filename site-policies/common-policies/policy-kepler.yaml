@@ -116,7 +116,7 @@ spec:
         metadata:
           name: policy-kepler-kepler
         spec:
-          remediationAction: inform # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
+          remediationAction: enforce # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
           severity: low
           object-templates:
             - complianceType: musthave
