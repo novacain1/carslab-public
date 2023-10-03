@@ -11,7 +11,7 @@ metadata:
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
     ran.openshift.io/ztp-deploy-wave: "11"
 spec:
-  remediationAction: inform
+  remediationAction: enforce
   disabled: false
   policy-templates:
     - objectDefinition:
@@ -20,7 +20,7 @@ spec:
         metadata:
           name: policy-enableuserworkload
         spec:
-          remediationAction: inform
+          remediationAction: enforce
           severity: low
           object-templates:
             - complianceType: musthave
@@ -45,7 +45,7 @@ spec:
         metadata:
           name: policy-kepler-catsrc
         spec:
-          remediationAction: inform # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
+          remediationAction: enforce # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
           severity: low
           object-templates:
             - complianceType: musthave
@@ -91,7 +91,7 @@ spec:
         metadata:
           name: policy-kepler-subs
         spec:
-          remediationAction: inform # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
+          remediationAction: enforce # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
           severity: low
           object-templates:
             - complianceType: musthave
