@@ -43,6 +43,7 @@ spec:
 #          logs:
 #            type: "fluentd"
 #            fluentd: {}
+# WPC CARD
     - fileName: PtpConfigGmWpc.yaml
       policyName: "config-policy"
       spec:
@@ -154,6 +155,8 @@ spec:
             manufacturerIdentity 00:00:00
             userDescription ;
             timeSource 0xA0
+          ptpSettings:
+            logReduce: "false"
           ts2phcConf: |
             [nmea]
             ts2phc.master 1
@@ -170,6 +173,7 @@ spec:
             [ens2f0]
             ts2phc.extts_polarity rising
             ts2phc.extts_correction 0
+          ts2phcOpts: "-m"
 #    - fileName: PtpConfigSlaveCvl.yaml   # Change to PtpConfigSlaveCvl.yaml for ColumbiaVille NIC
 #      policyName: "config-policy"
 #      metadata:
@@ -212,8 +216,8 @@ spec:
       spec:
         cpu:
           # These must be tailored for the specific hardware platform
-          isolated: "2-19,22-39"
-          reserved: "0-1,20-21"
+          isolated: "2-31,34-63"
+          reserved: "0-1,32-33"
         hugepages:
           defaultHugepagesSize: 1G
           pages:
@@ -223,8 +227,8 @@ spec:
           realTime: true
           highPowerConsumption: false
           perPodPowerManagement: true
-        net:
-          userLevelNetworking: true
+#        net:
+#          userLevelNetworking: true
     - fileName: TunedPerformancePatch.yaml
       policyName: "config-policy"
       spec:

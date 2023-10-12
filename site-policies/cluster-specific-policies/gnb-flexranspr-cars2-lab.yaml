@@ -60,7 +60,7 @@ spec:
         isRdma: false
         nicSelector:
           vendor: "8086"
-          deviceID: "1593"
+          deviceID: "1592"
           pfNames: ["ens1f0#0-3"]
         numVfs: 8
         priority: 10
@@ -76,7 +76,7 @@ spec:
         isRdma: false
         nicSelector:
           vendor: "8086"
-          deviceID: "1593"
+          deviceID: "1592"
           pfNames: ["ens1f0#4-7"]
         numVfs: 8
         priority: 10
@@ -88,7 +88,7 @@ spec:
       spec:
         resourceName: pci_sriov_net_ens1f0_1
         networkNamespace: flexranl1
-        vlan: 806
+        vlan: 2301
         ipam: |-
           {"type": "static"}
         linkState: auto
@@ -99,7 +99,7 @@ spec:
       spec:
         resourceName: pci_sriov_net_ens1f0_1
         networkNamespace: flexranl1
-        vlan: 814
+        vlan: 2301
         ipam: |-
           {"type": "static"}
         linkState: auto
@@ -110,7 +110,7 @@ spec:
       spec:
         resourceName: pci_sriov_net_ens1f0_0
         networkNamespace: flexranl1
-        vlan: 826
+        vlan: 2301
         ipam: |-
           {"type": "static"}
         linkState: auto
