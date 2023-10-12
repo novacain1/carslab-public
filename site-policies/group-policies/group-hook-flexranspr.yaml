@@ -222,13 +222,11 @@ spec:
           defaultHugepagesSize: 1G
           pages:
             - size: 1G
-              count: 16
+              count: 32
         workloadHints:
           realTime: true
           highPowerConsumption: false
           perPodPowerManagement: true
-#        net:
-#          userLevelNetworking: true
     - fileName: TunedPerformancePatch.yaml
       policyName: "config-policy"
       spec:
@@ -249,10 +247,10 @@ spec:
               service.chronyd=stop,disable
               [sysfs]
               /sys/devices/system/cpu/intel_pstate/max_perf_pct = 70
-    - fileName: optional-extra-manifest/enable-crun-master.yaml
-      policyName: "config-policy"
-    - fileName: optional-extra-manifest/enable-crun-worker.yaml
-      policyName: "config-policy"
+#    - fileName: optional-extra-manifest/enable-crun-master.yaml
+#      policyName: "config-policy"
+#    - fileName: optional-extra-manifest/enable-crun-worker.yaml
+#      policyName: "config-policy"
 #    --- sources needed for image registry (check ImageRegistry.md for more details)----
 #    - fileName: StorageClass.yaml
 #      policyName: "config-policy"
