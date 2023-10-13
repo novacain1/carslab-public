@@ -43,15 +43,15 @@ spec:
 #          logs:
 #            type: "fluentd"
 #            fluentd: {}
-# WPC CARD
+# Logan Beach CARD
     - fileName: PtpConfigGmWpc.yaml
       policyName: "config-policy"
       spec:
         profile:
         - name: "grandmaster"
-          phc2sysOpts: -r -u 0 -m -O -37 -N 8 -R 16 -s ens2f0 -n 24
+          phc2sysOpts: -r -u 0 -m -O -37 -N 8 -R 16 -s ens1f0 -n 24
           ptp4lConf: |
-            [ens2f0]
+            [ens1f0]
             masterOnly 1
             [global]
             #
@@ -170,7 +170,7 @@ spec:
             #example value of gnss_serialport is /dev/ttyGNSS_1700_0
             ts2phc.nmea_serialport /dev/gnss0
             leapfile  /usr/share/zoneinfo/leap-seconds.list
-            [ens2f0]
+            [ens1f0]
             ts2phc.extts_polarity rising
             ts2phc.extts_correction 0
           ts2phcOpts: "-m"
@@ -224,7 +224,7 @@ spec:
             - size: 1G
               count: 32
         workloadHints:
-          realTime: true
+          realTime: false
           highPowerConsumption: false
           perPodPowerManagement: true
     - fileName: TunedPerformancePatch.yaml
