@@ -223,6 +223,8 @@ spec:
           pages:
             - size: 1G
               count: 32
+        realTimeKernel:
+          enabled: false
         workloadHints:
           realTime: false
           highPowerConsumption: false
