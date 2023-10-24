@@ -20,7 +20,7 @@ spec:
       flexranspr-group-hook: ""
       #sites : "flexranspr-cars2-lab"
       acpipm: true
-      kepler: true
+      #kepler: true
       latencyrhel9: true
       vseextras: true
     clusterNetwork:
