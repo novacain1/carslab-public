@@ -14,7 +14,7 @@ generators:
 # This is common to all RAN DU deployments
 - common-policies/common-ranGen.yaml
 #- common-policies/common-ranGen-vse414.yaml
-- common-policies/common-ranGen-prega414.yaml
+- common-policies/common-ranGen-414.yaml
 - common-policies/common-ranGen-prega414-latest.yaml
 
 # This group policy is for Dell EMC XR12 based deployments:

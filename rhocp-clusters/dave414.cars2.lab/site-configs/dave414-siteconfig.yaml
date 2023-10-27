@@ -9,41 +9,41 @@ spec:
   baseDomain: "cars2.lab"
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
-  clusterImageSetNameRef: "openshift-4.14.0-rc.7"
+  clusterImageSetNameRef: "openshift-4.14.0"
   sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd7Jj5iFCWv9IHJK9H+2O3lyPs36moAxeAUiHvzRS3uzqGxxB33BnTRBNDKsoDFSGJX0J4bd5b+XyCPdhFOfvn/xhmAcm6d8GALS+139e8d+No8h2QgZy0OVJFp844k4nmz4wew5/+X9DN40ZURYerekbVc58hw1+rTu0uM2jQ0cE2QmEf3qGKHx9UJW8t6IsMzwnrikBH30sYqn2NcBE+/c8JzlLc3PvvenlY0iQkpukI1A5E9GGMR9OS/q+w6FH85zvSgUatOV7Q5lg45QUF+V77DrfX5+niI+NK1g70pRvD8481SAdXrHPB5vK4vQEmJ4pz83IKYHVuPzRnjzYKv1jV33oReyyMqyk44Rsfkxl4i5SJ9z7q/EVmTjvurzD6ofi3Dg0+PL18eTcjuPFdCxSCUFsnr5N9CRHCxHRQpxoZTD7sYD4jDGNygawLvhxcvgKGBZzP53NRCzRFOMFmZsLPLQRaNOsgKRPAohmrn5l8+1xG5ltVauOwAFlKUxk="
   clusters:
   - clusterName: "dave414"
     networkType: "OVNKubernetes"
     cpuPartitioningMode: AllNodes
     clusterLabels:
-      common-du-prega414-latest: true
+      common-du-414: true
       group-dellr750-vse4: ""
       acpipm: true
       #vseloki: true
       #kepler: true
       latencyrhel9: true
-      vseextras: true
+      #vseextras: true
     clusterNetwork:
-#      - cidr: 10.128.0.0/14
-#        hostPrefix: 23
+      - cidr: 10.128.0.0/14
+        hostPrefix: 23
       - cidr: fd01::/48
         hostPrefix: 64
     machineNetwork:
-#      - cidr: 192.168.38.128/26
+      - cidr: 192.168.38.128/26
       - cidr: 2600:52:7:300::0/64
     serviceNetwork:
-#      - 172.30.0.0/16
+      - 172.30.0.0/16
       - fd02::/112
     additionalNTPSources:
-#      - clock.cars2.lab
+      - clock.cars2.lab
       - clock-v6.cars2.lab
     # Optionally; This can be used to override the KlusterletAddonConfig that is created for this cluster:
     #crTemplates:
     #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
-    proxy:
-      httpProxy: http://cars2-client.infra.cars2.lab:3128
-      httpsProxy: http://cars2-client.infra.cars2.lab:3128
-      noProxy: ".cars2.lab,2600:52:7:300::0/64,fd02::/112,fd01::/48,2600:52:7:300::177,2600:52:7:300::179,2600:52:7:300::180,2600:52:7:300::181"
+#    proxy:
+#      httpProxy: http://cars2-client.infra.cars2.lab:3128
+#      httpsProxy: http://cars2-client.infra.cars2.lab:3128
+#      noProxy: ".cars2.lab,2600:52:7:300::0/64,fd02::/112,fd01::/48,2600:52:7:300::177,2600:52:7:300::179,2600:52:7:300::180,2600:52:7:300::181"
     nodes:
       - hostName: "cu1-1.dave414.cars2.lab"
         role: "master"
@@ -67,12 +67,12 @@ spec:
             - name: ens2f0
               type: ethernet
               state: up
-#              ipv4:
-#                enabled: true
-#                address:
-#                  - ip: "192.168.38.142"
-#                    prefix-length: 26
-#                dhcp: false
+              ipv4:
+                enabled: true
+                address:
+                  - ip: "192.168.38.142"
+                    prefix-length: 26
+                dhcp: false
               ipv6:
                 enabled: true
                 address:
@@ -83,13 +83,13 @@ spec:
             dns-resolver:
               config:
                 server:
-#                  - 192.168.38.12
+                  - 192.168.38.12
                   - 2600:52:7:38::12
             routes:
               config:
-#              - destination: 0.0.0.0/0
-#                next-hop-address: 192.168.38.129
-#                next-hop-interface: ens2f0
+              - destination: 0.0.0.0/0
+                next-hop-address: 192.168.38.129
+                next-hop-interface: ens2f0
               - destination: ::/0
                 next-hop-address: 2600:52:7:300::1
                 next-hop-interface: ens2f0
