@@ -22,7 +22,7 @@ spec:
       acpipm: true
       kepler: true
       latencyrhel9: true
-      vseextras: true
+      #vseextras: true
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
