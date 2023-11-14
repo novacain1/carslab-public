@@ -14,6 +14,7 @@ spec:
   clusters:
   - clusterName: "dave414"
     networkType: "OVNKubernetes"
+    installConfigOverrides:  "{\"capabilities\":{\"baselineCapabilitySet\": \"None\", \"additionalEnabledCapabilities\": [ \"marketplace\", \"NodeTuning\" ] }}"
     cpuPartitioningMode: AllNodes
     clusterLabels:
       common-du-414: true
