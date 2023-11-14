@@ -15,7 +15,6 @@ generators:
 - common-policies/common-ranGen.yaml
 #- common-policies/common-ranGen-vse414.yaml
 - common-policies/common-ranGen-414.yaml
-- common-policies/common-ranGen-prega414-latest.yaml
 
 # This group policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2.yaml
@@ -28,6 +27,8 @@ generators:
 - group-policies/group-dellr760-vse3.yaml
 # This group policy is for Dell R750 based deployments:
 - group-policies/group-dellr750-vse4.yaml
+# This group policy is for HPE e920t based deployments:
+- group-policies/group-hpee920t-sku1.yaml
 
 # This group validator policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2-validator.yaml
@@ -40,6 +41,8 @@ generators:
 - group-policies/group-dellr760-vse3-validator.yaml
 # This group validator policy is for Dell R750 based deployments:
 - group-policies/group-dellr750-vse4-validator.yaml
+# This group validator policy is for HPE e920t based deployments:
+- group-policies/group-hpee920t-sku1-validator.yaml
 
 # This group policy is for all compressed 3-node cluster deployments:
 #- group-du-3node-ranGen.yaml

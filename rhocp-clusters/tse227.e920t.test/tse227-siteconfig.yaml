@@ -1,0 +1,147 @@
+---
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "tse227"
+  namespace: "tse227"
+spec:
+  baseDomain: "e920t.test"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.14.1-x86-64-appsub"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd7Jj5iFCWv9IHJK9H+2O3lyPs36moAxeAUiHvzRS3uzqGxxB33BnTRBNDKsoDFSGJX0J4bd5b+XyCPdhFOfvn/xhmAcm6d8GALS+139e8d+No8h2QgZy0OVJFp844k4nmz4wew5/+X9DN40ZURYerekbVc58hw1+rTu0uM2jQ0cE2QmEf3qGKHx9UJW8t6IsMzwnrikBH30sYqn2NcBE+/c8JzlLc3PvvenlY0iQkpukI1A5E9GGMR9OS/q+w6FH85zvSgUatOV7Q5lg45QUF+V77DrfX5+niI+NK1g70pRvD8481SAdXrHPB5vK4vQEmJ4pz83IKYHVuPzRnjzYKv1jV33oReyyMqyk44Rsfkxl4i5SJ9z7q/EVmTjvurzD6ofi3Dg0+PL18eTcjuPFdCxSCUFsnr5N9CRHCxHRQpxoZTD7sYD4jDGNygawLvhxcvgKGBZzP53NRCzRFOMFmZsLPLQRaNOsgKRPAohmrn5l8+1xG5ltVauOwAFlKUxk="
+  clusters:
+    - clusterName: "tse227"
+      networkType: "OVNKubernetes"
+      cpuPartitioningMode: AllNodes
+      # installConfigOverrides is a generic way of passing install-config
+      # parameters through the siteConfig.  The 'capabilities' field configures
+      # the composable openshift feature.  In this 'capabilities' setting, we
+      # remove all but the marketplace component from the optional set of
+      # components.
+      # Notes:
+      # - NodeTuning is needed for 4.13 and later, not for 4.12 and earlier
+      installConfigOverrides: "{\"capabilities\":{\"baselineCapabilitySet\": \"None\", \"additionalEnabledCapabilities\": [ \"marketplace\", \"NodeTuning\" ] }}"
+      # It is strongly recommended to include crun manifests as part of the additional install-time manifests for 4.13+.
+      # The crun manifests can be obtained from source-crs/optional-extra-manifest/ and added to the git repo ie.sno-extra-manifest.
+      # extraManifestPath: sno-extra-manifest
+      clusterLabels:
+        common-du-414: true
+        group-hpee920t-sku1: ""
+      clusterNetwork:
+        - cidr: 10.128.0.0/14
+          hostPrefix: 23
+#        - cidr: fd01::/48
+#          hostPrefix: 64
+      serviceNetwork:
+        - 172.30.0.0/16
+#        - fd02::/112
+      machineNetwork:
+        - cidr: 192.168.14.96/27
+#        - cidr: 2600:52:7:300::0/64
+      additionalNTPSources:
+        - clock.cars2.lab
+#        - clock-v6.cars2.lab
+      #crTemplates:
+      #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
+      nodes:
+        - hostName: "e920t-sno.tse227.e920t.test"
+          role: master
+          # Optionally; This can be used to configure desired BIOS setting on a host:
+          #biosConfigRef:
+          #  filePath: "example-hw.profile"
+          bmcAddress: "redfish-virtualmedia://192.168.14.227/redfish/v1/Systems/1"
+          bmcCredentialsName:
+            name: "e920t-sno-tse227-e920t-test-bmc-secret"
+          bootMACAddress: "b4:96:91:d2:e8:45"
+          bootMode: "UEFI"
+          rootDeviceHints:
+            deviceName: "/dev/disk/by-path/pci-0000:c2:00.0-nvme-1"
+          # example of diskPartition below is used for image registry (check ImageRegistry.md for more details), but it's not limited to this use case
+#          diskPartition:
+#            - device: /dev/disk/by-id/wwn-0x11111000000asd123 # match rootDeviceHints
+#              partitions:
+#                - mount_point: /var/imageregistry
+#                  size: 102500
+#                  start: 344844
+         # allocate partitions for persist storage used by HTTP transport subscription data for PTP and BMER operators.
+         # disk id and and size needs to be adjusted to the hardware
+         # ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/disk/by-id/wwn-0x11111000000asd123","wipeTable":false,"partitions":[{"sizeMiB":16,"label":"httpevent1","startMiB":350000},{"sizeMiB":16,"label":"httpevent2","startMiB":350016}]}],"filesystem":[{"device":"/dev/disk/by-partlabel/httpevent1","format":"xfs","wipeFilesystem":true},{"device":"/dev/disk/by-partlabel/httpevent2","format":"xfs","wipeFilesystem":true}]}}'
+          nodeNetwork:
+            interfaces:
+              - name: eno1
+                macAddress: "5c:ba:2c:1f:6d:4b"
+              - name: ens1f0
+                macAddress: "b4:96:91:d2:e8:44"
+              - name: ens1f1
+                macAddress: "b4:96:91:d2:e8:45"
+              - name: ens1f2
+                macAddress: "b4:96:91:d2:e8:46"
+              - name: ens1f3
+                macAddress: "b4:96:91:d2:e8:47"                            
+              - name: ens2f0
+                macAddress: "b4:96:91:d2:e2:80"
+              - name: ens2f1
+                macAddress: "b4:96:91:d2:e2:81"
+              - name: ens2f2
+                macAddress: "b4:96:91:d2:e2:82"
+              - name: ens2f3
+                macAddress: "b4:96:91:d2:e2:83"
+            config:
+              interfaces:
+                - name: eno1
+                  type: ethernet
+                  state: down
+                - name: ens1f0
+                  type: ethernet
+                  state: down
+                - name: ens1f1
+                  type: ethernet
+                  state: up
+                  ipv4:
+                    enabled: true
+                    address:
+                      - ip: "192.168.14.102"
+                        prefix-length: 27
+                    dhcp: false
+#                  ipv6:
+#                    enabled: true
+#                    address:
+#                      - ip: "2600:52:7:300::143"
+#                        prefix-length: 64
+#                    autoconf: false
+#                    dhcp: false
+                - name: ens1f2
+                  type: ethernet
+                  state: down
+                - name: ens1f3
+                  type: ethernet
+                  state: down
+                - name: ens2f0
+                  type: ethernet
+                  state: down
+                - name: ens2f1
+                  type: ethernet
+                  state: down
+                - name: ens2f2
+                  type: ethernet
+                  state: down
+                - name: ens2f3
+                  type: ethernet
+                  state: down                                    
+              dns-resolver:
+                config:
+                  search:
+                    - cars2.lab
+                    - e920t.test
+                  server:
+                    - 192.168.38.12
+#                    - 2600:52:7:38::12
+              routes:
+                config:
+                  - destination: 0.0.0.0/0
+                    next-hop-address: 192.168.14.97
+                    next-hop-interface: ens1f1
+#                  - destination: ::/0
+#                    next-hop-address: 2600:52:7:300::1
+#                    next-hop-interface: eno3
