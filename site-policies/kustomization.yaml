@@ -29,6 +29,8 @@ generators:
 - group-policies/group-dellr750-vse4.yaml
 # This group policy is for HPE e920t based deployments:
 - group-policies/group-hpee920t-sku1.yaml
+# This group policy is for Intel gnr1 based deployments:
+- group-policies/group-gnr1.yaml
 
 # This group validator policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2-validator.yaml
@@ -43,6 +45,8 @@ generators:
 - group-policies/group-dellr750-vse4-validator.yaml
 # This group validator policy is for HPE e920t based deployments:
 - group-policies/group-hpee920t-sku1-validator.yaml
+# This group validator policy is for Intel gnr1 based deployments:
+- group-policies/group-gnr1-validator.yaml
 
 # This group policy is for all compressed 3-node cluster deployments:
 #- group-du-3node-ranGen.yaml
