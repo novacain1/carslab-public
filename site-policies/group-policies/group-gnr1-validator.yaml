@@ -12,7 +12,7 @@ spec:
     # yamllint disable-line rule:line-length
     # This policy will correspond to all clusters with label specified in bindingRules and
     # without label specified in bindingExcludedRules.
-    group-hpee920t-sku1: ""
+    group-gnr1: ""
   bindingExcludedRules:
     # yamllint disable-line rule:line-length
     # The ztp-done label is used in coordination with the Topology Aware Lifecycle Operator(TALO).

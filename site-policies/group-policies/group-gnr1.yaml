@@ -8,7 +8,7 @@ metadata:
 spec:
   bindingRules:
     # These policies will correspond to all clusters with this label:
-    group-gnr1-sku1: ""
+    group-gnr1: ""
   mcp: "master"
   sourceFiles:
     - fileName: AcceleratorsNS.yaml
