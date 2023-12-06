@@ -128,7 +128,7 @@ spec:
         priority: 10
         resourceName: pci_sriov_net_ens2f0_1
     - fileName: SriovNetwork.yaml
-      policyName: "sriov-network-policy-mplane"
+      policyName: "sriov-network-policy-mp"
       metadata:
         name: "sriov-nw-vran-mp1"
       spec:
@@ -139,7 +139,7 @@ spec:
           {"type": "static"}
         linkState: auto
     - fileName: SriovNetwork.yaml
-      policyName: "sriov-network-policy-splane"
+      policyName: "sriov-network-policy-sp"
       metadata:
         name: "sriov-nw-vran-splane1"
       spec:
