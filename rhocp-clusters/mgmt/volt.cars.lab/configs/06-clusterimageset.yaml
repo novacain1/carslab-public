@@ -2,9 +2,9 @@
 apiVersion: hive.openshift.io/v1
 kind: ClusterImageSet
 metadata:
-  name: openshift-4.12.0-ec.4-rhel9
+  name: openshift-4.14.5
 spec:
-  releaseImage: registry.ci.openshift.org/rhcos-devel/ocp-4.12-9.0:4.12.0-ec.4
+  releaseImage: quay.io/openshift-release-dev/ocp-release:4.14.5-x86_64
 ---  
 apiVersion: hive.openshift.io/v1
 kind: ClusterImageSet
