@@ -64,6 +64,7 @@ generators:
 #- site-specific-policies/flexrankepler-cars2-lab.yaml
 #- site-specific-policies/flexranspr-cars2-lab.yaml
 #- example-multinode-site.yaml
+- site-specific-policies/interceptor-worker-cars2-lab.yaml
 
 # These are cluster specific policies:
 - cluster-specific-policies/gnb-flexran2-cars2-lab.yaml
