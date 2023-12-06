@@ -140,97 +140,97 @@ spec:
                   - destination: ::/0
                     next-hop-address: 2600:52:7:300::1
                     next-hop-interface: ens2f0
-#       - hostName: "discrete.interceptor.cars2.lab"
-#          role: worker
-#          # Optionally; This can be used to configure desired BIOS setting on a host:
-#          #biosConfigRef:
-#          #  filePath: "example-hw.profile"
-#          bmcAddress: "idrac-virtualmedia://192.168.38.211/redfish/v1/Systems/System.Embedded.1"
-#          bmcCredentialsName:
-#            name: "discrete-interceptor-cars2-lab-bmc-secret"
-#          bootMACAddress: "40:a6:b7:bf:1c:c4"
-#          bootMode: "UEFI"
-#          rootDeviceHints:
-#            deviceName: "/dev/disk/by-path/pci-0000:43:00.0-nvme-1"
-#          # example of diskPartition below is used for image registry (check ImageRegistry.md for more details), but it's not limited to this use case
-##          diskPartition:
-##            - device: /dev/disk/by-id/wwn-0x11111000000asd123 # match rootDeviceHints
-##              partitions:
-##                - mount_point: /var/imageregistry
-##                  size: 102500
-##                  start: 344844
-#         # allocate partitions for persist storage used by HTTP transport subscription data for PTP and BMER operators.
-#         # disk id and and size needs to be adjusted to the hardware
-#         # ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/disk/by-id/wwn-0x11111000000asd123","wipeTable":false,"partitions":[{"sizeMiB":16,"label":"httpevent1","startMiB":350000},{"sizeMiB":16,"label":"httpevent2","startMiB":350016}]}],"filesystem":[{"device":"/dev/disk/by-partlabel/httpevent1","format":"xfs","wipeFilesystem":true},{"device":"/dev/disk/by-partlabel/httpevent2","format":"xfs","wipeFilesystem":true}]}}'
-#          nodeNetwork:
-#            interfaces:
-#              - name: ens2f0
-#                macAddress: "40:a6:b7:bf:1c:c4"
-#              - name: ens2f1
-#                macAddress: "40:a6:b7:bf:1c:c5"
-#              - name: ens2f2
-#                macAddress: "40:a6:b7:bf:1c:c6"
-#              - name: ens2f3
-#                macAddress: "40:a6:b7:bf:1c:c7"
-#              - name: ens3f0
-#                macAddress: "50:7c:6f:53:ce:a0"
-#              - name: ens3f1
-#                macAddress: "50:7c:6f:53:ce:a1"
-#              - name: ens3f2
-#                macAddress: "50:7c:6f:53:ce:a2"
-#              - name: ens3f3
-#                macAddress: "50:7c:6f:53:ce:a3"                
-#            config:
-#              interfaces:
-#                - name: ens2f0
-#                  type: ethernet
-#                  state: up
-#                  ipv4:
-#                    enabled: true
-#                    address:
-#                      - ip: "192.168.38.147"
-#                        prefix-length: 26
-#                    dhcp: false
-#                  ipv6:
-#                    enabled: true
-#                    address:
-#                      - ip: "2600:52:7:300::147"
-#                        prefix-length: 64
-#                    autoconf: false
-#                    dhcp: false
-#                - name: ens2f1
-#                  type: ethernet
-#                  state: down
-#                - name: ens2f2
-#                  type: ethernet
-#                  state: down
-#                - name: ens2f3
-#                  type: ethernet
-#                  state: down
-#                - name: ens3f0
-#                  type: ethernet
-#                  state: down
-#                - name: ens3f1
-#                  type: ethernet
-#                  state: down
-#                - name: ens3f2
-#                  type: ethernet
-#                  state: down
-#                - name: ens3f3
-#                  type: ethernet
-#                  state: down                                                                                                    
-#              dns-resolver:
-#                config:
-#                  search:
-#                    - interceptor.cars2.lab
-#                  server:
-#                    - 192.168.38.12
-#                    - 2600:52:7:38::12
-#              routes:
-#                config:
-#                  - destination: 0.0.0.0/0
-#                    next-hop-address: 192.168.38.129
-#                    next-hop-interface: ens2f0
-#                  - destination: ::/0
-#                    next-hop-address: 2600:52:7:300::1
-#                    next-hop-interface: ens2f0                    
+       - hostName: "discrete.interceptor.cars2.lab"
+          role: worker
+          # Optionally; This can be used to configure desired BIOS setting on a host:
+          #biosConfigRef:
+          #  filePath: "example-hw.profile"
+          bmcAddress: "idrac-virtualmedia://192.168.38.211/redfish/v1/Systems/System.Embedded.1"
+          bmcCredentialsName:
+            name: "discrete-interceptor-cars2-lab-bmc-secret"
+          bootMACAddress: "40:a6:b7:bf:1c:c4"
+          bootMode: "UEFI"
+          rootDeviceHints:
+            deviceName: "/dev/disk/by-path/pci-0000:43:00.0-nvme-1"
+          # example of diskPartition below is used for image registry (check ImageRegistry.md for more details), but it's not limited to this use case
+#          diskPartition:
+#            - device: /dev/disk/by-id/wwn-0x11111000000asd123 # match rootDeviceHints
+#              partitions:
+#                - mount_point: /var/imageregistry
+#                  size: 102500
+#                  start: 344844
+         # allocate partitions for persist storage used by HTTP transport subscription data for PTP and BMER operators.
+         # disk id and and size needs to be adjusted to the hardware
+         # ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/disk/by-id/wwn-0x11111000000asd123","wipeTable":false,"partitions":[{"sizeMiB":16,"label":"httpevent1","startMiB":350000},{"sizeMiB":16,"label":"httpevent2","startMiB":350016}]}],"filesystem":[{"device":"/dev/disk/by-partlabel/httpevent1","format":"xfs","wipeFilesystem":true},{"device":"/dev/disk/by-partlabel/httpevent2","format":"xfs","wipeFilesystem":true}]}}'
+          nodeNetwork:
+            interfaces:
+              - name: ens2f0
+                macAddress: "40:a6:b7:bf:1c:c4"
+              - name: ens2f1
+                macAddress: "40:a6:b7:bf:1c:c5"
+              - name: ens2f2
+                macAddress: "40:a6:b7:bf:1c:c6"
+              - name: ens2f3
+                macAddress: "40:a6:b7:bf:1c:c7"
+              - name: ens3f0
+                macAddress: "50:7c:6f:53:ce:a0"
+              - name: ens3f1
+                macAddress: "50:7c:6f:53:ce:a1"
+              - name: ens3f2
+                macAddress: "50:7c:6f:53:ce:a2"
+              - name: ens3f3
+                macAddress: "50:7c:6f:53:ce:a3"                
+            config:
+              interfaces:
+                - name: ens2f0
+                  type: ethernet
+                  state: up
+                  ipv4:
+                    enabled: true
+                    address:
+                      - ip: "192.168.38.147"
+                        prefix-length: 26
+                    dhcp: false
+                  ipv6:
+                    enabled: true
+                    address:
+                      - ip: "2600:52:7:300::147"
+                        prefix-length: 64
+                    autoconf: false
+                    dhcp: false
+                - name: ens2f1
+                  type: ethernet
+                  state: down
+                - name: ens2f2
+                  type: ethernet
+                  state: down
+                - name: ens2f3
+                  type: ethernet
+                  state: down
+                - name: ens3f0
+                  type: ethernet
+                  state: down
+                - name: ens3f1
+                  type: ethernet
+                  state: down
+                - name: ens3f2
+                  type: ethernet
+                  state: down
+                - name: ens3f3
+                  type: ethernet
+                  state: down                                                                                                    
+              dns-resolver:
+                config:
+                  search:
+                    - interceptor.cars2.lab
+                  server:
+                    - 192.168.38.12
+                    - 2600:52:7:38::12
+              routes:
+                config:
+                  - destination: 0.0.0.0/0
+                    next-hop-address: 192.168.38.129
+                    next-hop-interface: ens2f0
+                  - destination: ::/0
+                    next-hop-address: 2600:52:7:300::1
+                    next-hop-interface: ens2f0
