@@ -2,7 +2,7 @@
 apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
-  name: "interceptor-worker-cars2-lab"
+  name: "interceptor-worker"
   namespace: "ztp-site-cars2"
 spec:
   bindingRules:
