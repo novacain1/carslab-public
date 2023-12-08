@@ -120,6 +120,10 @@ spec:
               numQueueGroups: 4
               numAqsPerGroups: 16
               aqDepthLog2: 4
+            qfft:
+              aqDepthLog2: 4
+              numAqsPerGroups: 16
+              numQueueGroups: 4
     - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "sriovw-vfio-policy-ens2f0"
