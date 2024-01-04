@@ -86,7 +86,9 @@ spec:
           ptp4lOpts: "-2 -s --summary_interval -4"
           phc2sysOpts: "-a -r -n 24"
         recommend:
-        - profile: "worker-slave"
+        - match:
+          - nodeLabel: "kubernetes.io/hostname: discrete.interceptor.cars2.lab"
+          profile: "worker-slave"
     - fileName: SriovFecClusterConfig.yaml
       policyName: "fec-policy"
       metadata:
