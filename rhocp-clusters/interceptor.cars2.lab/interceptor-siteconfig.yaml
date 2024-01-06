@@ -141,7 +141,7 @@ spec:
                     next-hop-address: 2600:52:7:300::1
                     next-hop-interface: ens2f0
 #        - hostName: "discrete.interceptor.cars2.lab"
-#          role: worker
+#          role: oranru
 #          # Optionally; This can be used to configure desired BIOS setting on a host:
 #          #biosConfigRef:
 #          #  filePath: "example-hw.profile"

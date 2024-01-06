@@ -2,19 +2,19 @@
 apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
-  name: "interceptor-worker"
+  name: "interceptor-oranru"
   namespace: "ztp-site-cars2"
 spec:
   bindingRules:
-    sites: "interceptor-worker-cars2-lab"
+    sites: "interceptor-oranru-cars2-lab"
   remediationAction: enforce
-  mcp: "worker"
+  mcp: "oranru"
   sourceFiles:
     - fileName: MachineConfigGeneric.yaml 
       policyName: "config-policy"
       metadata:
         labels:
-          machineconfiguration.openshift.io/role: worker
+          machineconfiguration.openshift.io/role: oranru
         name: enable-workload-partitioning
       spec:
         config:
@@ -37,7 +37,7 @@ spec:
     - fileName: PerformanceProfile.yaml
       policyName: "config-policy"
       metadata:
-        name: "openshift-worker-node-performance-profile"
+        name: "openshift-oranru-node-performance-profile"
       spec:
         cpu:
           isolated: "2-31,34-63"
@@ -54,14 +54,14 @@ spec:
     - fileName: TunedPerformancePatch.yaml
       policyName: "config-policy"
       metadata:
-        name: performance-patch-worker
+        name: performance-patch-oranru
       spec:
         profile:
-          - name: performance-patch-worker
+          - name: performance-patch-oranru
             data: |
               [main]
               summary=Configuration changes profile inherited from performance created tuned
-              include=openshift-node-performance-openshift-worker-node-performance-profile
+              include=openshift-node-performance-openshift-oranru-node-performance-profile
               [sysctl]
               kernel.timer_migration=1
               [scheduler]
@@ -73,14 +73,14 @@ spec:
               [sysfs]
               /sys/devices/system/cpu/intel_pstate/max_perf_pct = 70
         recommend:
-        - profile: performance-patch-worker
+        - profile: performance-patch-oranru
     - fileName: PtpConfigSlaveCvl.yaml
       policyName: "config-policy"
       metadata:
-        name: "du-ptp-worker-slave"
+        name: "du-ptp-oranru-slave"
       spec:
         profile:
-        - name: "worker-slave"
+        - name: "oranru-slave"
           # This interface must match the hardware in this group
           interface: "ens2f0"
           ptp4lOpts: "-2 -s --summary_interval -4"
@@ -88,15 +88,15 @@ spec:
         recommend:
         - match:
           - nodeName: "discrete.interceptor.cars2.lab"
-          profile: "worker-slave"
+          profile: "oranru-slave"
     - fileName: SriovFecClusterConfig.yaml
       policyName: "fec-policy"
       metadata:
-        name: worker-config
+        name: oranru-config
       spec:
         drainSkip: true
         nodeSelector:
-          node-role.kubernetes.io/worker: ""
+          node-role.kubernetes.io/oranru: ""
         acceleratorSelector:
           pciAddress: 0000:f7:00.0
         physicalFunction:
