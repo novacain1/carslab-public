@@ -55,6 +55,47 @@ spec:
                             WantedBy=multi-user.target
                           enabled: true
                           name: acpipm-workaround.service
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: policy-acpipm-mc-worker
+        spec:
+          remediationAction: enforce # the policy-template spec.remediationAction is overridden by the preceding parameter value for spec.remediationAction.
+          severity: low
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: machineconfiguration.openshift.io/v1
+                kind: MachineConfig # must have acpipm
+                metadata:
+                  name: 50-mc-acpipm-workaround-worker
+                  labels:
+                    machineconfiguration.openshift.io/role: worker
+                spec:
+                  config:
+                    ignition:
+                      version: 3.2.0
+                    storage:
+                      files:
+                        - contents:
+                            source: data:text/plain;charset=utf-8;base64,IyEvdXNyL2Jpbi9lbnYgYmFzaAoKc2V0IC1leAoKbW9kcHJvYmUgLXIgYWNwaV9wb3dlcl9tZXRlcgptb2Rwcm9iZSBhY3BpX2lwbWkKbW9kcHJvYmUgYWNwaV9wb3dlcl9tZXRlcg==
+                          mode: 493
+                          overwrite: true
+                          path: /usr/local/bin/reload-acpi_power_meter.sh
+                    systemd:
+                      units:
+                        - contents: |
+                            [Unit]
+                            Description=Workaround ACPI Power Meter problems on Dell for Wall Power
+                            After=kubelet.service
+                            [Service]
+                            Type=oneshot
+                            ExecStart=/bin/sh /usr/local/bin/reload-acpi_power_meter.sh
+                            [Install]
+                            WantedBy=multi-user.target
+                          enabled: true
+                          name: acpipm-workaround.service
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding

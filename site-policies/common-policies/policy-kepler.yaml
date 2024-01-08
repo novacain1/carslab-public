@@ -109,7 +109,7 @@ spec:
                   name: kepler-operator
                   source: community-operators-kepler
                   sourceNamespace: openshift-marketplace
-                  startingCSV: kepler-operator.v0.8.0
+                  #startingCSV: kepler-operator.v0.8.0
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
