@@ -29,6 +29,7 @@ spec:
         common-du-414: true
         group-dellxr8620t-vse5: ""
         sites: "interceptor-worker-cars2-lab"
+        kepler: true
       clusterNetwork:
         - cidr: 10.128.0.0/14
           hostPrefix: 23
