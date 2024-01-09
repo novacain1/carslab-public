@@ -101,10 +101,11 @@ spec:
         nodeSelector:
           node-role.kubernetes.io/worker: ""
         acceleratorSelector:
-          pciAddress: 0000:f7:00.0
+          #pciAddress: 0000:f7:00.0 #acc200
+          pciAddress: 0000:9d:00.0
         physicalFunction:
          bbDevConfig:
-          acc200:
+          acc100:
             # Programming mode: 0 = VF Programming, 1 = PF Programming
             pfMode: false
             numVfBundles: 16
@@ -125,10 +126,10 @@ spec:
               numQueueGroups: 4
               numAqsPerGroups: 16
               aqDepthLog2: 4
-            qfft:
-              aqDepthLog2: 4
-              numAqsPerGroups: 16
-              numQueueGroups: 4
+#            qfft:
+#              aqDepthLog2: 4
+#              numAqsPerGroups: 16
+#              numQueueGroups: 4
     - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "sriovw-vfio-policy-ens2f0"
