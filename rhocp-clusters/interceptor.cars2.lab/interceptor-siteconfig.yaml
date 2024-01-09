@@ -30,7 +30,7 @@ spec:
         group-dellxr8620t-vse5: ""
         sites: "interceptor-worker-cars2-lab"
         acpipm: true
-        #kepler: true
+        kepler: true
       clusterNetwork:
         - cidr: 10.128.0.0/14
           hostPrefix: 23
