@@ -47,8 +47,10 @@ spec:
           pages:
             - size: 1G
               count: 32
+        realTimeKernel:
+          enabled: false
         workloadHints:
-          realTime: true
+          realTime: false
           highPowerConsumption: false
           perPodPowerManagement: true
     - fileName: TunedPerformancePatch.yaml
