@@ -33,6 +33,9 @@ generators:
 - group-policies/group-gnr1.yaml
 # This group policy is for Dell xr8620t based deployments:
 - group-policies/group-dellxr8620t-vse5.yaml
+- group-policies/group-dellxr8620t-vse5-validator.yaml
+- group-policies/group-dellxr8620t-vse6.yaml
+- group-policies/group-dellxr8620t-vse6-validator.yaml
 
 # This group validator policy is for Dell EMC XR12 based deployments:
 - group-policies/group-xr12-flexran2-validator.yaml
@@ -65,7 +68,7 @@ generators:
 #- site-specific-policies/fiesta-cars2-lab.yaml
 #- site-specific-policies/flexranspr-cars2-lab.yaml
 #- example-multinode-site.yaml
-- site-specific-policies/interceptor-worker-cars2-lab.yaml
+#- site-specific-policies/interceptor-worker-cars2-lab.yaml
 
 # These are cluster specific policies:
 - cluster-specific-policies/gnb-flexran2-cars2-lab.yaml
