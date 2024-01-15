@@ -21,7 +21,7 @@ spec:
       group-dellr750-vse4: ""
       acpipm: true
       #vseloki: true
-      #kepler: true
+      kepler: true
       #latencyrhel9: true
     clusterNetwork:
       - cidr: 10.128.0.0/14
