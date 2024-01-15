@@ -47,7 +47,7 @@ spec:
       proxy:
         httpProxy: http://cars2-client.infra.cars2.lab:3128
         httpsProxy: http://cars2-client.infra.cars2.lab:3128
-        noProxy: 193.168.38.128/26,172.30.0.0/16,10.128.0.0/14,.cars2.lab
+        noProxy: 193.168.38.,172.30.0.0/16,10.128.0.0/14,192.168.14.96/27,.cars2.lab
       nodes:
         - hostName: "e920t-sno.tse227.e920t.test"
           role: master
