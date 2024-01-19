@@ -33,12 +33,12 @@ spec:
 #              clustername: flexranicx
     - fileName: ClusterLogging.yaml
       policyName: "config-policy"
-      spec:
-        curation:
-          curator:
-            schedule: "30 3 * * *"
-        collection:
-          type: vector
+#      spec:
+#        curation:
+#          curator:
+#            schedule: "30 3 * * *"
+#        collection:
+#          type: vector
     - fileName: PtpConfigSlaveCvl.yaml   # Change to PtpConfigSlaveCvl.yaml for ColumbiaVille NIC
       policyName: "config-policy"
       metadata:
@@ -114,6 +114,16 @@ spec:
               service.chronyd=stop,disable
               [sysfs]
               /sys/devices/system/cpu/intel_pstate/max_perf_pct = 72
+    # These CRs are to enable crun on master and worker nodes for 4.13+ only
+    #
+    # Include these CRs in the group PGT instead of the common PGT to make sure
+    # they are applied after the operators have been successfully installed,
+    # however, it's strongly recommended to include these CRs as day-0 extra manifests
+    # to avoid the risk of an extra reboot.
+    - fileName: optional-extra-manifest/enable-crun-master.yaml
+      policyName: "config-policy"
+    - fileName: optional-extra-manifest/enable-crun-worker.yaml
+      policyName: "config-policy"              
 #    --- sources needed for image registry (check ImageRegistry.md for more details)----
 #    - fileName: StorageClass.yaml
 #      policyName: "config-policy"
