@@ -1,0 +1,23 @@
+FROM quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bbd15c05271b311110f598a254d8ee8260adb5c62af9e0f80da6a6e167d5539d as builder
+
+#ENV HTTP_PROXY <your-proxy>
+#ENV HTTPS_PROXY <your-proxy>
+
+WORKDIR /usr/src
+RUN ["curl", "-X", "GET", "http://192.168.38.12/software/ice-1.12.7_cgnatpatch.tar.gz", "--output", "ice-1.12.7_cgnatpatch.tar.gz"]
+RUN ["tar","-xvf", "ice-1.12.7_cgnatpatch.tar.gz"]
+WORKDIR /usr/src/ice-1.12.7_dirty/src
+RUN ["make", "install", "KSRC=/usr/src/kernels/4.18.0-372.80.1.rt7.239.el8_6.x86_64"]
+
+FROM registry.redhat.io/ubi9/ubi-minimal
+
+#ENV HTTP_PROXY <your-proxy>
+#ENV HTTPS_PROXY <your-proxy>
+
+RUN microdnf install kmod -y
+
+RUN mkdir -p /opt/lib/modules/4.18.0-372.80.1.rt7.239.el8_6.x86_64/
+COPY --from=builder /usr/lib/modules/4.18.0-372.80.1.rt7.239.el8_6.x86_64/updates/drivers/net/ethernet/intel/ice/ice.ko /opt/lib/modules/4.18.0-372.80.1.rt7.239.el8_6.x86_64/
+RUN ls /opt/lib/modules/4.18.0-372.80.1.rt7.239.el8_6.x86_64
+
+RUN depmod -b /opt 4.18.0-372.80.1.rt7.239.el8_6.x86_64

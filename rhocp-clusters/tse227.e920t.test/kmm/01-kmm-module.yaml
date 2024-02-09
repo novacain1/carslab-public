@@ -1,0 +1,17 @@
+---
+apiVersion: kmm.sigs.x-k8s.io/v1beta1
+kind: Module
+metadata:
+  name: oot-ice-cgnat
+  namespace: openshift-kmm
+spec:
+  moduleLoader:
+    container:
+      modprobe:
+        moduleName: ice
+      inTreeModuleToRemove: ice
+      kernelMappings:
+        - regexp: "4.18.0-372.80.1.rt7.239.el8_6.x86_64"
+          containerImage: "quay.io/dcain/oot-ice-cgnat/oot-ice-cgnat:4.18.0-372.80.1.rt7.239.el8_6.x86_64"
+  selector:
+    node-role.kubernetes.io/master: ""
