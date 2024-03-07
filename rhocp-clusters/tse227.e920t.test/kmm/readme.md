@@ -1,17 +1,19 @@
 # KMM driver work and output for CGNAT
 
-# Get Driver Toolkit Digest for OpenShift version
+# Pre-Built Instructions
+
+## Get Driver Toolkit Digest for OpenShift version
 ```shell
 $ oc adm release info 4.12.44 --image-for=driver-toolkit
 quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bbd15c05271b311110f598a254d8ee8260adb5c62af9e0f80da6a6e167d5539d
 ```
 
-# Pull Driver Toolkit locally to use
+## Pull Driver Toolkit locally to use
 ```shell
 $ podman pull --authfile ~/pull-secret-fun/pull-secret-2.json quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:bbd15c05271b311110f598a254d8ee8260adb5c62af9e0f80da6a6e167d5539d
 ```
 
-# Create Driver Container with forked OOT ice.ko locally
+## Create Driver Container with forked OOT ice.ko locally
 ```shell
 $ export REGISTRY=quay.io/dcain
 $ podman login -u dcain $REGISTRY 
@@ -20,15 +22,15 @@ $ podman build -f Containerfile-4.18.0-372.80.1.el8_6.x86_64 -t $REGISTRY/oot-ic
 $ podman push $REGISTRY/oot-ice-cgnat/oot-ice-cgnat:4.18.0-372.80.1.el8_6.x86_64
 ```
 
-# Load out of tree ice driver on ZTP cluster using KMM CR
+## Load out of tree ice driver on ZTP cluster using KMM CR
 This assumes irdma module is blacklisted like it is in the Telco DU Profile deployed by ZTP.
 This assumes the cluster has read pull access from the remote registry.
 
 ```shell
-$ oc create -f 01-kmm-module.yaml
+$ oc create -f 01-kmm-module-prebuilt.yaml
 ```
 
-# SSH to openshift node, look at driver
+## SSH to openshift node, look at driver
 Use ssh or oc debug container.
 
 ```shell
@@ -36,7 +38,7 @@ Use ssh or oc debug container.
 1.12.7_dirty
 ```
 
-## dmesg output
+### dmesg output
 ```shell
 [ 1256.117454] ice: module unloaded
 
@@ -145,7 +147,7 @@ Use ssh or oc debug container.
 [ 1260.691290] ice 0000:12:00.3 ens2f3: Port Number: 0.
 ```
 
-# Unloading module
+## Unloading module
 Note that this currently removes the ice driver module completely.  if you only have 800 series intel NICs, this essentially removes network access from the node.
 ```shell
 oc delete -f 01-kmm-module.yaml

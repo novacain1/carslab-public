@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oot-ice-cgnat-cm-containerfile
+  namespace: openshift-kmm
+data:
+  dockerfile: |
+    ARG DTK_AUTO
+    FROM ${DTK_AUTO} as builder
+    ARG KERNEL_VERSION
+    #ENV HTTP_PROXY <your-proxy>
+    #ENV HTTPS_PROXY <your-proxy>
+    WORKDIR /usr/src
+    RUN curl -X GET http://192.168.38.12/software/ice-1.12.7_cgnatpatch.tar.gz --output ice-1.12.7_cgnatpatch.tar.gz
+    RUN tar -xvf ice-1.12.7_cgnatpatch.tar.gz
+    WORKDIR /usr/src/ice-1.12.7_dirty/src
+    RUN make install KSRC=/usr/src/kernels/\${KERNEL_VERSION}
+
+    FROM registry.redhat.io/ubi9/ubi-minimal
+    ARG KERNEL_VERSION
+    #ENV HTTP_PROXY <your-proxy>
+    #ENV HTTPS_PROXY <your-proxy>
+    RUN microdnf install kmod -y
+    RUN mkdir -p /opt/lib/modules/${KERNEL_VERSION}
+    COPY --from=builder /usr/lib/modules/${KERNEL_VERSION}/updates/drivers/net/ethernet/intel/ice/ice.ko /opt/lib/modules/${KERNEL_VERSION}/
+    RUN ls /opt/lib/modules/${KERNEL_VERSION}
+    RUN depmod -b /opt ${KERNEL_VERSION}
