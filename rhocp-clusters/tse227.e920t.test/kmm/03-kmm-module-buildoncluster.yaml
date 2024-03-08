@@ -18,6 +18,13 @@ spec:
               - name: oot-ice-cgnat-pullsecret
             dockerfileConfigMap:
               name: oot-ice-cgnat-cm-containerfile
+        - literal: 4.18.0-372.87.1.el8_6.x86_64
+          containerImage: "quay.io/dcain/oot-ice-cgnat/oot-ice-cgnat:4.18.0-372.87.1.el8_6.x86_64"
+          build:
+            secrets:
+              - name: oot-ice-cgnat-pullsecret
+            dockerfileConfigMap:
+              name: oot-ice-cgnat-cm-containerfile
         #- regexp: "^.+$"
         #  containerImage: "quay.io/dcain/oot-ice-cgnat/oot-ice-cgnat:${KERNEL_FULL_VERSION}"
         #  build:
