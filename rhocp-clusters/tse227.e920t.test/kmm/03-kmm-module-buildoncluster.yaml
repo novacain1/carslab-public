@@ -18,8 +18,22 @@ spec:
               - name: oot-ice-cgnat-pullsecret
             dockerfileConfigMap:
               name: oot-ice-cgnat-cm-containerfile
+        - literal: 4.18.0-372.80.1.rt7.239.el8_6.x86_64
+          containerImage: "quay.io/dcain/oot-ice-cgnat/oot-ice-cgnat:4.18.0-372.80.1.rt7.239.el8_6.x86_64"
+          build:
+            secrets:
+              - name: oot-ice-cgnat-pullsecret
+            dockerfileConfigMap:
+              name: oot-ice-cgnat-cm-containerfile
         - literal: 4.18.0-372.87.1.el8_6.x86_64
           containerImage: "quay.io/dcain/oot-ice-cgnat/oot-ice-cgnat:4.18.0-372.87.1.el8_6.x86_64"
+          build:
+            secrets:
+              - name: oot-ice-cgnat-pullsecret
+            dockerfileConfigMap:
+              name: oot-ice-cgnat-cm-containerfile
+        - literal: 5.14.0-284.45.1.rt14.330.el9_2.x86_64
+          containerImage: "quay.io/dcain/oot-ice-cgnat/oot-ice-cgnat:5.14.0-284.45.1.rt14.330.el9_2.x86_64"
           build:
             secrets:
               - name: oot-ice-cgnat-pullsecret

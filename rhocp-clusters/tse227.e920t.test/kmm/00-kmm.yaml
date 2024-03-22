@@ -21,3 +21,5 @@ spec:
   name: kernel-module-management
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+  #installPlanApproval: Manual
+  #startingCSV: kernel-module-management.v2.0.0
