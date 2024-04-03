@@ -4,7 +4,7 @@ kind: PolicyGenTemplate
 metadata:
   # The name will be used to generate the placementBinding and placementRule names as {name}-placementBinding and {name}-placementRule
   name: "group-hpee920t-sku1"
-  namespace: "ztp-group"
+  namespace: "ztp-group-cars2"
 spec:
   bindingRules:
     # These policies will correspond to all clusters with this label:
