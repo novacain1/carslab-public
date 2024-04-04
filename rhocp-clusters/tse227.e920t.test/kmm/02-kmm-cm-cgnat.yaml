@@ -12,9 +12,9 @@ data:
     #ENV HTTP_PROXY <your-proxy>
     #ENV HTTPS_PROXY <your-proxy>
     WORKDIR /usr/src
-    RUN curl -X GET http://192.168.38.12/software/ice-1.12.7_cgnatpatch.tar.gz --output ice-1.12.7_cgnatpatch.tar.gz
-    RUN tar -xvf ice-1.12.7_cgnatpatch.tar.gz
-    WORKDIR /usr/src/ice-1.12.7_dirty/src
+    RUN curl -X GET http://192.168.38.12/software/ice-1.12.7.3_422024.tar.gz --output ice-1.12.7.3_422024.tar.gz
+    RUN tar -xvf ice-1.12.7.3_422024.tar.gz
+    WORKDIR /usr/src/ice-1.12.7.3/src
     RUN make install KSRC=/usr/src/kernels/\${KERNEL_VERSION}
 
     FROM registry.redhat.io/ubi9/ubi-minimal
