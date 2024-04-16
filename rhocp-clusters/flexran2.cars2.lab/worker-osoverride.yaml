@@ -1,0 +1,10 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: worker-osoverride
+spec:
+  #quay.io/openshift-release-dev/ocp-v4.0-art-dev:412.90.202301101512-0      
+  osImageURL: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ab67fb3a789352c69e7ae908c8c77d3d33a1ab5cf818c8e90ea897fd1ef63641

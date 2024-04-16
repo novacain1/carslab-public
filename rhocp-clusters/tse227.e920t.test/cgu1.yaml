@@ -1,0 +1,20 @@
+apiVersion: ran.openshift.io/v1alpha1
+kind: ClusterGroupUpgrade
+metadata:
+  name: cgu2-tse227
+  namespace: ztp-common-cars2
+spec:
+  managedPolicies: 
+#    - common-du-414-subscriptions-policy
+#    - group-hpee920t-sku1-config-policy
+#    - group-hpee920t-sku1-subscriptions-policy
+    - group-hpee920t-sku1-fec-policy
+    - group-hpee920t-sku1-sriov-nw-policy-fh
+    - group-hpee920t-sku1-sriov-nw-policy-mh
+    - group-hpee920t-sku1-sriov-nw-policy-vran-mgmt
+  enable: true
+  clusters: 
+  - tse227
+  remediationStrategy:
+    maxConcurrency: 2 
+    timeout: 240
