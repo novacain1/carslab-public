@@ -43,7 +43,7 @@ generators:
 # This group validator policy is for Supermicro X12 based deployments:
 - group-policies/group-smcx12-vse2-validator.yaml
 # This group validator policy is for Dell XR8620t based deployments:
-#- group-policies/group-hook-flexranspr-validator.yaml
+- group-policies/group-hook-flexranspr-validator.yaml
 # This group validator policy is for Dell R760 based deployments:
 - group-policies/group-dellr760-vse3-validator.yaml
 # This group validator policy is for Dell R750 based deployments:
