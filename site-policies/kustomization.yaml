@@ -73,4 +73,4 @@ generators:
 # These are cluster specific policies:
 #- cluster-specific-policies/gnb-flexran2-cars2-lab.yaml
 #- cluster-specific-policies/gnb-flexranicx-cars2-lab.yaml
-#- cluster-specific-policies/gnb-flexranspr-cars2-lab.yaml
+- cluster-specific-policies/gnb-flexranspr-cars2-lab.yaml
