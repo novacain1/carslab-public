@@ -216,6 +216,11 @@ spec:
       spec:
         additionalKernelArgs:
           - "intel_idle.max_cstate=0"
+          - "rcupdate.rcu_normal_after_boot=0"
+          - "efi=runtime"
+          - "vfio_pci.enable_sriov=1"
+          - "vfio_pci.disable_idle_d3=1"
+          - "module_blacklist=irdma"  
         cpu:
           # These must be tailored for the specific hardware platform
           isolated: "2-31,34-63"
