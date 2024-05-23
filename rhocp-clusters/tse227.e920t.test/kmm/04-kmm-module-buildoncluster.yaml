@@ -32,6 +32,13 @@ spec:
               - name: oot-ice-cgnat-pullsecret
             dockerfileConfigMap:
               name: oot-ice-cgnat-cm-containerfile
+          sign:
+            certSecret:
+              name: oot-ice-cgnat-signing-key-pub
+            keySecret:
+              name: oot-ice-cgnat-signing-key
+            filesToSign:
+              - /opt/lib/modules/4.18.0-372.80.1.el8_6.x86_64/ice.ko
         - literal: 4.18.0-372.80.1.rt7.239.el8_6.x86_64
           containerImage: "quay.io/dcain/oot-ice-cgnat/oot-ice-cgnat:4.18.0-372.80.1.rt7.239.el8_6.x86_64"
           build:
