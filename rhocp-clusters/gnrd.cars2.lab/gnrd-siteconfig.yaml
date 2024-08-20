@@ -1,0 +1,115 @@
+---
+apiVersion: ran.openshift.io/v1
+kind: SiteConfig
+metadata:
+  name: "gnrd"
+  namespace: "gnrd"
+spec:
+  baseDomain: "cars2.lab"
+  pullSecretRef:
+    name: "assisted-deployment-pull-secret"
+  clusterImageSetNameRef: "img4.16.7-x86-64-appsub"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdbJDYY43Zu0EKAGgrSKEobyXIxdhT0AeTT3yBoNY+YdYDScimJsQzK4hKNJIn1xC3klr0dSnsqeJru+SA4GMhbdcsmVyudhutCw75R/vFoRHOwaeVS2SMiBAtDbAYGQ3dh6LapkmXeLURcycNbebUV4HM9XsYqnuL8J2XyY4tRKgHrAd6OQw4jsXDOxwTRlHM822N/2kgv8iEwiXAJoUoymbr8mnfSxuuaH0oiKBwuaK1wuaDrlJyXkXNslPq89/1f8hJfjixY2dQdW7Xk5m3t5ptQxWENpw79OMRJ4cDW4G7LrtFONom5KQ+9TBZJIhNgJobkqI4qwinrWF8qMW5"
+  clusters:
+    - clusterName: "gnrd"
+      networkType: "OVNKubernetes"
+      cpuPartitioningMode: AllNodes
+      # installConfigOverrides is a generic way of passing install-config
+      # parameters through the siteConfig.  The 'capabilities' field configures
+      # the composable openshift feature.  In this 'capabilities' setting, we
+      # remove all but the marketplace component from the optional set of
+      # components.
+      # Notes:
+      # - NodeTuning is needed for 4.13 and later, not for 4.12 and earlier
+      installConfigOverrides: |
+        {
+          "capabilities": {
+            "baselineCapabilitySet": "None",
+            "additionalEnabledCapabilities": [
+              "NodeTuning",
+              "OperatorLifecycleManager",
+              "Ingress"
+            ]
+          }
+        }
+      # It is strongly recommended to include crun manifests as part of the additional install-time manifests for 4.13+.
+      # The crun manifests can be obtained from source-crs/optional-extra-manifest/ and added to the git repo ie.sno-extra-manifest.
+      # extraManifestPath: sno-extra-manifest
+      clusterLabels:
+        common-du-416: true
+        group-gnrd: ""
+      clusterNetwork:
+        - cidr: 10.128.0.0/14
+          hostPrefix: 23
+        - cidr: fd01::/48
+          hostPrefix: 64
+      serviceNetwork:
+        - 172.30.0.0/16
+        - fd02::/112
+      machineNetwork:
+        - cidr: 192.168.38.0/26
+        - cidr: 2600:52:7:238::0/64
+      additionalNTPSources:
+        - clock.cars2.lab
+        - clock-v6.cars2.lab
+      #crTemplates:
+      #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
+      nodes:
+        - hostName: "es1.gnrd.cars2.lab"
+          role: master
+          # Optionally; This can be used to configure desired BIOS setting on a host:
+          #biosConfigRef:
+          #  filePath: "example-hw.profile"
+          #  Dave note: this doesn't actually work, just seeding to get the ISO created:
+          bmcAddress: "redfish-virtualmedia://192.168.38.80/redfish/v1/Systems/1"
+          bmcCredentialsName:
+            name: "gnrd-cars2-lab-bmc-secret"
+          bootMACAddress: "a4:bf:01:95:28:f8"
+          bootMode: "UEFI"
+          rootDeviceHints:
+            deviceName: "/dev/disk/by-path/pci-0000:b9:00.0-nvme-1"
+          # example of diskPartition below is used for image registry (check ImageRegistry.md for more details), but it's not limited to this use case
+#          diskPartition:
+#            - device: /dev/disk/by-id/wwn-0x11111000000asd123 # match rootDeviceHints
+#              partitions:
+#                - mount_point: /var/imageregistry
+#                  size: 102500
+#                  start: 344844
+         # allocate partitions for persist storage used by HTTP transport subscription data for PTP and BMER operators.
+         # disk id and and size needs to be adjusted to the hardware
+         # ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/disk/by-id/wwn-0x11111000000asd123","wipeTable":false,"partitions":[{"sizeMiB":16,"label":"httpevent1","startMiB":350000},{"sizeMiB":16,"label":"httpevent2","startMiB":350016}]}],"filesystem":[{"device":"/dev/disk/by-partlabel/httpevent1","format":"xfs","wipeFilesystem":true},{"device":"/dev/disk/by-partlabel/httpevent2","format":"xfs","wipeFilesystem":true}]}}'
+          nodeNetwork:
+            interfaces:
+              - name: eno1
+                macAddress: "a4:bf:01:95:28:f8"
+            config:
+              interfaces:
+                - name: eno1
+                  type: ethernet
+                  state: up
+                  ipv4:
+                    enabled: true
+                    address:
+                      - ip: "192.168.38.99"
+                        prefix-length: 26
+                    dhcp: false
+                  ipv6:
+                    enabled: true
+                    address:
+                      - ip: "2600:52:7:238::99"
+                        prefix-length: 64
+                    autoconf: false
+                    dhcp: false
+              dns-resolver:
+                config:
+                  server:
+                    - 192.168.38.12
+                    - 2600:52:7:38::12
+              routes:
+                config:
+                  - destination: 0.0.0.0/0
+                    next-hop-address: 192.168.38.1
+                    next-hop-interface: eno1
+                  - destination: ::/0
+                    next-hop-address: 2600:52:7:238::1
+                    next-hop-interface: eno1
