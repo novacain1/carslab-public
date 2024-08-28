@@ -74,22 +74,22 @@ spec:
               macAddress: "a4:bf:01:95:28:f8"
           config:
             interfaces:
-              - name: eno1
-                type: ethernet
-                state: up
-                ipv4:
-                  enabled: true
-                  address:
-                    - ip: "192.168.38.99"
-                      prefix-length: 26
-                  dhcp: false
-                ipv6:
-                  enabled: true
-                  address:
-                    - ip: "2600:52:7:238::99"
-                      prefix-length: 64
-                  autoconf: false
-                  dhcp: false
+            - name: eno1
+              type: ethernet
+              state: up
+              ipv4:
+                enabled: true
+                address:
+                  - ip: "192.168.38.99"
+                    prefix-length: 26
+                dhcp: false
+              ipv6:
+                enabled: true
+                address:
+                  - ip: "2600:52:7:238::99"
+                    prefix-length: 64
+                autoconf: false
+                dhcp: false
             dns-resolver:
               config:
                 server:
