@@ -92,7 +92,7 @@ spec:
             routes:
               config:
                 - destination: 0.0.0.0/0
-                  next-hop-address: 192.168.38.1
+                  next-hop-address: 192.168.38.65
                   next-hop-interface: eno1
                 - destination: ::/0
                   next-hop-address: 2600:52:7:238::1
