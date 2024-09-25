@@ -67,13 +67,13 @@ spec:
           interfaces:
             - name: eno1
               macAddress: "a4:bf:01:95:28:f8"
-            - name: ens2f0np0
+            - name: ens2f0
               macAddress: "b4:96:91:a9:b0:b0"
-            - name: ens2f0np1
+            - name: ens2f1
               macAddress: "b4:96:91:a9:b0:b1"
-            - name: ens2f0np2
+            - name: ens2f2
               macAddress: "b4:96:91:a9:b0:b2"
-            - name: ens2f0np3
+            - name: ens2f3
               macAddress: "b4:96:91:a9:b0:b3"
           config:
             interfaces:
@@ -93,16 +93,16 @@ spec:
                     prefix-length: 64
                 autoconf: false
                 dhcp: false
-            - name: ens2f0np0
+            - name: ens2f0
               type: ethernet
               state: down
-            - name: ens2f0np1
+            - name: ens2f1
               type: ethernet
               state: down
-            - name: ens2f0np2
+            - name: ens2f2
               type: ethernet
               state: down
-            - name: ens2f0np3
+            - name: ens2f3
               type: ethernet
               state: down
             dns-resolver:
