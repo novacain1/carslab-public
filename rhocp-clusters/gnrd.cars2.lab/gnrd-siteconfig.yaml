@@ -36,7 +36,7 @@ spec:
       - 172.30.0.0/16
       - fd02::/112
     machineNetwork:
-      - cidr: 192.168.38.0/26
+      - cidr: 192.168.38.64/26
       - cidr: 2600:52:7:238::0/64
     additionalNTPSources:
       - clock.cars2.lab
