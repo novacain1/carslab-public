@@ -6,7 +6,7 @@ metadata:
   # The name will be used to generate the placementBinding name as {name}-placementBinding, the placementRule name as {name}-placementRule,
   # and the policy name as {name}-{spec.sourceFiles[x].policyName}
   name: "group-gnr1-validator"
-  namespace: "ztp-group"
+  namespace: "ztp-group-cars2"
 spec:
   bindingRules:
     # yamllint disable-line rule:line-length
