@@ -54,7 +54,8 @@ spec:
         #  filePath: "example-hw.profile"
         #  Dave note: this doesn't actually work, just seeding to get the ISO created:
         ironicInspect: "disabled"
-        bmcAddress: "redfish-virtualmedia://192.168.38.80/redfish/v1/Systems/1"
+        #bmcAddress: "redfish-virtualmedia://192.168.38.80/redfish/v1/Systems/1"
+        bmcAddress: "redfish-virtualmedia://192.168.38.15:9000/redfish/v1/Systems/1"
         bmcCredentialsName:
           name: "gnrd-cars2-lab-bmc-secret"
         bootMACAddress: "a4:bf:01:95:28:f8"
