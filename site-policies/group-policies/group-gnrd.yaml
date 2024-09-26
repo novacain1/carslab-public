@@ -193,35 +193,43 @@ spec:
 #          interface: "ens2f0"
 #          ptp4lOpts: "-2 -s --summary_interval -4"
 #          phc2sysOpts: "-a -r -n 24"
-#    - fileName: SriovFecClusterConfig.yaml
-#      policyName: "fec-policy"
-#      spec:
-#        drainSkip: true
-#        acceleratorSelector:
-#          pciAddress: 0000:4b:00.0
-#        physicalFunction:
-#         bbDevConfig:
-#          acc100:
+    - fileName: SriovFecClusterConfig.yaml
+      policyName: "fec-policy"
+      spec:
+        drainSkip: true
+        acceleratorSelector:
+          pciAddress: 0000:07:00.0
+        physicalFunction:
+         bbDevConfig:
+          vrb2:
 #            # Programming mode: 0 = VF Programming, 1 = PF Programming
-#            pfMode: false
-#            numVfBundles: 16
-#            maxQueueSize: 1024
-#            uplink4G:
-#              numQueueGroups: 0
-#              numAqsPerGroups: 16
-#              aqDepthLog2: 4
-#            downlink4G:
-#              numQueueGroups: 0
-#              numAqsPerGroups: 16
-#              aqDepthLog2: 4
-#            uplink5G:
-#              numQueueGroups: 4
-#              numAqsPerGroups: 16
-#              aqDepthLog2: 4
-#            downlink5G:
-#              numQueueGroups: 4
-#              numAqsPerGroups: 16
-#              aqDepthLog2: 4
+            pfMode: false
+            numVfBundles: 16
+            maxQueueSize: 1024
+            uplink4G:
+              numQueueGroups: 0
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            downlink4G:
+              numQueueGroups: 0
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            uplink5G:
+              numQueueGroups: 4
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            downlink5G:
+              numQueueGroups: 4
+              numAqsPerGroups: 16
+              aqDepthLog2: 4
+            qfft:
+              aqDepthLog2: 4
+              numAqsPerGroups: 16
+              numQueueGroups: 4
+            qmld:
+              aqDepthLog2: 4
+              numAqsPerGroups: 16
+              numQueueGroups: 4
     - fileName: SriovOperatorConfigForSNO.yaml
       policyName: "config-policy"
 #    - fileName: SriovOperatorConfig.yaml
