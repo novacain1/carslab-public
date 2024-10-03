@@ -220,81 +220,96 @@ spec:
 #              numQueueGroups: 4
 #              numAqsPerGroups: 16
 #              aqDepthLog2: 4
-#    - fileName: SriovOperatorConfig.yaml
-#      policyName: "config-policy"
-#      # For existing clusters with node selector set as "master",
-#      # change the complianceType to "mustonlyhave".
-#      # After complying with the policy, the complianceType can
-#      # be reverted to "musthave"
-#      complianceType: musthave
-#      spec:
-#        configDaemonNodeSelector:
-#          node-role.kubernetes.io/worker: ""
-#    - fileName: SriovNetworkNodePolicy.yaml
-#      remediationAction: enforce
-#      policyName: "sriov-vfio-policy-ens2f1"
-#      metadata:
-#        name: "sriov-nnp-vfio-ens2f1"
-#      spec:
-#        deviceType: vfio-pci
-#        mtu: 9216
-#        isRdma: false
-#        nicSelector:
-#          vendor: "8086"
-#          deviceID: "1593"
-#          pfNames: ["ens2f1#0-3"]
-#        numVfs: 8
-#        priority: 10
-#        resourceName: pci_sriov_net_ens2f1_0
-#    - fileName: SriovNetworkNodePolicy.yaml
-#      policyName: "sriov-netd-policy-ens2f1"
-#      remediationAction: enforce
-#      metadata:
-#        name: "sriov-nnp-netd-ens2f1"
-#      spec:
-#        deviceType: netdevice
-#        mtu: 9216
-#        isRdma: false
-#        nicSelector:
-#          vendor: "8086"
-#          deviceID: "1593"
-#          pfNames: ["ens2f1#4-7"]
-#        numVfs: 8
-#        priority: 10
-#        resourceName: pci_sriov_net_ens2f1_1
-#    - fileName: SriovNetwork.yaml
-#      policyName: "sriov-network-policy-mh"
-#      metadata:
-#        name: "sriov-nw-mh"
-#      spec:
-#        resourceName: pci_sriov_net_ens2f1_1
-#        networkNamespace: cnf1
-#        vlan: 2305
-#        ipam: |-
-#          {"type": "static"}
-#        linkState: auto
-#    - fileName: SriovNetwork.yaml
-#      policyName: "sriov-network-policy-vran-mgmt"
-#      metadata:
-#        name: "sriov-nw-vran-mgmt"
-#      spec:
-#        resourceName: pci_sriov_net_ens2f1_1
-#        networkNamespace: cnf1
-#        vlan: 2305
-#        ipam: |-
-#          {"type": "static"}
-#        linkState: auto
-#    - fileName: SriovNetwork.yaml
-#      policyName: "sriov-network-policy-fh"
-#      metadata:
-#        name: "sriov-nw-fh"
-#      spec:
-#        resourceName: pci_sriov_net_ens2f1_0
-#        networkNamespace: cnf1
-#        vlan: 2305
-#        ipam: |-
-#          {"type": "static"}
-#        linkState: auto
+    - fileName: SriovOperatorConfig.yaml
+      policyName: "config-policy"
+      # For existing clusters with node selector set as "master",
+      # change the complianceType to "mustonlyhave".
+      # After complying with the policy, the complianceType can
+      # be reverted to "musthave"
+      complianceType: musthave
+      spec:
+        configDaemonNodeSelector:
+          node-role.kubernetes.io/worker: ""
+    - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "sriov-vfio1-policy-ens2f0"
+      metadata:
+        name: "sriov-nnp-vfio1-ens2f0"
+      spec:
+        deviceType: vfio-pci
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "1593"
+          pfNames: ["ens2f0#0-15"]
+        numVfs: 48
+        priority: 10
+        resourceName: pci_sriov_net_ens2f0_0
+    - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "sriov-vfio2-policy-ens2f0"
+      metadata:
+        name: "sriov-nnp-vfio2-ens2f0"
+      spec:
+        deviceType: vfio-pci
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "1593"
+          pfNames: ["ens2f0#16-31"]
+        numVfs: 48
+        priority: 10
+        resourceName: pci_sriov_net_ens2f0_1
+    - fileName: SriovNetworkNodePolicy.yaml
+      policyName: "sriov-netd-policy-ens2f0"
+      remediationAction: enforce
+      metadata:
+        name: "sriov-nnp-netd-ens2f0"
+      spec:
+        deviceType: netdevice
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "1593"
+          pfNames: ["ens2f0#32-47"]
+        numVfs: 48
+        priority: 10
+        resourceName: pci_sriov_net_ens2f0_2
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-mh"
+      metadata:
+        name: "sriov-nw-mh"
+      spec:
+        resourceName: pci_sriov_net_ens2f0_0
+        networkNamespace: cnf1
+        vlan: 2300
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-fh"
+      metadata:
+        name: "sriov-nw-fh"
+      spec:
+        resourceName: pci_sriov_net_ens2f0_1
+        networkNamespace: cnf1
+        vlan: 2300
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
+    - fileName: SriovNetwork.yaml
+      policyName: "sriov-network-policy-vran-mgmt"
+      metadata:
+        name: "sriov-nw-vran-mgmt"
+      spec:
+        resourceName: pci_sriov_net_ens2f0_2
+        networkNamespace: cnf1
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
 #    - fileName: StorageLV.yaml
 #      policyName: "config-policy"
 #      spec:
@@ -344,11 +359,10 @@ spec:
               [main]
               summary=Configuration changes profile inherited from performance created tuned
               include=openshift-node-performance-openshift-node-performance-profile
-              [sysctl]
-              kernel.timer_migration=1
               [scheduler]
               group.ice-ptp=0:f:10:*:ice-ptp.*
               group.ice-gnss=0:f:10:*:ice-gnss.*
+              group.ice-dplls=0:f:10:*:ice-dplls.*
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
