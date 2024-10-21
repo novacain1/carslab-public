@@ -182,17 +182,17 @@ spec:
 #            ts2phc.extts_polarity rising
 #            ts2phc.extts_correction 0
 #          ts2phcOpts: "-m"
-#    - fileName: PtpConfigSlaveCvl.yaml
-#      policyName: "config-policy"
-#      metadata:
-#        name: "du-ptp-slave"
-#      spec:
-#        profile:
-#        - name: "slave"
-#          # This interface must match the hardware in this group
-#          interface: "ens2f0"
-#          ptp4lOpts: "-2 -s --summary_interval -4"
-#          phc2sysOpts: "-a -r -n 24"
+    - fileName: PtpConfigSlaveCvl.yaml
+      policyName: "config-policy"
+      metadata:
+        name: "du-ptp-slave"
+      spec:
+        profile:
+        - name: "slave"
+          # This interface must match the hardware in this group
+          interface: "ens2f0"
+          ptp4lOpts: "-2 -s --summary_interval -4"
+          phc2sysOpts: "-a -r -n 24"
 #    - fileName: SriovFecClusterConfig.yaml
 #      policyName: "fec-policy"
 #      spec:
@@ -459,3 +459,35 @@ spec:
 #                user:
 #                  name: root
 #     ---- sources needed for updating CRI-O workload-partitioning ends here ----
+    - fileName: MachineConfigGeneric.yaml
+      policyName: "config-policy"
+      metadata:
+        name: master-create-lvs-for-lso
+      spec:
+        config:
+          ignition:
+            version: 3.2.0
+          storage:
+            files:
+              - contents:
+                  source: >-
+                    data:text/plain;charset=utf-8;base64,IyEvYmluL2Jhc2gKCmlmICEgdmdzIG5ld192b2xfZ3JvdXBfMTsgdGhlbgogICAgdmdjcmVhdGUgbmV3X3ZvbF9ncm91cF8xIC9kZXYvbnZtZTBuMQoKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sMSBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sMiBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sMyBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sNCBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sNSBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sNiBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sNyBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sOCBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sOSBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sMTAgbmV3X3ZvbF9ncm91cF8xCiAgICBsdmNyZWF0ZSAtTCAyMEcgIC15IC1uIHZvbDExIG5ld192b2xfZ3JvdXBfMQogICAgbHZjcmVhdGUgLUwgMjBHICAteSAtbiB2b2wxMiBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sMTMgbmV3X3ZvbF9ncm91cF8xCiAgICBsdmNyZWF0ZSAtTCAyMEcgIC15IC1uIHZvbDE0IG5ld192b2xfZ3JvdXBfMQogICAgbHZjcmVhdGUgLUwgMjBHICAteSAtbiB2b2wxNSBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sMTYgbmV3X3ZvbF9ncm91cF8xCiAgICBsdmNyZWF0ZSAtTCAyMEcgIC15IC1uIHZvbDE3IG5ld192b2xfZ3JvdXBfMQogICAgbHZjcmVhdGUgLUwgMjBHICAteSAtbiB2b2wxOCBuZXdfdm9sX2dyb3VwXzEKICAgIGx2Y3JlYXRlIC1MIDIwRyAgLXkgLW4gdm9sMTkgbmV3X3ZvbF9ncm91cF8xCiAgICBsdmNyZWF0ZSAtTCAyMEcgIC15IC1uIHZvbDIwIG5ld192b2xfZ3JvdXBfMQpmaQoK
+                mode: 493
+                overwrite: true
+                path: /usr/local/bin/create-lvs-for-lso.sh
+          systemd:
+            units:
+              - contents: |
+                  [Unit]
+                  Description=Create LVS partitions for LSO
+                  Wants=network-online.target
+                  After=network-online.target ignition-firstboot-complete.service
+                  [Service]
+                  Type=oneshot
+                  RemainAfterExit=yes
+                  EnvironmentFile=
+                  ExecStart=/bin/bash -c "/usr/local/bin/create-lvs-for-lso.sh"
+                  [Install]
+                  WantedBy=multi-user.target
+                enabled: true
+                name: create-lvs-for-lso.service

@@ -8,7 +8,7 @@ spec:
   baseDomain: "cars2.lab"
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
-  clusterImageSetNameRef: "img4.16.13-x86-64-appsub"
+  clusterImageSetNameRef: "img4.16.17-x86-64-appsub"
   sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdbJDYY43Zu0EKAGgrSKEobyXIxdhT0AeTT3yBoNY+YdYDScimJsQzK4hKNJIn1xC3klr0dSnsqeJru+SA4GMhbdcsmVyudhutCw75R/vFoRHOwaeVS2SMiBAtDbAYGQ3dh6LapkmXeLURcycNbebUV4HM9XsYqnuL8J2XyY4tRKgHrAd6OQw4jsXDOxwTRlHM822N/2kgv8iEwiXAJoUoymbr8mnfSxuuaH0oiKBwuaK1wuaDrlJyXkXNslPq89/1f8hJfjixY2dQdW7Xk5m3t5ptQxWENpw79OMRJ4cDW4G7LrtFONom5KQ+9TBZJIhNgJobkqI4qwinrWF8qMW5"
   clusters:
   - clusterName: "gnrd"
@@ -62,7 +62,7 @@ spec:
         rootDeviceHints:
           deviceName: "/dev/disk/by-path/pci-0000:b9:00.0-nvme-1"
         # disk partition at `/var/lib/containers` with ignitionConfigOverride. Some values must be updated. See DiskPartitionContainer.md for more details
-        #ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/disk/by-id/wwn-0x11111000000asd123","wipeTable":false,"partitions":[{"sizeMiB":16,"label":"httpevent1","startMiB":350000},{"sizeMiB":16,"label":"httpevent2","startMiB":350016}]}],"filesystem":[{"device":"/dev/disk/by-partlabel/httpevent1","format":"xfs","wipeFilesystem":true},{"device":"/dev/disk/by-partlabel/httpevent2","format":"xfs","wipeFilesystem":true}]}}'
+        ignitionConfigOverride: '{"ignition":{"version":"3.2.0"},"storage":{"disks":[{"device":"/dev/nvme0n1","partitions":[{"label":"root","number":4,"resize":true,"sizeMiB":300000},{"label":"new_vol_group_1","sizeMiB":400000},{"label":"new_vol_group_2","sizeMiB":100000}],"wipeTable":false}]}}'
         nodeNetwork:
           interfaces:
             - name: eno1
