@@ -214,13 +214,13 @@ spec:
     - fileName: PerformanceProfile.yaml
       policyName: "config-policy"
       spec:
-        additionalKernelArgs:
-          - "intel_idle.max_cstate=0"
-          - "rcupdate.rcu_normal_after_boot=0"
-          - "efi=runtime"
-          - "vfio_pci.enable_sriov=1"
-          - "vfio_pci.disable_idle_d3=1"
-          - "module_blacklist=irdma"  
+        #additionalKernelArgs:
+        #  - "intel_idle.max_cstate=0"
+        #  - "rcupdate.rcu_normal_after_boot=0"
+        #  - "efi=runtime"
+        #  - "vfio_pci.enable_sriov=1"
+        #  - "vfio_pci.disable_idle_d3=1"
+        #  - "module_blacklist=irdma"  
         cpu:
           # These must be tailored for the specific hardware platform
           isolated: "2-31,34-63"
@@ -231,14 +231,14 @@ spec:
             - size: 1G
               count: 32
               node: 0 #
-        net: #
-          userLevelNetworking: false #
+        #net: #
+        #  userLevelNetworking: false #
         realTimeKernel:
           enabled: true
-        workloadHints:
-          realTime: true
-          highPowerConsumption: false
-          perPodPowerManagement: true
+        #workloadHints:
+        #  realTime: true
+        #  highPowerConsumption: false
+        #  perPodPowerManagement: true
     - fileName: TunedPerformancePatch.yaml
       policyName: "config-policy"
       spec:
@@ -249,24 +249,24 @@ spec:
               [main]
               summary=Configuration changes profile inherited from performance created tuned
               include=openshift-node-performance-openshift-node-performance-profile
-              [bootloader] #
-              cmdline_crash=nohz_full=2-31,34-63 #
-              cmdline_pstate=intel_pstate=active #
+              #[bootloader] #
+              #cmdline_crash=nohz_full=2-31,34-63 #
+              #cmdline_pstate=intel_pstate=active #
               [sysctl]
               kernel.timer_migration=1
-              kernel.unknown_nmi_panic = 1 #
-              kernel.panic_on_unrecovered_nmi = 1 #
-              net.core.rmem_max=26214400 #
-              net.core.wmem_max=26214400 #
+              #kernel.unknown_nmi_panic = 1 #
+              #kernel.panic_on_unrecovered_nmi = 1 #
+              #net.core.rmem_max=26214400 #
+              #net.core.wmem_max=26214400 #
               [scheduler]
               group.ice-ptp=0:f:10:*:ice-ptp.*
               group.ice-gnss=0:f:10:*:ice-gnss.*
+              group.ice-dplls=0:f:10:*:ice-dplls.*
               [service]
               service.stalld=start,enable
               service.chronyd=stop,disable
-              [sysfs]
-              #/sys/devices/system/cpu/intel_pstate/max_perf_pct = 69
-              /sys/devices/system/cpu/*/cpufreq/scaling_max_freq=2500000
+              #[sysfs]
+              #/sys/devices/system/cpu/*/cpufreq/scaling_max_freq=2500000
 #    - fileName: optional-extra-manifest/enable-crun-master.yaml
 #      policyName: "config-policy"
 #    - fileName: optional-extra-manifest/enable-crun-worker.yaml
