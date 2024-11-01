@@ -38,10 +38,12 @@ spec:
       # NOTE: Requests and limits MUST be identical for the Pod to be assigned to the QoS Guaranteed class
       requests:
         memory: "200Mi"
-        cpu: "36"
+#        cpu: "36"
+        cpu: "58"
       limits:
         memory: "200Mi"
-        cpu: "36"
+#        cpu: "36"
+        cpu: "58"
     env:
     - name: GIT_URL
       value: "false"
@@ -50,7 +52,7 @@ spec:
     - name: rt_priority
       value: "95"
     - name: DURATION
-      value: "4h"
+      value: "8h"
     - name: INTERVAL
       value: "1000"
     - name: delay

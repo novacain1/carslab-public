@@ -182,17 +182,17 @@ spec:
 #            ts2phc.extts_polarity rising
 #            ts2phc.extts_correction 0
 #          ts2phcOpts: "-m"
-    - fileName: PtpConfigSlaveCvl.yaml
-      policyName: "config-policy"
-      metadata:
-        name: "du-ptp-slave"
-      spec:
-        profile:
-        - name: "slave"
-          # This interface must match the hardware in this group
-          interface: "ens2f0"
-          ptp4lOpts: "-2 -s --summary_interval -4"
-          phc2sysOpts: "-a -r -n 24"
+#    - fileName: PtpConfigSlaveCvl.yaml
+#      policyName: "config-policy"
+#      metadata:
+#        name: "du-ptp-slave"
+#      spec:
+#        profile:
+#        - name: "slave"
+#          # This interface must match the hardware in this group
+#          interface: "ens2f0"
+#          ptp4lOpts: "-2 -s --summary_interval -4"
+#          phc2sysOpts: "-a -r -n 24"
 #    - fileName: SriovFecClusterConfig.yaml
 #      policyName: "fec-policy"
 #      spec:
@@ -358,8 +358,10 @@ spec:
           pages:
             - size: 1G
               count: 16
+        realTimeKernel:
+          enabled: false
         workloadHints:
-          realTime: true
+          realTime: false
           highPowerConsumption: false
           perPodPowerManagement: false
     - fileName: TunedPerformancePatch.yaml
