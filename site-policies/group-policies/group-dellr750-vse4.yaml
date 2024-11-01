@@ -12,8 +12,8 @@ spec:
     group-dellr750-vse4: ""
   mcp: "master"
   sourceFiles:
-    - fileName: ClusterLogging.yaml
-      policyName: "config-policy"
+#    - fileName: ClusterLogging.yaml
+#      policyName: "config-policy"
 #      spec:
 #        collection:
 #          type: vector

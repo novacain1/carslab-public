@@ -18,8 +18,8 @@ spec:
       policyName: "subscriptions-policy"
     - fileName: AcceleratorsSubscription.yaml
       policyName: "subscriptions-policy"
-    - fileName: ClusterLogging.yaml
-      policyName: "config-policy"
+#    - fileName: ClusterLogging.yaml
+#      policyName: "config-policy"
 
     # The setting below overrides the default "worker" selector predefined in
     # the source-crs. The change is recommended on SNOs configured with PTP

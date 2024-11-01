@@ -12,14 +12,14 @@ spec:
     group-dellr760-vse3: ""
   mcp: "master"
   sourceFiles:
-    - fileName: ClusterLogging.yaml
-      policyName: "config-policy"
-      spec:
-        collection:
-          type: vector
-        curation:
-          curator:
-            schedule: 30 3 * * *
+#    - fileName: ClusterLogging.yaml
+#      policyName: "config-policy"
+#      spec:
+#        collection:
+#          type: vector
+#        curation:
+#          curator:
+#            schedule: 30 3 * * *
     # The setting below overrides the default "worker" selector predefined in
     # the source-crs. The change is recommended on SNOs configured with PTP
     # event notification for forward compatibility with possible SNO expansion.
