@@ -182,17 +182,140 @@ spec:
 #            ts2phc.extts_polarity rising
 #            ts2phc.extts_correction 0
 #          ts2phcOpts: "-m"
-    - fileName: PtpConfigSlaveCvl.yaml
+#    - fileName: PtpConfigSlaveCvl.yaml
+#      policyName: "config-policy"
+#      metadata:
+#        name: "boundary"
+#      spec:
+#        profile:
+#        - name: "du-ptp-slave"
+#          # This interface must match the hardware in this group
+#          interface: "ens2f0"
+#          ptp4lOpts: "-2 -s --summary_interval -4"
+#          phc2sysOpts: "-a -r -n 24"
+    - fileName: PtpConfigBoundary.yaml
       policyName: "config-policy"
       metadata:
-        name: "du-ptp-slave"
+        name: "boundary"
       spec:
         profile:
-        - name: "slave"
-          # This interface must match the hardware in this group
-          interface: "ens2f0"
-          ptp4lOpts: "-2 -s --summary_interval -4"
+        - name: "boundary"
+          ptp4lOpts: "-2"
           phc2sysOpts: "-a -r -n 24"
+          ptpSchedulingPolicy: SCHED_FIFO
+          ptpSchedulingPriority: 10
+          ptpSettings:
+            logReduce: "true"
+
+          ptp4lConf: |
+            # The interface name is hardware-specific
+            [enp19s0f1]
+            masterOnly 0
+            [enp19s0f2]
+            masterOnly 1
+            [enp19s0f0]
+            masterOnly 1
+            [global]
+            #
+            # Default Data Set
+            #
+            twoStepFlag 1
+            slaveOnly 0
+            priority1 128
+            priority2 128
+            domainNumber 24
+            #utc_offset 37
+            clockClass 248
+            clockAccuracy 0xFE
+            offsetScaledLogVariance 0xFFFF
+            free_running 0
+            freq_est_interval 1
+            dscp_event 0
+            dscp_general 0
+            dataset_comparison G.8275.x
+            G.8275.defaultDS.localPriority 128
+            #
+            # Port Data Set
+            #
+            logAnnounceInterval -3
+            logSyncInterval -4
+            logMinDelayReqInterval -4
+            logMinPdelayReqInterval -4
+            announceReceiptTimeout 3
+            syncReceiptTimeout 0
+            delayAsymmetry 0
+            fault_reset_interval -4
+            neighborPropDelayThresh 20000000
+            masterOnly 0
+            G.8275.portDS.localPriority 128
+            #
+            # Run time options
+            #
+            assume_two_step 0
+            logging_level 6
+            path_trace_enabled 0
+            follow_up_info 0
+            hybrid_e2e 0
+            inhibit_multicast_service 0
+            net_sync_monitor 0
+            tc_spanning_tree 0
+            tx_timestamp_timeout 50
+            unicast_listen 0
+            unicast_master_table 0
+            unicast_req_duration 3600
+            use_syslog 1
+            verbose 0
+            summary_interval 0
+            kernel_leap 1
+            check_fup_sync 0
+            clock_class_threshold 135
+            #
+            # Servo Options
+            #
+            pi_proportional_const 0.0
+            pi_integral_const 0.0
+            pi_proportional_scale 0.0
+            pi_proportional_exponent -0.3
+            pi_proportional_norm_max 0.7
+            pi_integral_scale 0.0
+            pi_integral_exponent 0.4
+            pi_integral_norm_max 0.3
+            step_threshold 2.0
+            first_step_threshold 0.00002
+            max_frequency 900000000
+            clock_servo pi
+            sanity_freq_limit 200000000
+            ntpshm_segment 0
+            #
+            # Transport options
+            #
+            transportSpecific 0x0
+            ptp_dst_mac 01:1B:19:00:00:00
+            p2p_dst_mac 01:80:C2:00:00:0E
+            udp_ttl 1
+            udp6_scope 0x0E
+            uds_address /var/run/ptp4l
+            #
+            # Default interface options
+            #
+            clock_type BC
+            network_transport L2
+            delay_mechanism E2E
+            time_stamping hardware
+            tsproc_mode filter
+            delay_filter moving_median
+            delay_filter_length 10
+            egressLatency 0
+            ingressLatency 0
+            boundary_clock_jbod 0
+            #
+            # Clock description
+            #
+            productDescription ;;
+            revisionData ;;
+            manufacturerIdentity 00:00:00
+            userDescription ;
+            timeSource 0xA0            
 #    - fileName: SriovFecClusterConfig.yaml
 #      policyName: "fec-policy"
 #      spec:
@@ -230,6 +353,49 @@ spec:
 #              aqDepthLog2: 4
 #              numAqsPerGroups: 16
 #              numQueueGroups: 4
+#    - filename: SriovVrbClusterConfig.yaml
+#      kind: SriovVrbClusterConfig
+#      policyName: "config"
+#      namespace: vran-acceleration-operators
+#      spec:
+#        acceleratorSelector:
+#          pciAddress: "0000:07:00.0"
+#        drainSkip: true
+#        nodeSelector:
+#          node-role.kubernetes.io/master: ""
+#        physicalFunction:
+#          bbDevConfig:
+#            vrb2:
+#              downlink4G:
+#                aqDepthLog2: 4
+#                numAqsPerGroups: 16
+#                numQueueGroups: 0
+#              downlink5G:
+#                aqDepthLog2: 4
+#                numAqsPerGroups: 16
+#                numQueueGroups: 4
+#              maxQueueSize: 1024
+#              numVfBundles: 16
+#              pfMode: false
+#              qfft:
+#                aqDepthLog2: 4
+#                numAqsPerGroups: 16
+#                numQueueGroups: 4
+#              qmld:
+#                aqDepthLog2: 4
+#                numAqsPerGroups: 16
+#                numQueueGroups: 4
+#              uplink4G:
+#                aqDepthLog2: 4
+#                numAqsPerGroups: 16
+#                numQueueGroups: 0
+#              uplink5G:
+#                aqDepthLog2: 4
+#                numAqsPerGroups: 16
+#                numQueueGroups: 4
+#           pfDriver: vfio-pci
+#           vfAmount: 16
+#           vfDriver: vfio-pci
     - fileName: SriovOperatorConfigForSNO.yaml
       policyName: "config-policy"
 #    - fileName: SriovOperatorConfig.yaml
@@ -242,6 +408,7 @@ spec:
 #      spec:
 #        configDaemonNodeSelector:
 #          node-role.kubernetes.io/worker: ""
+# Salem Channel
     - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "sriov-vfio1-policy-ens2f0"
@@ -290,6 +457,137 @@ spec:
         numVfs: 48
         priority: 10
         resourceName: pci_sriov_net_ens2f0_2
+# Marius Internal NIC
+   - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "sriov-nnp-netd-enp19s0f1"
+      metadata:
+        name: "sriov-nnp-netd-enp19s0f1"
+      spec:
+        deviceType: netdevice
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "579d"
+          pfNames: ["enp19s0f1#32-47"]
+        numVfs: 48
+        priority: 10
+        resourceName: pci_sriov_net_enp19s0f1_2
+    - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "sriov-nnp-vfio1-enp19s0f1"
+      metadata:
+        name: "sriov-nnp-vfio1-enp19s0f1"
+      spec:
+        deviceType: vfio-pci
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "579d"
+          pfNames: ["enp19s0f1#0-15"]
+        numVfs: 48
+        priority: 10
+        resourceName: pci_sriov_net_enp19s0f1_0
+    - fileName: SriovNetworkNodePolicy.yaml
+      policyName: "sriov-nnp-vfio2-enp19s0f1"
+      remediationAction: enforce
+      metadata:
+        name: "sriov-nnp-vfio2-enp19s0f1"
+      spec:
+        deviceType: vfio-pci
+        mtu: 9216
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "579d"
+          pfNames: ["enp19s0f1#16-31"]
+        numVfs: 48
+        priority: 10
+        resourceName: pci_sriov_net_enp19s0f1_1
+# SLCM
+   - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "pci-sriov-net-e5l"
+      metadata:
+        name: "pci-sriov-net-e5l"
+      spec:
+        deviceType: vfio-pci
+        mtu: 1500
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "1593"
+          pfNames: ["ens2f1#0-3"]
+        numVfs: 8
+        priority: 93
+        resourceName: pci_sriov_net_e5l
+   - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "pci-sriov-net-f1"
+      metadata:
+        name: "pci-sriov-net-f1"
+      spec:
+        deviceType: netdevice
+        mtu: 1500
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "1593"
+          pfNames: ["ens2f0#0-7"]
+        numVfs: 8
+        priority: 90
+        resourceName: pci_sriov_net_f1
+   - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "pci-sriov-net-fgci"
+      metadata:
+        name: "pci-sriov-net-fgci"
+      spec:
+        deviceType: netdevice
+        mtu: 1500
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "1593"
+          pfNames: ["ens2f1#4-7"]
+        numVfs: 8
+        priority: 94
+        resourceName: pci_sriov_net_fgci
+   - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "pci-sriov-net-llscm"
+      metadata:
+        name: "pci-sriov-net-llscm"
+      spec:
+        deviceType: netdevice
+        mtu: 1500
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "1593"
+          pfNames: ["ens2f2#4-7"]
+        numVfs: 8
+        priority: 92
+        resourceName: pci_sriov_net_llscm
+   - fileName: SriovNetworkNodePolicy.yaml
+      remediationAction: enforce
+      policyName: "pci-sriov-net-llscu"
+      metadata:
+        name: "pci-sriov-net-llscu"
+      spec:
+        deviceType: vfio-pci
+        mtu: 1500
+        isRdma: false
+        nicSelector:
+          vendor: "8086"
+          deviceID: "1593"
+          pfNames: ["ens2f2#0-3"]
+        numVfs: 8
+        priority: 91
+        resourceName: pci_sriov_net_llscu
+# Salem Channel 4x25
     - fileName: SriovNetwork.yaml
       policyName: "sriov-network-policy-mh"
       metadata:
@@ -319,6 +617,82 @@ spec:
       spec:
         resourceName: pci_sriov_net_ens2f0_2
         networkNamespace: cnf1
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
+# Marius
+    - fileName: SriovNetwork.yaml
+      policyName: "networking-e5l"
+      metadata:
+        name: "networking-e5l"
+      spec:
+        resourceName: pci_sriov_net_e5l
+        networkNamespace: test
+        vlan: 3805
+        ipam: '{}'
+        linkState: auto
+   - fileName: SriovNetwork.yaml
+      policyName: "networking-f1c"
+      metadata:
+        name: "networking-f1c"
+      spec:
+        resourceName: pci_sriov_net_f1
+        networkNamespace: test
+        vlan: 3801
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
+   - fileName: SriovNetwork.yaml
+      policyName: "networking-f1u"
+      metadata:
+        name: "networking-f1u"
+      spec:
+        resourceName: pci_sriov_net_f1
+        networkNamespace: test
+        vlan: 3802
+        ipam: |-
+          {"type": "static"}
+        linkState: auto          
+   - fileName: SriovNetwork.yaml
+      policyName: "networking-fgci"
+      metadata:
+        name: "networking-fgci"
+      spec:
+        resourceName: pci_sriov_net_fgci
+        networkNamespace: test
+        vlan: 3806
+        ipam: |-
+          {"type": "static"}
+        linkState: auto     
+   - fileName: SriovNetwork.yaml
+      policyName: "networking-llscm"
+      metadata:
+        name: "networking-llscm"
+      spec:
+        resourceName: pci_sriov_net_llscm
+        networkNamespace: test
+        vlan: 3804
+        ipam: |-
+          {"type": "static"}
+        linkState: auto
+   - fileName: SriovNetwork.yaml
+      policyName: "networking-llscu"
+      metadata:
+        name: "networking-llscu"
+      spec:
+        resourceName: pci_sriov_net_llscu
+        networkNamespace: test
+        vlan: 3803
+        ipam: '{}'
+        linkState: auto
+   - fileName: SriovNetwork.yaml
+      policyName: "networking-oam"
+      metadata:
+        name: "networking-oam"
+      spec:
+        resourceName: pci_sriov_net_f1
+        networkNamespace: test
+        vlan: 3807
         ipam: |-
           {"type": "static"}
         linkState: auto
@@ -357,9 +731,11 @@ spec:
           defaultHugepagesSize: 1G
           pages:
             - size: 1G
-              count: 16
+              count: 32
+        net:
+          userLevelNetworking: true
         realTimeKernel:
-          enabled: true
+          enabled: false
         workloadHints:
           realTime: true
           highPowerConsumption: false
