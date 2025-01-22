@@ -458,7 +458,7 @@ spec:
         priority: 10
         resourceName: pci_sriov_net_ens2f0_2
 # Marius Internal NIC
-   - fileName: SriovNetworkNodePolicy.yaml
+    - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "sriov-nnp-netd-enp19s0f1"
       metadata:
@@ -507,7 +507,7 @@ spec:
         priority: 10
         resourceName: pci_sriov_net_enp19s0f1_1
 # SLCM
-   - fileName: SriovNetworkNodePolicy.yaml
+    - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "pci-sriov-net-e5l"
       metadata:
@@ -523,7 +523,7 @@ spec:
         numVfs: 8
         priority: 93
         resourceName: pci_sriov_net_e5l
-   - fileName: SriovNetworkNodePolicy.yaml
+    - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "pci-sriov-net-f1"
       metadata:
@@ -539,7 +539,7 @@ spec:
         numVfs: 8
         priority: 90
         resourceName: pci_sriov_net_f1
-   - fileName: SriovNetworkNodePolicy.yaml
+    - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "pci-sriov-net-fgci"
       metadata:
@@ -555,7 +555,7 @@ spec:
         numVfs: 8
         priority: 94
         resourceName: pci_sriov_net_fgci
-   - fileName: SriovNetworkNodePolicy.yaml
+    - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "pci-sriov-net-llscm"
       metadata:
@@ -571,7 +571,7 @@ spec:
         numVfs: 8
         priority: 92
         resourceName: pci_sriov_net_llscm
-   - fileName: SriovNetworkNodePolicy.yaml
+    - fileName: SriovNetworkNodePolicy.yaml
       remediationAction: enforce
       policyName: "pci-sriov-net-llscu"
       metadata:
@@ -631,7 +631,7 @@ spec:
         vlan: 3805
         ipam: '{}'
         linkState: auto
-   - fileName: SriovNetwork.yaml
+    - fileName: SriovNetwork.yaml
       policyName: "networking-f1c"
       metadata:
         name: "networking-f1c"
@@ -642,7 +642,7 @@ spec:
         ipam: |-
           {"type": "static"}
         linkState: auto
-   - fileName: SriovNetwork.yaml
+    - fileName: SriovNetwork.yaml
       policyName: "networking-f1u"
       metadata:
         name: "networking-f1u"
@@ -653,7 +653,7 @@ spec:
         ipam: |-
           {"type": "static"}
         linkState: auto          
-   - fileName: SriovNetwork.yaml
+    - fileName: SriovNetwork.yaml
       policyName: "networking-fgci"
       metadata:
         name: "networking-fgci"
@@ -664,7 +664,7 @@ spec:
         ipam: |-
           {"type": "static"}
         linkState: auto     
-   - fileName: SriovNetwork.yaml
+    - fileName: SriovNetwork.yaml
       policyName: "networking-llscm"
       metadata:
         name: "networking-llscm"
@@ -675,7 +675,7 @@ spec:
         ipam: |-
           {"type": "static"}
         linkState: auto
-   - fileName: SriovNetwork.yaml
+    - fileName: SriovNetwork.yaml
       policyName: "networking-llscu"
       metadata:
         name: "networking-llscu"
@@ -685,7 +685,7 @@ spec:
         vlan: 3803
         ipam: '{}'
         linkState: auto
-   - fileName: SriovNetwork.yaml
+    - fileName: SriovNetwork.yaml
       policyName: "networking-oam"
       metadata:
         name: "networking-oam"
