@@ -37,7 +37,7 @@ spec:
     - fileName: ClusterLogSubscription.yaml
       policyName: "subscriptions-policy"
       spec:
-#        channel: stable-5.7
+        channel: stable-6.1
         source: redhat-operators
     - fileName: ClusterLogOperatorStatus.yaml
       policyName: "subscriptions-policy"
@@ -58,33 +58,33 @@ spec:
     #
 #    - fileName: OperatorHub.yaml
 #      policyName: "config-policy"
-    - fileName: DefaultCatsrc.yaml
-      policyName: "config-policy"
-      # The Subscriptions all point to redhat-operators. The OperatorHub CR
-      # disables the defaults and this CR replaces redhat-operators with a
-      # CatalogSource pointing to the disconnected registry. Including both of
-      # these in the same policy orders their application to the cluster.
-      metadata:
-        name: redhat-operators
-      spec:
-        displayName: Telco 4.18 PreGA
-        image: quay.io/prega/prega-operator-index:v4.18
-        updateStrategy:
-            registryPoll:
-                interval: 10m0s
-    - fileName: DisconnectedICSP.yaml
-      policyName: "config-policy"
-      spec:
-        repositoryDigestMirrors:
-        - mirrors:
-          - brew.registry.redhat.io
-          source: registry-proxy.engineering.redhat.com
-        - mirrors:
-          - brew.registry.redhat.io/openshift4
-          source: registry.redhat.io/openshift4
-        - mirrors:
-          - brew.registry.redhat.io/openshift-logging
-          source: registry.redhat.io/openshift-logging
+#    - fileName: DefaultCatsrc.yaml
+#      policyName: "config-policy"
+#      # The Subscriptions all point to redhat-operators. The OperatorHub CR
+#      # disables the defaults and this CR replaces redhat-operators with a
+#      # CatalogSource pointing to the disconnected registry. Including both of
+#      # these in the same policy orders their application to the cluster.
+#      metadata:
+#        name: redhat-operators
+#      spec:
+#        displayName: Telco 4.18 PreGA
+#        image: quay.io/prega/prega-operator-index:v4.18
+#        updateStrategy:
+#            registryPoll:
+#                interval: 10m0s
+#    - fileName: DisconnectedICSP.yaml
+#      policyName: "config-policy"
+#      spec:
+#        repositoryDigestMirrors:
+#        - mirrors:
+#          - brew.registry.redhat.io
+#          source: registry-proxy.engineering.redhat.com
+#        - mirrors:
+#          - brew.registry.redhat.io/openshift4
+#          source: registry.redhat.io/openshift4
+#        - mirrors:
+#          - brew.registry.redhat.io/openshift-logging
+#          source: registry.redhat.io/openshift-logging
 #    - fileName: DisconnectedICSP.yaml
 #      policyName: "config-policy"
 #      spec:
