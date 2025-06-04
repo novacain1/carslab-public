@@ -8,7 +8,7 @@ spec:
   baseDomain: "cars2.lab"
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
-  clusterImageSetNameRef: "openshift-v4.19-ec.5"
+  clusterImageSetNameRef: "openshift-v4.19-rc.5"
   sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdbJDYY43Zu0EKAGgrSKEobyXIxdhT0AeTT3yBoNY+YdYDScimJsQzK4hKNJIn1xC3klr0dSnsqeJru+SA4GMhbdcsmVyudhutCw75R/vFoRHOwaeVS2SMiBAtDbAYGQ3dh6LapkmXeLURcycNbebUV4HM9XsYqnuL8J2XyY4tRKgHrAd6OQw4jsXDOxwTRlHM822N/2kgv8iEwiXAJoUoymbr8mnfSxuuaH0oiKBwuaK1wuaDrlJyXkXNslPq89/1f8hJfjixY2dQdW7Xk5m3t5ptQxWENpw79OMRJ4cDW4G7LrtFONom5KQ+9TBZJIhNgJobkqI4qwinrWF8qMW5"
   clusters:
   - clusterName: "gnrd"
@@ -55,8 +55,10 @@ spec:
         #biosConfigRef:
         #  filePath: "example-hw.profile"
         ironicInspect: "disabled"
-        #bmcAddress: "redfish-virtualmedia://192.168.38.80/redfish/v1/Systems/1"
-        bmcAddress: "redfish-virtualmedia://192.168.38.15:9000/redfish/v1/Systems/1"
+        #openbmc
+        bmcAddress: "redfish-virtualmedia://192.168.38.80/redfish/v1/Systems/1"
+        #fakefish
+        #bmcAddress: "redfish-virtualmedia://192.168.38.15:9000/redfish/v1/Systems/1"
         bmcCredentialsName:
           name: "gnrd-cars2-lab-bmc-secret"
         bootMACAddress: "a4:bf:01:95:28:f8"
