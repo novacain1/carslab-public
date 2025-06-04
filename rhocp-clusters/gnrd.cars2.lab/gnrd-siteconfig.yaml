@@ -56,7 +56,7 @@ spec:
         #  filePath: "example-hw.profile"
         ironicInspect: "disabled"
         #openbmc
-        bmcAddress: "redfish-virtualmedia://192.168.38.80/redfish/v1/Systems/1"
+        bmcAddress: "redfish-virtualmedia://192.168.38.80/redfish/v1/Systems/bmc"
         #fakefish
         #bmcAddress: "redfish-virtualmedia://192.168.38.15:9000/redfish/v1/Systems/1"
         bmcCredentialsName:
