@@ -27,8 +27,8 @@ spec:
     # The crun manifests can be obtained from source-crs/optional-extra-manifest/ and added to the git repo ie.sno-extra-manifest.
     # extraManifestPath: sno-extra-manifest
     clusterLabels:
-      detach-common-du-418: true
-      detach-group-gnrd: ""
+      common-du-418: true
+      group-gnrd: ""
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
