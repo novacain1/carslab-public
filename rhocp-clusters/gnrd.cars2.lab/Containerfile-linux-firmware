@@ -1,0 +1,26 @@
+# podman build -f Containerfile-linux-firmware --tag quay.io/dcain/linux-firmware:151.2 --network=host 
+# podman push quay.io/dcain/linux-firmware:151.2
+
+# oc adm release info --image-for rhel-coreos
+# 4.19.0-rc.5
+FROM quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:ec16622a2758c7aacfd04679980848dd0ae7511be027cab590c10cd5bc02eae2
+# Install new linux-firmware packages
+RUN dnf erase -y linux-firmware linux-firmware-whence && \
+    dnf install -y http://cars2-client.infra.cars2.lab/software/redhat/linux-firmware-20250604-151.2.el9_6.noarch.rpm \
+                  http://cars2-client.infra.cars2.lab/software/redhat/linux-firmware-whence-20250604-151.2.el9_6.noarch.rpm && \
+    dnf clean all && \
+    ostree container commit
+
+# Run dracut to build a new initrd
+RUN export KERNEL_VERSION="$(rpm -qa kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')" && \
+    stock_arguments=$(lsinitrd "/lib/modules/${KERNEL_VERSION}/initramfs.img"  | grep '^Arguments: ' | sed 's/^Arguments: //') && \
+    mkdir -p /tmp/dracut /var/roothome && \
+    bash <(/usr/bin/echo "dracut $stock_arguments") && \
+    rm -rf /var/* /tmp/*  && \
+    ostree container commit
+
+# Move the new initrd into place while keeping the stock initrd in the image for reference.
+RUN export KERNEL_VERSION="$(rpm -qa kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')" && \
+    mv -v "/lib/modules/${KERNEL_VERSION}/initramfs.img" "/lib/modules/${KERNEL_VERSION}/initramfs.stock.img" && \
+    mv -v /boot/initramfs*.img "/lib/modules/${KERNEL_VERSION}/initramfs.img" && \
+    ostree container commit

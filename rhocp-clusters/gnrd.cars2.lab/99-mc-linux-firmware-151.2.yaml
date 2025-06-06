@@ -1,0 +1,9 @@
+---
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: os-layer-linux-firmware-151
+spec:
+  osImageURL: quay.io/dcain/linux-firmware@sha256:bc23c6947a8fb8c2ab173c01dec5bff7c0d098d049c4ec146e03a6c57685589c
