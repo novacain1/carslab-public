@@ -356,9 +356,9 @@ spec:
                 aqDepthLog2: 4
                 numAqsPerGroups: 16
                 numQueueGroups: 4
-           pfDriver: vfio-pci
-           vfAmount: 16
-           vfDriver: vfio-pci
+          pfDriver: vfio-pci
+          vfAmount: 16
+          vfDriver: vfio-pci
     - fileName: SriovOperatorConfigForSNO.yaml
       policyName: "config-policy"
 #    - fileName: SriovOperatorConfig.yaml
