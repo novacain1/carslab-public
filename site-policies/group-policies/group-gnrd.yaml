@@ -316,7 +316,7 @@ spec:
 #            manufacturerIdentity 00:00:00
 #            userDescription ;
 #            timeSource 0xA0            
-    - fileName: SriovFecClusterConfig.yaml
+    - fileName: SriovVrbClusterConfig.yaml
       policyName: "vrb-policy"
       spec:
         drainSkip: true
