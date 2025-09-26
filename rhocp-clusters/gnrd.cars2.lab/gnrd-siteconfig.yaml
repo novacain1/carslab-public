@@ -27,7 +27,7 @@ spec:
     # The crun manifests can be obtained from source-crs/optional-extra-manifest/ and added to the git repo ie.sno-extra-manifest.
     # extraManifestPath: sno-extra-manifest
     clusterLabels:
-      common-du-419: true
+      common-du-420: true
       group-gnrd: ""
     clusterNetwork:
       - cidr: 10.128.0.0/14
