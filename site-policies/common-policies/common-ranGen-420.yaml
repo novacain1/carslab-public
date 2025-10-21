@@ -26,8 +26,6 @@ spec:
         source: redhat-operators
     - fileName: PtpSubscriptionNS.yaml
       policyName: "subscriptions-policy"
-      spec:
-        source: redhat-operators
     - fileName: PtpSubscriptionOperGroup.yaml
       policyName: "subscriptions-policy"
     - fileName: PtpOperatorStatus.yaml
