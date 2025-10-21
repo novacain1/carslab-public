@@ -12,8 +12,8 @@ spec:
     # Create operators policies that will be installed in all clusters
     - fileName: SriovSubscription.yaml
       policyName: "subscriptions-policy"
-      spec:
-        source: redhat-operators-stage
+      #spec:
+      #  source: redhat-operators-stage
     - fileName: SriovSubscriptionNS.yaml
       policyName: "subscriptions-policy"
     - fileName: SriovSubscriptionOperGroup.yaml
@@ -22,12 +22,12 @@ spec:
       policyName: "subscriptions-policy"
     - fileName: PtpSubscription.yaml
       policyName: "subscriptions-policy"
-      spec:
-        source: redhat-operators-stage
+      #spec:
+      #  source: redhat-operators-stage
     - fileName: PtpSubscriptionNS.yaml
       policyName: "subscriptions-policy"
-      spec:
-        source: redhat-operators-stage
+      #spec:
+      #  source: redhat-operators-stage
     - fileName: PtpSubscriptionOperGroup.yaml
       policyName: "subscriptions-policy"
     - fileName: PtpOperatorStatus.yaml
@@ -40,7 +40,7 @@ spec:
       policyName: "subscriptions-policy"
       spec:
         channel: stable-6.3
-        source: redhat-operators-stage
+      #  source: redhat-operators-stage
     - fileName: ClusterLogOperatorStatus.yaml
       policyName: "subscriptions-policy"
     - fileName: StorageNS.yaml
@@ -49,8 +49,8 @@ spec:
       policyName: "subscriptions-policy"
     - fileName: StorageSubscription.yaml
       policyName: "subscriptions-policy"
-      spec:
-        source: redhat-operators-stage
+      #spec:
+      #  source: redhat-operators-stage
     - fileName: StorageOperatorStatus.yaml
       policyName: "subscriptions-policy"
     - fileName: ReduceMonitoringFootprint.yaml

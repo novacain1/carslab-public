@@ -64,7 +64,8 @@ spec:
         # Use UEFISecureBoot to enable secure boot
         bootMode: "UEFI"
         rootDeviceHints:
-          wwn: "0x500a075138277708"
+          deviceName: "/dev/disk/by-path/pci-0000:00:11.5-ata-1"
+          #wwn: "0x500a075138277708"
         nodeNetwork:
           interfaces:
             - name: eno1
